@@ -1,0 +1,12 @@
+.wrapper {
+  aspect-ratio: 16/9;
+  position: relative;
+  .watched {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    display: block;
+    background-color: #00b3ff;
+  }
+}

@@ -31,19 +31,26 @@
     "@storybook/addon-essentials": "^6.5.15",
     "@storybook/addon-interactions": "^6.5.15",
     "@storybook/addon-links": "^6.5.15",
+    "@storybook/addon-postcss": "^2.0.0",
     "@storybook/builder-webpack5": "^6.5.15",
     "@storybook/manager-webpack5": "^6.5.15",
     "@storybook/react": "^6.5.15",
     "@storybook/testing-library": "^0.0.13",
+    "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^5.47.1",
     "@typescript-eslint/parser": "^5.43.0",
     "babel-loader": "^8.3.0",
+    "css-loader": "^6.7.3",
     "eslint": "^8.27.0",
     "eslint-config-next": "13.1.1",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-storybook": "^0.6.8",
     "husky": "^8.0.2",
     "lint-staged": "^13.0.3",
-    "prettier": "2.7.1"
+    "prettier": "2.7.1",
+    "sass": "^1.57.1",
+    "sass-loader": "^13.2.0",
+    "style-loader": "^3.3.1",
+    "styled-components": "^5.3.6"
   }
 }
