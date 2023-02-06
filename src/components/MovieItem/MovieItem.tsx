@@ -1,19 +1,10 @@
 import styled from "styled-components";
 import Styles from "./MovieItem.module.scss";
 import Image from "next/image";
-
-type MovieItemProps = {
-  src: string;
-  alt?: string;
-  watched?: number;
-};
-
-type WatchedProps = {
-  itemwidth: number;
-};
+import { MovieItemProps, WatchedProps } from "@/@types/MovieItem";
 
 const WatchedProgress = styled.div<WatchedProps>`
-  width: ${(p) => p.itemwidth}%;
+  width: ${(p) => p.itemWidth}%;
 `;
 
 const MovieItem = (props: MovieItemProps) => {
@@ -21,7 +12,7 @@ const MovieItem = (props: MovieItemProps) => {
     <div className={Styles.wrapper}>
       <Image src={props.src} alt={props.alt || ""} fill={true} />
       <WatchedProgress
-        itemwidth={props.watched || 0}
+        itemWidth={props.watched || 0}
         className={Styles.watched}
       />
     </div>
