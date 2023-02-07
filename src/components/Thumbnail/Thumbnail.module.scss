@@ -1,3 +1,5 @@
+@import "components/colors";
+
 .wrapper {
   aspect-ratio: 16/9;
   position: relative;
@@ -7,6 +9,6 @@
     left: 0;
     height: 3px;
     display: block;
-    background-color: #00b3ff;
+    background-color: $accentColor;
   }
 }
