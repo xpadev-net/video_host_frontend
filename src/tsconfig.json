@@ -21,6 +21,9 @@
     ],
     "baseUrl": ".",
     "paths": {
+      "@/atoms/*": [
+        "atoms/*"
+      ],
       "@/components/*": [
         "components/*"
       ],

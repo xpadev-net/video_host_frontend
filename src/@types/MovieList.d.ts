@@ -1,4 +1,4 @@
-import {MovieItemProps} from "@/@types/MovieItem";
+import {MovieItemProps} from "@/@types/Thumbnail";
 
 export type MovieListProps = {
   movies: MovieItemProps[];
