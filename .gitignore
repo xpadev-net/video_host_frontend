@@ -36,4 +36,4 @@ yarn-error.log*
 /src/next-env.d.ts
 
 .idea
-/src/.env
+/src/.env.local
