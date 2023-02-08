@@ -1,8 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    appDir: true,
-  },
+  reactStrictMode: true,
+
   images: {
     remotePatterns: [
       {
@@ -10,6 +9,8 @@ const nextConfig = {
         hostname: '**.xpadev.net',
       },
     ],
+    formats: ['image/webp'],
+    deviceSizes: [300]
   },
 }
 

@@ -12,7 +12,7 @@
     }
     .titles {
       min-height: 40px;
-      .episodeTitle {
+      .movieTitle {
         font-size: 17px;
         line-height: 20px;
         font-weight: 700;
@@ -34,7 +34,7 @@
       max-width: 40%;
       width: 357px;
     }
-    .episodeTitle {
+    .movieTitle {
       font-size: min(1.7vw, 18px);
     }
     .title {
@@ -56,7 +56,7 @@
       height: 56px;
     }
     .titles {
-      .episodeTitle {
+      .movieTitle {
         margin: 0 0 4px;
         font-size: 14px;
         line-height: 16px;
@@ -69,7 +69,7 @@
       }
     }
   }
-  .episodeTitle {
+  .movieTitle {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal;

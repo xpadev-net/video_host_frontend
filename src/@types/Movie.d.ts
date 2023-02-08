@@ -3,7 +3,7 @@ export type Movie = {
   seriesUrl: string;
   url: string;
   title: string;
-  episodeTitle: string;
+  movieTitle: string;
   duration: number;
   addAt: number;
 }

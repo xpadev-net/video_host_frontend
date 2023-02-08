@@ -1,5 +1,5 @@
 import {WatchedHistory} from "@/@types/WatchedHistory";
-import {atomWithStorage} from "jotai/vanilla/utils/atomWithStorage";
+import {atomWithStorage} from "jotai/utils";
 
 const watchedHistory = atomWithStorage<WatchedHistory>("WatchedHistory",{});
 

@@ -2,6 +2,8 @@
   display: flex;
   &.row {
     flex-direction: row;
+    overflow-x: scroll;
+    max-width: 100vw;
   }
   &.column,
   &.minColumn {
