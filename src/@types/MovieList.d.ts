@@ -1,6 +1,7 @@
-import {MovieItemProps} from "@/@types/Thumbnail";
+import {Movie} from "@/@types/Movie";
 
 export type MovieListProps = {
-  movies: MovieItemProps[];
-  direction: "row"|"column"
+  movies: Movie[];
+  type: "row"|"column"|"minColumn";
+  active?: string;
 }

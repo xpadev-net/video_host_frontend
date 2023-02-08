@@ -1,0 +1,88 @@
+@import "styles/colors";
+
+.wrapper {
+  &.row {
+    display: block;
+    margin: 10px;
+    max-width: 360px;
+    max-height: 300px;
+    text-decoration: none;
+    .thumbnail {
+      margin-bottom: 7px;
+    }
+    .titles {
+      min-height: 40px;
+      .episodeTitle {
+        font-size: 17px;
+        line-height: 20px;
+        font-weight: 700;
+        max-height: 40px;
+      }
+      .title {
+        max-height: 36px;
+        line-height: 18px;
+        font-size: 13px;
+      }
+    }
+  }
+  &.column {
+    display: flex;
+    flex-direction: row;
+    width: calc(100% - 20px);
+    padding: 0 10px;
+    .thumbnail {
+      max-width: 40%;
+      width: 357px;
+    }
+    .episodeTitle {
+      font-size: min(1.7vw, 18px);
+    }
+    .title {
+      font-size: min(1.2vw, 13px);
+    }
+  }
+  &.minColumn {
+    display: flex;
+    flex-direction: row;
+    height: 56px;
+    padding: 4px 8px 4px 0;
+    .index {
+      width: 24px;
+      line-height: 24px;
+      font-size: 12px;
+    }
+    .thumbnail {
+      width: 100px;
+      height: 56px;
+    }
+    .titles {
+      .episodeTitle {
+        margin: 0 0 4px;
+        font-size: 14px;
+        line-height: 16px;
+      }
+      .title {
+        line-height: 18px;
+        font-weight: 400;
+        font-size: 13px;
+        max-height: 18px;
+      }
+    }
+  }
+  .episodeTitle {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    display: block;
+    letter-spacing: 0;
+    color: $textColor;
+  }
+  .title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+    letter-spacing: 0;
+    color: $subTextColor;
+  }
+}

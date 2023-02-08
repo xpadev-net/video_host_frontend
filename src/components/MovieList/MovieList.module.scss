@@ -1,0 +1,10 @@
+.wrapper {
+  display: flex;
+  &.row {
+    flex-direction: row;
+  }
+  &.column,
+  &.minColumn {
+    flex-direction: column;
+  }
+}
