@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "cd ..&&husky install",
+    "prepare": "husky install",
     "check-types": "npx tsc --noEmit --jsx react-jsx",
     "eslint:fix": "next lint --fix",
     "format": "prettier --write \"{app,pages,components}/**/*.{tsx,ts,js,json,css,scss}\"",

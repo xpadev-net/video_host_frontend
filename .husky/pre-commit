@@ -2,4 +2,4 @@
 export FORCE_COLOR=1
 . "$(dirname -- "$0")/_/husky.sh"
 
-cd src && npx lint-staged
+npx lint-staged
