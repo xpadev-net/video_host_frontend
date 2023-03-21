@@ -3,8 +3,9 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import NProgress from "nprogress";
 import "@/styles/global.scss";
+import {App} from "@/components/App/App";
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function _app({ Component, pageProps }: AppProps) {
   const router = useRouter();
   useEffect(() => {
     const handleStart = () => {
@@ -24,5 +25,7 @@ export default function App({ Component, pageProps }: AppProps) {
       router.events.off("routeChangeError", handleStop);
     };
   }, [router]);
-  return <Component {...pageProps} />;
+  return <App>
+    <Component {...pageProps} />
+  </App>;
 }

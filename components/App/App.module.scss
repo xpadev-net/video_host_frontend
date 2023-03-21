@@ -1,0 +1,22 @@
+@use "../../styles/colors.scss";
+
+.header{
+  height: 56px;
+  width: 100vw;
+  background-color: colors.$subBackgroundColor;
+}
+.main{
+  display: flex;
+  height: calc(100vh - 56px);
+  width: 100vw;
+  overflow-y: scroll;
+  .sidebar{
+    width: 76px;
+    background-color: colors.$subBackgroundColor;
+  }
+  .container{
+    flex: 1;
+    overflow-y: scroll;
+    padding: 24px 24px 0 24px;
+  }
+}

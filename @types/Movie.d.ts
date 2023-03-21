@@ -12,7 +12,6 @@ export type MovieProps = {
   movie: Movie;
   type: "row"|"column"|"minColumn";
   index?: number|"active";
-  itemWidth?: number;
 }
 
 export type WrapperProps = {

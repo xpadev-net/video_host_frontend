@@ -5,7 +5,13 @@ import { recentUpdates, recentUpdatesResponse } from "@/@types/api";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { MovieList } from "@/components/MovieList/MovieList";
-import { throttle } from "@/libraries/throttle";
+import Styles from "@/styles/index.module.scss";
+import styled from "styled-components";
+import {WrapperProps} from "@/@types/Movie";
+
+const Wrapper = styled.div<WrapperProps>`
+  --width: ${(p) => (p.itemWidth === undefined ? "unset" : `${p.itemWidth}px`)};
+`;
 
 const Index = () => {
   const router = useRouter();
@@ -13,17 +19,17 @@ const Index = () => {
 
   const [width, setWidth] = useState(360);
   const wrapper = useRef<HTMLDivElement>(null);
-  const handleResize = throttle(() => {
-    const width = wrapper.current?.clientWidth || 1920;
-    setWidth(width / (Math.floor(width / 385) + 1) - 20);
-  }, 100);
   useEffect(() => {
+    const handleResize = () => {
+      const width = wrapper.current?.clientWidth || 1920;
+      setWidth(width / (Math.floor(width / 385) + 1) - 20);
+    };
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [handleResize]);
+  }, [wrapper.current]);
   useEffect(() => {
     void (async () => {
       const req = await request(`/recentUpdates/`);
@@ -45,14 +51,16 @@ const Index = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {updates.map((update) => {
-        return (
-          <div key={update.seriesUrl}>
-            <Link href={`/series/${update.seriesUrl}`}>{update.title}</Link>
-            <MovieList movies={update.movies} type={"row"} width={width} />
-          </div>
-        );
-      })}
+      <Wrapper itemWidth={width}>
+        {updates.map((update) => {
+          return (
+            <div key={update.seriesUrl}>
+              <Link href={`/series/${update.seriesUrl}`} className={Styles.title}>{update.title}</Link>
+              <MovieList movies={update.movies} type={"row"}/>
+            </div>
+          );
+        })}
+      </Wrapper>
     </div>
   );
 };

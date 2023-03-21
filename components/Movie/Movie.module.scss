@@ -7,21 +7,24 @@
     max-width: 360px;
     max-height: 300px;
     text-decoration: none;
-    .thumbnail {
-      margin-bottom: 7px;
-    }
-    .titles {
-      min-height: 40px;
-      .movieTitle {
-        font-size: 17px;
-        line-height: 20px;
-        font-weight: 700;
-        max-height: 40px;
+    .width{
+      width: var(--width,unset);
+      .thumbnail {
+        margin-bottom: 7px;
       }
-      .title {
-        max-height: 36px;
-        line-height: 18px;
-        font-size: 13px;
+      .titles {
+        min-height: 40px;
+        .movieTitle {
+          font-size: 17px;
+          line-height: 20px;
+          font-weight: 700;
+          max-height: 40px;
+        }
+        .title {
+          max-height: 36px;
+          line-height: 18px;
+          font-size: 13px;
+        }
       }
     }
   }
