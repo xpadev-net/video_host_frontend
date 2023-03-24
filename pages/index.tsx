@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { request } from "@/libraries/request";
 import { recentUpdates, recentUpdatesResponse } from "@/@types/api";
 import { useRouter } from "next/router";
@@ -19,7 +19,7 @@ const Index = () => {
 
   const [width, setWidth] = useState(360);
   const wrapper = useRef<HTMLDivElement>(null);
-  useEffect(() => {
+  useLayoutEffect(() => {
     const handleResize = () => {
       const width = wrapper.current?.clientWidth || 1920;
       setWidth(width / (Math.floor(width / 385) + 1) - 20);
@@ -29,8 +29,8 @@ const Index = () => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [wrapper]);
-  useEffect(() => {
+  }, [wrapper.current]);
+  useLayoutEffect(() => {
     void (async () => {
       const req = await request(`/recentUpdates/`);
       const res = (await req.json()) as recentUpdatesResponse;
