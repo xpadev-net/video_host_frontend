@@ -44,29 +44,31 @@ const Login = () => {
   };
 
   return (
-    <div className={Styles.wrapper}>
+    <>
       {loading && <div className={Styles.loading} />}
-      {message && <div>{message}</div>}
-      <form className={Styles.form} onSubmit={onSubmit}>
-        <input
-          type={"text"}
-          required={true}
-          name={"username"}
-          className={Styles.input}
-          placeholder={"Username"}
-        />
-        <input
-          type={"password"}
-          required={true}
-          name={"password"}
-          className={Styles.input}
-          placeholder={"Password"}
-        />
-        <button type="submit" className={Styles.button}>
-          Login
-        </button>
-      </form>
-    </div>
+      <div className={Styles.wrapper}>
+        {message && <div>{message}</div>}
+        <form className={Styles.form} onSubmit={onSubmit}>
+          <input
+            type={"text"}
+            required={true}
+            name={"username"}
+            className={Styles.input}
+            placeholder={"Username"}
+          />
+          <input
+            type={"password"}
+            required={true}
+            name={"password"}
+            className={Styles.input}
+            placeholder={"Password"}
+          />
+          <button type="submit" className={Styles.button}>
+            Login
+          </button>
+        </form>
+      </div>
+    </>
   );
 };
 export default Login;
