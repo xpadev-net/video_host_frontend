@@ -1,10 +1,10 @@
 import { MovieListProps } from "@/@types/MovieList";
 import { Movie } from "@/components/Movie/Movie";
 import Styles from "./MovieList.module.scss";
-import {useMemo} from "react";
+import { useMemo } from "react";
 
 const MovieList = ({ movies, type, active }: MovieListProps) => {
-  return useMemo(()=>{
+  return useMemo(() => {
     return (
       <div className={`${Styles.wrapper} ${Styles[type]}`}>
         {movies.map((movie, index) => {
@@ -24,8 +24,8 @@ const MovieList = ({ movies, type, active }: MovieListProps) => {
           );
         })}
       </div>
-    )
-  },[movies,type,active]);
+    );
+  }, [movies, type, active]);
 };
 
 export { MovieList };

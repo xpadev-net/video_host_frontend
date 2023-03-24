@@ -1,0 +1,16 @@
+@use "../../../styles/colors.scss";
+
+.container {
+  padding: 0 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  .leftSideWrapper {
+    display: flex;
+    width: 169px;
+  }
+  .rightSideSpacer {
+    width: 225px;
+  }
+}

@@ -7,7 +7,7 @@ import Link from "next/link";
 import { MovieList } from "@/components/MovieList/MovieList";
 import Styles from "@/styles/index.module.scss";
 import styled from "styled-components";
-import {WrapperProps} from "@/@types/Movie";
+import { WrapperProps } from "@/@types/Movie";
 
 const Wrapper = styled.div<WrapperProps>`
   --width: ${(p) => (p.itemWidth === undefined ? "unset" : `${p.itemWidth}px`)};
@@ -29,7 +29,7 @@ const Index = () => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [wrapper.current]);
+  }, [wrapper]);
   useEffect(() => {
     void (async () => {
       const req = await request(`/recentUpdates/`);
@@ -55,8 +55,13 @@ const Index = () => {
         {updates.map((update) => {
           return (
             <div key={update.seriesUrl}>
-              <Link href={`/series/${update.seriesUrl}`} className={Styles.title}>{update.title}</Link>
-              <MovieList movies={update.movies} type={"row"}/>
+              <Link
+                href={`/series/${update.seriesUrl}`}
+                className={Styles.title}
+              >
+                {update.title}
+              </Link>
+              <MovieList movies={update.movies} type={"row"} />
             </div>
           );
         })}

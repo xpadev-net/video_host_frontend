@@ -3,7 +3,8 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import NProgress from "nprogress";
 import "@/styles/global.scss";
-import {App} from "@/components/App/App";
+import "@/styles/nprogress.css";
+import { App } from "@/components/App/App";
 
 export default function _app({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -25,7 +26,9 @@ export default function _app({ Component, pageProps }: AppProps) {
       router.events.off("routeChangeError", handleStop);
     };
   }, [router]);
-  return <App>
-    <Component {...pageProps} />
-  </App>;
+  return (
+    <App>
+      <Component {...pageProps} />
+    </App>
+  );
 }
