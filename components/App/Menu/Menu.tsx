@@ -1,4 +1,5 @@
 import Styles from "@/components/App/Menu/Menu.module.scss";
+import ButtonStyles from "@/styles/button.module.scss";
 import Link from "next/link";
 import { Home, Menu } from "@mui/icons-material";
 import { useAtom } from "jotai";
@@ -11,12 +12,12 @@ const HeaderMenu = () => {
   };
   return (
     <>
-      <div className={`${Styles.buttonWrapper} ${Styles.hover}`}>
-        <Menu className={Styles.button} onClick={toggleSidebar} />
+      <div className={`${ButtonStyles.buttonWrapper} ${ButtonStyles.hover}`}>
+        <Menu className={ButtonStyles.button} onClick={toggleSidebar} />
       </div>
       <Link href={"/"} className={Styles.homeButton}>
-        <div className={Styles.buttonWrapper}>
-          <Home className={Styles.button} />
+        <div className={ButtonStyles.buttonWrapper}>
+          <Home className={ButtonStyles.button} />
         </div>
       </Link>
     </>
