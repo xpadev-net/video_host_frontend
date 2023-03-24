@@ -1,0 +1,16 @@
+@use "./colors.scss";
+
+.buttonWrapper {
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  &.hover:hover {
+    background-color: colors.$hoverColor;
+  }
+  .button {
+    width: 24px;
+    height: 24px;
+  }
+}
