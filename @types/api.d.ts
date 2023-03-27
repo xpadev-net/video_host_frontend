@@ -8,7 +8,6 @@ export type recentUpdates = {
 
 type recentUpdatesRes = {
   status: "success";
-  code: "200";
   data: recentUpdates;
 }
 
@@ -19,6 +18,16 @@ type authenticationError = {
 }
 
 export type recentUpdatesResponse = recentUpdatesRes | authenticationError;
+
+export type Suggest = { title:string }[];
+
+type SuggestRes = {
+  status: "success";
+  code: "200";
+  data: Suggest;
+}
+
+export type SuggestResponse = SuggestRes | authenticationError;
 
 type authorized = {
   status: "success";

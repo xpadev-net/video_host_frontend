@@ -10,8 +10,14 @@
     display: flex;
     width: 169px;
   }
+  .centerWrapper {
+    flex: 0 1 728px;
+    min-width: 0;
+    padding: 0 40px;
+  }
   .rightSideWrapper {
     width: 225px;
-    text-align: right;
+    display: flex;
+    justify-content: flex-end;
   }
 }

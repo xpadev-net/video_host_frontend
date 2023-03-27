@@ -3,7 +3,7 @@
 .header {
   height: 56px;
   width: 100vw;
-  background-color: colors.$subBackgroundColor;
+  background-color: colors.$secondaryBackgroundColor;
 }
 .main {
   display: flex;
@@ -12,7 +12,7 @@
   overflow-y: scroll;
   .sidebar {
     width: 76px;
-    background-color: colors.$subBackgroundColor;
+    background-color: colors.$secondaryBackgroundColor;
   }
   .container {
     flex: 1;

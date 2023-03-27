@@ -1,0 +1,67 @@
+@use "../../../../styles/colors.scss";
+
+.wrapper {
+  padding: 0 4px;
+  display: flex;
+  height: 32px;
+  .inputWrapper {
+    position: relative;
+    background-color: colors.$thirdlyBackgroundColor;
+    border: solid 1px colors.$backgroundColor;
+    border-right: none;
+    flex: 1;
+    box-shadow: inset 0 1px 2px #000;
+    padding: 2px 6px;
+    .input {
+      outline: none;
+      border: none;
+      background: none;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+      margin-left: 4px;
+      text-align: inherit;
+      &::placeholder {
+        color: colors.$subTextColor;
+      }
+    }
+    .suggest {
+      display: none;
+      z-index: 1;
+      position: absolute;
+      left: -1px;
+      top: 100%;
+      width: calc(100% + 2px);
+      background-color: colors.$backgroundColor;
+      border: solid 1px colors.$secondaryBackgroundColor;
+      padding-top: 10px;
+      .suggestItem {
+        padding: 3px 10px;
+        margin: 5px 0;
+        display: block;
+      }
+    }
+    .input:focus + .suggest,
+    &:hover .suggest {
+      display: block;
+    }
+  }
+  .button {
+    cursor: pointer;
+    width: 65px;
+    border: 1px solid colors.$backgroundColor;
+    background-color: colors.$quaternaryBackgroundColor;
+    border-radius: 0 2px 2px 0;
+    margin: 0;
+    display: inline-block;
+    text-align: center;
+    .icon {
+      height: 20px;
+      width: 20px;
+      fill: colors.$subTextColor;
+      opacity: 0.6;
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+}
