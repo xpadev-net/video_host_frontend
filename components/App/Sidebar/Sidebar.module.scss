@@ -1,0 +1,41 @@
+@use "../../../styles/colors";
+
+.wrapper {
+  position: relative;
+  &.disable {
+    .container {
+      left: -76px;
+    }
+    .spacer {
+      width: 0;
+    }
+  }
+  .container {
+    transition: left ease 0.5s;
+    width: 76px;
+    background-color: colors.$secondaryBackgroundColor;
+    padding: 12px 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    min-height: calc(100vh - 56px);
+    .buttonWrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 15px 0;
+      .icon {
+        width: 24px;
+        height: 24px;
+      }
+      .text {
+        font-size: 10px;
+      }
+    }
+  }
+  .spacer {
+    transition: width ease 0.5s;
+    width: 76px;
+  }
+}

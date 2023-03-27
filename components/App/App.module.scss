@@ -10,10 +10,6 @@
   height: calc(100vh - 56px);
   width: 100vw;
   overflow-y: scroll;
-  .sidebar {
-    width: 76px;
-    background-color: colors.$secondaryBackgroundColor;
-  }
   .container {
     flex: 1;
     overflow-y: scroll;

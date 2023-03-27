@@ -20,17 +20,16 @@ const Index = () => {
 
   const [width, setWidth] = useState(360);
   const wrapper = useRef<HTMLDivElement>(null);
+  const observer = useRef<ResizeObserver>();
   const isomorphicEffect = useIsomorphicEffect();
+  const handleResize = () => {
+    const width = wrapper.current?.clientWidth || 1920;
+    setWidth(width / (Math.floor(width / 385) + 1) - 20);
+  };
   isomorphicEffect(() => {
-    const handleResize = () => {
-      const width = wrapper.current?.clientWidth || 1920;
-      setWidth(width / (Math.floor(width / 385) + 1) - 20);
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+    if (!observer.current) observer.current = new ResizeObserver(handleResize);
+    if (!wrapper.current) return;
+    observer.current?.observe(wrapper.current);
   }, [wrapper.current]);
   isomorphicEffect(() => {
     void (async () => {
@@ -43,7 +42,6 @@ const Index = () => {
       setUpdates(res.data);
     })();
   }, [router]);
-  if (!updates) return <></>;
 
   return (
     <div ref={wrapper}>
@@ -54,19 +52,20 @@ const Index = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Wrapper itemWidth={width}>
-        {updates.map((update) => {
-          return (
-            <div key={update.seriesUrl}>
-              <Link
-                href={`/series/${update.seriesUrl}`}
-                className={Styles.title}
-              >
-                {update.title}
-              </Link>
-              <MovieList movies={update.movies} type={"row"} />
-            </div>
-          );
-        })}
+        {updates &&
+          updates.map((update) => {
+            return (
+              <div key={update.seriesUrl}>
+                <Link
+                  href={`/series/${update.seriesUrl}`}
+                  className={Styles.title}
+                >
+                  {update.title}
+                </Link>
+                <MovieList movies={update.movies} type={"row"} />
+              </div>
+            );
+          })}
       </Wrapper>
     </div>
   );

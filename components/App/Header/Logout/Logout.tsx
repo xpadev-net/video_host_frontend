@@ -1,4 +1,4 @@
-import { ExitToApp } from "@mui/icons-material";
+import { ExitToAppSharp } from "@mui/icons-material";
 import ButtonStyles from "@/styles/button.module.scss";
 import { request } from "@/libraries/request";
 import { useRouter } from "next/router";
@@ -13,7 +13,7 @@ const Logout = () => {
   };
   return (
     <div className={`${ButtonStyles.buttonWrapper} ${ButtonStyles.hover}`}>
-      <ExitToApp className={ButtonStyles.button} onClick={logout} />
+      <ExitToAppSharp className={ButtonStyles.button} onClick={logout} />
     </div>
   );
 };
