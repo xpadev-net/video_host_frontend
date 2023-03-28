@@ -12,8 +12,11 @@ const HeaderMenu = () => {
   };
   return (
     <div className={Styles.wrapper}>
-      <div className={`${ButtonStyles.buttonWrapper} ${ButtonStyles.hover}`}>
-        <Menu className={ButtonStyles.button} onClick={toggleSidebar} />
+      <div
+        className={`${ButtonStyles.buttonWrapper} ${ButtonStyles.hover}`}
+        onClick={toggleSidebar}
+      >
+        <Menu className={ButtonStyles.button} />
       </div>
       <Link href={"/"} className={Styles.homeButton}>
         <div className={ButtonStyles.buttonWrapper}>
