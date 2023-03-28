@@ -10,9 +10,11 @@ import styled from "styled-components";
 import { WrapperProps } from "@/@types/Movie";
 import { useIsomorphicEffect } from "@/libraries/IsomorphicEffect";
 
-const Wrapper = styled.div<WrapperProps>`
-  --width: ${(p) => (p.itemWidth === undefined ? "unset" : `${p.itemWidth}px`)};
-`;
+const Wrapper = styled.div.attrs((p: WrapperProps) => ({
+  style: {
+    "--width": `${p.itemWidth}px`,
+  },
+}))``;
 
 const Index = () => {
   const router = useRouter();

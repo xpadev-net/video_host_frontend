@@ -9,15 +9,13 @@ const Movie = ({ movie, index, type }: MovieProps) => {
       href={`/movie/${movie.url}`}
       className={`${Styles.wrapper} ${Styles[type]}`}
     >
-      <div className={Styles.width}>
-        {index !== undefined && <span>{index === "active" ? "▶" : index}</span>}
-        <div className={Styles.thumbnail}>
-          <Thumbnail movie={movie} />
-        </div>
-        <div className={Styles.titles}>
-          <span className={Styles.movieTitle}>{movie.movieTitle}</span>
-          <span className={Styles.title}>{movie.title}</span>
-        </div>
+      {index !== undefined && <span>{index === "active" ? "▶" : index}</span>}
+      <div className={Styles.thumbnail}>
+        <Thumbnail movie={movie} />
+      </div>
+      <div className={Styles.titles}>
+        <span className={Styles.movieTitle}>{movie.movieTitle}</span>
+        <span className={Styles.title}>{movie.title}</span>
       </div>
     </Link>
   );
