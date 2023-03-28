@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useRef, useState } from "react";
-import { request } from "@/libraries/request";
-import { recentUpdates, recentUpdatesResponse } from "@/@types/api";
+import { swrRequest } from "@/libraries/request";
+import { recentUpdatesResponse } from "@/@types/api";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { MovieList } from "@/components/MovieList/MovieList";
@@ -9,6 +9,7 @@ import Styles from "@/styles/index.module.scss";
 import styled from "styled-components";
 import { WrapperProps } from "@/@types/Movie";
 import { useIsomorphicEffect } from "@/libraries/IsomorphicEffect";
+import useSWR from "swr";
 
 const Wrapper = styled.div.attrs((p: WrapperProps) => ({
   style: {
@@ -18,7 +19,6 @@ const Wrapper = styled.div.attrs((p: WrapperProps) => ({
 
 const Index = () => {
   const router = useRouter();
-  const [updates, setUpdates] = useState<recentUpdates | undefined>(undefined);
 
   const [width, setWidth] = useState(360);
   const wrapper = useRef<HTMLDivElement>(null);
@@ -33,18 +33,15 @@ const Index = () => {
     if (!wrapper.current) return;
     observer.current?.observe(wrapper.current);
   }, [wrapper.current]);
-  isomorphicEffect(() => {
-    void (async () => {
-      const req = await request(`/recentUpdates/`);
-      const res = (await req.json()) as recentUpdatesResponse;
-      if (res.status === "fail") {
-        void router.push("/login");
-        return;
-      }
-      setUpdates(res.data);
-    })();
-  }, [router]);
+  const { data: updates } = useSWR<recentUpdatesResponse>(
+    "/recentUpdates/",
+    swrRequest
+  );
 
+  if (updates?.status === "fail") {
+    void router.push("/login");
+    return <></>;
+  }
   return (
     <div ref={wrapper}>
       <Head>
@@ -55,7 +52,7 @@ const Index = () => {
       </Head>
       <Wrapper itemWidth={width}>
         {updates &&
-          updates.map((update) => {
+          updates.data.map((update) => {
             return (
               <div key={update.seriesUrl}>
                 <Link
