@@ -17,7 +17,7 @@ const Thumbnail = ({ movie }: ThumbnailProps) => {
     <div className={Styles.wrapper}>
       <Image
         src={`${process.env.NEXT_PUBLIC_API_ENDPOINT}/img/${movie.url}`}
-        alt={`${movie.title} ${movie.movieTitle}`}
+        alt={`${movie.seriesTitle} ${movie.title}`}
         fill={true}
         sizes={"360px"}
       />

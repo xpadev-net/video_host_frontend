@@ -1,0 +1,11 @@
+.wrapper{
+  max-width: 1070px;
+  margin: 0 auto;
+  .seriesWrapper,.moviesWrapper{
+    padding: 10px 0;
+  }
+  .text{
+    text-decoration: none;
+    margin: 5px 0;
+  }
+}

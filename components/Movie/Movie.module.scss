@@ -13,13 +13,13 @@
     }
     .titles {
       min-height: 40px;
-      .movieTitle {
+      .title {
         font-size: 17px;
         line-height: 20px;
         font-weight: 700;
         max-height: 40px;
       }
-      .title {
+      .seriesTitle {
         max-height: 36px;
         line-height: 18px;
         font-size: 13px;
@@ -29,17 +29,21 @@
   &.column {
     display: flex;
     flex-direction: row;
-    width: calc(100% - 20px);
     padding: 0 10px;
+    margin-top: 16px;
     .thumbnail {
       max-width: 40%;
       width: 357px;
     }
-    .movieTitle {
-      font-size: min(1.7vw, 18px);
-    }
-    .title {
-      font-size: min(1.2vw, 13px);
+    .titles {
+      flex: 1;
+      padding-left: 10px;
+      .title {
+        font-size: min(1.7vw, 18px);
+      }
+      .seriesTitle {
+        font-size: min(1.2vw, 13px);
+      }
     }
   }
   &.minColumn {
@@ -57,12 +61,13 @@
       height: 56px;
     }
     .titles {
-      .movieTitle {
+      flex: 1;
+      .title {
         margin: 0 0 4px;
         font-size: 14px;
         line-height: 16px;
       }
-      .title {
+      .seriesTitle {
         line-height: 18px;
         font-weight: 400;
         font-size: 13px;
@@ -70,7 +75,7 @@
       }
     }
   }
-  .movieTitle {
+  .title {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal;
@@ -78,7 +83,7 @@
     letter-spacing: 0;
     color: $textColor;
   }
-  .title {
+  .seriesTitle {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
