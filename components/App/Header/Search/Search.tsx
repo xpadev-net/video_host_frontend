@@ -1,6 +1,6 @@
 import Styles from "@/components/App/Header/Search/Search.module.scss";
 import { Search as SearchIcon } from "@mui/icons-material";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState, KeyboardEvent } from "react";
 import { request } from "@/libraries/request";
 import { SuggestResponse } from "@/@types/api";
 import { useRouter } from "next/router";
@@ -14,9 +14,24 @@ type SuggestState = {
 const Search = () => {
   const [input, setInput] = useState("");
   const [suggest, setSuggest] = useState<SuggestState | undefined>();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const router = useRouter();
 
+  const onKeyUp = (e: KeyboardEvent<HTMLInputElement>) => {
+    const key = e.keyCode || e.charCode || 0;
+    if (!e.nativeEvent.isComposing && key === 13) {
+      void router.push(`/search/` + encodeURIComponent(input));
+      setSuggest(undefined);
+      inputRef.current?.blur();
+    }
+  };
+  const onSearchClick = () => {
+    if (input && input.length > 1) {
+      void router.push(`/search/` + encodeURIComponent(input));
+      setSuggest(undefined);
+    }
+  };
   useEffect(() => {
     if (input === suggest?.query || input.length < 2) {
       return;
@@ -46,8 +61,10 @@ const Search = () => {
       <div className={Styles.inputWrapper}>
         <input
           type="text"
+          ref={inputRef}
           className={Styles.input}
           placeholder={"検索"}
+          onKeyDown={onKeyUp}
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
@@ -57,7 +74,7 @@ const Search = () => {
             {suggest.suggest.map((title) => {
               return (
                 <Link
-                  href={`/search/${encodeURI(title)}`}
+                  href={`/search/${encodeURIComponent(title)}`}
                   key={title}
                   className={Styles.suggestItem}
                 >
@@ -68,7 +85,7 @@ const Search = () => {
           </div>
         )}
       </div>
-      <button className={Styles.button}>
+      <button className={Styles.button} onClick={onSearchClick}>
         <SearchIcon className={Styles.icon} />
       </button>
     </div>
