@@ -15,9 +15,9 @@
     width: 76px;
     background-color: colors.$secondaryBackgroundColor;
     padding: 12px 0;
-    position: absolute;
+    position: fixed;
     left: 0;
-    top: 0;
+    top: 56px;
     bottom: 0;
     min-height: calc(100vh - 56px);
     .buttonWrapper {
