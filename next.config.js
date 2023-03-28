@@ -12,6 +12,9 @@ const nextConfig = {
     formats: ['image/webp'],
     deviceSizes: [300]
   },
+  compiler: {
+    styledComponents: true,
+  }
 }
 
 module.exports = nextConfig
