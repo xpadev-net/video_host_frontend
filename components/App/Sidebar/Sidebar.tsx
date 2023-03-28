@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { History, Home } from "@mui/icons-material";
 import Styles from "@/components/App/Sidebar/Sidebar.module.scss";
 import Link from "next/link";
+import { OverlaySidebar } from "@/components/App/Sidebar/OverlaySidebar";
 
 const Sidebar = () => {
   const router = useRouter();
@@ -23,6 +24,7 @@ const Sidebar = () => {
         </Link>
       </div>
       <div className={Styles.spacer}></div>
+      <OverlaySidebar />
     </div>
   );
 };

@@ -11,7 +11,7 @@ const HeaderMenu = () => {
     setIsSidebarActive(!isSidebarActive);
   };
   return (
-    <>
+    <div className={Styles.wrapper}>
       <div className={`${ButtonStyles.buttonWrapper} ${ButtonStyles.hover}`}>
         <Menu className={ButtonStyles.button} onClick={toggleSidebar} />
       </div>
@@ -20,7 +20,7 @@ const HeaderMenu = () => {
           <OndemandVideoSharp className={ButtonStyles.button} />
         </div>
       </Link>
-    </>
+    </div>
   );
 };
 
