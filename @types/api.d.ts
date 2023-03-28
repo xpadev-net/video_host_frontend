@@ -28,6 +28,14 @@ type SearchRes = {
 
 export type SearchResponse = SearchRes | authenticationError;
 
+type SeriesRes = {
+  status: "success";
+  title: string;
+  movies: Movie[];
+}
+
+export type SeriesResponse = SeriesRes | authenticationError;
+
 export type Suggest = { title:string }[];
 
 type SuggestRes = {
