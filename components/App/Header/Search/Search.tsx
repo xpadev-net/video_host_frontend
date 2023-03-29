@@ -1,7 +1,7 @@
 import Styles from "@/components/App/Header/Search/Search.module.scss";
 import { Search as SearchIcon } from "@mui/icons-material";
 import { useRef, useState, KeyboardEvent } from "react";
-import { swrRequest } from "@/libraries/request";
+import { request } from "@/libraries/request";
 import { SuggestResponse } from "@/@types/api";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -28,7 +28,7 @@ const Search = () => {
 
   const { data: suggest } = useSWR<SuggestResponse>(
     `/suggest/${encodeURIComponent(input)}`,
-    swrRequest
+    request
   );
 
   return (

@@ -10,8 +10,7 @@ const Login = () => {
   const [message, setMessage] = useState("");
   useEffect(() => {
     void (async () => {
-      const req = await request(`/tryAuth/`);
-      const res = (await req.json()) as tryAuthResponse;
+      const res = await request<tryAuthResponse>(`/tryAuth/`);
       if (res.status === "success") {
         void router.push(
           router.query.callback ? `${router.query.callback}` : "/"
@@ -26,11 +25,10 @@ const Login = () => {
     setLoading(true);
     void (async () => {
       const data = new FormData(e.target as HTMLFormElement);
-      const req = await request(`/auth/`, {
+      const res = await request<authResponse>(`/auth/`, {
         method: "POST",
         body: data,
       });
-      const res = (await req.json()) as authResponse;
       if (res.status === "fail") {
         setMessage("incorrect username or password");
         setLoading(false);

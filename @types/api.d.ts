@@ -46,6 +46,13 @@ type MovieRes = {
 
 export type MovieResponse = MovieRes | authenticationError;
 
+type CommentRes = {
+  status: "success";
+  comments: v1Thread[];
+}
+
+export type CommentResponse = CommentRes | authenticationError;
+
 type SeriesRes = {
   status: "success";
   title: string;

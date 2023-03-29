@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useRef, useState } from "react";
-import { swrRequest } from "@/libraries/request";
+import { request } from "@/libraries/request";
 import { recentUpdatesResponse } from "@/@types/api";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -35,7 +35,7 @@ const Index = () => {
   }, [wrapper.current]);
   const { data: updates } = useSWR<recentUpdatesResponse>(
     "/recentUpdates/",
-    swrRequest
+    request
   );
 
   if (updates?.status === "fail") {

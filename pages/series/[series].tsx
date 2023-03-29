@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { Error } from "@/components/Error/Error";
 import useSWR from "swr";
-import { swrRequest } from "@/libraries/request";
+import { request } from "@/libraries/request";
 import { SeriesResponse } from "@/@types/api";
 import { MovieList } from "@/components/MovieList/MovieList";
 import Styles from "@/styles/search.module.scss";
@@ -11,7 +11,7 @@ const SearchPage = () => {
   const query = router.query.series;
   const { data: result } = useSWR<SeriesResponse>(
     `/series/${encodeURIComponent(typeof query === "string" ? query : "")}`,
-    swrRequest
+    request
   );
   if (!result) {
     return <></>;
