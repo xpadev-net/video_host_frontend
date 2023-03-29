@@ -4,9 +4,11 @@
   .leftSideWrapper{
     flex: 1;
     min-width: 640px;
+    margin-right: 24px;
   }
   .rightSideWrapper{
     max-width: 400px;
+    width: 300px;
     flex: 1;
   }
 }
@@ -17,6 +19,7 @@
     .leftSideWrapper,.rightSideWrapper{
       width: 100%;
       max-width: unset;
+      min-width: unset;
     }
   }
 }

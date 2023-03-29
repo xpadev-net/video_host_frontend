@@ -82,6 +82,11 @@
         font-weight: 400;
         font-size: 13px;
         max-height: 18px;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        overflow: hidden;
       }
     }
   }
@@ -96,7 +101,6 @@
   .seriesTitle {
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
     display: block;
     letter-spacing: 0;
     color: $subTextColor;

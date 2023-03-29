@@ -1,14 +1,18 @@
 import { useAtomValue } from "jotai";
-import { MovieItemAtom } from "@/atoms/Player";
+import { MovieItemAtom, NiconicommentsConfigAtom } from "@/atoms/Player";
 import { useEffect, useRef } from "react";
 import { request } from "@/libraries/request";
 import { CommentResponse } from "@/@types/api";
+import NiconiComments from "@xpadev-net/niconicomments";
+import Styles from "@/components/Player/DesktopPlayer/Video/Video.module.scss";
 
 const Video = () => {
   const data = useAtomValue(MovieItemAtom);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const pipVideoRef = useRef<HTMLVideoElement>(null);
+  const niconicommentsRef = useRef<NiconiComments>();
+  const niconicommentsConfig = useAtomValue(NiconicommentsConfigAtom);
 
   const onPipPause = () => {
     void (async () => {
@@ -22,7 +26,8 @@ const Video = () => {
   };
 
   useEffect(() => {
-    if (!videoRef.current || !canvasRef.current || !pipVideoRef.current) return;
+    const canvas = canvasRef.current;
+    if (!videoRef.current || !canvas || !pipVideoRef.current) return;
     if (!data) {
       videoRef.current.srcObject = null;
       return;
@@ -32,14 +37,24 @@ const Video = () => {
         `/comments/${data.movie.url}/`
       );
       if (res.status !== "success") return;
+      niconicommentsRef.current = new NiconiComments(
+        canvas,
+        res.comments,
+        niconicommentsConfig
+      );
     })();
   }, [videoRef.current, canvasRef.current, pipVideoRef.current, data?.source]);
 
   return (
-    <div>
-      <canvas ref={canvasRef} />
-      <video ref={videoRef} crossOrigin={"use-credentials"} />
+    <div className={Styles.wrapper}>
+      <canvas ref={canvasRef} className={Styles.canvas} />
       <video
+        ref={videoRef}
+        crossOrigin={"use-credentials"}
+        className={Styles.video}
+      />
+      <video
+        className={Styles.pipVideo}
         ref={pipVideoRef}
         autoPlay={true}
         muted={true}

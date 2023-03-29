@@ -1,0 +1,12 @@
+.wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  .canvas,
+  .video,
+  .pipVideo {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+}
