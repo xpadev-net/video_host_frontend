@@ -48,7 +48,7 @@ export type MovieResponse = MovieRes | authenticationError;
 
 type CommentRes = {
   status: "success";
-  comments: v1Thread[];
+  comments: v1Comment[];
 }
 
 export type CommentResponse = CommentRes | authenticationError;

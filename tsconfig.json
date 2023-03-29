@@ -48,6 +48,9 @@
       ],
       "@/libraries/*": [
         "libraries/*"
+      ],
+      "@/assets/*": [
+        "assets/*"
       ]
     }
   },

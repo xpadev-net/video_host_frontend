@@ -13,7 +13,11 @@ const MoviePage = () => {
     `/movie/${encodeURIComponent(typeof query === "string" ? query : "")}`,
     request
   );
-  if (!result || result.status !== "success") return <></>;
+  if (!result) return <></>;
+  if (result.status !== "success") {
+    void router.push("/login");
+    return <></>;
+  }
   return (
     <div className={Styles.wrapper}>
       <div className={Styles.leftSideWrapper}>
