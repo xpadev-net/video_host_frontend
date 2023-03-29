@@ -28,6 +28,24 @@ type SearchRes = {
 
 export type SearchResponse = SearchRes | authenticationError;
 
+export type MovieItem = {
+  playlist: Movie[];
+  movie:Movie;
+  prev?: Movie;
+  next?: Movie;
+  source:{
+    hls: string;
+    http: string;
+  }
+}
+
+type MovieRes = {
+  status: "success";
+  data: MovieItem;
+}
+
+export type MovieResponse = MovieRes | authenticationError;
+
 type SeriesRes = {
   status: "success";
   title: string;

@@ -17,7 +17,7 @@ const MovieList = ({ movies, type, active }: MovieListProps) => {
                 active !== undefined
                   ? movie.url === active
                     ? "active"
-                    : index
+                    : index + 1
                   : undefined
               }
             />

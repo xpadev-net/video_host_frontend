@@ -1,0 +1,45 @@
+@use "../../styles/colors";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  border: solid 1px colors.$quaternaryBackgroundColor;
+  .header {
+    display: flex;
+    height: 60px;
+    padding: 5px;
+    .icon {
+      height: 50px;
+    }
+    .textWrapper {
+      display: flex;
+      flex-direction: column;
+      line-height: 25px;
+      flex: 1;
+      padding: 0 10px;
+      .nextTitle {
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        overflow: hidden;
+      }
+      .title {
+        font-size: 12px;
+        color: colors.$subTextColor;
+      }
+    }
+    &.open {
+      .textWrapper {
+        line-height: 50px;
+        .title {
+          font-size: unset;
+          color: colors.$textColor;
+        }
+      }
+    }
+  }
+  .list {
+    border-top: solid 1px colors.$quaternaryBackgroundColor;
+  }
+}

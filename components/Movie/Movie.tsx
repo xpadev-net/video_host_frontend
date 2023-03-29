@@ -26,7 +26,9 @@ const Movie = ({ movie, index, type }: MovieProps) => {
       href={`/movie/${movie.url}`}
       className={`${Styles.wrapper} ${Styles[type]}`}
     >
-      {index !== undefined && <span>{index === "active" ? "▶" : index}</span>}
+      {index !== undefined && (
+        <span className={Styles.index}>{index === "active" ? "▶" : index}</span>
+      )}
       <div className={Styles.thumbnail}>
         <Thumbnail movie={movie} />
       </div>

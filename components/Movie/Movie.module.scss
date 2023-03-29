@@ -52,23 +52,30 @@
   &.minColumn {
     display: flex;
     flex-direction: row;
-    height: 56px;
+    height: 64px;
     padding: 4px 8px 4px 0;
     .index {
       width: 24px;
-      line-height: 24px;
+      line-height: 56px;
       font-size: 12px;
+      text-align: center;
     }
     .thumbnail {
       width: 100px;
       height: 56px;
     }
     .titles {
+      margin-left: 5px;
       flex: 1;
       .title {
         margin: 0 0 4px;
         font-size: 14px;
         line-height: 16px;
+        max-height: 32px;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
       }
       .seriesTitle {
         line-height: 18px;

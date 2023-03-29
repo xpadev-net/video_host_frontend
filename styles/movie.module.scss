@@ -1,0 +1,22 @@
+.wrapper{
+  display: flex;
+  flex-direction: row;
+  .leftSideWrapper{
+    flex: 1;
+    min-width: 640px;
+  }
+  .rightSideWrapper{
+    max-width: 400px;
+    flex: 1;
+  }
+}
+
+@media (max-width: 1000px){
+  .wrapper{
+    flex-direction: column;
+    .leftSideWrapper,.rightSideWrapper{
+      width: 100%;
+      max-width: unset;
+    }
+  }
+}

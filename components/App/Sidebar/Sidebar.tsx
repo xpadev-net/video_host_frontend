@@ -10,7 +10,7 @@ const Sidebar = () => {
   return (
     <div
       className={`${Styles.wrapper} ${
-        router.pathname.startsWith("/episode/") && Styles.disable
+        router.pathname.startsWith("/movie/") && Styles.disable
       }`}
     >
       <div className={Styles.container}>
