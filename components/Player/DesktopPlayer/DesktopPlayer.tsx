@@ -160,7 +160,11 @@ const DesktopPlayer = () => {
   };
 
   const onVideoLoadedMetadata = () => {
-    setMetadata({ ...metadata, duration: videoRef.current?.duration || 0 });
+    setMetadata({
+      ...metadata,
+      duration: videoRef.current?.duration || 0,
+      paused: true,
+    });
   };
 
   const onVideoTimeUpdate = () => {

@@ -47,6 +47,7 @@ const Controller = ({ className }: props) => {
 
   return (
     <div className={`${className} ${Styles.wrapper}`} onClick={stopPropagation}>
+      <div className={Styles.background}></div>
       <div className={Styles.buttons} onMouseLeave={onMouseLeave}>
         <div className={Styles.leftSideWrapper}>
           <PrevNextButton className={Styles.button} type={"prev"} />

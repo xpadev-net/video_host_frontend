@@ -1,17 +1,25 @@
 .wrapper {
-  height: 100px;
-  background: rgb(2, 0, 36);
-  background: linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 0.7) 0%,
-    rgba(0, 0, 0, 0.4) 40%,
-    rgba(0, 0, 0, 0.2) 60%,
-    rgba(0, 0, 0, 0) 100%
-  );
+  position: relative;
   padding: 0 12px;
   display: flex;
   flex-direction: column-reverse;
   user-select: none;
+  .background {
+    position: absolute;
+    left: 0;
+    height: 100px;
+    width: 100%;
+    z-index: -1;
+    pointer-events: none;
+    background: rgb(2, 0, 36);
+    background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(0, 0, 0, 0.4) 40%,
+      rgba(0, 0, 0, 0.2) 60%,
+      rgba(0, 0, 0, 0) 100%
+    );
+  }
   .buttons {
     display: flex;
     flex-direction: row;
@@ -44,6 +52,7 @@
         font-size: 12px;
         .text {
           color: #ddd;
+          margin: 0 2px;
         }
       }
     }
