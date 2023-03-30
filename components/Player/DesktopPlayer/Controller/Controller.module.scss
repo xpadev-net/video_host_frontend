@@ -19,9 +19,13 @@
     justify-content: space-between;
     .button {
       width: 40px;
+      height: 40px;
       border: none;
       background: none;
       cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     .leftSideWrapper {
       display: flex;
