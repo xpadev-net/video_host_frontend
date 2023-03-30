@@ -54,7 +54,6 @@ const CommentCanvas = ({ url, videoRef, pipVideoRef, className }: props) => {
         [{ comments: res.comments, id: "0", fork: "main", commentCount: 0 }],
         { ...niconicommentsConfig, video }
       );
-      console.log(niconicommentsRef.current);
     })();
   }, [url]);
 
@@ -70,7 +69,7 @@ const CommentCanvas = ({ url, videoRef, pipVideoRef, className }: props) => {
     return () => {
       window.clearInterval(interval);
     };
-  }, []);
+  }, [niconicommentsRef.current, videoRef?.paused]);
 
   useEffect(() => {
     if (!niconicommentsRef.current || !canvasRef.current || !pipVideoRef)
