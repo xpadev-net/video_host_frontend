@@ -3,6 +3,12 @@
   width: 100%;
   aspect-ratio: 16/9;
   overflow: hidden;
+  &.inactive {
+    cursor: none;
+    .controller {
+      bottom: -100px;
+    }
+  }
   .canvas,
   .video,
   .pipVideo,
@@ -42,8 +48,5 @@
     left: 0;
     width: 100%;
     transition: bottom 250ms ease;
-    &.disabled {
-      bottom: -100px;
-    }
   }
 }

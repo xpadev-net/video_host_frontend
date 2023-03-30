@@ -3,7 +3,7 @@ import {
   MovieItemAtom,
   NiconicommentsConfigAtom,
   PlayerConfigAtom,
-  VideoIsPaused,
+  VideoMetadataAtom,
   VideoRefAtom,
 } from "@/atoms/Player";
 import { useEffect, useRef, useState } from "react";
@@ -27,7 +27,7 @@ const DesktopPlayer = () => {
   const commentSmoothingRef = useRef({ offset: 0, timestamp: 0 });
   const [isLoading, setIsLoading] = useState(true);
   const [isAfk, setIsAfk] = useState(false);
-  const [isPause, setIsPause] = useAtom(VideoIsPaused);
+  const [metadata, setMetadata] = useAtom(VideoMetadataAtom);
   const afkTimeout = useRef(-1);
 
   const onPipPause = () => {
@@ -47,9 +47,6 @@ const DesktopPlayer = () => {
       setPlayerConfig({ ...playerConfig, volume: videoRef.current.volume });
     }
   }, [videoRef, playerConfig]);
-  useEffect(() => {
-    setIsPause(!!videoRef.current?.paused);
-  }, [videoRef.current?.paused]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -122,7 +119,7 @@ const DesktopPlayer = () => {
       offset: videoRef.current?.currentTime || 0,
       timestamp: performance.now(),
     };
-    setIsPause(false);
+    setMetadata({ ...metadata, paused: false });
   };
 
   const onVideoRateChange = () => {
@@ -143,7 +140,7 @@ const DesktopPlayer = () => {
   };
 
   const onVideoPause = () => {
-    setIsPause(true);
+    setMetadata({ ...metadata, paused: true });
   };
 
   const togglePlayerState = () => {
@@ -158,9 +155,22 @@ const DesktopPlayer = () => {
     setPlayerConfig({ ...playerConfig, volume: videoRef.current?.volume || 0 });
   };
 
+  const onVideoLoadedMetadata = () => {
+    setMetadata({ ...metadata, duration: videoRef.current?.duration || 0 });
+  };
+
+  const onVideoTimeUpdate = () => {
+    setMetadata({
+      ...metadata,
+      currentTime: videoRef.current?.currentTime || 0,
+    });
+  };
+
   return (
     <div
-      className={Styles.wrapper}
+      className={`${Styles.wrapper} ${
+        isAfk && !metadata.paused && Styles.inactive
+      }`}
       onMouseMove={onMouseMove}
       onClick={togglePlayerState}
     >
@@ -182,6 +192,8 @@ const DesktopPlayer = () => {
         onRateChange={onVideoRateChange}
         onPause={onVideoPause}
         onVolumeChange={onVideoVolumeChange}
+        onLoadedMetadata={onVideoLoadedMetadata}
+        onTimeUpdate={onVideoTimeUpdate}
       />
       <video
         className={`${Styles.pipVideo} ${
@@ -192,11 +204,7 @@ const DesktopPlayer = () => {
         muted={true}
         onPause={onPipPause}
       />
-      <Controller
-        className={`${Styles.controller} ${
-          isAfk && !isPause && Styles.disabled
-        }`}
-      />
+      <Controller className={Styles.controller} />
     </div>
   );
 };

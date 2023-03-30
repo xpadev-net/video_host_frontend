@@ -7,3 +7,9 @@ export type PlayerConfig = {
   isPipEnable: boolean;
   volume: number
 }
+
+export type VideoMetadata = {
+  currentTime: number;
+  duration: number;
+  paused: boolean;
+}

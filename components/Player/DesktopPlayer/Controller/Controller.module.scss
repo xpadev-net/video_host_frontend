@@ -3,30 +3,49 @@
   background: rgb(2, 0, 36);
   background: linear-gradient(
     0deg,
-    rgba(0, 0, 0, 0.5) 0%,
-    rgba(0, 0, 0, 0.1) 60%,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.4) 40%,
+    rgba(0, 0, 0, 0.2) 60%,
     rgba(0, 0, 0, 0) 100%
   );
   padding: 0 12px;
   display: flex;
   flex-direction: column-reverse;
+  user-select: none;
   .buttons {
     display: flex;
     flex-direction: row;
     height: 40px;
-    .button {
-      width: 40px;
-      border: none;
-      background: none;
-      cursor: pointer;
-    }
-    .volumeSlider {
-      overflow: hidden;
-      width: 0;
-      transition: width 250ms ease;
-      &.extend {
-        width: 52px;
+    justify-content: space-between;
+    .leftSideWrapper {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      .button {
+        width: 40px;
+        border: none;
+        background: none;
+        cursor: pointer;
       }
+      .volumeSlider {
+        overflow: hidden;
+        width: 0;
+        transition: width 250ms ease;
+        &.extend {
+          width: 52px;
+        }
+        margin-right: 10px;
+      }
+      .timeDisplay {
+        font-size: 12px;
+        .text {
+          color: #ddd;
+        }
+      }
+    }
+    .rightSideWrapper {
+      display: flex;
+      flex-direction: row;
     }
   }
 }
