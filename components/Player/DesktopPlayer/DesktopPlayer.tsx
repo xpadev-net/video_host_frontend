@@ -44,6 +44,9 @@ const DesktopPlayer = () => {
   useEffect(() => {
     setVideoAtom(videoRef.current);
   }, [videoRef.current]);
+  useEffect(() => {
+    setIsPause(!!videoRef.current?.paused);
+  }, [videoRef.current?.paused]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
