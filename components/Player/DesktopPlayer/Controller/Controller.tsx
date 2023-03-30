@@ -16,6 +16,7 @@ const Controller = ({ className }: props) => {
   const videoRef = useAtomValue(VideoRefAtom);
   const isPaused = useAtomValue(VideoIsPaused);
   const [isVolumeExtend, setIsVolumeExtend] = useState(false);
+  const [mutedVolume, setMutedVolume] = useState<number | undefined>(undefined);
   const router = useRouter();
   if (!data) return <></>;
 
@@ -46,6 +47,17 @@ const Controller = ({ className }: props) => {
     e.stopPropagation();
   };
 
+  const onVolumeClick = () => {
+    if (!videoRef) return;
+    if (mutedVolume && videoRef.volume === 0) {
+      videoRef.volume = mutedVolume;
+      setMutedVolume(undefined);
+    } else {
+      setMutedVolume(videoRef.volume);
+      videoRef.volume = 0;
+    }
+  };
+
   return (
     <div
       className={`${className} ${Styles.wrapper}`}
@@ -66,7 +78,11 @@ const Controller = ({ className }: props) => {
             <SkipNext />
           </button>
         )}
-        <button onMouseOver={onVolumeMouseOver} className={Styles.button}>
+        <button
+          onClick={onVolumeClick}
+          onMouseOver={onVolumeMouseOver}
+          className={Styles.button}
+        >
           <VolumeIcon />
         </button>
         <div

@@ -46,7 +46,6 @@ const VolumeSlider = () => {
     let x = clientX - rect.left;
     if (x < 0) x = 0;
     else if (x > rect.width) x = rect.width;
-    console.log(x / rect.width);
     videoRef.volume = x / rect.width;
   };
 
