@@ -17,16 +17,16 @@
     flex-direction: row;
     height: 40px;
     justify-content: space-between;
+    .button {
+      width: 40px;
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
     .leftSideWrapper {
       display: flex;
       flex-direction: row;
       align-items: center;
-      .button {
-        width: 40px;
-        border: none;
-        background: none;
-        cursor: pointer;
-      }
       .volumeSlider {
         overflow: hidden;
         width: 0;
@@ -46,6 +46,7 @@
     .rightSideWrapper {
       display: flex;
       flex-direction: row;
+      align-items: center;
     }
   }
 }

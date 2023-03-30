@@ -5,6 +5,7 @@ import {
   PlayerConfigAtom,
   VideoMetadataAtom,
   VideoRefAtom,
+  WrapperRefAtom,
 } from "@/atoms/Player";
 import { useEffect, useRef, useState } from "react";
 import { request } from "@/libraries/request";
@@ -18,7 +19,9 @@ import { Controller } from "@/components/Player/DesktopPlayer/Controller/Control
 const DesktopPlayer = () => {
   const data = useAtomValue(MovieItemAtom);
   const setVideoAtom = useSetAtom(VideoRefAtom);
+  const setWrapperAtom = useSetAtom(WrapperRefAtom);
   const [playerConfig, setPlayerConfig] = useAtom(PlayerConfigAtom);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const pipVideoRef = useRef<HTMLVideoElement>(null);
@@ -43,6 +46,7 @@ const DesktopPlayer = () => {
 
   useEffect(() => {
     setVideoAtom(videoRef.current);
+    setWrapperAtom(wrapperRef.current);
     if (videoRef.current && playerConfig.volume !== videoRef.current.volume) {
       setPlayerConfig({ ...playerConfig, volume: videoRef.current.volume });
     }
@@ -173,6 +177,7 @@ const DesktopPlayer = () => {
       }`}
       onMouseMove={onMouseMove}
       onClick={togglePlayerState}
+      ref={wrapperRef}
     >
       {isLoading && (
         <div className={Styles.loadingWrapper}>
