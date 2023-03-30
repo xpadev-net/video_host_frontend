@@ -9,6 +9,7 @@ import { FullscreenButton } from "@/components/Player/DesktopPlayer/Controller/F
 import { TheatreButton } from "@/components/Player/DesktopPlayer/Controller/TheatreButton";
 import { PrevNextButton } from "@/components/Player/DesktopPlayer/Controller/PrevNextButton";
 import { PlayPauseButton } from "@/components/Player/DesktopPlayer/Controller/PlayPauseButton";
+import { Slider } from "@/components/Player/DesktopPlayer/Controller/Slider/Slider";
 
 type props = {
   className?: string;
@@ -45,12 +46,8 @@ const Controller = ({ className }: props) => {
   };
 
   return (
-    <div
-      className={`${className} ${Styles.wrapper}`}
-      onMouseLeave={onMouseLeave}
-      onClick={stopPropagation}
-    >
-      <div className={Styles.buttons}>
+    <div className={`${className} ${Styles.wrapper}`} onClick={stopPropagation}>
+      <div className={Styles.buttons} onMouseLeave={onMouseLeave}>
         <div className={Styles.leftSideWrapper}>
           <PrevNextButton className={Styles.button} type={"prev"} />
           <PlayPauseButton className={Styles.button} />
@@ -80,7 +77,7 @@ const Controller = ({ className }: props) => {
           <FullscreenButton className={Styles.button} />
         </div>
       </div>
-      <div className={Styles.Slider}></div>
+      <Slider className={Styles.Slider} />
     </div>
   );
 };

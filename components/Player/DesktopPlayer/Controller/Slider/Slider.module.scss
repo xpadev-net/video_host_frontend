@@ -1,0 +1,44 @@
+@use "../../../../../styles/colors";
+
+.wrapper {
+  position: relative;
+  width: 100%;
+  height: 6px;
+  cursor: pointer;
+  .background {
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background-color: rgba(255, 255, 255, 0.2);
+    bottom: 0;
+  }
+  .buffered {
+    position: absolute;
+    height: 3px;
+    background-color: rgba(255, 255, 255, 0.8);
+    bottom: 0;
+    transition: all 250ms ease;
+  }
+  .watched {
+    position: absolute;
+    height: 3px;
+    background-color: colors.$accentColor;
+    bottom: 0;
+  }
+  .grubber {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background-color: colors.$accentColor;
+    bottom: 2px;
+    transform: translate(-50%, 50%);
+    transition: width 50ms ease, height 50ms ease;
+  }
+  &:hover {
+    .grubber {
+      width: 11px;
+      height: 11px;
+    }
+  }
+}
