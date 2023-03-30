@@ -18,7 +18,7 @@ import { Controller } from "@/components/Player/DesktopPlayer/Controller/Control
 const DesktopPlayer = () => {
   const data = useAtomValue(MovieItemAtom);
   const setVideoAtom = useSetAtom(VideoRefAtom);
-  const playerConfig = useAtomValue(PlayerConfigAtom);
+  const [playerConfig, setPlayerConfig] = useAtom(PlayerConfigAtom);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const pipVideoRef = useRef<HTMLVideoElement>(null);
@@ -43,7 +43,10 @@ const DesktopPlayer = () => {
 
   useEffect(() => {
     setVideoAtom(videoRef.current);
-  }, [videoRef.current]);
+    if (videoRef.current && playerConfig.volume !== videoRef.current.volume) {
+      setPlayerConfig({ ...playerConfig, volume: videoRef.current.volume });
+    }
+  }, [videoRef, playerConfig]);
   useEffect(() => {
     setIsPause(!!videoRef.current?.paused);
   }, [videoRef.current?.paused]);
@@ -151,6 +154,10 @@ const DesktopPlayer = () => {
     }
   };
 
+  const onVideoVolumeChange = () => {
+    setPlayerConfig({ ...playerConfig, volume: videoRef.current?.volume || 0 });
+  };
+
   return (
     <div
       className={Styles.wrapper}
@@ -174,6 +181,7 @@ const DesktopPlayer = () => {
         onPlay={onVideoPlay}
         onRateChange={onVideoRateChange}
         onPause={onVideoPause}
+        onVolumeChange={onVideoVolumeChange}
       />
       <video
         className={`${Styles.pipVideo} ${

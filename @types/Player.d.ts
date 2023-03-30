@@ -5,4 +5,5 @@ export type PlayerConfig = {
   isTheatre: boolean;
   isHls: boolean
   isPipEnable: boolean;
+  volume: number
 }

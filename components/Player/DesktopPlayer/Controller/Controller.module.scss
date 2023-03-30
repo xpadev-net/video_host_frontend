@@ -10,4 +10,23 @@
   padding: 0 12px;
   display: flex;
   flex-direction: column-reverse;
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    height: 40px;
+    .button {
+      width: 40px;
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+    .volumeSlider {
+      overflow: hidden;
+      width: 0;
+      transition: width 250ms ease;
+      &.extend {
+        width: 52px;
+      }
+    }
+  }
 }

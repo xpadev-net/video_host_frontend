@@ -3,7 +3,9 @@ import { useAtomValue } from "jotai";
 import { MovieItemAtom, VideoIsPaused, VideoRefAtom } from "@/atoms/Player";
 import { Pause, PlayArrow, SkipNext, SkipPrevious } from "@mui/icons-material";
 import { useRouter } from "next/router";
-import { MouseEvent } from "react";
+import { MouseEvent, useState } from "react";
+import { VolumeIcon } from "@/components/Player/DesktopPlayer/Controller/VolumeIcon";
+import { VolumeSlider } from "@/components/Player/DesktopPlayer/Controller/VolumeSlider/VolumeSlider";
 
 type props = {
   className?: string;
@@ -13,20 +15,18 @@ const Controller = ({ className }: props) => {
   const data = useAtomValue(MovieItemAtom);
   const videoRef = useAtomValue(VideoRefAtom);
   const isPaused = useAtomValue(VideoIsPaused);
+  const [isVolumeExtend, setIsVolumeExtend] = useState(false);
   const router = useRouter();
   if (!data) return <></>;
 
-  const onPrevClick = (e: MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
+  const onPrevClick = () => {
     void router.push(`/movie/${data.prev?.url}`);
   };
-  const onNextClick = (e: MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
+  const onNextClick = () => {
     void router.push(`/movie/${data.next?.url}`);
   };
 
-  const togglePlayerState = (e: MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
+  const togglePlayerState = () => {
     if (videoRef?.paused) {
       void videoRef?.play();
     } else {
@@ -34,22 +34,48 @@ const Controller = ({ className }: props) => {
     }
   };
 
+  const onMouseLeave = () => {
+    setIsVolumeExtend(false);
+  };
+
+  const onVolumeMouseOver = () => {
+    setIsVolumeExtend(true);
+  };
+
+  const stopPropagation = (e: MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+  };
+
   return (
-    <div className={`${className} ${Styles.wrapper}`}>
+    <div
+      className={`${className} ${Styles.wrapper}`}
+      onMouseLeave={onMouseLeave}
+      onClick={stopPropagation}
+    >
       <div className={Styles.buttons}>
         {data.prev && (
-          <button onClick={onPrevClick}>
+          <button onClick={onPrevClick} className={Styles.button}>
             <SkipPrevious />
           </button>
         )}
-        <button onClick={togglePlayerState}>
+        <button onClick={togglePlayerState} className={Styles.button}>
           {isPaused ? <PlayArrow /> : <Pause />}
         </button>
         {data.next && (
-          <button onClick={onNextClick}>
+          <button onClick={onNextClick} className={Styles.button}>
             <SkipNext />
           </button>
         )}
+        <button onMouseOver={onVolumeMouseOver} className={Styles.button}>
+          <VolumeIcon />
+        </button>
+        <div
+          className={`${Styles.volumeSlider} ${
+            isVolumeExtend && Styles.extend
+          }`}
+        >
+          <VolumeSlider />
+        </div>
       </div>
       <div className={Styles.Slider}></div>
     </div>
