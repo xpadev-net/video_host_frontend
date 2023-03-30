@@ -28,15 +28,17 @@ type SearchRes = {
 
 export type SearchResponse = SearchRes | authenticationError;
 
+export type MovieItemSource = {
+  hls: string;
+  http: string;
+}
+
 export type MovieItem = {
   playlist: Movie[];
   movie:Movie;
   prev?: Movie;
   next?: Movie;
-  source:{
-    hls: string;
-    http: string;
-  }
+  source: MovieItemSource
 }
 
 type MovieRes = {

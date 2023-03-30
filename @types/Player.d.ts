@@ -13,4 +13,5 @@ export type VideoMetadata = {
   currentTime: number;
   duration: number;
   paused: boolean;
+  isLoading: boolean;
 }
