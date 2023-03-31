@@ -25,6 +25,7 @@
 .wrapper.theatre{
   flex-direction: column;
   padding: 0;
+  max-width: unset;
   .mainWrapper{
     width: 100%;
     .playerWrapper{
