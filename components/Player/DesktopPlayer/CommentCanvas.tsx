@@ -55,6 +55,9 @@ const CommentCanvas = ({ url, videoRef, pipVideoRef, className }: props) => {
         { ...niconicommentsConfig, video }
       );
     })();
+    return () => {
+      niconicommentsRef.current = undefined;
+    };
   }, [url]);
 
   useEffect(() => {
