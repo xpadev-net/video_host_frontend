@@ -37,6 +37,17 @@ const DesktopPlayer = () => {
   };
 
   useEffect(() => {
+    setIsAfk(false);
+    clearTimeout(afkTimeout.current);
+    afkTimeout.current = window.setTimeout(() => {
+      setIsAfk(true);
+    }, 3000);
+    return () => {
+      clearTimeout(afkTimeout.current);
+    };
+  }, []);
+
+  useEffect(() => {
     setVideoAtom(videoRef.current);
     setWrapperAtom(wrapperRef.current);
     if (videoRef.current && playerConfig.volume !== videoRef.current.volume) {
