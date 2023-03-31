@@ -37,11 +37,14 @@ const Controller = ({ className }: props) => {
   const onVolumeClick = () => {
     if (!videoRef) return;
     if (mutedVolume && videoRef.volume === 0) {
-      videoRef.volume = mutedVolume;
       setMutedVolume(undefined);
+      videoRef.volume = mutedVolume;
+    } else if (mutedVolume === 0 && videoRef.volume === 0) {
+      setMutedVolume(undefined);
+      videoRef.volume = 1;
     } else {
-      videoRef.volume = 0;
       setMutedVolume(videoRef.volume);
+      videoRef.volume = 0;
     }
   };
 
