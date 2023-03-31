@@ -1,4 +1,4 @@
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import {
   MovieItemAtom,
   PlayerConfigAtom,
@@ -21,7 +21,7 @@ const DesktopPlayer = ({ className }: props) => {
   const data = useAtomValue(MovieItemAtom);
   const setVideoAtom = useSetAtom(VideoRefAtom);
   const setWrapperAtom = useSetAtom(WrapperRefAtom);
-  const [playerConfig, setPlayerConfig] = useAtom(PlayerConfigAtom);
+  const playerConfig = useAtomValue(PlayerConfigAtom);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const pipVideoRef = useRef<HTMLVideoElement>(null);
@@ -54,9 +54,6 @@ const DesktopPlayer = ({ className }: props) => {
   useEffect(() => {
     setVideoAtom(videoRef.current);
     setWrapperAtom(wrapperRef.current);
-    if (videoRef.current && playerConfig.volume !== videoRef.current.volume) {
-      setPlayerConfig({ ...playerConfig, volume: videoRef.current.volume });
-    }
   }, [videoRef, playerConfig]);
 
   const onMouseMove = () => {
