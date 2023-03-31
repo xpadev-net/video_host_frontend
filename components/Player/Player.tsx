@@ -6,20 +6,17 @@ import { useEffect } from "react";
 
 type props = {
   data: MovieItem;
+  className?: string;
 };
 
-const Player = ({ data }: props) => {
+const Player = ({ data, className }: props) => {
   const setMovieItem = useSetAtom(MovieItemAtom);
 
   useEffect(() => {
     setMovieItem(data);
   }, [data]);
 
-  return (
-    <div>
-      <DesktopPlayer />
-    </div>
-  );
+  return <DesktopPlayer className={className} />;
 };
 
 export { Player };

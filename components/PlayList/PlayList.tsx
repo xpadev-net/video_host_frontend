@@ -10,12 +10,13 @@ import { useState } from "react";
 
 type props = {
   data: MovieItem;
+  className?: string;
 };
 
-const PlayList = ({ data }: props) => {
+const PlayList = ({ data, className }: props) => {
   const [isOpen, setIsOpen] = useState(true);
   return (
-    <div className={Styles.wrapper}>
+    <div className={`${Styles.wrapper} ${className}`}>
       <div
         className={`${Styles.header} ${isOpen && Styles.open}`}
         onClick={() => setIsOpen(!isOpen)}

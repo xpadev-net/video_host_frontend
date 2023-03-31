@@ -1,15 +1,48 @@
 .wrapper{
   display: flex;
   flex-direction: row;
-  .leftSideWrapper{
+  padding: 24px;
+  max-width: 1800px;
+  margin: 0 auto;
+  .mainWrapper{
     flex: 1;
     min-width: 640px;
     margin-right: 24px;
   }
-  .rightSideWrapper{
+  .subWrapper{
+    flex: 1;
     max-width: 400px;
     width: 300px;
+  }
+  .playlistWrapper{
+    width: 100%;
+  }
+  .info{
     flex: 1;
+  }
+}
+
+.wrapper.theatre{
+  flex-direction: column;
+  padding: 0;
+  .mainWrapper{
+    width: 100%;
+    .playerWrapper{
+      width: 100%;
+      max-height: calc(100vh - 170px);
+      height: 100vh;
+    }
+  }
+  .subWrapper{
+    padding: 24px;
+    width: 100%;
+    max-width: 1800px;
+    margin: 0 auto;
+    display: flex;
+    .playlistWrapper{
+      max-width: 400px;
+      width: 300px;
+    }
   }
 }
 

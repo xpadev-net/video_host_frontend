@@ -13,7 +13,11 @@ import { Controller } from "@/components/Player/DesktopPlayer/Controller/Control
 import { CommentCanvas } from "@/components/Player/DesktopPlayer/CommentCanvas";
 import { Video } from "@/components/Player/DesktopPlayer/Video";
 
-const DesktopPlayer = () => {
+type props = {
+  className?: string;
+};
+
+const DesktopPlayer = ({ className }: props) => {
   const data = useAtomValue(MovieItemAtom);
   const setVideoAtom = useSetAtom(VideoRefAtom);
   const setWrapperAtom = useSetAtom(WrapperRefAtom);
@@ -73,34 +77,36 @@ const DesktopPlayer = () => {
 
   return (
     <div
-      className={`${Styles.wrapper} ${
+      className={`${className} ${Styles.wrapper} ${
         isAfk && !metadata.paused && Styles.inactive
       }`}
       onMouseMove={onMouseMove}
       onClick={togglePlayerState}
       ref={wrapperRef}
     >
-      {metadata.isLoading && (
-        <div className={Styles.loadingWrapper}>
-          <LoadingIcon className={Styles.icon} />
-        </div>
-      )}
-      <CommentCanvas
-        url={data?.movie.url}
-        className={Styles.canvas}
-        videoRef={videoRef.current}
-        pipVideoRef={pipVideoRef.current}
-      />
-      <Video className={Styles.video} videoRef={videoRef} movie={data} />
-      <video
-        className={`${Styles.pipVideo} ${
-          playerConfig.isPipEnable && Styles.active
-        }`}
-        ref={pipVideoRef}
-        autoPlay={true}
-        muted={true}
-        onPause={onPipPause}
-      />
+      <div className={Styles.videoWrapper}>
+        {metadata.isLoading && (
+          <div className={Styles.loadingWrapper}>
+            <LoadingIcon className={Styles.icon} />
+          </div>
+        )}
+        <CommentCanvas
+          url={data?.movie.url}
+          className={Styles.canvas}
+          videoRef={videoRef.current}
+          pipVideoRef={pipVideoRef.current}
+        />
+        <Video className={Styles.video} videoRef={videoRef} movie={data} />
+        <video
+          className={`${Styles.pipVideo} ${
+            playerConfig.isPipEnable && Styles.active
+          }`}
+          ref={pipVideoRef}
+          autoPlay={true}
+          muted={true}
+          onPause={onPipPause}
+        />
+      </div>
       <Controller className={Styles.controller} />
     </div>
   );

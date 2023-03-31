@@ -5,6 +5,10 @@ import { request } from "@/libraries/request";
 import Styles from "@/styles/movie.module.scss";
 import { PlayList } from "@/components/PlayList/PlayList";
 import { Player } from "@/components/Player/Player";
+import { useAtomValue } from "jotai";
+import { PlayerConfigAtom } from "@/atoms/Player";
+import { MovieInfo } from "@/components/MovieInfo/MovieInfo";
+import { useMemo } from "react";
 
 const MoviePage = () => {
   const router = useRouter();
@@ -13,18 +17,29 @@ const MoviePage = () => {
     `/movie/${encodeURIComponent(typeof query === "string" ? query : "")}`,
     request
   );
+  const { isTheatre } = useAtomValue(PlayerConfigAtom);
+  const movieInfo = useMemo(() => {
+    if (!result || result.status !== "success") return <></>;
+    return <MovieInfo className={Styles.info} data={result?.data} />;
+  }, [result]);
   if (!result) return <></>;
   if (result.status !== "success") {
     void router.push("/login");
     return <></>;
   }
   return (
-    <div className={Styles.wrapper}>
-      <div className={Styles.leftSideWrapper}>
-        <Player data={result.data} />
+    <div className={`${Styles.wrapper} ${isTheatre && Styles.theatre}`}>
+      <div className={Styles.mainWrapper}>
+        <div className={Styles.playerWrapper}>
+          <Player data={result.data} />
+        </div>
+        {!isTheatre && movieInfo}
       </div>
-      <div className={Styles.rightSideWrapper}>
-        <PlayList data={result.data} />
+      <div className={Styles.subWrapper}>
+        {isTheatre && movieInfo}
+        <div className={Styles.playlistWrapper}>
+          <PlayList data={result.data} />
+        </div>
       </div>
     </div>
   );
