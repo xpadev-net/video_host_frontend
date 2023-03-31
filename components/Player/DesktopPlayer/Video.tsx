@@ -70,6 +70,8 @@ const Video = ({ className, videoRef, source }: props) => {
             xhr.withCredentials = true;
             xhr.open("GET", url);
           },
+          enableWorker: true,
+          lowLatencyMode: true,
         });
         hls.loadSource(source.hls);
         hls.attachMedia(videoRef.current);
