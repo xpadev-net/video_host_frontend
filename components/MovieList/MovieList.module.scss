@@ -1,5 +1,6 @@
 .wrapper {
   display: flex;
+  position: relative;
   &.row {
     flex-direction: row;
     overflow-x: scroll;

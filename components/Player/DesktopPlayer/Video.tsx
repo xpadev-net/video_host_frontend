@@ -108,6 +108,7 @@ const Video = ({ className, videoRef, movie }: props) => {
       videoRef.current.crossOrigin = "use-credentials";
     }
     videoRef.current.playbackRate = playerConfig.playbackRate;
+    videoRef.current.volume = playerConfig.volume;
   }, [videoRef.current, movie?.source]);
 
   return (

@@ -1,9 +1,19 @@
-import type { MovieProps } from "@/@types/Movie";
+import type { Movie } from "@/@types/Movie";
 import { Thumbnail } from "@/components/Thumbnail/Thumbnail";
 import Link from "next/link";
 import Styles from "./Movie.module.scss";
+import { ForwardedRef, forwardRef } from "react";
 
-const Movie = ({ movie, index, type }: MovieProps) => {
+export type props = {
+  movie: Movie;
+  type: "row" | "column" | "minColumn";
+  index?: number | "active";
+};
+
+const MovieCard_ = (
+  { movie, index, type }: props,
+  ref: ForwardedRef<HTMLAnchorElement>
+) => {
   if (type === "column") {
     return (
       <div className={`${Styles.wrapper} ${Styles[type]}`}>
@@ -25,6 +35,7 @@ const Movie = ({ movie, index, type }: MovieProps) => {
     <Link
       href={`/movie/${movie.url}`}
       className={`${Styles.wrapper} ${Styles[type]}`}
+      ref={ref}
     >
       {index !== undefined && (
         <span className={Styles.index}>{index === "active" ? "▶" : index}</span>
@@ -39,4 +50,6 @@ const Movie = ({ movie, index, type }: MovieProps) => {
     </Link>
   );
 };
-export { Movie };
+
+const MovieCard = forwardRef(MovieCard_);
+export { MovieCard };

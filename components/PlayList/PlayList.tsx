@@ -35,13 +35,12 @@ const PlayList = ({ data, className }: props) => {
         )}
       </div>
       {isOpen && (
-        <div className={Styles.list}>
-          <MovieList
-            movies={data.playlist}
-            type={"minColumn"}
-            active={data.movie.url}
-          />
-        </div>
+        <MovieList
+          movies={data.playlist}
+          type={"minColumn"}
+          active={data.movie.url}
+          className={Styles.list}
+        />
       )}
     </div>
   );

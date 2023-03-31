@@ -58,5 +58,7 @@
   }
   .list {
     border-top: solid 1px colors.$quaternaryBackgroundColor;
+    max-height: min(700px, 50vh);
+    overflow-y: scroll;
   }
 }

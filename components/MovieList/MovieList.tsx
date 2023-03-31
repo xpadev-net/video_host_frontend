@@ -1,18 +1,53 @@
-import { MovieListProps } from "@/@types/MovieList";
-import { Movie } from "@/components/Movie/Movie";
+import { MovieCard } from "@/components/Movie/Movie";
 import Styles from "./MovieList.module.scss";
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
+import { Movie } from "@/@types/Movie";
 
-const MovieList = ({ movies, type, active }: MovieListProps) => {
+export type props = {
+  movies: Movie[];
+  type: "row" | "column" | "minColumn";
+  active?: string;
+  className?: string;
+};
+
+const MovieList = ({ movies, type, active, className }: props) => {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const activeRef = useRef<HTMLAnchorElement>(null);
+  useEffect(() => {
+    console.log(
+      type,
+      active,
+      activeRef.current,
+      wrapperRef.current,
+      activeRef.current?.offsetTop,
+      activeRef.current?.getBoundingClientRect()
+    );
+    if (
+      type !== "minColumn" ||
+      !active ||
+      !activeRef.current ||
+      !wrapperRef.current
+    )
+      return;
+    wrapperRef.current.scrollTop = activeRef.current.offsetTop;
+  }, [movies, type, active]);
   return useMemo(() => {
     return (
-      <div className={`${Styles.wrapper} ${Styles[type]}`}>
+      <div
+        className={`${className} ${Styles.wrapper} ${Styles[type]}`}
+        ref={wrapperRef}
+      >
         {movies.map((movie, index) => {
           return (
-            <Movie
+            <MovieCard
               key={`${movie.seriesUrl}/${movie.url}`}
               movie={movie}
               type={type}
+              ref={
+                active !== undefined && movie.url === active
+                  ? activeRef
+                  : undefined
+              }
               index={
                 active !== undefined
                   ? movie.url === active
