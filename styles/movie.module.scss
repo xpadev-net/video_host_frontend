@@ -13,12 +13,9 @@
     flex: 1;
     max-width: 400px;
     width: 300px;
-  }
-  .playlistWrapper{
-    width: 100%;
-  }
-  .info{
-    flex: 1;
+    .playlistWrapper{
+      width: 100%;
+    }
   }
 }
 
@@ -40,6 +37,9 @@
     max-width: 1800px;
     margin: 0 auto;
     display: flex;
+    .info{
+      flex: 1;
+    }
     .playlistWrapper{
       max-width: 400px;
       width: 300px;

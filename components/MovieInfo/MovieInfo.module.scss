@@ -1,2 +1,21 @@
+@use "../../styles/colors";
+
 .wrapper {
+  .titleWrapper {
+    border-bottom: solid 1px colors.$quaternaryBackgroundColor;
+    margin-bottom: 10px;
+    .title {
+      font-size: 18px;
+      padding: 10px 0;
+    }
+    .postDate {
+      font-size: 14px;
+      color: colors.$subTextColor;
+      padding-bottom: 10px;
+    }
+  }
+  .seriesTitle {
+    font-size: 14px;
+    padding-bottom: 10px;
+  }
 }
