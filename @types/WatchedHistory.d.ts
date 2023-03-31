@@ -1,3 +1,8 @@
+import {MovieItem} from "@/@types/api";
+
 export type WatchedHistory = {
-  [key: string]: number
+  [key: string]: {
+    movie: MovieItem;
+    watched: number;
+  }
 }

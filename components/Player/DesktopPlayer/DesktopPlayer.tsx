@@ -91,11 +91,7 @@ const DesktopPlayer = () => {
         videoRef={videoRef.current}
         pipVideoRef={pipVideoRef.current}
       />
-      <Video
-        className={Styles.video}
-        videoRef={videoRef}
-        source={data?.source}
-      />
+      <Video className={Styles.video} videoRef={videoRef} movie={data} />
       <video
         className={`${Styles.pipVideo} ${
           playerConfig.isPipEnable && Styles.active

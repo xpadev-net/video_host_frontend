@@ -3,7 +3,7 @@ import Styles from "./Thumbnail.module.scss";
 import Image from "next/image";
 import type { ThumbnailProps, WatchedProps } from "@/@types/Thumbnail";
 import { useAtom } from "jotai";
-import { watchedHistory } from "@/atoms/WatchedHistory";
+import { watchedHistoryAtom } from "@/atoms/WatchedHistory";
 import { time2str } from "@/libraries/time";
 
 const WatchedProgress = styled.div<WatchedProps>`
@@ -11,7 +11,7 @@ const WatchedProgress = styled.div<WatchedProps>`
 `;
 
 const Thumbnail = ({ movie }: ThumbnailProps) => {
-  const [history] = useAtom(watchedHistory);
+  const [history] = useAtom(watchedHistoryAtom);
 
   return (
     <div className={Styles.wrapper}>
@@ -22,7 +22,7 @@ const Thumbnail = ({ movie }: ThumbnailProps) => {
         sizes={"360px"}
       />
       <WatchedProgress
-        itemWidth={(history[movie.url] || 0) / 100}
+        itemWidth={(history[movie.url]?.watched || 0) * 100}
         className={Styles.watched}
       />
       <span className={Styles.duration}>{time2str(movie.duration)}</span>

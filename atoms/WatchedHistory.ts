@@ -1,6 +1,6 @@
 import {WatchedHistory} from "@/@types/WatchedHistory";
 import {atomWithStorage} from "jotai/utils";
 
-const watchedHistory = atomWithStorage<WatchedHistory>("WatchedHistory",{});
+const watchedHistoryAtom = atomWithStorage<WatchedHistory>("WatchedHistory",{});
 
-export {watchedHistory};
+export {watchedHistoryAtom};

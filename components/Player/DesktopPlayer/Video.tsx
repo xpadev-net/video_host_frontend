@@ -1,18 +1,20 @@
 import { useAtom } from "jotai";
 import { PlayerConfigAtom, VideoMetadataAtom } from "@/atoms/Player";
 import { RefObject, useEffect } from "react";
-import { MovieItemSource } from "@/@types/api";
+import { MovieItem } from "@/@types/api";
 import Hls from "hls.js";
+import { watchedHistoryAtom } from "@/atoms/WatchedHistory";
 
 type props = {
   className?: string;
-  source?: MovieItemSource;
+  movie?: MovieItem;
   videoRef: RefObject<HTMLVideoElement>;
 };
 
-const Video = ({ className, videoRef, source }: props) => {
+const Video = ({ className, videoRef, movie }: props) => {
   const [metadata, setMetadata] = useAtom(VideoMetadataAtom);
   const [playerConfig, setPlayerConfig] = useAtom(PlayerConfigAtom);
+  const [watchedHistory, setWatchedHistory] = useAtom(watchedHistoryAtom);
 
   const onVideoPlay = () => {
     setMetadata({ ...metadata, paused: false });
@@ -49,6 +51,19 @@ const Video = ({ className, videoRef, source }: props) => {
       ...metadata,
       currentTime: videoRef.current?.currentTime || 0,
     });
+    if (
+      videoRef.current &&
+      Math.floor(videoRef.current.currentTime) % 10 === 0 &&
+      movie
+    ) {
+      setWatchedHistory({
+        ...watchedHistory,
+        [movie.movie.url]: {
+          movie: movie,
+          watched: videoRef.current.currentTime / videoRef.current.duration,
+        },
+      });
+    }
   };
 
   const setIsNotLoading = () => setMetadata({ ...metadata, isLoading: false });
@@ -56,13 +71,20 @@ const Video = ({ className, videoRef, source }: props) => {
 
   useEffect(() => {
     if (!videoRef.current) return;
-    if (!source) {
+    if (!movie?.source) {
       videoRef.current.srcObject = null;
       return;
     }
+    setWatchedHistory({
+      ...watchedHistory,
+      [movie.movie.url]: {
+        movie: movie,
+        watched: 0,
+      },
+    });
     if (playerConfig.isHls) {
       if (videoRef.current.canPlayType("application/vnd.apple.mpegurl")) {
-        videoRef.current.src = source.http;
+        videoRef.current.src = movie.source.http;
         videoRef.current.crossOrigin = "use-credentials";
       } else if (Hls.isSupported()) {
         const hls = new Hls({
@@ -73,7 +95,7 @@ const Video = ({ className, videoRef, source }: props) => {
           enableWorker: true,
           lowLatencyMode: true,
         });
-        hls.loadSource(source.hls);
+        hls.loadSource(movie.source.hls);
         hls.attachMedia(videoRef.current);
         videoRef.current.crossOrigin = "anonymous";
       } else {
@@ -82,11 +104,11 @@ const Video = ({ className, videoRef, source }: props) => {
         );
       }
     } else {
-      videoRef.current.src = source.http;
+      videoRef.current.src = movie.source.http;
       videoRef.current.crossOrigin = "use-credentials";
     }
     videoRef.current.playbackRate = playerConfig.playbackRate;
-  }, [videoRef.current, source]);
+  }, [videoRef.current, movie?.source]);
 
   return (
     <video
