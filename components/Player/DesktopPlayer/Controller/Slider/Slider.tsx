@@ -1,8 +1,9 @@
 import Styles from "@/components/Player/DesktopPlayer/Controller/Slider/Slider.module.scss";
 import styled from "styled-components";
-import { VideoRefAtom } from "@/atoms/Player";
+import { VideoMetadataAtom, VideoRefAtom } from "@/atoms/Player";
 import { useAtomValue } from "jotai";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, MouseEvent } from "react";
+import { time2str } from "@/libraries/time";
 
 type props = {
   className?: string;
@@ -20,22 +21,30 @@ const RangeItem = styled.div.attrs<RangeItemProps>((p) => ({
   },
 }))<RangeItemProps>``;
 
-type GrubberProps = {
+type LeftItemProps = {
   _left: number;
 };
 
-const Grubber = styled.div.attrs<GrubberProps>((p) => ({
+const Grubber = styled.div.attrs<LeftItemProps>((p) => ({
   style: {
     left: `${p._left}%`,
   },
-}))<GrubberProps>``;
+}))<LeftItemProps>``;
+
+const TimeDisplay = styled.div.attrs<LeftItemProps>((p) => ({
+  style: {
+    left: `max(min(${p._left}%, 100% - 15px), 15px)`,
+  },
+}))<LeftItemProps>``;
 
 const Slider = ({ className }: props) => {
   const videoRef = useAtomValue(VideoRefAtom);
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const metadata = useAtomValue(VideoMetadataAtom);
   const [buffered, setBuffered] = useState<RangeItemProps[]>([]);
   const [isDrugging, setIsDrugging] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [timeDisplayPos, setTimeDisplayPos] = useState(0);
 
   useEffect(() => {
     if (!videoRef) return;
@@ -90,11 +99,18 @@ const Slider = ({ className }: props) => {
     setIsDrugging(true);
   };
 
+  const onMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+    if (!wrapperRef.current) return;
+    const rect = wrapperRef.current.getBoundingClientRect();
+    setTimeDisplayPos(((e.clientX - rect.left) / rect.width) * 100);
+  };
+
   return (
     <div
       className={`${Styles.wrapper} ${className}`}
       ref={wrapperRef}
       onMouseDown={onMouseDown}
+      onMouseMove={onMouseMove}
     >
       <div className={Styles.background} />
       {buffered.map((item) => {
@@ -104,6 +120,9 @@ const Slider = ({ className }: props) => {
       })}
       <RangeItem _left={0} _width={progress} className={Styles.watched} />
       <Grubber _left={progress} className={Styles.grubber} />
+      <TimeDisplay _left={timeDisplayPos} className={Styles.timeDisplay}>
+        {time2str((timeDisplayPos / 100) * metadata.duration)}
+      </TimeDisplay>
     </div>
   );
 };
