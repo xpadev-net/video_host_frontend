@@ -16,7 +16,9 @@ const Login = () => {
       const res = await request<tryAuthResponse>(`/tryAuth/`);
       if (res.status === "success") {
         void router.push(
-          router.query.callback ? `${router.query.callback}` : "/"
+          typeof router.query.callback === "string"
+            ? `${decodeURIComponent(router.query.callback)}`
+            : "/"
         );
         return;
       }

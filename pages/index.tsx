@@ -39,7 +39,7 @@ const Index = () => {
   );
 
   if (updates?.status === "fail") {
-    void router.push("/login");
+    void router.push(`/login?callback=${encodeURIComponent(router.asPath)}`);
     return <></>;
   }
   return (

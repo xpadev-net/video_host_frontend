@@ -17,7 +17,7 @@ const SearchPage = () => {
     return <></>;
   }
   if (result.status === "fail") {
-    void router.push("/login");
+    void router.push(`/login?callback=${encodeURIComponent(router.asPath)}`);
     return <></>;
   }
   if (!result.title) {

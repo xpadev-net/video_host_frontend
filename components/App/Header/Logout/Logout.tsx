@@ -8,7 +8,7 @@ const Logout = () => {
   const logout = () => {
     void (async () => {
       await request("/logout/");
-      await router.push("/login");
+      await router.push(`/login?callback=${encodeURIComponent(router.asPath)}`);
     })();
   };
   return (

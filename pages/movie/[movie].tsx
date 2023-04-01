@@ -24,7 +24,7 @@ const MoviePage = () => {
   }, [result]);
   if (!result) return <></>;
   if (result.status !== "success") {
-    void router.push("/login");
+    void router.push(`/login?callback=${encodeURIComponent(router.asPath)}`);
     return <></>;
   }
   return (
