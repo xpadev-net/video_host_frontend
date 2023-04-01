@@ -6,6 +6,7 @@ export type PlayerConfig = {
   isHls: boolean
   isPipEnable: boolean;
   isFullscreen: boolean;
+  isNiconicommentsEnable: boolean;
   volume: number;
 }
 
@@ -14,4 +15,7 @@ export type VideoMetadata = {
   duration: number;
   paused: boolean;
   isLoading: boolean;
+  isSetting:boolean;
 }
+
+export type SettingKey = "main"|"playbackRate"|"mode"|"comment";

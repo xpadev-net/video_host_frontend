@@ -11,6 +11,8 @@ import { PrevNextButton } from "@/components/Player/DesktopPlayer/Controller/Pre
 import { PlayPauseButton } from "@/components/Player/DesktopPlayer/Controller/PlayPauseButton";
 import { Slider } from "@/components/Player/DesktopPlayer/Controller/Slider/Slider";
 import { AutoPlayButton } from "@/components/Player/DesktopPlayer/Controller/AutoPlayButton/AutoPlayButton";
+import { SettingButton } from "@/components/Player/DesktopPlayer/Controller/SettingButton";
+import { Setting } from "@/components/Player/DesktopPlayer/Controller/Setting/Setting";
 
 type props = {
   className?: string;
@@ -19,7 +21,7 @@ type props = {
 const Controller = ({ className }: props) => {
   const data = useAtomValue(MovieItemAtom);
   const videoRef = useAtomValue(VideoRefAtom);
-  const { currentTime, duration } = useAtomValue(VideoMetadataAtom);
+  const { currentTime, duration, isSetting } = useAtomValue(VideoMetadataAtom);
   const [isVolumeExtend, setIsVolumeExtend] = useState(false);
   const [mutedVolume, setMutedVolume] = useState<number | undefined>(undefined);
   if (!data) return <></>;
@@ -79,11 +81,13 @@ const Controller = ({ className }: props) => {
         </div>
         <div className={Styles.rightSideWrapper}>
           <AutoPlayButton className={Styles.button} />
+          <SettingButton className={Styles.button} />
           <TheatreButton className={Styles.button} />
           <FullscreenButton className={Styles.button} />
         </div>
       </div>
       <Slider className={Styles.Slider} />
+      {isSetting && <Setting className={Styles.setting} />}
     </div>
   );
 };
