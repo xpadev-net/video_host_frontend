@@ -87,12 +87,14 @@ const DesktopPlayer = ({ className }: props) => {
             <LoadingIcon className={Styles.icon} />
           </div>
         )}
-        <CommentCanvas
-          url={data?.movie.url}
-          className={Styles.canvas}
-          videoRef={videoRef.current}
-          pipVideoRef={pipVideoRef.current}
-        />
+        {playerConfig.isNiconicommentsEnable && (
+          <CommentCanvas
+            url={data?.movie.url}
+            className={Styles.canvas}
+            videoRef={videoRef.current}
+            pipVideoRef={pipVideoRef.current}
+          />
+        )}
         <Video className={Styles.video} videoRef={videoRef} movie={data} />
         <video
           className={`${Styles.pipVideo} ${
