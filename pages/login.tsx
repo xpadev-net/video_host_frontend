@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { FormEvent, useEffect, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import { request } from "@/libraries/request";
 import { authResponse, tryAuthResponse } from "@/@types/api";
 import Styles from "@/styles/login.module.scss";
@@ -8,8 +8,11 @@ const Login = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   useEffect(() => {
     void (async () => {
+      if (router.pathname !== "/login") return;
       const res = await request<tryAuthResponse>(`/tryAuth/`);
       if (res.status === "success") {
         void router.push(
@@ -21,10 +24,13 @@ const Login = () => {
     })();
   }, [router]);
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     setLoading(true);
     void (async () => {
-      const data = new FormData(e.target as HTMLFormElement);
+      const data = new FormData();
+      data.append("username", username);
+      data.append("password", password);
       const res = await request<authResponse>(`/auth/`, {
         method: "POST",
         body: data,
@@ -38,7 +44,6 @@ const Login = () => {
         router.query.callback ? `${router.query.callback}` : "/"
       );
     })();
-    e.preventDefault();
   };
 
   return (
@@ -46,13 +51,17 @@ const Login = () => {
       {loading && <div className={Styles.loading} />}
       <div className={Styles.wrapper}>
         {message && <div>{message}</div>}
-        <form className={Styles.form} onSubmit={onSubmit}>
+        <form className={Styles.form}>
           <input
             type={"text"}
             required={true}
             name={"username"}
             className={Styles.input}
             placeholder={"Username"}
+            value={username}
+            onChange={(e) => {
+              setUsername(e.target.value);
+            }}
           />
           <input
             type={"password"}
@@ -60,8 +69,12 @@ const Login = () => {
             name={"password"}
             className={Styles.input}
             placeholder={"Password"}
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
           />
-          <button type="submit" className={Styles.button}>
+          <button type="button" className={Styles.button} onClick={onSubmit}>
             Login
           </button>
         </form>
