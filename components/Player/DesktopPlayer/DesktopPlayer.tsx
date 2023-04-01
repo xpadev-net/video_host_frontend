@@ -21,7 +21,7 @@ const DesktopPlayer = ({ className }: props) => {
   const data = useAtomValue(MovieItemAtom);
   const setVideoAtom = useSetAtom(VideoRefAtom);
   const setWrapperAtom = useSetAtom(WrapperRefAtom);
-  const playerConfig = useAtomValue(PlayerConfigAtom);
+  const { isPipEnable, isTheatre } = useAtomValue(PlayerConfigAtom);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const pipVideoRef = useRef<HTMLVideoElement>(null);
@@ -54,7 +54,7 @@ const DesktopPlayer = ({ className }: props) => {
   useEffect(() => {
     setVideoAtom(videoRef.current);
     setWrapperAtom(wrapperRef.current);
-  }, [videoRef, playerConfig]);
+  }, [videoRef, wrapperRef]);
 
   const onMouseMove = () => {
     window.clearTimeout(afkTimeout.current);
@@ -75,8 +75,8 @@ const DesktopPlayer = ({ className }: props) => {
   return (
     <div
       className={`${className} ${Styles.wrapper} ${
-        isAfk && !metadata.paused && Styles.inactive
-      }`}
+        isTheatre && Styles.theatre
+      } ${isAfk && !metadata.paused && Styles.inactive}`}
       onMouseMove={onMouseMove}
       onClick={togglePlayerState}
       ref={wrapperRef}
@@ -97,9 +97,7 @@ const DesktopPlayer = ({ className }: props) => {
         )}
         <Video className={Styles.video} videoRef={videoRef} movie={data} />
         <video
-          className={`${Styles.pipVideo} ${
-            playerConfig.isPipEnable && Styles.active
-          }`}
+          className={`${Styles.pipVideo} ${isPipEnable && Styles.active}`}
           ref={pipVideoRef}
           autoPlay={true}
           muted={true}
