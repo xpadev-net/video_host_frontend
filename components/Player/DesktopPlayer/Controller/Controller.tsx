@@ -10,6 +10,7 @@ import { TheatreButton } from "@/components/Player/DesktopPlayer/Controller/Thea
 import { PrevNextButton } from "@/components/Player/DesktopPlayer/Controller/PrevNextButton";
 import { PlayPauseButton } from "@/components/Player/DesktopPlayer/Controller/PlayPauseButton";
 import { Slider } from "@/components/Player/DesktopPlayer/Controller/Slider/Slider";
+import { AutoPlayButton } from "@/components/Player/DesktopPlayer/Controller/AutoPlayButton/AutoPlayButton";
 
 type props = {
   className?: string;
@@ -77,6 +78,7 @@ const Controller = ({ className }: props) => {
           </div>
         </div>
         <div className={Styles.rightSideWrapper}>
+          <AutoPlayButton className={Styles.button} />
           <TheatreButton className={Styles.button} />
           <FullscreenButton className={Styles.button} />
         </div>

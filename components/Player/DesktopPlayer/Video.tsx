@@ -4,6 +4,7 @@ import { RefObject, useEffect } from "react";
 import { MovieItem } from "@/@types/api";
 import Hls from "hls.js";
 import { watchedHistoryAtom } from "@/atoms/WatchedHistory";
+import { useRouter } from "next/router";
 
 type props = {
   className?: string;
@@ -15,6 +16,8 @@ const Video = ({ className, videoRef, movie }: props) => {
   const [metadata, setMetadata] = useAtom(VideoMetadataAtom);
   const [playerConfig, setPlayerConfig] = useAtom(PlayerConfigAtom);
   const [watchedHistory, setWatchedHistory] = useAtom(watchedHistoryAtom);
+
+  const router = useRouter();
 
   const onVideoPlay = () => {
     setMetadata({ ...metadata, paused: false });
@@ -64,6 +67,11 @@ const Video = ({ className, videoRef, movie }: props) => {
         },
       });
     }
+  };
+
+  const onVideoEnded = () => {
+    if (!playerConfig.autoPlay || !movie?.next) return;
+    void router.push(`/movie/${movie.next.url}`);
   };
 
   const setIsNotLoading = () => setMetadata({ ...metadata, isLoading: false });
@@ -124,6 +132,7 @@ const Video = ({ className, videoRef, movie }: props) => {
       onCanPlay={setIsNotLoading}
       onSeeking={onVideoSeeking}
       onSeeked={setIsNotLoading}
+      onEnded={onVideoEnded}
     />
   );
 };
