@@ -12,8 +12,11 @@ const Logout = () => {
     })();
   };
   return (
-    <div className={`${ButtonStyles.buttonWrapper} ${ButtonStyles.hover}`}>
-      <ExitToAppSharp className={ButtonStyles.button} onClick={logout} />
+    <div
+      className={`${ButtonStyles.buttonWrapper} ${ButtonStyles.hover}`}
+      onClick={logout}
+    >
+      <ExitToAppSharp className={ButtonStyles.button} />
     </div>
   );
 };
