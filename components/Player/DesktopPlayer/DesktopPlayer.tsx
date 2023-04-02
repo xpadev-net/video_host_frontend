@@ -21,7 +21,8 @@ const DesktopPlayer = ({ className }: props) => {
   const data = useAtomValue(MovieItemAtom);
   const setVideoAtom = useSetAtom(VideoRefAtom);
   const setWrapperAtom = useSetAtom(WrapperRefAtom);
-  const { isPipEnable, isTheatre } = useAtomValue(PlayerConfigAtom);
+  const { isPipEnable, isTheatre, isNiconicommentsEnable } =
+    useAtomValue(PlayerConfigAtom);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const pipVideoRef = useRef<HTMLVideoElement>(null);
@@ -87,7 +88,7 @@ const DesktopPlayer = ({ className }: props) => {
             <LoadingIcon className={Styles.icon} />
           </div>
         )}
-        {playerConfig.isNiconicommentsEnable && (
+        {isNiconicommentsEnable && (
           <CommentCanvas
             url={data?.movie.url}
             className={Styles.canvas}
