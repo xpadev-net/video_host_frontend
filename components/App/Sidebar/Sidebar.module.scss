@@ -39,4 +39,21 @@
     transition: width ease 0.5s;
     width: 76px;
   }
+  &.mobile {
+    height: 48px;
+    .container {
+      padding: 0;
+      top: unset;
+      bottom: 0;
+      width: 100%;
+      height: 48px;
+      min-height: unset;
+      display: flex;
+      flex-direction: row;
+      .buttonWrapper {
+        flex: 1;
+        padding: 6px 0;
+      }
+    }
+  }
 }

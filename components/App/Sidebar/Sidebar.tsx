@@ -3,13 +3,15 @@ import { History, Home } from "@mui/icons-material";
 import Styles from "@/components/App/Sidebar/Sidebar.module.scss";
 import Link from "next/link";
 import { OverlaySidebar } from "@/components/App/Sidebar/OverlaySidebar";
+import { useIsMobile } from "@/libraries/isMobile";
 
 const Sidebar = () => {
   const router = useRouter();
+  const isMobile = useIsMobile();
 
   return (
     <div
-      className={`${Styles.wrapper} ${
+      className={`${Styles.wrapper} ${isMobile && Styles.mobile} ${
         router.pathname.startsWith("/movie/") && Styles.disable
       }`}
     >
