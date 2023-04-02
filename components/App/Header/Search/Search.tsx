@@ -13,7 +13,8 @@ const Search = () => {
 
   const router = useRouter();
 
-  const onKeyUp = (e: KeyboardEvent<HTMLInputElement>) => {
+  const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    e.stopPropagation();
     const key = e.keyCode || e.charCode || 0;
     if (!e.nativeEvent.isComposing && key === 13) {
       void router.push(`/search/` + encodeURIComponent(input));
@@ -39,7 +40,7 @@ const Search = () => {
           ref={inputRef}
           className={Styles.input}
           placeholder={"検索"}
-          onKeyDown={onKeyUp}
+          onKeyDown={onKeyDown}
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />

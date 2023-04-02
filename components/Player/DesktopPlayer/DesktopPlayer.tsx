@@ -12,6 +12,7 @@ import { LoadingIcon } from "@/assets/LoadingIcon";
 import { Controller } from "@/components/Player/DesktopPlayer/Controller/Controller";
 import { CommentCanvas } from "@/components/Player/DesktopPlayer/CommentCanvas";
 import { Video } from "@/components/Player/DesktopPlayer/Video";
+import { KeyboardHandler } from "@/components/Player/DesktopPlayer/KeyboardHandler";
 
 type props = {
   className?: string;
@@ -115,6 +116,7 @@ const DesktopPlayer = ({ className }: props) => {
         />
       </div>
       <Controller className={Styles.controller} />
+      <KeyboardHandler />
     </div>
   );
 };

@@ -29,6 +29,22 @@ const FullscreenButton = ({ className }: props) => {
       document.removeEventListener("fullscreenchange", handler);
     };
   }, [metadata, playerConfig.windowFullscreen]);
+
+  useEffect(() => {
+    if (
+      metadata.isFullscreen &&
+      !playerConfig.windowFullscreen &&
+      !document.fullscreenElement &&
+      wrapperRef
+    ) {
+      wrapperRef
+        .requestFullscreen()
+        .catch(() => setMetadata({ ...metadata, isFullscreen: false }));
+    } else if (!metadata.isFullscreen && document.fullscreenElement) {
+      void document.exitFullscreen();
+    }
+  }, [metadata.isFullscreen]);
+
   const toggleFullscreen = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     const isFullscreen = !metadata.isFullscreen;
@@ -37,14 +53,6 @@ const FullscreenButton = ({ className }: props) => {
       isSetting: false,
       isFullscreen: isFullscreen,
     });
-    if (!wrapperRef) return;
-    if (isFullscreen && !playerConfig.windowFullscreen) {
-      wrapperRef
-        .requestFullscreen()
-        .catch(() => setMetadata({ ...metadata, isFullscreen: false }));
-    } else {
-      document.fullscreenElement && void document.exitFullscreen();
-    }
   };
 
   return (
