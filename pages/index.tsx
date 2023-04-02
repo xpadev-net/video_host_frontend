@@ -1,7 +1,7 @@
 import Head from "next/head";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { request } from "@/libraries/request";
-import { recentUpdatesResponse } from "@/@types/api";
+import { recentUpdatesRes, recentUpdatesResponse } from "@/@types/api";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { MovieList } from "@/components/MovieList/MovieList";
@@ -9,7 +9,6 @@ import Styles from "@/styles/index.module.scss";
 import styled from "styled-components";
 import { WrapperProps } from "@/@types/Movie";
 import { useIsomorphicEffect } from "@/libraries/IsomorphicEffect";
-import useSWR from "swr";
 
 const Wrapper = styled.div.attrs((p: WrapperProps) => ({
   style: {
@@ -23,6 +22,7 @@ const Index = () => {
   const [width, setWidth] = useState(360);
   const wrapper = useRef<HTMLDivElement>(null);
   const observer = useRef<ResizeObserver>();
+  const [updates, setUpdates] = useState<recentUpdatesRes | undefined>();
   const isomorphicEffect = useIsomorphicEffect();
   const handleResize = () => {
     const width = wrapper.current?.clientWidth || 1920;
@@ -33,15 +33,19 @@ const Index = () => {
     if (!wrapper.current) return;
     observer.current?.observe(wrapper.current);
   }, [wrapper.current]);
-  const { data: updates } = useSWR<recentUpdatesResponse>(
-    "/recentUpdates/",
-    request
-  );
-
-  if (updates?.status === "fail") {
-    void router.push(`/login?callback=${encodeURIComponent(router.asPath)}`);
-    return <></>;
-  }
+  useEffect(() => {
+    void (async () => {
+      const data = await request<recentUpdatesResponse>("/recentUpdates/");
+      if (data.status === "fail") {
+        void router.push(
+          `/login?callback=${encodeURIComponent(router.asPath)}`
+        );
+        return;
+      }
+      setUpdates(data);
+    })();
+  });
+  if (!updates) return <></>;
   return (
     <div className={Styles.wrapper}>
       <Head>
