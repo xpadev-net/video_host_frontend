@@ -85,10 +85,17 @@ const DesktopPlayer = ({ className }: props) => {
       ref={wrapperRef}
     >
       <div className={Styles.videoWrapper}>
-        {metadata.isLoading && (
-          <div className={Styles.loadingWrapper}>
-            <LoadingIcon className={Styles.icon} />
-          </div>
+        {metadata.isLoading && data && (
+          <>
+            <div className={Styles.loadingWrapper}>
+              <LoadingIcon className={Styles.icon} />
+            </div>
+            <img
+              src={`${process.env.NEXT_PUBLIC_API_ENDPOINT}/img/${data.movie.url}`}
+              alt={""}
+              className={Styles.thumbnail}
+            />
+          </>
         )}
         {isNiconicommentsEnable && (
           <CommentCanvas
@@ -99,13 +106,6 @@ const DesktopPlayer = ({ className }: props) => {
           />
         )}
         <Video className={Styles.video} videoRef={videoRef} movie={data} />
-        {data && (
-          <img
-            src={`${process.env.NEXT_PUBLIC_API_ENDPOINT}/img/${data.movie.url}`}
-            alt={""}
-            className={Styles.thumbnail}
-          />
-        )}
         <video
           className={`${Styles.pipVideo} ${isPipEnable && Styles.active}`}
           ref={pipVideoRef}

@@ -7,16 +7,28 @@ import {
 } from "@mui/icons-material";
 import { MovieItem } from "@/@types/api";
 import { useState } from "react";
+import styled from "styled-components";
 
 type props = {
   data: MovieItem;
   className?: string;
+  maxHeight?: number;
 };
 
-const PlayList = ({ data, className }: props) => {
+type WrapperProps = {
+  maxHeight?: number;
+};
+
+const Wrapper = styled.div.attrs<WrapperProps>(({ maxHeight }) => ({
+  style: {
+    maxHeight: maxHeight ? `${maxHeight}px` : "none",
+  },
+}))<WrapperProps>``;
+
+const PlayList = ({ data, className, maxHeight }: props) => {
   const [isOpen, setIsOpen] = useState(true);
   return (
-    <div className={`${Styles.wrapper} ${className}`}>
+    <Wrapper className={`${Styles.wrapper} ${className}`} maxHeight={maxHeight}>
       <div
         className={`${Styles.header} ${isOpen && Styles.open}`}
         onClick={() => setIsOpen(!isOpen)}
@@ -42,7 +54,7 @@ const PlayList = ({ data, className }: props) => {
           className={Styles.list}
         />
       )}
-    </div>
+    </Wrapper>
   );
 };
 

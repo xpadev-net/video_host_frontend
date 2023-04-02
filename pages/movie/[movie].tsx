@@ -5,7 +5,11 @@ import Styles from "@/styles/movie.module.scss";
 import { PlayList } from "@/components/PlayList/PlayList";
 import { Player } from "@/components/Player/Player";
 import { useAtomValue, useSetAtom } from "jotai";
-import { PlayerConfigAtom, VideoMetadataAtom } from "@/atoms/Player";
+import {
+  PlayerConfigAtom,
+  VideoMetadataAtom,
+  WrapperRefAtom,
+} from "@/atoms/Player";
 import { MovieInfo } from "@/components/MovieInfo/MovieInfo";
 import { useEffect, useMemo, useState } from "react";
 
@@ -14,6 +18,10 @@ const MoviePage = () => {
   const query = router.query.movie;
   const { isTheatre } = useAtomValue(PlayerConfigAtom);
   const setVideoMetadata = useSetAtom(VideoMetadataAtom);
+  const wrapperRef = useAtomValue(WrapperRefAtom);
+  const [playlistMaxHeight, setPlaylistMaxHeight] = useState<
+    number | undefined
+  >();
   const [result, setResult] = useState<MovieRes | undefined>();
   useEffect(() => {
     if (typeof query !== "string") return;
@@ -35,6 +43,18 @@ const MoviePage = () => {
     if (!result || result.status !== "success") return <></>;
     return <MovieInfo className={Styles.info} data={result?.data} />;
   }, [result]);
+  useEffect(() => {
+    if (!wrapperRef) return;
+    const resizeObserver = new ResizeObserver((entries) => {
+      const wrapper = entries[0];
+      if (!wrapper) return;
+      setPlaylistMaxHeight(wrapper.contentRect.height);
+    });
+    resizeObserver.observe(wrapperRef);
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, [wrapperRef]);
   if (!result) return <></>;
 
   return (
@@ -48,7 +68,7 @@ const MoviePage = () => {
       <div className={Styles.subWrapper}>
         {isTheatre && movieInfo}
         <div className={Styles.playlistWrapper}>
-          <PlayList data={result.data} />
+          <PlayList data={result.data} maxHeight={playlistMaxHeight} />
         </div>
       </div>
     </div>

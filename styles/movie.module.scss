@@ -9,6 +9,9 @@
     min-width: 640px;
     margin-right: 24px;
   }
+  .info{
+    margin-bottom: 10px;
+  }
   .subWrapper{
     flex: 1;
     max-width: 400px;
@@ -37,6 +40,7 @@
     display: flex;
     .info{
       flex: 1;
+      margin-right: 24px;
     }
     .playlistWrapper{
       max-width: 400px;
@@ -52,6 +56,15 @@
       width: 100%;
       max-width: unset;
       min-width: 420px;
+    }
+  }
+  .wrapper.theatre{
+    .subWrapper{
+      flex-direction: column;
+      .playlistWrapper{
+        width: 100%;
+        max-width: unset;
+      }
     }
   }
 }

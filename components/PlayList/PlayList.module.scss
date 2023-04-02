@@ -5,6 +5,7 @@
   flex-direction: column;
   border: solid 1px colors.$quaternaryBackgroundColor;
   user-select: none;
+  max-height: min(700px, 50vh);
   .header {
     display: flex;
     height: 60px;
@@ -58,7 +59,6 @@
   }
   .list {
     border-top: solid 1px colors.$quaternaryBackgroundColor;
-    max-height: min(700px, 50vh);
     overflow-y: scroll;
   }
 }
