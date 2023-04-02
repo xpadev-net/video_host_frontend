@@ -74,7 +74,14 @@ const Video = ({ className, videoRef, movie }: props) => {
     void router.push(`/movie/${movie.next.url}`);
   };
 
-  const setIsNotLoading = () => setMetadata({ ...metadata, isLoading: false });
+  const onVideoCanPlay = () => {
+    setMetadata({ ...metadata, isLoading: false });
+    videoRef.current?.play().catch(() => {
+      console.info("failed to play");
+    });
+  };
+
+  const onVideoSeeked = () => setMetadata({ ...metadata, isLoading: false });
   const onVideoSeeking = () => setMetadata({ ...metadata, isLoading: true });
 
   useEffect(() => {
@@ -129,9 +136,9 @@ const Video = ({ className, videoRef, movie }: props) => {
       onVolumeChange={onVideoVolumeChange}
       onLoadedMetadata={onVideoLoadedMetadata}
       onTimeUpdate={onVideoTimeUpdate}
-      onCanPlay={setIsNotLoading}
+      onCanPlay={onVideoCanPlay}
       onSeeking={onVideoSeeking}
-      onSeeked={setIsNotLoading}
+      onSeeked={onVideoSeeked}
       onEnded={onVideoEnded}
     />
   );
