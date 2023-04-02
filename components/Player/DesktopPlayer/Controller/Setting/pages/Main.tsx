@@ -22,10 +22,12 @@ const Main = () => {
   return (
     <div className={Styles.wrapper}>
       <div className={Styles.item}>
-        <div className={Styles.iconWrapper}>
-          <SlowMotionVideo className={Styles.icon} />
+        <div className={Styles.left}>
+          <div className={Styles.iconWrapper}>
+            <SlowMotionVideo className={Styles.icon} />
+          </div>
+          <span className={Styles.text}>再生速度</span>
         </div>
-        <span className={Styles.text}>再生速度</span>
         <div className={Styles.right}>
           <span>{playerConfig.playbackRate}</span>
           <div className={Styles.iconWrapper}>
@@ -34,10 +36,12 @@ const Main = () => {
         </div>
       </div>
       <div className={Styles.item}>
-        <div className={Styles.iconWrapper}>
-          <ChatBubble className={Styles.icon} />
+        <div className={Styles.left}>
+          <div className={Styles.iconWrapper}>
+            <ChatBubble className={Styles.icon} />
+          </div>
+          <span className={Styles.text}>コメント</span>
         </div>
-        <span className={Styles.text}>コメント</span>
         <div className={Styles.right}>
           <span>{playerConfig.isNiconicommentsEnable ? "有効" : "無効"}</span>
           <div className={Styles.iconWrapper}>
@@ -46,10 +50,12 @@ const Main = () => {
         </div>
       </div>
       <div className={Styles.item} onClick={toggleWindowFullscreen}>
-        <div className={Styles.iconWrapper}>
-          <OpenInFull className={Styles.icon} />
+        <div className={Styles.left}>
+          <div className={Styles.iconWrapper}>
+            <OpenInFull className={Styles.icon} />
+          </div>
+          <span className={Styles.text}>ウィンドウフルスクリーン</span>
         </div>
-        <span className={Styles.text}>ウィンドウフルスクリーン</span>
         <div className={Styles.right}>
           <div className={Styles.switch}>
             <Switch checked={playerConfig.windowFullscreen} />

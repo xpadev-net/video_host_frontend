@@ -1,5 +1,5 @@
 import Styles from "@/components/Player/DesktopPlayer/Controller/Controller.module.scss";
-import { useAtomValue } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { MovieItemAtom, VideoMetadataAtom, VideoRefAtom } from "@/atoms/Player";
 import { MouseEvent, useState } from "react";
 import { VolumeIcon } from "@/components/Player/DesktopPlayer/Controller/VolumeIcon";
@@ -21,7 +21,7 @@ type props = {
 const Controller = ({ className }: props) => {
   const data = useAtomValue(MovieItemAtom);
   const videoRef = useAtomValue(VideoRefAtom);
-  const { currentTime, duration, isSetting } = useAtomValue(VideoMetadataAtom);
+  const [metadata, setMetadata] = useAtom(VideoMetadataAtom);
   const [isVolumeExtend, setIsVolumeExtend] = useState(false);
   const [mutedVolume, setMutedVolume] = useState<number | undefined>(undefined);
   if (!data) return <></>;
@@ -34,6 +34,10 @@ const Controller = ({ className }: props) => {
   };
 
   const stopPropagation = (e: MouseEvent<HTMLDivElement>) => {
+    setMetadata({
+      ...metadata,
+      isSetting: false,
+    });
     e.stopPropagation();
   };
 
@@ -74,9 +78,11 @@ const Controller = ({ className }: props) => {
             <VolumeSlider />
           </div>
           <div className={Styles.timeDisplay}>
-            <span className={Styles.text}>{time2str(currentTime)}</span>
+            <span className={Styles.text}>
+              {time2str(metadata.currentTime)}
+            </span>
             <span className={Styles.text}>/</span>
-            <span className={Styles.text}>{time2str(duration)}</span>
+            <span className={Styles.text}>{time2str(metadata.duration)}</span>
           </div>
         </div>
         <div className={Styles.rightSideWrapper}>
@@ -87,7 +93,7 @@ const Controller = ({ className }: props) => {
         </div>
       </div>
       <Slider className={Styles.Slider} />
-      {isSetting && <Setting className={Styles.setting} />}
+      {metadata.isSetting && <Setting className={Styles.setting} />}
     </div>
   );
 };
