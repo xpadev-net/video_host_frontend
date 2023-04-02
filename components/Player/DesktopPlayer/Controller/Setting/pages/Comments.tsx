@@ -54,7 +54,7 @@ const Comments_ = ({ className }: props, ref: ForwardedRef<HTMLDivElement>) => {
 
   return (
     <div className={`${Styles.wrapper} ${className}`} ref={ref}>
-      <div className={Styles.item} onClick={backToMain}>
+      <div className={`${Styles.item} ${Styles.header}`} onClick={backToMain}>
         <div className={Styles.left}>
           <div className={Styles.iconWrapper}>
             <KeyboardArrowLeft className={Styles.icon} />

@@ -1,16 +1,19 @@
-.wrapper {
+.scrollContainer {
+  overflow-y: scroll;
   background-color: rgba(0, 0, 0, 0.8);
   border-radius: 5px;
-  overflow: hidden;
-  transition: width 300ms ease, height 300ms ease;
-  position: relative;
-  .container {
-    width: 1920px;
-    height: 1080px;
-    display: flex;
-    align-items: flex-start;
-    position: absolute;
-    transition: left 300ms ease;
+  .wrapper {
+    overflow: hidden;
+    transition: width 200ms ease, height 200ms ease;
+    position: relative;
+    .container {
+      width: 1920px;
+      height: 1080px;
+      display: flex;
+      align-items: flex-start;
+      position: absolute;
+      transition: left 200ms;
+    }
   }
 }
 .measure {

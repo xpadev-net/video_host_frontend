@@ -10,7 +10,11 @@ import {
   RefAttributes,
 } from "react";
 import { useAtom, useAtomValue } from "jotai";
-import { PlayerSettingAtom, VideoMetadataAtom } from "@/atoms/Player";
+import {
+  PlayerSettingAtom,
+  VideoMetadataAtom,
+  WrapperRefAtom,
+} from "@/atoms/Player";
 import { PlaybackRate } from "@/components/Player/DesktopPlayer/Controller/Setting/pages/PlaybackRate";
 import { SettingKey } from "@/@types/Player";
 import { Comments } from "@/components/Player/DesktopPlayer/Controller/Setting/pages/Comments";
@@ -37,6 +41,18 @@ const SettingContainer = styled.div.attrs<SettingContainerProps>((p) => ({
   },
 }))<SettingContainerProps>``;
 
+type SettingScrollContainerProps = {
+  _height: number;
+};
+
+const SettingScrollContainer = styled.div.attrs<SettingScrollContainerProps>(
+  (p) => ({
+    style: {
+      maxHeight: `${p._height}px`,
+    },
+  })
+)<SettingScrollContainerProps>``;
+
 type props = {
   className?: string;
 };
@@ -53,8 +69,15 @@ const Menu: {
 
 const Setting = ({ className }: props) => {
   const [metadata, setMetadata] = useAtom(VideoMetadataAtom);
-  const [size, setSize] = useState({ width: 0, height: 0, left: 0 });
+  const [size, setSize] = useState({
+    width: 0,
+    height: 0,
+    maxHeight: 0,
+    left: 0,
+  });
   const playerSetting = useAtomValue(PlayerSettingAtom);
+  const wrapperRef = useAtomValue(WrapperRefAtom);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const targetRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const onClick = () => {
@@ -70,25 +93,31 @@ const Setting = ({ className }: props) => {
   }, [metadata]);
 
   useEffect(() => {
-    if (!targetRef.current) return;
+    if (!targetRef.current || !wrapperRef || !scrollContainerRef.current)
+      return;
     setSize({
       width: targetRef.current.clientWidth,
       height: targetRef.current.clientHeight,
       left: targetRef.current.offsetLeft,
+      maxHeight: wrapperRef.clientHeight - 120,
     });
-  }, [targetRef.current, playerSetting]);
+  }, [targetRef.current, wrapperRef, playerSetting]);
 
   const onClick = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
   };
 
   return (
-    <>
+    <SettingScrollContainer
+      _height={size.maxHeight}
+      ref={scrollContainerRef}
+      className={`${Styles.scrollContainer} ${className}`}
+    >
       <SettingWrapper
         _height={size.height}
         _width={size.width}
-        className={`${Styles.wrapper} ${className}`}
         onClick={onClick}
+        className={Styles.wrapper}
       >
         <SettingContainer _left={size.left} className={Styles.container}>
           {playerSetting.map((key, index) => {
@@ -100,7 +129,7 @@ const Setting = ({ className }: props) => {
           })}
         </SettingContainer>
       </SettingWrapper>
-    </>
+    </SettingScrollContainer>
   );
 };
 export { Setting };
