@@ -12,6 +12,6 @@ const VideoMetadataAtom = atom<VideoMetadata>({currentTime:0,duration:0,paused:f
 const PlayerConfigAtom = atomWithStorage<PlayerConfig>("playerConfig",{playbackRate: 1,windowFullscreen:true,autoPlay:true,isTheatre:false,isHls:true,isPipEnable:false,volume:1,isNiconicommentsEnable:true});
 const NiconicommentsConfigAtom = atom<Options>({format: "v1"});
 
-const PlayerSettingAtom = atom<SettingKey[]>([]);
+const PlayerSettingAtom = atom<SettingKey[]>(["main"]);
 
 export {MovieItemAtom,WrapperRefAtom, VideoRefAtom,VideoMetadataAtom,PlayerConfigAtom,NiconicommentsConfigAtom,PlayerSettingAtom};

@@ -18,6 +18,7 @@ const FullscreenButton = ({ className }: props) => {
 
   useEffect(() => {
     const handler = () => {
+      if (playerConfig.windowFullscreen) return;
       setMetadata({
         ...metadata,
         isFullscreen: document.fullscreenElement !== null,
@@ -27,7 +28,7 @@ const FullscreenButton = ({ className }: props) => {
     return () => {
       document.removeEventListener("fullscreenchange", handler);
     };
-  }, [metadata]);
+  }, [metadata, playerConfig.windowFullscreen]);
   const toggleFullscreen = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     const isFullscreen = !metadata.isFullscreen;

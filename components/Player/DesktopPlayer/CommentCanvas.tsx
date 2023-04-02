@@ -64,15 +64,15 @@ const CommentCanvas = ({ url, videoRef, pipVideoRef, className }: props) => {
     const interval = window.setInterval(() => {
       const vposMs = videoRef?.paused
         ? Math.floor(videoRef.currentTime * 1000)
-        : performance.now() -
-          commentSmoothingRef.current.timestamp +
+        : (performance.now() - commentSmoothingRef.current.timestamp) *
+            playerConfig.playbackRate +
           commentSmoothingRef.current.offset * 1000;
       niconicommentsRef.current?.drawCanvas(Math.floor(vposMs / 10));
     }, 1);
     return () => {
       window.clearInterval(interval);
     };
-  }, [niconicommentsRef.current, videoRef?.paused]);
+  }, [niconicommentsRef.current, videoRef?.paused, playerConfig.playbackRate]);
 
   useEffect(() => {
     if (!niconicommentsRef.current || !canvasRef.current || !pipVideoRef)

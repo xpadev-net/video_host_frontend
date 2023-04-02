@@ -4,24 +4,50 @@ import {
   OpenInFull,
   SlowMotionVideo,
 } from "@mui/icons-material";
-import { useAtom } from "jotai";
-import { PlayerConfigAtom } from "@/atoms/Player";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import {
+  PlayerConfigAtom,
+  PlayerSettingAtom,
+  VideoMetadataAtom,
+  WrapperRefAtom,
+} from "@/atoms/Player";
 import { Switch } from "@/components/Switch/Switch";
 import Styles from "@/components/Player/DesktopPlayer/Controller/Setting/pages/pages.module.scss";
+import { ForwardedRef, forwardRef } from "react";
 
-const Main = () => {
+type props = {
+  className?: string;
+};
+
+const Main_ = ({ className }: props, ref: ForwardedRef<HTMLDivElement>) => {
   const [playerConfig, setPlayerConfig] = useAtom(PlayerConfigAtom);
+  const [metadata, setMetadata] = useAtom(VideoMetadataAtom);
+  const setPlayerSetting = useSetAtom(PlayerSettingAtom);
+  const wrapperRef = useAtomValue(WrapperRefAtom);
 
   const toggleWindowFullscreen = () => {
     setPlayerConfig({
       ...playerConfig,
       windowFullscreen: !playerConfig.windowFullscreen,
     });
+    if (metadata.isFullscreen) {
+      if (playerConfig.windowFullscreen) {
+        wrapperRef
+          ?.requestFullscreen()
+          .catch(() => setMetadata({ ...metadata, isFullscreen: false }));
+      } else {
+        document.fullscreenElement && void document.exitFullscreen();
+      }
+    }
+  };
+
+  const openPlaybackRate = () => {
+    setPlayerSetting((prev) => [...prev, "playbackRate"]);
   };
 
   return (
-    <div className={Styles.wrapper}>
-      <div className={Styles.item}>
+    <div className={`${Styles.wrapper} ${className}`} ref={ref}>
+      <div className={Styles.item} onClick={openPlaybackRate}>
         <div className={Styles.left}>
           <div className={Styles.iconWrapper}>
             <SlowMotionVideo className={Styles.icon} />
@@ -65,5 +91,7 @@ const Main = () => {
     </div>
   );
 };
+
+const Main = forwardRef(Main_);
 
 export { Main };

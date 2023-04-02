@@ -1,4 +1,23 @@
 .wrapper {
   background-color: rgba(0, 0, 0, 0.8);
   border-radius: 5px;
+  overflow: hidden;
+  transition: width 300ms ease, height 300ms ease;
+  position: relative;
+  .container {
+    width: 1920px;
+    height: 1080px;
+    display: flex;
+    align-items: flex-start;
+    position: absolute;
+    transition: left 300ms ease;
+  }
+}
+.measure {
+  position: fixed;
+  right: -100%;
+  width: 1000px;
+  .item {
+    width: fit-content;
+  }
 }
