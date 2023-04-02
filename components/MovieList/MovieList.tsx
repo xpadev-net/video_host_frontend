@@ -14,14 +14,6 @@ const MovieList = ({ movies, type, active, className }: props) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const activeRef = useRef<HTMLAnchorElement>(null);
   useEffect(() => {
-    console.log(
-      type,
-      active,
-      activeRef.current,
-      wrapperRef.current,
-      activeRef.current?.offsetTop,
-      activeRef.current?.getBoundingClientRect()
-    );
     if (
       type !== "minColumn" ||
       !active ||
@@ -29,7 +21,8 @@ const MovieList = ({ movies, type, active, className }: props) => {
       !wrapperRef.current
     )
       return;
-    wrapperRef.current.scrollTop = activeRef.current.offsetTop;
+    wrapperRef.current.scrollTop =
+      activeRef.current.offsetTop - activeRef.current.clientHeight;
   }, [movies, type, active]);
   return useMemo(() => {
     return (
