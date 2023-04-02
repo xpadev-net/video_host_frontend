@@ -93,7 +93,7 @@ const Controller = ({ className }: props) => {
         </div>
       </div>
       <Slider className={Styles.Slider} />
-      {metadata.isSetting && <Setting className={Styles.setting} />}
+      <Setting className={Styles.setting} />
     </div>
   );
 };

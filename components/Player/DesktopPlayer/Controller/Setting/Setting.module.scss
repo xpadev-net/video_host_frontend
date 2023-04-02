@@ -2,6 +2,10 @@
   overflow-y: scroll;
   background-color: rgba(0, 0, 0, 0.8);
   border-radius: 5px;
+  &.inactive {
+    opacity: 0;
+    user-select: none;
+  }
   .wrapper {
     overflow: hidden;
     transition: width 200ms ease, height 200ms ease;

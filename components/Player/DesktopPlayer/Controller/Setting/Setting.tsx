@@ -129,7 +129,9 @@ const Setting = ({ className }: props) => {
     <SettingScrollContainer
       _height={size.maxHeight}
       ref={scrollContainerRef}
-      className={`${Styles.scrollContainer} ${className}`}
+      className={`${Styles.scrollContainer} ${className} ${
+        !metadata.isSetting && Styles.inactive
+      }`}
     >
       <SettingWrapper
         _height={size.height}

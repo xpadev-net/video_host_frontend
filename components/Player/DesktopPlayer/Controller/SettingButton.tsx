@@ -13,7 +13,9 @@ const SettingButton = ({ className }: props) => {
   const toggleTheatre = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     setMetadata({ ...metadata, isSetting: !metadata.isSetting });
-    setPlayerSetting(["main"]);
+    if (!metadata.isSetting) {
+      setPlayerSetting(["main"]);
+    }
   };
   return (
     <div className={className} onClick={toggleTheatre}>
