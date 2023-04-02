@@ -38,6 +38,9 @@ const Video = ({ className, videoRef, movie }: props) => {
       paused: true,
       isLoading: true,
     });
+    videoRef.current?.play().catch(() => {
+      console.info("failed to play");
+    });
   };
 
   const onVideoRateChange = () => {
@@ -76,9 +79,6 @@ const Video = ({ className, videoRef, movie }: props) => {
 
   const onVideoCanPlay = () => {
     setMetadata({ ...metadata, isLoading: false });
-    videoRef.current?.play().catch(() => {
-      console.info("failed to play");
-    });
   };
 
   const onVideoSeeked = () => setMetadata({ ...metadata, isLoading: false });

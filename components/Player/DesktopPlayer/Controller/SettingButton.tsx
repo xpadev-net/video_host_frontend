@@ -1,6 +1,6 @@
 import { Settings } from "@mui/icons-material";
-import { useAtom } from "jotai";
-import { VideoMetadataAtom } from "@/atoms/Player";
+import { useAtom, useSetAtom } from "jotai";
+import { PlayerSettingAtom, VideoMetadataAtom } from "@/atoms/Player";
 import { MouseEvent } from "react";
 
 type props = {
@@ -9,9 +9,11 @@ type props = {
 
 const SettingButton = ({ className }: props) => {
   const [metadata, setMetadata] = useAtom(VideoMetadataAtom);
+  const setPlayerSetting = useSetAtom(PlayerSettingAtom);
   const toggleTheatre = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     setMetadata({ ...metadata, isSetting: !metadata.isSetting });
+    setPlayerSetting(["main"]);
   };
   return (
     <div className={className} onClick={toggleTheatre}>

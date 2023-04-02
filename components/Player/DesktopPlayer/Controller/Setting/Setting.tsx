@@ -96,12 +96,30 @@ const Setting = ({ className }: props) => {
     if (!targetRef.current || !wrapperRef || !scrollContainerRef.current)
       return;
     setSize({
+      ...size,
       width: targetRef.current.clientWidth,
       height: targetRef.current.clientHeight,
       left: targetRef.current.offsetLeft,
       maxHeight: wrapperRef.clientHeight - 120,
     });
   }, [targetRef.current, wrapperRef, playerSetting]);
+
+  useEffect(() => {
+    if (!wrapperRef) return;
+    const handler: ResizeObserverCallback = (entries) => {
+      const wrapper = entries[0];
+      if (!wrapper) return;
+      setSize({
+        ...size,
+        maxHeight: wrapper.contentRect.height - 120,
+      });
+    };
+    const resizeObserver = new ResizeObserver(handler);
+    resizeObserver.observe(wrapperRef);
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, [size, wrapperRef]);
 
   const onClick = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
