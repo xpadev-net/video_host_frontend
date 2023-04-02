@@ -45,6 +45,10 @@ const Main_ = ({ className }: props, ref: ForwardedRef<HTMLDivElement>) => {
     setPlayerSetting((prev) => [...prev, "playbackRate"]);
   };
 
+  const openComments = () => {
+    setPlayerSetting((prev) => [...prev, "comments"]);
+  };
+
   return (
     <div className={`${Styles.wrapper} ${className}`} ref={ref}>
       <div className={Styles.item} onClick={openPlaybackRate}>
@@ -61,7 +65,7 @@ const Main_ = ({ className }: props, ref: ForwardedRef<HTMLDivElement>) => {
           </div>
         </div>
       </div>
-      <div className={Styles.item}>
+      <div className={Styles.item} onClick={openComments}>
         <div className={Styles.left}>
           <div className={Styles.iconWrapper}>
             <ChatBubble className={Styles.icon} />

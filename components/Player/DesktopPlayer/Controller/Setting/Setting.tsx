@@ -13,6 +13,7 @@ import { useAtom, useAtomValue } from "jotai";
 import { PlayerSettingAtom, VideoMetadataAtom } from "@/atoms/Player";
 import { PlaybackRate } from "@/components/Player/DesktopPlayer/Controller/Setting/pages/PlaybackRate";
 import { SettingKey } from "@/@types/Player";
+import { Comments } from "@/components/Player/DesktopPlayer/Controller/Setting/pages/Comments";
 
 type SettingWrapperProps = {
   _width: number;
@@ -47,6 +48,7 @@ const Menu: {
 } = {
   main: Main,
   playbackRate: PlaybackRate,
+  comments: Comments,
 };
 
 const Setting = ({ className }: props) => {

@@ -18,4 +18,4 @@ export type VideoMetadata = {
   isFullscreen: boolean;
 }
 
-export type SettingKey = "main"|"playbackRate";
+export type SettingKey = "main"|"playbackRate"|"comments";

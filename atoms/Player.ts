@@ -10,7 +10,7 @@ const VideoRefAtom = atom<HTMLVideoElement|null>(null);
 const VideoMetadataAtom = atom<VideoMetadata>({currentTime:0,duration:0,paused:false,isLoading:true,isSetting: false,isFullscreen:false});
 
 const PlayerConfigAtom = atomWithStorage<PlayerConfig>("playerConfig",{playbackRate: 1,windowFullscreen:true,autoPlay:true,isTheatre:false,isHls:true,isPipEnable:false,volume:1,isNiconicommentsEnable:true});
-const NiconicommentsConfigAtom = atom<Options>({format: "v1"});
+const NiconicommentsConfigAtom = atomWithStorage<Options>("niconicommentsConfig",{format: "v1",enableLegacyPiP: true});
 
 const PlayerSettingAtom = atom<SettingKey[]>(["main"]);
 
