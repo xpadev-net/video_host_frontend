@@ -17,6 +17,7 @@
   overflow-y: scroll;
   &.mobile {
     flex-direction: column-reverse;
+    padding: 0;
   }
   .container {
     flex: 1;
