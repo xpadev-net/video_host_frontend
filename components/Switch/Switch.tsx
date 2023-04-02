@@ -11,7 +11,6 @@ const Switch = ({ children, checked }: props) => {
   return (
     <RadixSwitch.Root
       className={`${Styles.root} ${checked && Styles.checked}`}
-      id="airplane-mode"
       checked={checked}
     >
       <RadixSwitch.Thumb className={Styles.thumb}>{children}</RadixSwitch.Thumb>
