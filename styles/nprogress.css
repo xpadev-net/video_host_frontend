@@ -2,7 +2,7 @@
     background: #29d;
 
     position: fixed;
-    z-index: 1031;
+    z-index: 100000;
     top: 0;
     left: 0;
 
