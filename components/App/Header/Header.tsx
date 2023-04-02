@@ -11,7 +11,7 @@ type props = {
 
 const Header = ({ className }: props) => {
   const isMobile = useIsMobile();
-  if (isMobile) return <MobileHeader />;
+  if (isMobile) return <MobileHeader className={className} />;
   return (
     <header className={`${className} ${Styles.container}`}>
       <div className={Styles.leftSideWrapper}>
