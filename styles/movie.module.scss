@@ -48,10 +48,10 @@
 @media (max-width: 1000px){
   .wrapper{
     flex-direction: column;
-    .leftSideWrapper,.rightSideWrapper{
+    .mainWrapper,.subWrapper{
       width: 100%;
       max-width: unset;
-      min-width: unset;
+      min-width: 420px;
     }
   }
 }
