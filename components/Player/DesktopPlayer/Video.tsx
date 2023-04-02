@@ -60,11 +60,11 @@ const Video = ({ className, videoRef, movie }: props) => {
       movie
     ) {
       setWatchedHistory({
-        ...watchedHistory,
         [movie.movie.url]: {
           movie: movie,
           watched: videoRef.current.currentTime / videoRef.current.duration,
         },
+        ...watchedHistory,
       });
     }
   };

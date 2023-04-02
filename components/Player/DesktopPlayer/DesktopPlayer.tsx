@@ -76,8 +76,10 @@ const DesktopPlayer = ({ className }: props) => {
   return (
     <div
       className={`${className} ${Styles.wrapper} ${
-        isTheatre && Styles.theatre
-      } ${isAfk && !metadata.paused && !metadata.isSetting && Styles.inactive}`}
+        isTheatre && !metadata.isFullscreen && Styles.theatre
+      } ${metadata.isFullscreen && Styles.fullscreen} ${
+        isAfk && !metadata.paused && !metadata.isSetting && Styles.inactive
+      }`}
       onMouseMove={onMouseMove}
       onClick={togglePlayerState}
       ref={wrapperRef}

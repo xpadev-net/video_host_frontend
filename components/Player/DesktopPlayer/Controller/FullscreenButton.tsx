@@ -1,41 +1,46 @@
 import { Fullscreen, FullscreenExit } from "@mui/icons-material";
 import { useAtom, useAtomValue } from "jotai";
-import { PlayerConfigAtom, WrapperRefAtom } from "@/atoms/Player";
-import { useEffect } from "react";
+import {
+  PlayerConfigAtom,
+  VideoMetadataAtom,
+  WrapperRefAtom,
+} from "@/atoms/Player";
+import { MouseEvent, useEffect } from "react";
 
 type props = {
   className?: string;
 };
 
 const FullscreenButton = ({ className }: props) => {
-  const [playerConfig, setPlayerConfig] = useAtom(PlayerConfigAtom);
+  const [metadata, setMetadata] = useAtom(VideoMetadataAtom);
+  const playerConfig = useAtomValue(PlayerConfigAtom);
   const wrapperRef = useAtomValue(WrapperRefAtom);
 
   useEffect(() => {
     const handler = () => {
-      setPlayerConfig({
-        ...playerConfig,
+      setMetadata({
+        ...metadata,
         isFullscreen: document.fullscreenElement !== null,
       });
     };
-    if (!!document.fullscreenElement !== playerConfig.isFullscreen) {
-      handler();
-    }
     document.addEventListener("fullscreenchange", handler);
     return () => {
       document.removeEventListener("fullscreenchange", handler);
     };
-  }, [playerConfig]);
-  const toggleFullscreen = () => {
-    setPlayerConfig({
-      ...playerConfig,
-      isFullscreen: !playerConfig.isFullscreen,
+  }, [metadata]);
+  const toggleFullscreen = (e: MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    const isFullscreen = !metadata.isFullscreen;
+    setMetadata({
+      ...metadata,
+      isSetting: false,
+      isFullscreen: isFullscreen,
     });
     if (!wrapperRef) return;
-    if (!playerConfig.isFullscreen) {
+    if (isFullscreen && !playerConfig.windowFullscreen) {
       wrapperRef
         .requestFullscreen()
-        .catch(() => setPlayerConfig({ ...playerConfig, isFullscreen: false }));
+        .catch(() => setMetadata({ ...metadata, isFullscreen: false }));
     } else {
       document.fullscreenElement && void document.exitFullscreen();
     }
@@ -43,7 +48,7 @@ const FullscreenButton = ({ className }: props) => {
 
   return (
     <div className={className} onClick={toggleFullscreen}>
-      {playerConfig.isFullscreen ? <FullscreenExit /> : <Fullscreen />}
+      {metadata.isFullscreen ? <FullscreenExit /> : <Fullscreen />}
     </div>
   );
 };
