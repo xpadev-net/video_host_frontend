@@ -7,7 +7,11 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import useSWR from "swr";
 
-const Search = () => {
+type props = {
+  className?: string;
+};
+
+const Search = ({ className }: props) => {
   const [input, setInput] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -33,7 +37,7 @@ const Search = () => {
   );
 
   return (
-    <div className={Styles.wrapper}>
+    <div className={`${Styles.wrapper} ${className}`}>
       <div className={Styles.inputWrapper}>
         <input
           type="text"

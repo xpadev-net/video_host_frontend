@@ -6,6 +6,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  position: relative;
   .leftSideWrapper {
     width: 169px;
   }
@@ -18,5 +19,19 @@
     width: 225px;
     display: flex;
     justify-content: flex-end;
+  }
+  .inputWrapper {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    background-color: colors.$backgroundColor;
+    padding: 0 8px;
+    .input {
+      flex: 1;
+      margin: 4px 0;
+    }
   }
 }
