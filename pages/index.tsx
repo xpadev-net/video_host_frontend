@@ -44,7 +44,7 @@ const Index = () => {
       }
       setUpdates(data);
     })();
-  });
+  }, []);
   if (!updates) return <></>;
   return (
     <div className={Styles.wrapper}>
