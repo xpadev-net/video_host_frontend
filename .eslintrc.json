@@ -18,6 +18,7 @@
     "@typescript-eslint/restrict-template-expressions": "off",
     "@typescript-eslint/unbound-method": "off",
     "@typescript-eslint/no-unused-vars": "error",
+    "@next/next/no-img-element": "off",
     "no-unused-vars": "off",
     "no-control-regex": "off"
   }

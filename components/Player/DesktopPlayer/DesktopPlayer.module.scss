@@ -19,7 +19,8 @@
   .canvas,
   .video,
   .pipVideo,
-  .loadingWrapper {
+  .loadingWrapper,
+  .thumbnail {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -37,6 +38,9 @@
     &.active {
       z-index: 3;
     }
+  }
+  .thumbnail {
+    z-index: 0;
   }
   .loadingWrapper {
     background-color: rgba(0, 0, 0, 0.5);

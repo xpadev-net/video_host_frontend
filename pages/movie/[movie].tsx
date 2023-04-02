@@ -1,32 +1,42 @@
 import { useRouter } from "next/router";
-import useSWR from "swr";
-import { MovieResponse } from "@/@types/api";
+import { MovieRes, MovieResponse } from "@/@types/api";
 import { request } from "@/libraries/request";
 import Styles from "@/styles/movie.module.scss";
 import { PlayList } from "@/components/PlayList/PlayList";
 import { Player } from "@/components/Player/Player";
-import { useAtomValue } from "jotai";
-import { PlayerConfigAtom } from "@/atoms/Player";
+import { useAtomValue, useSetAtom } from "jotai";
+import { PlayerConfigAtom, VideoMetadataAtom } from "@/atoms/Player";
 import { MovieInfo } from "@/components/MovieInfo/MovieInfo";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const MoviePage = () => {
   const router = useRouter();
   const query = router.query.movie;
-  const { data: result } = useSWR<MovieResponse>(
-    `/movie/${encodeURIComponent(typeof query === "string" ? query : "")}`,
-    request
-  );
   const { isTheatre } = useAtomValue(PlayerConfigAtom);
+  const setVideoMetadata = useSetAtom(VideoMetadataAtom);
+  const [result, setResult] = useState<MovieRes | undefined>();
+  useEffect(() => {
+    if (typeof query !== "string") return;
+    void (async () => {
+      setVideoMetadata((prev) => ({ ...prev, isLoading: true }));
+      const result: MovieResponse = await request(
+        `/movie/${encodeURIComponent(query)}`
+      );
+      if (result.status !== "success") {
+        void router.push(
+          `/login?callback=${encodeURIComponent(router.asPath)}`
+        );
+        return <></>;
+      }
+      setResult(result);
+    })();
+  }, [query]);
   const movieInfo = useMemo(() => {
     if (!result || result.status !== "success") return <></>;
     return <MovieInfo className={Styles.info} data={result?.data} />;
   }, [result]);
   if (!result) return <></>;
-  if (result.status !== "success") {
-    void router.push(`/login?callback=${encodeURIComponent(router.asPath)}`);
-    return <></>;
-  }
+
   return (
     <div className={`${Styles.wrapper} ${isTheatre && Styles.theatre}`}>
       <div className={Styles.mainWrapper}>

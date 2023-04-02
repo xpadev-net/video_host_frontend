@@ -99,6 +99,13 @@ const DesktopPlayer = ({ className }: props) => {
           />
         )}
         <Video className={Styles.video} videoRef={videoRef} movie={data} />
+        {data && (
+          <img
+            src={`${process.env.NEXT_PUBLIC_API_ENDPOINT}/img/${data.movie.url}`}
+            alt={""}
+            className={Styles.thumbnail}
+          />
+        )}
         <video
           className={`${Styles.pipVideo} ${isPipEnable && Styles.active}`}
           ref={pipVideoRef}
