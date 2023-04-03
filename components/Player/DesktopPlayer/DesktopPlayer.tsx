@@ -10,9 +10,9 @@ import { useEffect, useRef, useState } from "react";
 import Styles from "@/components/Player/DesktopPlayer/DesktopPlayer.module.scss";
 import { LoadingIcon } from "@/assets/LoadingIcon";
 import { Controller } from "@/components/Player/DesktopPlayer/Controller/Controller";
-import { CommentCanvas } from "@/components/Player/DesktopPlayer/CommentCanvas";
-import { Video } from "@/components/Player/DesktopPlayer/Video";
-import { KeyboardHandler } from "@/components/Player/DesktopPlayer/KeyboardHandler";
+import { CommentCanvas } from "@/components/Player/Shared/CommentCanvas";
+import { Video } from "@/components/Player/Shared/Video";
+import { KeyboardHandler } from "@/components/Player/Shared/KeyboardHandler";
 
 type props = {
   className?: string;
