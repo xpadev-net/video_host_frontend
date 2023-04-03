@@ -65,4 +65,9 @@
       vertical-align: middle;
     }
   }
+  &.mobile {
+    .suggest {
+      display: block;
+    }
+  }
 }

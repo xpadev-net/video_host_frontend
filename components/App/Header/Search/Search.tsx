@@ -1,22 +1,24 @@
 import Styles from "@/components/App/Header/Search/Search.module.scss";
 import { Search as SearchIcon } from "@mui/icons-material";
-import { useRef, useState, KeyboardEvent } from "react";
+import { useState, KeyboardEvent, forwardRef, ForwardedRef } from "react";
 import { request } from "@/libraries/request";
 import { SuggestResponse } from "@/@types/api";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import useSWR from "swr";
+import { useForwardRef } from "@/libraries/useForwardRef";
+import { useIsMobile } from "@/libraries/isMobile";
 
 type props = {
   className?: string;
 };
 
-const Search = ({ className }: props) => {
+const Search_ = ({ className }: props, ref: ForwardedRef<HTMLInputElement>) => {
   const [input, setInput] = useState("");
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useForwardRef<HTMLInputElement>(ref);
+  const isMobile = useIsMobile();
 
   const router = useRouter();
-
   const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     e.stopPropagation();
     const key = e.keyCode || e.charCode || 0;
@@ -37,7 +39,9 @@ const Search = ({ className }: props) => {
   );
 
   return (
-    <div className={`${Styles.wrapper} ${className}`}>
+    <div
+      className={`${isMobile && Styles.mobile} ${Styles.wrapper} ${className}`}
+    >
       <div className={Styles.inputWrapper}>
         <input
           type="text"
@@ -46,11 +50,12 @@ const Search = ({ className }: props) => {
           placeholder={"検索"}
           onKeyDown={onKeyDown}
           value={input}
+          id={"headerSearchInput"}
           onChange={(e) => setInput(e.target.value)}
         />
 
         {suggest?.status === "success" && suggest.data.length > 0 && (
-          <div className={Styles.suggest}>
+          <label htmlFor={"headerSearchInput"} className={Styles.suggest}>
             {suggest.data.map((item) => {
               return (
                 <Link
@@ -62,7 +67,7 @@ const Search = ({ className }: props) => {
                 </Link>
               );
             })}
-          </div>
+          </label>
         )}
       </div>
       <button className={Styles.button} onClick={onSearchClick}>
@@ -71,5 +76,7 @@ const Search = ({ className }: props) => {
     </div>
   );
 };
+
+const Search = forwardRef(Search_);
 
 export { Search };
