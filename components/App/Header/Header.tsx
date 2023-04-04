@@ -9,7 +9,7 @@ type props = {
 const Header = ({ className }: props) => {
   const isMobile = useIsMobile();
   if (isMobile) return <MobileHeader className={className} />;
-  return <DesktopHeader />;
+  return <DesktopHeader className={className} />;
 };
 
 export { Header };
