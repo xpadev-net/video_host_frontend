@@ -18,6 +18,7 @@ import {
 import { PlaybackRate } from "@/components/Player/DesktopPlayer/Controller/Setting/pages/PlaybackRate";
 import { SettingKey } from "@/@types/Player";
 import { Comments } from "@/components/Player/DesktopPlayer/Controller/Setting/pages/Comments";
+import { useIsMobile } from "@/libraries/isMobile";
 
 type SettingWrapperProps = {
   _width: number;
@@ -42,13 +43,13 @@ const SettingContainer = styled.div.attrs<SettingContainerProps>((p) => ({
 }))<SettingContainerProps>``;
 
 type SettingScrollContainerProps = {
-  _height: number;
+  _height?: number;
 };
 
 const SettingScrollContainer = styled.div.attrs<SettingScrollContainerProps>(
   (p) => ({
     style: {
-      maxHeight: `${p._height}px`,
+      maxHeight: p._height ? `${p._height}px` : "unset",
     },
   })
 )<SettingScrollContainerProps>``;
@@ -79,6 +80,7 @@ const Setting = ({ className }: props) => {
   const wrapperRef = useAtomValue(WrapperRefAtom);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const targetRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
   useEffect(() => {
     const onClick = () => {
       setMetadata({
@@ -127,7 +129,7 @@ const Setting = ({ className }: props) => {
 
   return (
     <SettingScrollContainer
-      _height={size.maxHeight}
+      _height={isMobile ? undefined : size.maxHeight}
       ref={scrollContainerRef}
       className={`${Styles.scrollContainer} ${className} ${
         !metadata.isSetting && Styles.inactive

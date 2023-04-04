@@ -8,6 +8,7 @@ import { VideoMetadataAtom } from "@/atoms/Player";
 import { Slider } from "@/components/Player/MobilePlayer/Controller/Slider/Slider";
 import { FullscreenButton } from "@/components/Player/DesktopPlayer/Controller/FullscreenButton";
 import { useAtomValue } from "jotai";
+import { Setting } from "@/components/Player/DesktopPlayer/Controller/Setting/Setting";
 
 type props = {
   className?: string;
@@ -39,6 +40,8 @@ const Controller = ({ className }: props) => {
         <Slider className={Styles.slider} />
         <FullscreenButton className={Styles.button} />
       </div>
+      <Setting className={Styles.setting} />
+      {metadata.isSetting && <div className={Styles.settingBackground} />}
     </div>
   );
 };
