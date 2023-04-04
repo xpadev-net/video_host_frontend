@@ -1,11 +1,16 @@
 import Styles from "@/components/App/Header/Search/Search.module.scss";
 import { Search as SearchIcon } from "@mui/icons-material";
-import { useState, KeyboardEvent, forwardRef, ForwardedRef } from "react";
+import {
+  useState,
+  KeyboardEvent,
+  forwardRef,
+  ForwardedRef,
+  useEffect,
+} from "react";
 import { request } from "@/libraries/request";
-import { SuggestResponse } from "@/@types/api";
+import { SuggestRes, SuggestResponse } from "@/@types/api";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import useSWR from "swr";
 import { useForwardRef } from "@/libraries/useForwardRef";
 import { useIsMobile } from "@/libraries/isMobile";
 
@@ -15,6 +20,7 @@ type props = {
 
 const Search_ = ({ className }: props, ref: ForwardedRef<HTMLInputElement>) => {
   const [input, setInput] = useState("");
+  const [suggest, setSuggest] = useState<SuggestRes | undefined>();
   const inputRef = useForwardRef<HTMLInputElement>(ref);
   const isMobile = useIsMobile();
 
@@ -33,10 +39,21 @@ const Search_ = ({ className }: props, ref: ForwardedRef<HTMLInputElement>) => {
     }
   };
 
-  const { data: suggest } = useSWR<SuggestResponse>(
-    `/suggest/${encodeURIComponent(input)}`,
-    request
-  );
+  useEffect(() => {
+    void (async () => {
+      if (input.length < 2) return;
+      const suggest: SuggestResponse = await request(
+        `/suggest/${encodeURIComponent(input)}`
+      );
+      if (suggest.status === "fail") {
+        await router.push(
+          `/login?callback=${encodeURIComponent(router.asPath)}`
+        );
+        return;
+      }
+      setSuggest(suggest);
+    })();
+  }, [input]);
 
   return (
     <div
