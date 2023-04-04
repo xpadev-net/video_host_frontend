@@ -2,7 +2,7 @@ ARG NODE_VERSION=18-slim
 
 # Build phase
 FROM node:$NODE_VERSION AS builder
-LABEL org.opencontainers.image.source=https://github.com/xpadev-net/video_host_re
+LABEL org.opencontainers.image.source=https://github.com/xpadev-net/video_host_frontend
 WORKDIR /app
 
 # Prepare node_modules
