@@ -12,6 +12,7 @@ import {
 } from "@/atoms/Player";
 import { MovieInfo } from "@/components/MovieInfo/MovieInfo";
 import { useEffect, useMemo, useState } from "react";
+import { useIsMobile } from "@/libraries/isMobile";
 
 const MoviePage = () => {
   const router = useRouter();
@@ -23,6 +24,8 @@ const MoviePage = () => {
     number | undefined
   >();
   const [result, setResult] = useState<MovieRes | undefined>();
+  const isMobile = useIsMobile();
+  const isWideVideo = isTheatre || isMobile;
   useEffect(() => {
     if (typeof query !== "string") return;
     void (async () => {
@@ -58,15 +61,15 @@ const MoviePage = () => {
   if (!result) return <></>;
 
   return (
-    <div className={`${Styles.wrapper} ${isTheatre && Styles.theatre}`}>
+    <div className={`${Styles.wrapper} ${isWideVideo && Styles.theatre}`}>
       <div className={Styles.mainWrapper}>
         <div className={Styles.playerWrapper}>
           <Player data={result.data} />
         </div>
-        {!isTheatre && movieInfo}
+        {!isWideVideo && movieInfo}
       </div>
       <div className={Styles.subWrapper}>
-        {isTheatre && movieInfo}
+        {isWideVideo && movieInfo}
         <div className={Styles.playlistWrapper}>
           <PlayList data={result.data} maxHeight={playlistMaxHeight} />
         </div>

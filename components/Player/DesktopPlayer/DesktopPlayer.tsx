@@ -28,8 +28,8 @@ const DesktopPlayer = ({ className }: props) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const pipVideoRef = useRef<HTMLVideoElement>(null);
   const [isAfk, setIsAfk] = useState(false);
-  const metadata = useAtomValue(VideoMetadataAtom);
   const afkTimeout = useRef(-1);
+  const metadata = useAtomValue(VideoMetadataAtom);
 
   const onPipPause = () => {
     void (async () => {

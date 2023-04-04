@@ -3,6 +3,7 @@ import { PlayerConfigAtom } from "@/atoms/Player";
 import * as Switch from "@radix-ui/react-switch";
 import Styles from "@/components/Player/DesktopPlayer/Controller/AutoPlayButton/AutoPlayButton.module.scss";
 import { Pause, PlayArrow } from "@mui/icons-material";
+import { MouseEvent } from "react";
 
 type props = {
   className?: string;
@@ -11,7 +12,8 @@ type props = {
 const AutoPlayButton = ({ className }: props) => {
   const [playerConfig, setPlayerConfig] = useAtom(PlayerConfigAtom);
 
-  const toggleAutPlay = () => {
+  const toggleAutPlay = (e: MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
     setPlayerConfig({ ...playerConfig, autoPlay: !playerConfig.autoPlay });
   };
 

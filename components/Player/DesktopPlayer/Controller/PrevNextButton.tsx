@@ -2,6 +2,7 @@ import { SkipNext, SkipPrevious } from "@mui/icons-material";
 import { useRouter } from "next/router";
 import { MovieItemAtom } from "@/atoms/Player";
 import { useAtomValue } from "jotai";
+import { MouseEvent } from "react";
 
 type props = {
   className?: string;
@@ -14,7 +15,8 @@ const PrevNextButton = ({ className, type }: props) => {
 
   const item = data?.[type];
   if (!item) return <></>;
-  const onPrevClick = () => {
+  const onPrevClick = (e: MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
     void router.push(`/movie/${item.url}`);
   };
   return (
