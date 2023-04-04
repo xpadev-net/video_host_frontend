@@ -12,6 +12,7 @@
     height: 48px;
     display: flex;
     justify-content: right;
+    margin: 0 10px;
   }
   .middle {
     height: 80px;
@@ -44,6 +45,20 @@
   }
   .bottom {
     height: 40px;
+    margin: 0 10px;
+    display: flex;
+    .timeDisplay {
+      .text {
+        font-size: 12px;
+        line-height: 40px;
+        padding: 0 2px;
+      }
+    }
+    .slider {
+      height: 40px;
+      flex: 1;
+      margin: 0 10px;
+    }
   }
 }
 .button {

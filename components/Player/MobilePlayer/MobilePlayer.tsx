@@ -53,6 +53,7 @@ const MobilePlayer = ({ className }: props) => {
     <div
       className={`${className} ${Styles.wrapper} ${isAfk && Styles.inactive}`}
       onClick={toggleAfk}
+      ref={wrapperRef}
     >
       <div className={Styles.videoWrapper}>
         {metadata.isLoading && data && (
