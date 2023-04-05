@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Prepare node_modules
 COPY ./ ./
-RUN yarn install --frozen-lockfile --production
+RUN yarn install --frozen-lockfile
 
 
 # Run phase
