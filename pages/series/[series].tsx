@@ -21,7 +21,7 @@ const SearchPage = () => {
     void router.push(`/login?callback=${encodeURIComponent(router.asPath)}`);
     return <></>;
   }
-  if (!result.title) {
+  if (!result.data.seriesTitle) {
     return (
       <>
         <Head>
@@ -34,12 +34,12 @@ const SearchPage = () => {
   return (
     <div className={Styles.wrapper}>
       <Head>
-        <title>{`${result.title} - ${process.env.NEXT_PUBLIC_SITE_NAME}`}</title>
+        <title>{`${result.data.seriesTitle} - ${process.env.NEXT_PUBLIC_SITE_NAME}`}</title>
       </Head>
       <div className={Styles.moviesWrapper}>
-        <h1>{result.title}</h1>
+        <h1>{result.data.seriesTitle}</h1>
         <div className={Styles.moviesContainer}>
-          <MovieList movies={result.movies} type={"column"} />
+          <MovieList movies={result.data.movies} type={"column"} />
         </div>
       </div>
     </div>

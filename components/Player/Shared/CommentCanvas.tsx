@@ -51,7 +51,14 @@ const CommentCanvas = ({ url, videoRef, pipVideoRef, className }: props) => {
         : undefined;
       niconicommentsRef.current = new NiconiComments(
         canvasRef.current,
-        [{ comments: res.comments, id: "0", fork: "main", commentCount: 0 }],
+        [
+          {
+            comments: res.data.comments,
+            id: "0",
+            fork: "main",
+            commentCount: 0,
+          },
+        ],
         { ...niconicommentsConfig, video }
       );
     })();

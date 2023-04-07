@@ -22,7 +22,7 @@ const SearchPage = () => {
     void router.push(`/login?callback=${encodeURIComponent(router.asPath)}`);
     return <></>;
   }
-  if (result.movies.length < 1 && result.series.length < 1) {
+  if (result.data.movies.length < 1 && result.data.series.length < 1) {
     return (
       <>
         <Head>
@@ -40,7 +40,7 @@ const SearchPage = () => {
       <div className={Styles.seriesWrapper}>
         <h1>シリーズ</h1>
         <div className={Styles.seriesContainer}>
-          {result.series.map((series) => (
+          {result.data.series.map((series) => (
             <Link href={`/series/${series.seriesUrl}`} key={series.seriesUrl}>
               <h2 className={Styles.text}>{series.seriesTitle}</h2>
             </Link>
@@ -50,7 +50,7 @@ const SearchPage = () => {
       <div className={Styles.moviesWrapper}>
         <h1>動画</h1>
         <div className={Styles.moviesContainer}>
-          <MovieList movies={result.movies} type={"column"} />
+          <MovieList movies={result.data.movies} type={"column"} />
         </div>
       </div>
     </div>

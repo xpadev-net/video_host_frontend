@@ -64,7 +64,7 @@ const Index = () => {
                   href={`/series/${update.seriesUrl}`}
                   className={Styles.title}
                 >
-                  {update.title}
+                  {update.seriesTitle}
                 </Link>
                 <MovieList movies={update.movies} type={"row"} />
               </div>
