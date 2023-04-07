@@ -13,6 +13,7 @@ import { Controller } from "@/components/Player/DesktopPlayer/Controller/Control
 import { CommentCanvas } from "@/components/Player/Shared/CommentCanvas";
 import { Video } from "@/components/Player/Shared/Video";
 import { KeyboardHandler } from "@/components/Player/Shared/KeyboardHandler";
+import { MediaSessionHandler } from "@/components/Player/Shared/MediaSessionHandler";
 
 type props = {
   className?: string;
@@ -117,6 +118,7 @@ const DesktopPlayer = ({ className }: props) => {
       </div>
       <Controller className={Styles.controller} />
       <KeyboardHandler />
+      <MediaSessionHandler />
     </div>
   );
 };

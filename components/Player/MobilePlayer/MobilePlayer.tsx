@@ -13,6 +13,7 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { KeyboardHandler } from "@/components/Player/Shared/KeyboardHandler";
 import { Controller } from "@/components/Player/MobilePlayer/Controller/Controller";
+import { MediaSessionHandler } from "@/components/Player/Shared/MediaSessionHandler";
 
 type props = {
   className?: string;
@@ -80,6 +81,7 @@ const MobilePlayer = ({ className }: props) => {
       </div>
       <Controller className={Styles.controller} />
       <KeyboardHandler />
+      <MediaSessionHandler />
     </div>
   );
 };
