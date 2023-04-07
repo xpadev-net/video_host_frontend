@@ -13,10 +13,8 @@ const Login = () => {
   const [password, setPassword] = useState("");
   useEffect(() => {
     void (async () => {
-      console.log("try auth start");
       if (router.pathname !== "/login") return;
       const res = await request<tryAuthResponse>(`/tryAuth/`);
-      console.log("try auth end");
       if (res.status === "success") {
         void router.push(
           typeof router.query.callback === "string"
@@ -35,7 +33,6 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     void (async () => {
-      console.log("auth start");
       const data = new FormData();
       data.append("username", username);
       data.append("password", password);
@@ -43,13 +40,11 @@ const Login = () => {
         method: "POST",
         body: data,
       });
-      console.log("auth end");
       if (res.status === "fail") {
         setMessage("incorrect username or password");
         setLoading(false);
         return;
       }
-      console.log("redirecting");
       await router.push(
         router.query.callback ? `${router.query.callback}` : "/"
       );

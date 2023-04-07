@@ -56,7 +56,6 @@ const KeyboardHandler = () => {
         }));
         return;
       }
-      console.log(e.code);
     };
     window.addEventListener("keydown", onKeyDown);
     return () => {
