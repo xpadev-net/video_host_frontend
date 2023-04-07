@@ -21,7 +21,7 @@ type props = {
 
 const MobilePlayer = ({ className }: props) => {
   const data = useAtomValue(MovieItemAtom);
-  const metadata = useAtomValue(VideoMetadataAtom);
+  const { isLoading, isFullscreen } = useAtomValue(VideoMetadataAtom);
   const { isNiconicommentsEnable } = useAtomValue(PlayerConfigAtom);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -52,12 +52,14 @@ const MobilePlayer = ({ className }: props) => {
 
   return (
     <div
-      className={`${className} ${Styles.wrapper} ${isAfk && Styles.inactive}`}
+      className={`${className} ${Styles.wrapper} ${isAfk && Styles.inactive} ${
+        isFullscreen && Styles.fullscreen
+      }`}
       onClick={toggleAfk}
       ref={wrapperRef}
     >
       <div className={Styles.videoWrapper}>
-        {metadata.isLoading && data && (
+        {isLoading && data && (
           <>
             <div className={Styles.loadingWrapper}>
               <LoadingIcon className={Styles.icon} />
