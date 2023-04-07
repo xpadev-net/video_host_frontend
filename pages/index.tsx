@@ -26,11 +26,13 @@ const Index = () => {
   const isomorphicEffect = useIsomorphicEffect();
   const handleResize = () => {
     const width = wrapper.current?.clientWidth || 1920;
-    setWidth(width / (Math.floor(width / 385) + 1) - 20);
+    const cardCount = Math.floor(width / 380) + 1;
+    setWidth(width / cardCount - 20);
   };
   isomorphicEffect(() => {
     if (!observer.current) observer.current = new ResizeObserver(handleResize);
     if (!wrapper.current) return;
+    handleResize();
     observer.current?.observe(wrapper.current);
   }, [wrapper.current]);
   useEffect(() => {
@@ -45,7 +47,6 @@ const Index = () => {
       setUpdates(data);
     })();
   }, []);
-  if (!updates) return <></>;
   return (
     <div className={Styles.wrapper}>
       <Head>
