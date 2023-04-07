@@ -3,6 +3,7 @@ import { FormEvent, MouseEvent, useEffect, useState } from "react";
 import { request } from "@/libraries/request";
 import { authResponse, tryAuthResponse } from "@/@types/api";
 import Styles from "@/styles/login.module.scss";
+import Head from "next/head";
 
 const Login = () => {
   const router = useRouter();
@@ -57,6 +58,9 @@ const Login = () => {
 
   return (
     <>
+      <Head>
+        <title>{`ログイン - ${process.env.NEXT_PUBLIC_SITE_NAME}`}</title>
+      </Head>
       {loading && <div className={Styles.loading} />}
       <div className={Styles.wrapper}>
         {message && <div>{message}</div>}

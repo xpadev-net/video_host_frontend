@@ -5,6 +5,7 @@ import { request } from "@/libraries/request";
 import { SeriesResponse } from "@/@types/api";
 import { MovieList } from "@/components/MovieList/MovieList";
 import Styles from "@/styles/search.module.scss";
+import Head from "next/head";
 
 const SearchPage = () => {
   const router = useRouter();
@@ -21,10 +22,20 @@ const SearchPage = () => {
     return <></>;
   }
   if (!result.title) {
-    return <Error title={"条件に合致するものが見つかりませんでした"} />;
+    return (
+      <>
+        <Head>
+          <title>{`検索 - ${process.env.NEXT_PUBLIC_SITE_NAME}`}</title>
+        </Head>
+        <Error title={"条件に合致するものが見つかりませんでした"} />
+      </>
+    );
   }
   return (
     <div className={Styles.wrapper}>
+      <Head>
+        <title>{`${result.title} - ${process.env.NEXT_PUBLIC_SITE_NAME}`}</title>
+      </Head>
       <div className={Styles.moviesWrapper}>
         <h1>{result.title}</h1>
         <div className={Styles.moviesContainer}>

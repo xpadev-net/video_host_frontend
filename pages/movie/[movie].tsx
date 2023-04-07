@@ -13,6 +13,7 @@ import {
 import { MovieInfo } from "@/components/MovieInfo/MovieInfo";
 import { useEffect, useMemo, useState } from "react";
 import { useIsMobile } from "@/libraries/isMobile";
+import Head from "next/head";
 
 const MoviePage = () => {
   const router = useRouter();
@@ -62,6 +63,9 @@ const MoviePage = () => {
 
   return (
     <div className={`${Styles.wrapper} ${isWideVideo && Styles.theatre}`}>
+      <Head>
+        <title>{`${result.data.movie.title} / ${result.data.movie.seriesTitle} - ${process.env.NEXT_PUBLIC_SITE_NAME}`}</title>
+      </Head>
       <div className={Styles.mainWrapper}>
         <div className={Styles.playerWrapper}>
           <Player data={result.data} />

@@ -2,6 +2,7 @@ import { useAtomValue } from "jotai";
 import { watchedHistoryAtom } from "@/atoms/WatchedHistory";
 import { MovieList } from "@/components/MovieList/MovieList";
 import Styles from "@/styles/history.module.scss";
+import Head from "next/head";
 
 const History = () => {
   const history = useAtomValue(watchedHistoryAtom);
@@ -12,6 +13,9 @@ const History = () => {
 
   return (
     <div className={Styles.wrapper}>
+      <Head>
+        <title>{`履歴 - ${process.env.NEXT_PUBLIC_SITE_NAME}`}</title>
+      </Head>
       <MovieList movies={historyList} type={"column"} />
     </div>
   );
