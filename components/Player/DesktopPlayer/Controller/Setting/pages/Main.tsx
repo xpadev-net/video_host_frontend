@@ -1,5 +1,6 @@
 import {
   ChatBubble,
+  Hls,
   KeyboardArrowRight,
   OpenInFull,
   SlowMotionVideo,
@@ -48,6 +49,12 @@ const Main_ = ({ className }: props, ref: ForwardedRef<HTMLDivElement>) => {
   const openComments = () => {
     setPlayerSetting((prev) => [...prev, "comments"]);
   };
+  const toggleHls = () => {
+    setPlayerConfig({
+      ...playerConfig,
+      isHls: !playerConfig.isHls,
+    });
+  };
 
   return (
     <div className={`${Styles.wrapper} ${className}`} ref={ref}>
@@ -89,6 +96,19 @@ const Main_ = ({ className }: props, ref: ForwardedRef<HTMLDivElement>) => {
         <div className={Styles.right}>
           <div className={Styles.switch}>
             <Switch checked={playerConfig.windowFullscreen} />
+          </div>
+        </div>
+      </div>
+      <div className={Styles.item} onClick={toggleHls}>
+        <div className={Styles.left}>
+          <div className={Styles.iconWrapper}>
+            <Hls className={Styles.icon} />
+          </div>
+          <span className={Styles.text}>HLS有効化</span>
+        </div>
+        <div className={Styles.right}>
+          <div className={Styles.switch}>
+            <Switch checked={playerConfig.isHls} />
           </div>
         </div>
       </div>

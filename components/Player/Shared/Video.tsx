@@ -1,6 +1,6 @@
 import { useAtom } from "jotai";
 import { PlayerConfigAtom, VideoMetadataAtom } from "@/atoms/Player";
-import { RefObject, useEffect } from "react";
+import { RefObject, useEffect, useState } from "react";
 import { MovieItem } from "@/@types/api";
 import Hls from "hls.js";
 import { watchedHistoryAtom } from "@/atoms/WatchedHistory";
@@ -16,6 +16,7 @@ const Video = ({ className, videoRef, movie }: props) => {
   const [metadata, setMetadata] = useAtom(VideoMetadataAtom);
   const [playerConfig, setPlayerConfig] = useAtom(PlayerConfigAtom);
   const [watchedHistory, setWatchedHistory] = useAtom(watchedHistoryAtom);
+  const [url, setUrl] = useState<string>("");
 
   const router = useRouter();
 
@@ -90,41 +91,54 @@ const Video = ({ className, videoRef, movie }: props) => {
       videoRef.current.srcObject = null;
       return;
     }
-    setWatchedHistory({
-      ...watchedHistory,
-      [movie.movie.url]: {
-        movie: movie,
-        watched: 0,
-      },
-    });
-    if (playerConfig.isHls) {
-      if (videoRef.current.canPlayType("application/vnd.apple.mpegurl")) {
+    const setup = () => {
+      if (!videoRef.current) return;
+      if (playerConfig.isHls) {
+        if (videoRef.current.canPlayType("application/vnd.apple.mpegurl")) {
+          videoRef.current.src = movie.source.http;
+          videoRef.current.crossOrigin = "use-credentials";
+        } else if (Hls.isSupported()) {
+          const hls = new Hls({
+            xhrSetup: function (xhr, url) {
+              xhr.withCredentials = true;
+              xhr.open("GET", url);
+            },
+            enableWorker: true,
+            lowLatencyMode: true,
+          });
+          hls.loadSource(movie.source.hls);
+          hls.attachMedia(videoRef.current);
+          videoRef.current.crossOrigin = "anonymous";
+        } else {
+          console.error(
+            "This is an old browser that does not support MSE https://developer.mozilla.org/en-US/docs/Web/API/Media_Source_Extensions_API"
+          );
+        }
+      } else {
         videoRef.current.src = movie.source.http;
         videoRef.current.crossOrigin = "use-credentials";
-      } else if (Hls.isSupported()) {
-        const hls = new Hls({
-          xhrSetup: function (xhr, url) {
-            xhr.withCredentials = true;
-            xhr.open("GET", url);
-          },
-          enableWorker: true,
-          lowLatencyMode: true,
-        });
-        hls.loadSource(movie.source.hls);
-        hls.attachMedia(videoRef.current);
-        videoRef.current.crossOrigin = "anonymous";
-      } else {
-        console.error(
-          "This is an old browser that does not support MSE https://developer.mozilla.org/en-US/docs/Web/API/Media_Source_Extensions_API"
-        );
+        videoRef.current.load();
       }
+      videoRef.current.playbackRate = playerConfig.playbackRate;
+      videoRef.current.volume = playerConfig.volume;
+    };
+
+    if (movie.movie.url === url) {
+      const currentTIme = videoRef.current.currentTime;
+      setup();
+      videoRef.current.currentTime = currentTIme;
     } else {
-      videoRef.current.src = movie.source.http;
-      videoRef.current.crossOrigin = "use-credentials";
+      setWatchedHistory({
+        ...watchedHistory,
+        [movie.movie.url]: {
+          movie: movie,
+          watched: 0,
+        },
+      });
+      setup();
     }
-    videoRef.current.playbackRate = playerConfig.playbackRate;
-    videoRef.current.volume = playerConfig.volume;
-  }, [videoRef.current, movie?.source]);
+    setUrl(movie.movie.url);
+  }, [videoRef.current, movie?.source, playerConfig.isHls]);
 
   return (
     <video
