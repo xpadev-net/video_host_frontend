@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useAtomValue, useSetAtom } from "jotai";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import {
   MovieItemAtom,
   PlayerConfigAtom,
@@ -13,12 +13,13 @@ const rates = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 3, 4];
 const KeyboardHandler = () => {
   const videoRef = useAtomValue(VideoRefAtom);
   const movieItem = useAtomValue(MovieItemAtom);
-  const setPlayerConfig = useSetAtom(PlayerConfigAtom);
+  const [playerConfig, setPlayerConfig] = useAtom(PlayerConfigAtom);
   const setVideoMetadata = useSetAtom(VideoMetadataAtom);
   const router = useRouter();
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (!videoRef || !movieItem) return;
+      console.log(e.code, e.shiftKey);
       if (e.code === "ArrowRight" || e.code === "ArrowLeft") {
         videoRef.currentTime += 5 * (e.code === "ArrowRight" ? 1 : -1);
         return;
@@ -30,8 +31,10 @@ const KeyboardHandler = () => {
       }
       if ((e.code === "Period" || e.code === "Comma") && e.shiftKey) {
         const key =
-          rates.indexOf(videoRef.playbackRate) + (e.code === "Period" ? 1 : -1);
+          rates.indexOf(playerConfig.playbackRate) +
+          (e.code === "Period" ? 1 : -1);
         if (!rates[key]) return;
+        setPlayerConfig({ ...playerConfig, playbackRate: rates[key] });
         videoRef.playbackRate = rates[key];
         return;
       }
@@ -61,7 +64,7 @@ const KeyboardHandler = () => {
     return () => {
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [videoRef, movieItem]);
+  }, [videoRef, movieItem, playerConfig]);
 
   return <></>;
 };
