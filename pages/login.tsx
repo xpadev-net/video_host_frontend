@@ -82,7 +82,7 @@ const Login = () => {
               setPassword(e.target.value);
             }}
           />
-          <button type="button" className={Styles.button} onClick={onSubmit}>
+          <button type="submit" className={Styles.button}>
             Login
           </button>
         </form>
