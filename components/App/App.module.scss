@@ -11,10 +11,8 @@
 }
 .main {
   display: flex;
-  height: 100vh;
   padding-top: 56px;
   width: 100vw;
-  overflow-y: scroll;
   &.mobile {
     flex-direction: column-reverse;
   }
