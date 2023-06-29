@@ -7,7 +7,3 @@ export type Movie = {
   duration: number;
   addAt: number;
 }
-
-export type WrapperProps = {
-  itemWidth?: number;
-}

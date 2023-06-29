@@ -1,14 +1,9 @@
-import styled from "styled-components";
 import Styles from "./Thumbnail.module.scss";
 import Image from "next/image";
-import type { ThumbnailProps, WatchedProps } from "@/@types/Thumbnail";
+import type { ThumbnailProps } from "@/@types/Thumbnail";
 import { useAtom } from "jotai";
 import { watchedHistoryAtom } from "@/atoms/WatchedHistory";
 import { time2str } from "@/libraries/time";
-
-const WatchedProgress = styled.div<WatchedProps>`
-  width: ${(p) => p.itemWidth}%;
-`;
 
 const Thumbnail = ({ movie }: ThumbnailProps) => {
   const [history] = useAtom(watchedHistoryAtom);
@@ -21,9 +16,11 @@ const Thumbnail = ({ movie }: ThumbnailProps) => {
         fill={true}
         sizes={"360px"}
       />
-      <WatchedProgress
-        itemWidth={(history[movie.url]?.watched || 0) * 100}
+      <div
         className={Styles.watched}
+        style={{
+          width: `${(history[movie.url]?.watched || 0) * 100}%`,
+        }}
       />
       <span className={Styles.duration}>{time2str(movie.duration)}</span>
     </div>

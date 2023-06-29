@@ -19,17 +19,19 @@ const KeyboardHandler = () => {
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (!videoRef || !movieItem) return;
-      console.log(e.code, e.shiftKey);
       if (e.code === "ArrowRight" || e.code === "ArrowLeft") {
+        e.preventDefault();
         videoRef.currentTime += 5 * (e.code === "ArrowRight" ? 1 : -1);
         return;
       }
       if (e.code === "ArrowUp" || e.code === "ArrowDown") {
+        e.preventDefault();
         const volume = videoRef.volume + 0.1 * (e.code === "ArrowUp" ? 1 : -1);
         videoRef.volume = Math.min(1, Math.max(0, volume));
         return;
       }
       if ((e.code === "Period" || e.code === "Comma") && e.shiftKey) {
+        e.preventDefault();
         const key =
           rates.indexOf(playerConfig.playbackRate) +
           (e.code === "Period" ? 1 : -1);
@@ -39,20 +41,24 @@ const KeyboardHandler = () => {
         return;
       }
       if (e.code === "Space" || e.code === "KeyK") {
+        e.preventDefault();
         void (videoRef.paused ? videoRef.play() : videoRef.pause());
         return;
       }
       if ((e.code === "KeyN" || e.code === "KeyP") && e.shiftKey) {
+        e.preventDefault();
         const item = movieItem[e.code === "KeyN" ? "next" : "prev"];
         if (!item) return;
         void router.push(`/movie/${item.url}`);
         return;
       }
       if (e.code === "KeyT") {
+        e.preventDefault();
         setPlayerConfig((prev) => ({ ...prev, isTheatre: !prev.isTheatre }));
         return;
       }
       if (e.code === "KeyF" || e.code === "Escape") {
+        e.preventDefault();
         setVideoMetadata((prev) => ({
           ...prev,
           isFullscreen: e.code === "KeyF" ? !prev.isFullscreen : false,
@@ -64,7 +70,7 @@ const KeyboardHandler = () => {
     return () => {
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [videoRef, movieItem, playerConfig]);
+  }, [videoRef, movieItem, playerConfig, setPlayerConfig, setVideoMetadata]);
 
   return <></>;
 };

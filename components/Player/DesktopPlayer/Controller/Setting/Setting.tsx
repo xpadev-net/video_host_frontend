@@ -1,5 +1,4 @@
 import Styles from "@/components/Player/DesktopPlayer/Controller/Setting/Setting.module.scss";
-import styled from "styled-components";
 import { Main } from "@/components/Player/DesktopPlayer/Controller/Setting/pages/Main";
 import {
   useEffect,
@@ -19,40 +18,6 @@ import { PlaybackRate } from "@/components/Player/DesktopPlayer/Controller/Setti
 import { SettingKey } from "@/@types/Player";
 import { Comments } from "@/components/Player/DesktopPlayer/Controller/Setting/pages/Comments";
 import { useIsMobile } from "@/libraries/isMobile";
-
-type SettingWrapperProps = {
-  _width: number;
-  _height: number;
-};
-
-const SettingWrapper = styled.div.attrs<SettingWrapperProps>((p) => ({
-  style: {
-    width: `${p._width}px`,
-    height: `${p._height}px`,
-  },
-}))<SettingWrapperProps>``;
-
-type SettingContainerProps = {
-  _left: number;
-};
-
-const SettingContainer = styled.div.attrs<SettingContainerProps>((p) => ({
-  style: {
-    left: `-${p._left}px`,
-  },
-}))<SettingContainerProps>``;
-
-type SettingScrollContainerProps = {
-  _height?: number;
-};
-
-const SettingScrollContainer = styled.div.attrs<SettingScrollContainerProps>(
-  (p) => ({
-    style: {
-      maxHeight: p._height ? `${p._height}px` : "unset",
-    },
-  })
-)<SettingScrollContainerProps>``;
 
 type props = {
   className?: string;
@@ -128,20 +93,29 @@ const Setting = ({ className }: props) => {
   };
 
   return (
-    <SettingScrollContainer
-      _height={isMobile ? undefined : size.maxHeight}
+    <div
       ref={scrollContainerRef}
       className={`${Styles.scrollContainer} ${className} ${
         !metadata.isSetting && Styles.inactive
       }`}
+      style={{
+        maxHeight: isMobile ? "unset" : `${size.maxHeight}px`,
+      }}
     >
-      <SettingWrapper
-        _height={size.height}
-        _width={size.width}
+      <div
         onClick={onClick}
         className={Styles.wrapper}
+        style={{
+          width: `${size.width}px`,
+          height: `${size.height}px`,
+        }}
       >
-        <SettingContainer _left={size.left} className={Styles.container}>
+        <div
+          className={Styles.container}
+          style={{
+            left: `-${size.left}px`,
+          }}
+        >
           {playerSetting.map((key, index) => {
             const Target = Menu[key];
             if (index + 1 === playerSetting.length) {
@@ -149,9 +123,9 @@ const Setting = ({ className }: props) => {
             }
             return <Target key={key} />;
           })}
-        </SettingContainer>
-      </SettingWrapper>
-    </SettingScrollContainer>
+        </div>
+      </div>
+    </div>
   );
 };
 export { Setting };

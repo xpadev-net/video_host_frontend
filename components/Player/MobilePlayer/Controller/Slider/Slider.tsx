@@ -1,5 +1,4 @@
 import Styles from "@/components/Player/MobilePlayer/Controller/Slider/Slider.module.scss";
-import styled from "styled-components";
 import { VideoRefAtom } from "@/atoms/Player";
 import { useAtomValue } from "jotai";
 import { useEffect, useRef, useState, MouseEvent } from "react";
@@ -9,26 +8,9 @@ type props = {
 };
 
 type RangeItemProps = {
-  _left: number;
-  _width: number;
+  left: number;
+  width: number;
 };
-
-const RangeItem = styled.div.attrs<RangeItemProps>((p) => ({
-  style: {
-    left: `${p._left}%`,
-    width: `${p._width}%`,
-  },
-}))<RangeItemProps>``;
-
-type LeftItemProps = {
-  _left: number;
-};
-
-const Grubber = styled.div.attrs<LeftItemProps>((p) => ({
-  style: {
-    left: `${p._left}%`,
-  },
-}))<LeftItemProps>``;
 
 const Slider = ({ className }: props) => {
   const videoRef = useAtomValue(VideoRefAtom);
@@ -43,8 +25,8 @@ const Slider = ({ className }: props) => {
       const buffer_arr: RangeItemProps[] = [];
       for (let i = 0; i < videoRef.buffered.length; i++) {
         buffer_arr.push({
-          _left: (videoRef.buffered.start(i) / videoRef.duration) * 100,
-          _width:
+          left: (videoRef.buffered.start(i) / videoRef.duration) * 100,
+          width:
             ((videoRef.buffered.end(i) - videoRef.buffered.start(i)) /
               videoRef.duration) *
             100,
@@ -104,11 +86,30 @@ const Slider = ({ className }: props) => {
       <div className={Styles.background} />
       {buffered.map((item) => {
         return (
-          <RangeItem className={Styles.buffered} key={item._left} {...item} />
+          <div
+            className={Styles.buffered}
+            key={item.left}
+            {...item}
+            style={{
+              left: `${item.left}%`,
+              width: `${item.width}%`,
+            }}
+          />
         );
       })}
-      <RangeItem _left={0} _width={progress} className={Styles.watched} />
-      <Grubber _left={progress} className={Styles.grubber} />
+      <div
+        className={Styles.watched}
+        style={{
+          left: `0`,
+          width: `${progress}%`,
+        }}
+      />
+      <div
+        className={Styles.grubber}
+        style={{
+          left: `${progress}%`,
+        }}
+      />
     </div>
   );
 };

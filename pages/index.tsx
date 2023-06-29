@@ -1,20 +1,12 @@
 import Head from "next/head";
-import { useEffect, useRef, useState } from "react";
+import { CSSProperties, useEffect, useRef, useState } from "react";
 import { request } from "@/libraries/request";
 import { recentUpdatesRes, recentUpdatesResponse } from "@/@types/api";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { MovieList } from "@/components/MovieList/MovieList";
 import Styles from "@/styles/index.module.scss";
-import styled from "styled-components";
-import { WrapperProps } from "@/@types/Movie";
 import { useIsomorphicEffect } from "@/libraries/IsomorphicEffect";
-
-const Wrapper = styled.div.attrs((p: WrapperProps) => ({
-  style: {
-    "--width": `${p.itemWidth}px`,
-  },
-}))``;
 
 const Index = () => {
   const router = useRouter();
@@ -55,7 +47,7 @@ const Index = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Wrapper itemWidth={width} ref={wrapper}>
+      <div ref={wrapper} style={{ "--width": `${width}px` } as CSSProperties}>
         {updates &&
           updates.data.map((update) => {
             return (
@@ -70,7 +62,7 @@ const Index = () => {
               </div>
             );
           })}
-      </Wrapper>
+      </div>
     </div>
   );
 };

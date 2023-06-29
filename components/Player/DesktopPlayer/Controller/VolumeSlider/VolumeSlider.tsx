@@ -1,18 +1,7 @@
 import { useAtomValue } from "jotai";
 import { PlayerConfigAtom, VideoRefAtom } from "@/atoms/Player";
-import styled from "styled-components";
 import Styles from "@/components/Player/DesktopPlayer/Controller/VolumeSlider/VolumeSlider.module.scss";
 import { MouseEvent, useEffect, useRef, useState } from "react";
-
-type GrubberProps = {
-  left: number;
-};
-
-const VolumeGrubber = styled.div.attrs<GrubberProps>((p) => ({
-  style: {
-    left: `${p.left * 100}%`,
-  },
-}))<GrubberProps>``;
 
 const VolumeSlider = () => {
   const videoRef = useAtomValue(VideoRefAtom);
@@ -51,7 +40,12 @@ const VolumeSlider = () => {
 
   return (
     <div className={Styles.wrapper} onMouseDown={onMouseDown} ref={wrapperRef}>
-      <VolumeGrubber left={playerConfig.volume} className={Styles.grubber} />
+      <div
+        className={Styles.grubber}
+        style={{
+          left: `${playerConfig.volume * 100}%`,
+        }}
+      />
     </div>
   );
 };
