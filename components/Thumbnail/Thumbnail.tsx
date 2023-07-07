@@ -18,6 +18,7 @@ const Thumbnail = ({ movie }: ThumbnailProps) => {
         alt={`${movie.seriesTitle} ${movie.title}`}
         fill={true}
         sizes={"360px"}
+        className={Styles.image}
       />
       <div
         className={Styles.watched}

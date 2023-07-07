@@ -6,6 +6,9 @@
   height: 100%;
   position: relative;
   overflow: hidden;
+  .image {
+    object-fit: cover;
+  }
   .watched {
     position: absolute;
     bottom: 0;
