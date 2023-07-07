@@ -40,9 +40,7 @@ const Video = ({ className, videoRef, movie }: props) => {
       paused: true,
       isLoading: true,
     });
-    videoRef.current?.play().catch(() => {
-      console.info("failed to play");
-    });
+    void videoRef.current?.play().catch();
   };
 
   const onVideoRateChange = () => {
