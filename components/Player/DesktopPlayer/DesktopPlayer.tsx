@@ -89,19 +89,22 @@ const DesktopPlayer = ({ className }: props) => {
       onClick={togglePlayerState}
       ref={wrapperRef}
     >
+      {metadata.isLoading && data && (
+        <>
+          <div
+            className={Styles.loadingWrapper}
+            onClick={(e) => e.preventDefault()}
+          >
+            <LoadingIcon className={Styles.icon} />
+          </div>
+          <img
+            src={`${ApiEndpoint}/img/${data.movie.url}`}
+            alt={""}
+            className={Styles.thumbnail}
+          />
+        </>
+      )}
       <div className={Styles.videoWrapper}>
-        {metadata.isLoading && data && (
-          <>
-            <div className={Styles.loadingWrapper}>
-              <LoadingIcon className={Styles.icon} />
-            </div>
-            <img
-              src={`${ApiEndpoint}/img/${data.movie.url}`}
-              alt={""}
-              className={Styles.thumbnail}
-            />
-          </>
-        )}
         {isNiconicommentsEnable && EnableComments && (
           <CommentCanvas
             url={data?.movie.url}
