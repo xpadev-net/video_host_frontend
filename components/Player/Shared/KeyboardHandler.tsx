@@ -17,46 +17,47 @@ const KeyboardHandler = () => {
   const [playerConfig, setPlayerConfig] = useAtom(PlayerConfigAtom);
   const setVideoMetadata = useSetAtom(VideoMetadataAtom);
   const router = useRouter();
+
   useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (!videoRef || !movieItem) return;
+    const handler = (e: KeyboardEvent) => {
+      if (!videoRef || !movieItem) return false;
       if (e.code === "ArrowRight" || e.code === "ArrowLeft") {
         e.preventDefault();
         videoRef.currentTime += 5 * (e.code === "ArrowRight" ? 1 : -1);
-        return;
+        return true;
       }
       if (e.code === "ArrowUp" || e.code === "ArrowDown") {
         e.preventDefault();
         const volume = videoRef.volume + 0.1 * (e.code === "ArrowUp" ? 1 : -1);
         videoRef.volume = Math.min(1, Math.max(0, volume));
-        return;
+        return true;
       }
       if ((e.code === "Period" || e.code === "Comma") && e.shiftKey) {
         e.preventDefault();
         const key =
           rates.indexOf(playerConfig.playbackRate) +
           (e.code === "Period" ? 1 : -1);
-        if (!rates[key]) return;
+        if (!rates[key]) return false;
         setPlayerConfig({ ...playerConfig, playbackRate: rates[key] });
         videoRef.playbackRate = rates[key];
-        return;
+        return true;
       }
       if (e.code === "Space" || e.code === "KeyK") {
         e.preventDefault();
         void (videoRef.paused ? videoRef.play() : videoRef.pause());
-        return;
+        return true;
       }
       if ((e.code === "KeyN" || e.code === "KeyP") && e.shiftKey) {
         e.preventDefault();
         const item = movieItem[e.code === "KeyN" ? "next" : "prev"];
-        if (!item) return;
+        if (!item) return false;
         void router.push(`/movie/${item.url}`);
-        return;
+        return true;
       }
       if (e.code === "KeyT") {
         e.preventDefault();
         setPlayerConfig((prev) => ({ ...prev, isTheatre: !prev.isTheatre }));
-        return;
+        return true;
       }
       if (e.code === "KeyF" || e.code === "Escape") {
         e.preventDefault();
@@ -64,7 +65,14 @@ const KeyboardHandler = () => {
           ...prev,
           isFullscreen: e.code === "KeyF" ? !prev.isFullscreen : false,
         }));
-        return;
+        return true;
+      }
+      return false;
+    };
+    const onKeyDown = (e: KeyboardEvent) => {
+      const result = handler(e);
+      if (result) {
+        e.preventDefault();
       }
     };
     window.addEventListener("keydown", onKeyDown);
