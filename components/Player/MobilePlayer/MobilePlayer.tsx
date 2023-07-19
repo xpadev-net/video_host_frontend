@@ -12,7 +12,7 @@ import {
 } from "@/atoms/Player";
 import { useEffect, useRef, useState } from "react";
 import { KeyboardHandler } from "@/components/Player/Shared/KeyboardHandler";
-import { Controller } from "@/components/Player/MobilePlayer/Controller/Controller";
+import { Controller } from "@/components/Player/MobilePlayer/Controller";
 import { MediaSessionHandler } from "@/components/Player/Shared/MediaSessionHandler";
 
 type props = {

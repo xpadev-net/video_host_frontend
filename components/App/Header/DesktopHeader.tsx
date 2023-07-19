@@ -1,7 +1,7 @@
 import Styles from "@/components/App/Header/Header.module.scss";
-import { HeaderMenu } from "@/components/App/Menu/Menu";
-import { Logout } from "@/components/App/Header/Logout/Logout";
-import { Search } from "@/components/App/Header/Search/Search";
+import { HeaderMenu } from "@/components/App/Menu";
+import { Logout } from "@/components/App/Header/Logout";
+import { Search } from "@/components/App/Header/Search";
 
 type props = {
   className?: string;

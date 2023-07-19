@@ -2,15 +2,15 @@ import { useRouter } from "next/router";
 import { MovieRes, MovieResponse, notFoundError } from "@/@types/api";
 import { request } from "@/libraries/request";
 import Styles from "@/styles/movie.module.scss";
-import { PlayList } from "@/components/PlayList/PlayList";
-import { Player } from "@/components/Player/Player";
+import { PlayList } from "@/components/PlayList";
+import { Player } from "@/components/Player";
 import { useAtomValue, useSetAtom } from "jotai";
 import {
   PlayerConfigAtom,
   VideoMetadataAtom,
   WrapperRefAtom,
 } from "@/atoms/Player";
-import { MovieInfo } from "@/components/MovieInfo/MovieInfo";
+import { MovieInfo } from "@/components/MovieInfo";
 import { useEffect, useMemo, useState } from "react";
 import { useIsMobile } from "@/libraries/isMobile";
 import Head from "next/head";

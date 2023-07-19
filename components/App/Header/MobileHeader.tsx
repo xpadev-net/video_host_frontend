@@ -1,8 +1,8 @@
 import Styles from "@/components/App/Header/Header.module.scss";
 import ButtonStyles from "@/styles/button.module.scss";
-import { HeaderMenu } from "@/components/App/Menu/Menu";
-import { Logout } from "@/components/App/Header/Logout/Logout";
-import { Search } from "@/components/App/Header/Search/Search";
+import { HeaderMenu } from "@/components/App/Menu";
+import { Logout } from "@/components/App/Header/Logout";
+import { Search } from "@/components/App/Header/Search";
 import { ArrowBack, Search as SearchIcon } from "@mui/icons-material";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";

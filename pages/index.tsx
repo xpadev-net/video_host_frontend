@@ -4,7 +4,7 @@ import { request } from "@/libraries/request";
 import { recentUpdatesRes, recentUpdatesResponse } from "@/@types/api";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { MovieList } from "@/components/MovieList/MovieList";
+import { MovieList } from "@/components/MovieList";
 import Styles from "@/styles/index.module.scss";
 import { useIsomorphicEffect } from "@/libraries/IsomorphicEffect";
 

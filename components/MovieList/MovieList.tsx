@@ -1,4 +1,4 @@
-import { MovieCard } from "@/components/Movie/Movie";
+import { MovieCard } from "@/components/Movie";
 import Styles from "./MovieList.module.scss";
 import { useEffect, useMemo, useRef } from "react";
 import { Movie } from "@/@types/Movie";

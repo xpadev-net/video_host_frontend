@@ -1,14 +1,14 @@
 import Styles from "@/components/Player/MobilePlayer/Controller/Controller.module.scss";
-import { AutoPlayButton } from "@/components/Player/DesktopPlayer/Controller/AutoPlayButton/AutoPlayButton";
+import { AutoPlayButton } from "@/components/Player/DesktopPlayer/Controller/AutoPlayButton";
 import { SettingButton } from "@/components/Player/DesktopPlayer/Controller/SettingButton";
 import { PrevNextButton } from "@/components/Player/DesktopPlayer/Controller/PrevNextButton";
 import { PlayPauseButton } from "@/components/Player/DesktopPlayer/Controller/PlayPauseButton";
 import { time2str } from "@/libraries/time";
 import { VideoMetadataAtom } from "@/atoms/Player";
-import { Slider } from "@/components/Player/MobilePlayer/Controller/Slider/Slider";
+import { Slider } from "@/components/Player/MobilePlayer/Controller/Slider";
 import { FullscreenButton } from "@/components/Player/DesktopPlayer/Controller/FullscreenButton";
 import { useAtomValue } from "jotai";
-import { Setting } from "@/components/Player/DesktopPlayer/Controller/Setting/Setting";
+import { Setting } from "@/components/Player/DesktopPlayer/Controller/Setting";
 
 type props = {
   className?: string;

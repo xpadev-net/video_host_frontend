@@ -1,6 +1,6 @@
 import { useAtomValue } from "jotai";
 import { watchedHistoryAtom } from "@/atoms/WatchedHistory";
-import { MovieList } from "@/components/MovieList/MovieList";
+import { MovieList } from "@/components/MovieList";
 import Styles from "@/styles/history.module.scss";
 import Head from "next/head";
 

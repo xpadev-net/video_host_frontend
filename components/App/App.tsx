@@ -1,8 +1,8 @@
 import Styles from "./App.module.scss";
 import { ReactElement } from "react";
-import { Header } from "@/components/App/Header/Header";
+import { Header } from "@/components/App/Header";
 import { useRouter } from "next/router";
-import { Sidebar } from "@/components/App/Sidebar/Sidebar";
+import { Sidebar } from "@/components/App/Sidebar";
 import { useIsMobile } from "@/libraries/isMobile";
 
 type props = {

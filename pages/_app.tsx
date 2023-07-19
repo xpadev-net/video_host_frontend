@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import NProgress from "nprogress";
 import "@/styles/global.scss";
 import "@/styles/nprogress.css";
-import { App } from "@/components/App/App";
+import { App } from "@/components/App";
 
 export default function Main({ Component, pageProps }: AppProps) {
   const router = useRouter();

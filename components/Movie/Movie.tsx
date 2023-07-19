@@ -1,5 +1,5 @@
 import type { Movie } from "@/@types/Movie";
-import { Thumbnail } from "@/components/Thumbnail/Thumbnail";
+import { Thumbnail } from "@/components/Thumbnail";
 import Link from "next/link";
 import Styles from "./Movie.module.scss";
 import { ForwardedRef, forwardRef } from "react";

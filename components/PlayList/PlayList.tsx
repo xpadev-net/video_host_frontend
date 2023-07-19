@@ -1,4 +1,4 @@
-import { MovieList } from "@/components/MovieList/MovieList";
+import { MovieList } from "@/components/MovieList";
 import Styles from "@/components/PlayList/PlayList.module.scss";
 import {
   KeyboardArrowDown,

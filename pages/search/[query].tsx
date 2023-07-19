@@ -1,10 +1,10 @@
 import { useRouter } from "next/router";
-import { Error } from "@/components/Error/Error";
+import { Error } from "@/components/Error";
 import useSWR from "swr";
 import { request } from "@/libraries/request";
 import { SearchResponse } from "@/@types/api";
 import Link from "next/link";
-import { MovieList } from "@/components/MovieList/MovieList";
+import { MovieList } from "@/components/MovieList";
 import Styles from "@/styles/search.module.scss";
 import Head from "next/head";
 
