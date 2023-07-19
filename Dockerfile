@@ -6,7 +6,8 @@ WORKDIR /app
 
 # Prepare node_modules
 COPY ./ ./
-RUN yarn install --frozen-lockfile
+RUN npm install -g pnpm
+RUN pnpm install --frozen-lockfile
 
 
 # Run phase
