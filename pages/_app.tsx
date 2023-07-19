@@ -6,7 +6,7 @@ import "@/styles/global.scss";
 import "@/styles/nprogress.css";
 import { App } from "@/components/App/App";
 
-export default function _app({ Component, pageProps }: AppProps) {
+export default function Main({ Component, pageProps }: AppProps) {
   const router = useRouter();
   useEffect(() => {
     const handleStart = () => {

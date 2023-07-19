@@ -17,9 +17,16 @@ const SearchPage = () => {
   if (!result) {
     return <></>;
   }
-  if (result.status === "fail") {
+  if (result.code === "401") {
     void router.push(`/login?callback=${encodeURIComponent(router.asPath)}`);
     return <></>;
+  }
+  if (result.code === "404") {
+    return (
+      <div>
+        <h2>見つかりませんでした</h2>
+      </div>
+    );
   }
   if (!result.data.seriesTitle) {
     return (

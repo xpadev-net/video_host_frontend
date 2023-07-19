@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { MovieRes, MovieResponse } from "@/@types/api";
+import { MovieRes, MovieResponse, notFoundError } from "@/@types/api";
 import { request } from "@/libraries/request";
 import Styles from "@/styles/movie.module.scss";
 import { PlayList } from "@/components/PlayList/PlayList";
@@ -24,7 +24,7 @@ const MoviePage = () => {
   const [playlistMaxHeight, setPlaylistMaxHeight] = useState<
     number | undefined
   >();
-  const [result, setResult] = useState<MovieRes | undefined>();
+  const [result, setResult] = useState<MovieRes | notFoundError | undefined>();
   const isMobile = useIsMobile();
   const isWideVideo = isTheatre || isMobile;
   useEffect(() => {
@@ -34,7 +34,7 @@ const MoviePage = () => {
       const result: MovieResponse = await request(
         `/movie/${encodeURIComponent(query)}`
       );
-      if (result.status !== "success") {
+      if (result.code === "401") {
         void router.push(
           `/login?callback=${encodeURIComponent(router.asPath)}`
         );
@@ -60,7 +60,13 @@ const MoviePage = () => {
     };
   }, [wrapperRef]);
   if (!result) return <></>;
-
+  if (result.code === "404") {
+    return (
+      <div>
+        <h2>見つかりませんでした</h2>
+      </div>
+    );
+  }
   return (
     <div className={`${Styles.wrapper} ${isWideVideo && Styles.theatre}`}>
       <Head>

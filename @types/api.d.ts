@@ -19,6 +19,12 @@ type authenticationError = {
   message: "authentication required";
 }
 
+type notFoundError = {
+  status: "fail";
+  code: "404";
+  message: "not found";
+}
+
 export type recentUpdatesResponse = recentUpdatesRes | authenticationError;
 
 
@@ -52,7 +58,7 @@ type MovieRes = {
   data: MovieItem;
 }
 
-export type MovieResponse = MovieRes | authenticationError;
+export type MovieResponse = MovieRes | notFoundError | authenticationError;
 
 type CommentRes = {
   status: "success";
@@ -73,7 +79,7 @@ type SeriesRes = {
   }
 }
 
-export type SeriesResponse = SeriesRes | authenticationError;
+export type SeriesResponse = SeriesRes | notFoundError | authenticationError;
 
 export type Suggest = { title:string }[];
 
