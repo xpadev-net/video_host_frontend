@@ -1,7 +1,8 @@
 import { ExitToAppSharp } from "@mui/icons-material";
-import ButtonStyles from "@/styles/button.module.scss";
-import { request } from "@/libraries/request";
 import { useRouter } from "next/router";
+
+import { request } from "@/libraries/request";
+import ButtonStyles from "@/styles/button.module.scss";
 
 const Logout = () => {
   const router = useRouter();

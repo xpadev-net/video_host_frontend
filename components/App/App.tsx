@@ -1,9 +1,11 @@
-import Styles from "./App.module.scss";
-import { ReactElement } from "react";
-import { Header } from "@/components/App/Header";
 import { useRouter } from "next/router";
+import { ReactElement } from "react";
+
+import { Header } from "@/components/App/Header";
 import { Sidebar } from "@/components/App/Sidebar";
 import { useIsMobile } from "@/libraries/isMobile";
+
+import Styles from "./App.module.scss";
 
 type props = {
   children: ReactElement;

@@ -1,12 +1,13 @@
 import { Check, KeyboardArrowLeft } from "@mui/icons-material";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { ForwardedRef, forwardRef } from "react";
+
 import {
   PlayerConfigAtom,
   PlayerSettingAtom,
   VideoRefAtom,
 } from "@/atoms/Player";
 import Styles from "@/components/Player/DesktopPlayer/Controller/Setting/pages/pages.module.scss";
-import { ForwardedRef, forwardRef } from "react";
 
 type props = {
   className?: string;

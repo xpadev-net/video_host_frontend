@@ -1,12 +1,13 @@
 import Head from "next/head";
-import { CSSProperties, useEffect, useRef, useState } from "react";
-import { request } from "@/libraries/request";
-import { recentUpdatesRes, recentUpdatesResponse } from "@/@types/api";
-import { useRouter } from "next/router";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { CSSProperties, useEffect, useRef, useState } from "react";
+
+import { recentUpdatesRes, recentUpdatesResponse } from "@/@types/api";
 import { MovieList } from "@/components/MovieList";
-import Styles from "@/styles/index.module.scss";
 import { useIsomorphicEffect } from "@/libraries/IsomorphicEffect";
+import { request } from "@/libraries/request";
+import Styles from "@/styles/index.module.scss";
 
 const Index = () => {
   const router = useRouter();

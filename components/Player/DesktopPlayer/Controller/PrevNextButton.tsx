@@ -1,8 +1,9 @@
 import { SkipNext, SkipPrevious } from "@mui/icons-material";
-import { useRouter } from "next/router";
-import { MovieItemAtom } from "@/atoms/Player";
 import { useAtomValue } from "jotai";
+import { useRouter } from "next/router";
 import { MouseEvent } from "react";
+
+import { MovieItemAtom } from "@/atoms/Player";
 
 type props = {
   className?: string;

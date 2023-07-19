@@ -1,10 +1,11 @@
-import { DesktopPlayer } from "@/components/Player/DesktopPlayer";
-import { MovieItem } from "@/@types/api";
-import { MovieItemAtom } from "@/atoms/Player";
 import { useSetAtom } from "jotai";
 import { useEffect } from "react";
-import { useIsMobile } from "@/libraries/isMobile";
+
+import { MovieItem } from "@/@types/api";
+import { MovieItemAtom } from "@/atoms/Player";
+import { DesktopPlayer } from "@/components/Player/DesktopPlayer";
 import { MobilePlayer } from "@/components/Player/MobilePlayer";
+import { useIsMobile } from "@/libraries/isMobile";
 
 type props = {
   data: MovieItem;

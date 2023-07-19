@@ -1,9 +1,11 @@
-import Styles from "./Thumbnail.module.scss";
-import Image from "next/image";
-import type { ThumbnailProps } from "@/@types/Thumbnail";
 import { useAtom } from "jotai";
+import Image from "next/image";
+
+import type { ThumbnailProps } from "@/@types/Thumbnail";
 import { watchedHistoryAtom } from "@/atoms/WatchedHistory";
 import { time2str } from "@/libraries/time";
+
+import Styles from "./Thumbnail.module.scss";
 
 const Thumbnail = ({ movie }: ThumbnailProps) => {
   const [history] = useAtom(watchedHistoryAtom);

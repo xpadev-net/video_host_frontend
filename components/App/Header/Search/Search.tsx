@@ -1,18 +1,19 @@
-import Styles from "@/components/App/Header/Search/Search.module.scss";
 import { Search as SearchIcon } from "@mui/icons-material";
-import {
-  useState,
-  KeyboardEvent,
-  forwardRef,
-  ForwardedRef,
-  useEffect,
-} from "react";
-import { request } from "@/libraries/request";
-import { SuggestRes, SuggestResponse } from "@/@types/api";
-import { useRouter } from "next/router";
 import Link from "next/link";
-import { useForwardRef } from "@/libraries/useForwardRef";
+import { useRouter } from "next/router";
+import {
+  ForwardedRef,
+  forwardRef,
+  KeyboardEvent,
+  useEffect,
+  useState,
+} from "react";
+
+import { SuggestRes, SuggestResponse } from "@/@types/api";
+import Styles from "@/components/App/Header/Search/Search.module.scss";
 import { useIsMobile } from "@/libraries/isMobile";
+import { request } from "@/libraries/request";
+import { useForwardRef } from "@/libraries/useForwardRef";
 
 type props = {
   className?: string;

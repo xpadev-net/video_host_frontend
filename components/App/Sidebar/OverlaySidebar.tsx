@@ -1,9 +1,10 @@
-import { useAtom } from "jotai";
-import { sidebarState } from "@/atoms/SidebarState";
-import Styles from "@/components/App/Sidebar/OverlaySidebar.module.scss";
-import { HeaderMenu } from "@/components/App/Menu/Menu";
-import Link from "next/link";
 import { History, Home } from "@mui/icons-material";
+import { useAtom } from "jotai";
+import Link from "next/link";
+
+import { sidebarState } from "@/atoms/SidebarState";
+import { HeaderMenu } from "@/components/App/Menu/Menu";
+import Styles from "@/components/App/Sidebar/OverlaySidebar.module.scss";
 
 const OverlaySidebar = () => {
   const [isActive, setIsActive] = useAtom(sidebarState);

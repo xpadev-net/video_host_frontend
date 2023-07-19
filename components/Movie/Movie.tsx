@@ -1,8 +1,10 @@
+import Link from "next/link";
+import { ForwardedRef, forwardRef } from "react";
+
 import type { Movie } from "@/@types/Movie";
 import { Thumbnail } from "@/components/Thumbnail";
-import Link from "next/link";
+
 import Styles from "./Movie.module.scss";
-import { ForwardedRef, forwardRef } from "react";
 
 export type props = {
   movie: Movie;

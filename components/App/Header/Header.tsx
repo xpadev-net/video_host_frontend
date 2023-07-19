@@ -1,6 +1,6 @@
-import { useIsMobile } from "@/libraries/isMobile";
-import { MobileHeader } from "@/components/App/Header/MobileHeader";
 import { DesktopHeader } from "@/components/App/Header/DesktopHeader";
+import { MobileHeader } from "@/components/App/Header/MobileHeader";
+import { useIsMobile } from "@/libraries/isMobile";
 
 type props = {
   className?: string;

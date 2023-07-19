@@ -1,7 +1,8 @@
 import { useAtomValue } from "jotai";
+import { MouseEvent, useEffect, useRef, useState } from "react";
+
 import { PlayerConfigAtom, VideoRefAtom } from "@/atoms/Player";
 import Styles from "@/components/Player/DesktopPlayer/Controller/VolumeSlider/VolumeSlider.module.scss";
-import { MouseEvent, useEffect, useRef, useState } from "react";
 
 const VolumeSlider = () => {
   const videoRef = useAtomValue(VideoRefAtom);

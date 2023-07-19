@@ -1,10 +1,11 @@
-import Styles from "@/components/App/Menu/Menu.module.scss";
-import ButtonStyles from "@/styles/button.module.scss";
-import Link from "next/link";
 import { Menu, OndemandVideoSharp } from "@mui/icons-material";
 import { useAtom } from "jotai";
+import Link from "next/link";
+
 import { sidebarState } from "@/atoms/SidebarState";
+import Styles from "@/components/App/Menu/Menu.module.scss";
 import { useIsMobile } from "@/libraries/isMobile";
+import ButtonStyles from "@/styles/button.module.scss";
 
 const HeaderMenu = () => {
   const [isSidebarActive, setIsSidebarActive] = useAtom(sidebarState);

@@ -1,7 +1,8 @@
 import { useAtomValue } from "jotai";
-import { MovieItemAtom, VideoRefAtom } from "@/atoms/Player";
-import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
+
+import { MovieItemAtom, VideoRefAtom } from "@/atoms/Player";
 
 const MediaSessionHandler = () => {
   const movieItem = useAtomValue(MovieItemAtom);

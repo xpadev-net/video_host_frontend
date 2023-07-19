@@ -1,18 +1,19 @@
-import Styles from "@/components/Player/DesktopPlayer/Controller/Controller.module.scss";
 import { useAtom, useAtomValue } from "jotai";
-import { MovieItemAtom, VideoMetadataAtom, VideoRefAtom } from "@/atoms/Player";
 import { MouseEvent, useState } from "react";
+
+import { MovieItemAtom, VideoMetadataAtom, VideoRefAtom } from "@/atoms/Player";
+import { AutoPlayButton } from "@/components/Player/DesktopPlayer/Controller/AutoPlayButton";
+import Styles from "@/components/Player/DesktopPlayer/Controller/Controller.module.scss";
+import { FullscreenButton } from "@/components/Player/DesktopPlayer/Controller/FullscreenButton";
+import { PlayPauseButton } from "@/components/Player/DesktopPlayer/Controller/PlayPauseButton";
+import { PrevNextButton } from "@/components/Player/DesktopPlayer/Controller/PrevNextButton";
+import { Setting } from "@/components/Player/DesktopPlayer/Controller/Setting/Setting";
+import { SettingButton } from "@/components/Player/DesktopPlayer/Controller/SettingButton";
+import { Slider } from "@/components/Player/DesktopPlayer/Controller/Slider";
+import { TheatreButton } from "@/components/Player/DesktopPlayer/Controller/TheatreButton";
 import { VolumeIcon } from "@/components/Player/DesktopPlayer/Controller/VolumeIcon";
 import { VolumeSlider } from "@/components/Player/DesktopPlayer/Controller/VolumeSlider";
 import { time2str } from "@/libraries/time";
-import { FullscreenButton } from "@/components/Player/DesktopPlayer/Controller/FullscreenButton";
-import { TheatreButton } from "@/components/Player/DesktopPlayer/Controller/TheatreButton";
-import { PrevNextButton } from "@/components/Player/DesktopPlayer/Controller/PrevNextButton";
-import { PlayPauseButton } from "@/components/Player/DesktopPlayer/Controller/PlayPauseButton";
-import { Slider } from "@/components/Player/DesktopPlayer/Controller/Slider";
-import { AutoPlayButton } from "@/components/Player/DesktopPlayer/Controller/AutoPlayButton";
-import { SettingButton } from "@/components/Player/DesktopPlayer/Controller/SettingButton";
-import { Setting } from "@/components/Player/DesktopPlayer/Controller/Setting/Setting";
 
 type props = {
   className?: string;

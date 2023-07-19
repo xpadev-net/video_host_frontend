@@ -6,15 +6,16 @@ import {
   SlowMotionVideo,
 } from "@mui/icons-material";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { ForwardedRef, forwardRef } from "react";
+
 import {
   PlayerConfigAtom,
   PlayerSettingAtom,
   VideoMetadataAtom,
   WrapperRefAtom,
 } from "@/atoms/Player";
-import { Switch } from "@/components/Switch/Switch";
 import Styles from "@/components/Player/DesktopPlayer/Controller/Setting/pages/pages.module.scss";
-import { ForwardedRef, forwardRef } from "react";
+import { Switch } from "@/components/Switch/Switch";
 
 type props = {
   className?: string;

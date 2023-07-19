@@ -1,9 +1,10 @@
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { FormEvent, MouseEvent, useEffect, useState } from "react";
-import { request } from "@/libraries/request";
+
 import { authResponse, tryAuthResponse } from "@/@types/api";
+import { request } from "@/libraries/request";
 import Styles from "@/styles/login.module.scss";
-import Head from "next/head";
 
 const Login = () => {
   const router = useRouter();

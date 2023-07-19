@@ -1,14 +1,15 @@
-import Styles from "@/components/Player/MobilePlayer/Controller/Controller.module.scss";
-import { AutoPlayButton } from "@/components/Player/DesktopPlayer/Controller/AutoPlayButton";
-import { SettingButton } from "@/components/Player/DesktopPlayer/Controller/SettingButton";
-import { PrevNextButton } from "@/components/Player/DesktopPlayer/Controller/PrevNextButton";
-import { PlayPauseButton } from "@/components/Player/DesktopPlayer/Controller/PlayPauseButton";
-import { time2str } from "@/libraries/time";
-import { VideoMetadataAtom } from "@/atoms/Player";
-import { Slider } from "@/components/Player/MobilePlayer/Controller/Slider";
-import { FullscreenButton } from "@/components/Player/DesktopPlayer/Controller/FullscreenButton";
 import { useAtomValue } from "jotai";
+
+import { VideoMetadataAtom } from "@/atoms/Player";
+import { AutoPlayButton } from "@/components/Player/DesktopPlayer/Controller/AutoPlayButton";
+import { FullscreenButton } from "@/components/Player/DesktopPlayer/Controller/FullscreenButton";
+import { PlayPauseButton } from "@/components/Player/DesktopPlayer/Controller/PlayPauseButton";
+import { PrevNextButton } from "@/components/Player/DesktopPlayer/Controller/PrevNextButton";
 import { Setting } from "@/components/Player/DesktopPlayer/Controller/Setting";
+import { SettingButton } from "@/components/Player/DesktopPlayer/Controller/SettingButton";
+import Styles from "@/components/Player/MobilePlayer/Controller/Controller.module.scss";
+import { Slider } from "@/components/Player/MobilePlayer/Controller/Slider";
+import { time2str } from "@/libraries/time";
 
 type props = {
   className?: string;

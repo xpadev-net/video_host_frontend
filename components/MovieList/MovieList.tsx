@@ -1,7 +1,9 @@
-import { MovieCard } from "@/components/Movie";
-import Styles from "./MovieList.module.scss";
 import { useEffect, useMemo, useRef } from "react";
+
 import { Movie } from "@/@types/Movie";
+import { MovieCard } from "@/components/Movie";
+
+import Styles from "./MovieList.module.scss";
 
 export type props = {
   movies: Movie[];

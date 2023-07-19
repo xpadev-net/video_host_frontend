@@ -1,12 +1,13 @@
-import { useRouter } from "next/router";
-import { Error } from "@/components/Error";
-import useSWR from "swr";
-import { request } from "@/libraries/request";
-import { SearchResponse } from "@/@types/api";
-import Link from "next/link";
-import { MovieList } from "@/components/MovieList";
-import Styles from "@/styles/search.module.scss";
 import Head from "next/head";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import useSWR from "swr";
+
+import { SearchResponse } from "@/@types/api";
+import { Error } from "@/components/Error";
+import { MovieList } from "@/components/MovieList";
+import { request } from "@/libraries/request";
+import Styles from "@/styles/search.module.scss";
 
 const SearchPage = () => {
   const router = useRouter();

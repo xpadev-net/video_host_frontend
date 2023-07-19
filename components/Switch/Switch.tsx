@@ -1,6 +1,7 @@
-import { ReactNode } from "react";
-import Styles from "@/components/Switch/Switch.module.scss";
 import * as RadixSwitch from "@radix-ui/react-switch";
+import { ReactNode } from "react";
+
+import Styles from "@/components/Switch/Switch.module.scss";
 
 type props = {
   children?: ReactNode;

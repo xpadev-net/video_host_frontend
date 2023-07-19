@@ -1,7 +1,8 @@
-import Styles from "@/components/Player/DesktopPlayer/Controller/Slider/Slider.module.scss";
-import { VideoMetadataAtom, VideoRefAtom } from "@/atoms/Player";
 import { useAtomValue } from "jotai";
-import { useEffect, useRef, useState, MouseEvent } from "react";
+import { MouseEvent, useEffect, useRef, useState } from "react";
+
+import { VideoMetadataAtom, VideoRefAtom } from "@/atoms/Player";
+import Styles from "@/components/Player/DesktopPlayer/Controller/Slider/Slider.module.scss";
 import { time2str } from "@/libraries/time";
 
 type props = {

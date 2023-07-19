@@ -1,12 +1,13 @@
-import { useEffect } from "react";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+
 import {
   MovieItemAtom,
   PlayerConfigAtom,
   VideoMetadataAtom,
   VideoRefAtom,
 } from "@/atoms/Player";
-import { useRouter } from "next/router";
 
 const rates = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 3, 4];
 

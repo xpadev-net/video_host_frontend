@@ -1,5 +1,6 @@
-import { MovieItem } from "@/@types/api";
 import Link from "next/link";
+
+import { MovieItem } from "@/@types/api";
 import Styles from "@/components/MovieInfo/MovieInfo.module.scss";
 
 type props = {

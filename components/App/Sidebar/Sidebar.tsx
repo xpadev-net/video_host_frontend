@@ -1,8 +1,9 @@
-import { useRouter } from "next/router";
 import { History, Home } from "@mui/icons-material";
-import Styles from "@/components/App/Sidebar/Sidebar.module.scss";
 import Link from "next/link";
+import { useRouter } from "next/router";
+
 import { OverlaySidebar } from "@/components/App/Sidebar/OverlaySidebar";
+import Styles from "@/components/App/Sidebar/Sidebar.module.scss";
 import { useIsMobile } from "@/libraries/isMobile";
 
 const Sidebar = () => {

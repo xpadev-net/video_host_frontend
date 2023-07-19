@@ -1,12 +1,13 @@
-import { MovieList } from "@/components/MovieList";
-import Styles from "@/components/PlayList/PlayList.module.scss";
 import {
   KeyboardArrowDown,
   KeyboardArrowUp,
   PlaylistPlay,
 } from "@mui/icons-material";
-import { MovieItem } from "@/@types/api";
 import { useState } from "react";
+
+import { MovieItem } from "@/@types/api";
+import { MovieList } from "@/components/MovieList";
+import Styles from "@/components/PlayList/PlayList.module.scss";
 
 type props = {
   data: MovieItem;

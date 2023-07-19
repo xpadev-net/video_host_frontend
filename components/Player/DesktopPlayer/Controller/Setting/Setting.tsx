@@ -1,22 +1,23 @@
-import Styles from "@/components/Player/DesktopPlayer/Controller/Setting/Setting.module.scss";
-import { Main } from "@/components/Player/DesktopPlayer/Controller/Setting/pages/Main";
+import { useAtom, useAtomValue } from "jotai";
 import {
-  useEffect,
+  ForwardRefExoticComponent,
   MouseEvent,
+  RefAttributes,
+  useEffect,
   useRef,
   useState,
-  ForwardRefExoticComponent,
-  RefAttributes,
 } from "react";
-import { useAtom, useAtomValue } from "jotai";
+
+import { SettingKey } from "@/@types/Player";
 import {
   PlayerSettingAtom,
   VideoMetadataAtom,
   WrapperRefAtom,
 } from "@/atoms/Player";
-import { PlaybackRate } from "@/components/Player/DesktopPlayer/Controller/Setting/pages/PlaybackRate";
-import { SettingKey } from "@/@types/Player";
 import { Comments } from "@/components/Player/DesktopPlayer/Controller/Setting/pages/Comments";
+import { Main } from "@/components/Player/DesktopPlayer/Controller/Setting/pages/Main";
+import { PlaybackRate } from "@/components/Player/DesktopPlayer/Controller/Setting/pages/PlaybackRate";
+import Styles from "@/components/Player/DesktopPlayer/Controller/Setting/Setting.module.scss";
 import { useIsMobile } from "@/libraries/isMobile";
 
 type props = {

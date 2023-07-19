@@ -5,6 +5,7 @@ import {
   VolumeUp,
 } from "@mui/icons-material";
 import { useAtomValue } from "jotai";
+
 import { PlayerConfigAtom } from "@/atoms/Player";
 
 const VolumeIcon = () => {

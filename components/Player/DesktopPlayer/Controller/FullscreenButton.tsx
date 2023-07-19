@@ -1,11 +1,12 @@
 import { Fullscreen, FullscreenExit } from "@mui/icons-material";
 import { useAtom, useAtomValue } from "jotai";
+import { MouseEvent, useEffect } from "react";
+
 import {
   PlayerConfigAtom,
   VideoMetadataAtom,
   WrapperRefAtom,
 } from "@/atoms/Player";
-import { MouseEvent, useEffect } from "react";
 
 type props = {
   className?: string;

@@ -1,5 +1,6 @@
-import { Crop169Sharp, Crop32Sharp } from "@mui/icons-material";
+import { Crop32Sharp, Crop169Sharp } from "@mui/icons-material";
 import { useAtom, useAtomValue } from "jotai";
+
 import { PlayerConfigAtom, VideoMetadataAtom } from "@/atoms/Player";
 
 type props = {

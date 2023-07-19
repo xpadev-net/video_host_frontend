@@ -1,7 +1,8 @@
-import Styles from "@/components/Player/MobilePlayer/Controller/Slider/Slider.module.scss";
-import { VideoRefAtom } from "@/atoms/Player";
 import { useAtomValue } from "jotai";
-import { useEffect, useRef, useState, MouseEvent } from "react";
+import { MouseEvent, useEffect, useRef, useState } from "react";
+
+import { VideoRefAtom } from "@/atoms/Player";
+import Styles from "@/components/Player/MobilePlayer/Controller/Slider/Slider.module.scss";
 
 type props = {
   className?: string;

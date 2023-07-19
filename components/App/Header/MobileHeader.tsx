@@ -1,11 +1,12 @@
+import { ArrowBack, Search as SearchIcon } from "@mui/icons-material";
+import { useRouter } from "next/router";
+import { useEffect, useRef, useState } from "react";
+
 import Styles from "@/components/App/Header/Header.module.scss";
-import ButtonStyles from "@/styles/button.module.scss";
-import { HeaderMenu } from "@/components/App/Menu";
 import { Logout } from "@/components/App/Header/Logout";
 import { Search } from "@/components/App/Header/Search";
-import { ArrowBack, Search as SearchIcon } from "@mui/icons-material";
-import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/router";
+import { HeaderMenu } from "@/components/App/Menu";
+import ButtonStyles from "@/styles/button.module.scss";
 
 type props = {
   className?: string;

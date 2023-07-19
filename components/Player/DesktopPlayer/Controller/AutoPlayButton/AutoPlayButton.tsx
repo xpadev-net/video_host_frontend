@@ -1,9 +1,10 @@
-import { useAtom } from "jotai";
-import { PlayerConfigAtom } from "@/atoms/Player";
-import * as Switch from "@radix-ui/react-switch";
-import Styles from "@/components/Player/DesktopPlayer/Controller/AutoPlayButton/AutoPlayButton.module.scss";
 import { Pause, PlayArrow } from "@mui/icons-material";
+import * as Switch from "@radix-ui/react-switch";
+import { useAtom } from "jotai";
 import { MouseEvent } from "react";
+
+import { PlayerConfigAtom } from "@/atoms/Player";
+import Styles from "@/components/Player/DesktopPlayer/Controller/AutoPlayButton/AutoPlayButton.module.scss";
 
 type props = {
   className?: string;

@@ -1,10 +1,11 @@
-import { useAtom } from "jotai";
-import { PlayerConfigAtom, VideoMetadataAtom } from "@/atoms/Player";
-import { RefObject, useEffect, useState } from "react";
-import { MovieItem } from "@/@types/api";
 import Hls from "hls.js";
-import { watchedHistoryAtom } from "@/atoms/WatchedHistory";
+import { useAtom } from "jotai";
 import { useRouter } from "next/router";
+import { RefObject, useEffect, useState } from "react";
+
+import { MovieItem } from "@/@types/api";
+import { PlayerConfigAtom, VideoMetadataAtom } from "@/atoms/Player";
+import { watchedHistoryAtom } from "@/atoms/WatchedHistory";
 
 type props = {
   className?: string;

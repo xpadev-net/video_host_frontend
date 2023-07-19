@@ -1,8 +1,9 @@
 import { useAtomValue } from "jotai";
+import Head from "next/head";
+
 import { watchedHistoryAtom } from "@/atoms/WatchedHistory";
 import { MovieList } from "@/components/MovieList";
 import Styles from "@/styles/history.module.scss";
-import Head from "next/head";
 
 const History = () => {
   const history = useAtomValue(watchedHistoryAtom);

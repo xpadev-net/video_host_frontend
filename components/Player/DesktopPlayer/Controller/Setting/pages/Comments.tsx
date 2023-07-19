@@ -6,16 +6,17 @@ import {
   SelectAll,
   SixtyFpsSelect,
 } from "@mui/icons-material";
+import { Options } from "@xpadev-net/niconicomments";
 import { useAtom, useSetAtom } from "jotai";
+import { ForwardedRef, forwardRef } from "react";
+
 import {
   NiconicommentsConfigAtom,
   PlayerConfigAtom,
   PlayerSettingAtom,
 } from "@/atoms/Player";
-import { Switch } from "@/components/Switch/Switch";
 import Styles from "@/components/Player/DesktopPlayer/Controller/Setting/pages/pages.module.scss";
-import { ForwardedRef, forwardRef } from "react";
-import { Options } from "@xpadev-net/niconicomments";
+import { Switch } from "@/components/Switch/Switch";
 
 type props = {
   className?: string;

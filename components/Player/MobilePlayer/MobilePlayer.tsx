@@ -1,8 +1,7 @@
-import Styles from "@/components/Player/MobilePlayer/MobilePlayer.module.scss";
-import { LoadingIcon } from "@/assets/LoadingIcon";
-import { CommentCanvas } from "@/components/Player/Shared/CommentCanvas";
-import { Video } from "@/components/Player/Shared/Video";
 import { useAtomValue, useSetAtom } from "jotai";
+import { useEffect, useRef, useState } from "react";
+
+import { LoadingIcon } from "@/assets/LoadingIcon";
 import {
   MovieItemAtom,
   PlayerConfigAtom,
@@ -10,10 +9,12 @@ import {
   VideoRefAtom,
   WrapperRefAtom,
 } from "@/atoms/Player";
-import { useEffect, useRef, useState } from "react";
-import { KeyboardHandler } from "@/components/Player/Shared/KeyboardHandler";
 import { Controller } from "@/components/Player/MobilePlayer/Controller";
+import Styles from "@/components/Player/MobilePlayer/MobilePlayer.module.scss";
+import { CommentCanvas } from "@/components/Player/Shared/CommentCanvas";
+import { KeyboardHandler } from "@/components/Player/Shared/KeyboardHandler";
 import { MediaSessionHandler } from "@/components/Player/Shared/MediaSessionHandler";
+import { Video } from "@/components/Player/Shared/Video";
 
 type props = {
   className?: string;

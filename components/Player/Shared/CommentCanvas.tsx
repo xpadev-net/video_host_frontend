@@ -1,9 +1,10 @@
-import { useEffect, useRef } from "react";
-import { request } from "@/libraries/request";
-import { CommentResponse } from "@/@types/api";
 import NiconiComments from "@xpadev-net/niconicomments";
 import { useAtomValue } from "jotai";
+import { useEffect, useRef } from "react";
+
+import { CommentResponse } from "@/@types/api";
 import { NiconicommentsConfigAtom, PlayerConfigAtom } from "@/atoms/Player";
+import { request } from "@/libraries/request";
 
 type props = {
   url?: string;

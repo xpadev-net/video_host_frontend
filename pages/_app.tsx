@@ -1,9 +1,11 @@
-import type { AppProps } from "next/app";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-import NProgress from "nprogress";
 import "@/styles/global.scss";
 import "@/styles/nprogress.css";
+
+import type { AppProps } from "next/app";
+import { useRouter } from "next/router";
+import NProgress from "nprogress";
+import { useEffect } from "react";
+
 import { App } from "@/components/App";
 
 export default function Main({ Component, pageProps }: AppProps) {
