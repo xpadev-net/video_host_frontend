@@ -19,6 +19,7 @@ const Slider = ({ className }: props) => {
   const [buffered, setBuffered] = useState<RangeItemProps[]>([]);
   const [isDrugging, setIsDrugging] = useState(false);
   const [progress, setProgress] = useState(0);
+  const lastTouchEventRef = useRef<globalThis.TouchEvent>();
 
   useEffect(() => {
     if (!videoRef) return;
@@ -56,12 +57,13 @@ const Slider = ({ className }: props) => {
       return ((e.clientX - rect.left) / rect.width) * 100;
     };
     const onTouchMove = (e: globalThis.TouchEvent) => {
-      if (!isDrugging || !wrapperRef.current) return;
+      if (!isDrugging || !wrapperRef.current || e.touches.length === 0) return;
       e.preventDefault();
       const rect = wrapperRef.current.getBoundingClientRect();
       const clientX = e.touches.item(0)?.clientX ?? 0;
-      setProgress((clientX - rect.left / rect.width) * 100);
-      return (clientX - rect.left / rect.width) * 100;
+      lastTouchEventRef.current = e;
+      setProgress(((clientX - rect.left) / rect.width) * 100);
+      return ((clientX - rect.left) / rect.width) * 100;
     };
     const onMouseUp = (e: globalThis.MouseEvent) => {
       const progress = onMouseMove(e);
@@ -69,8 +71,9 @@ const Slider = ({ className }: props) => {
       if (!videoRef || progress === undefined) return;
       videoRef.currentTime = (videoRef.duration * progress) / 100;
     };
-    const onTouchEnd = (e: globalThis.TouchEvent) => {
-      const progress = onTouchMove(e);
+    const onTouchEnd = () => {
+      if (!lastTouchEventRef.current) return;
+      const progress = onTouchMove(lastTouchEventRef.current);
       setIsDrugging(false);
       if (!videoRef || progress === undefined) return;
       videoRef.currentTime = (videoRef.duration * progress) / 100;
