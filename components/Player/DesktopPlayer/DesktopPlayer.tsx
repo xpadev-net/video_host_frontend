@@ -115,7 +115,9 @@ const DesktopPlayer = ({ className }: props) => {
         )}
         <Video className={Styles.video} videoRef={videoRef} movie={data} />
         <video
-          className={`${Styles.pipVideo} ${isPipEnable && Styles.active}`}
+          className={`${Styles.pipVideo} ${
+            isPipEnable && EnableComments && Styles.active
+          }`}
           ref={pipVideoRef}
           autoPlay={true}
           muted={true}
