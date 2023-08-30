@@ -15,6 +15,7 @@ import {
   WrapperRefAtom,
 } from "@/atoms/Player";
 import { Switch } from "@/components/Switch/Switch";
+import { EnableComments } from "@/contexts/env";
 
 import Styles from "./pages.module.scss";
 
@@ -74,20 +75,22 @@ const Main_ = ({ className }: props, ref: ForwardedRef<HTMLDivElement>) => {
           </div>
         </div>
       </div>
-      <div className={Styles.item} onClick={openComments}>
-        <div className={Styles.left}>
-          <div className={Styles.iconWrapper}>
-            <ChatBubble className={Styles.icon} />
+      {EnableComments && (
+        <div className={Styles.item} onClick={openComments}>
+          <div className={Styles.left}>
+            <div className={Styles.iconWrapper}>
+              <ChatBubble className={Styles.icon} />
+            </div>
+            <span className={Styles.text}>コメント</span>
           </div>
-          <span className={Styles.text}>コメント</span>
-        </div>
-        <div className={Styles.right}>
-          <span>{playerConfig.isNiconicommentsEnable ? "有効" : "無効"}</span>
-          <div className={Styles.iconWrapper}>
-            <KeyboardArrowRight className={Styles.icon} />
+          <div className={Styles.right}>
+            <span>{playerConfig.isNiconicommentsEnable ? "有効" : "無効"}</span>
+            <div className={Styles.iconWrapper}>
+              <KeyboardArrowRight className={Styles.icon} />
+            </div>
           </div>
         </div>
-      </div>
+      )}
       <div className={Styles.item} onClick={toggleWindowFullscreen}>
         <div className={Styles.left}>
           <div className={Styles.iconWrapper}>
