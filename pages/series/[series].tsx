@@ -5,6 +5,7 @@ import useSWR from "swr";
 import { SeriesResponse } from "@/@types/api";
 import { Error } from "@/components/Error";
 import { MovieList } from "@/components/MovieList";
+import { SiteName } from "@/contexts/env";
 import { request } from "@/libraries/request";
 import Styles from "@/styles/search.module.scss";
 
@@ -33,7 +34,7 @@ const SearchPage = () => {
     return (
       <>
         <Head>
-          <title>{`検索 - ${process.env.NEXT_PUBLIC_SITE_NAME}`}</title>
+          <title>{`検索 - ${SiteName}`}</title>
         </Head>
         <Error title={"条件に合致するものが見つかりませんでした"} />
       </>
@@ -42,7 +43,7 @@ const SearchPage = () => {
   return (
     <div className={Styles.wrapper}>
       <Head>
-        <title>{`${result.data.seriesTitle} - ${process.env.NEXT_PUBLIC_SITE_NAME}`}</title>
+        <title>{`${result.data.seriesTitle} - ${SiteName}`}</title>
       </Head>
       <div className={Styles.moviesWrapper}>
         <h1>{result.data.seriesTitle}</h1>

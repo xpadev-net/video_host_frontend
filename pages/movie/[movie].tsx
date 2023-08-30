@@ -12,6 +12,7 @@ import {
 import { MovieInfo } from "@/components/MovieInfo";
 import { Player } from "@/components/Player";
 import { PlayList } from "@/components/PlayList";
+import { SiteName } from "@/contexts/env";
 import { useIsMobile } from "@/libraries/isMobile";
 import { request } from "@/libraries/request";
 import Styles from "@/styles/movie.module.scss";
@@ -71,7 +72,7 @@ const MoviePage = () => {
   return (
     <div className={`${Styles.wrapper} ${isWideVideo && Styles.theatre}`}>
       <Head>
-        <title>{`${result.data.movie.title} / ${result.data.movie.seriesTitle} - ${process.env.NEXT_PUBLIC_SITE_NAME}`}</title>
+        <title>{`${result.data.movie.title} / ${result.data.movie.seriesTitle} - ${SiteName}`}</title>
       </Head>
       <div className={Styles.mainWrapper}>
         <div className={Styles.playerWrapper}>

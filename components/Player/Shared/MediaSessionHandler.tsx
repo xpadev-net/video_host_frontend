@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 import { MovieItemAtom, VideoRefAtom } from "@/atoms/Player";
+import { ApiEndpoint } from "@/contexts/env";
 
 const MediaSessionHandler = () => {
   const movieItem = useAtomValue(MovieItemAtom);
@@ -54,7 +55,7 @@ const MediaSessionHandler = () => {
       artist: movieItem.movie.seriesTitle,
       artwork: [
         {
-          src: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/img/${movieItem.movie.url}`,
+          src: `${ApiEndpoint}/img/${movieItem.movie.url}`,
           sizes: "256x256",
           type: "image/jpg",
         },

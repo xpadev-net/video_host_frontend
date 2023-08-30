@@ -15,6 +15,7 @@ import { CommentCanvas } from "@/components/Player/Shared/CommentCanvas";
 import { KeyboardHandler } from "@/components/Player/Shared/KeyboardHandler";
 import { MediaSessionHandler } from "@/components/Player/Shared/MediaSessionHandler";
 import { Video } from "@/components/Player/Shared/Video";
+import { ApiEndpoint } from "@/contexts/env";
 
 type props = {
   className?: string;
@@ -94,7 +95,7 @@ const DesktopPlayer = ({ className }: props) => {
               <LoadingIcon className={Styles.icon} />
             </div>
             <img
-              src={`${process.env.NEXT_PUBLIC_API_ENDPOINT}/img/${data.movie.url}`}
+              src={`${ApiEndpoint}/img/${data.movie.url}`}
               alt={""}
               className={Styles.thumbnail}
             />

@@ -3,6 +3,7 @@ import Head from "next/head";
 
 import { watchedHistoryAtom } from "@/atoms/WatchedHistory";
 import { MovieList } from "@/components/MovieList";
+import { SiteName } from "@/contexts/env";
 import Styles from "@/styles/history.module.scss";
 
 const History = () => {
@@ -15,7 +16,7 @@ const History = () => {
   return (
     <div className={Styles.wrapper}>
       <Head>
-        <title>{`履歴 - ${process.env.NEXT_PUBLIC_SITE_NAME}`}</title>
+        <title>{`履歴 - ${SiteName}`}</title>
       </Head>
       <MovieList movies={historyList} type={"column"} />
     </div>

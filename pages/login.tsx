@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { FormEvent, MouseEvent, useEffect, useState } from "react";
 
 import { authResponse, tryAuthResponse } from "@/@types/api";
+import { SiteName } from "@/contexts/env";
 import { request } from "@/libraries/request";
 import Styles from "@/styles/login.module.scss";
 
@@ -55,7 +56,7 @@ const Login = () => {
   return (
     <>
       <Head>
-        <title>{`ログイン - ${process.env.NEXT_PUBLIC_SITE_NAME}`}</title>
+        <title>{`ログイン - ${SiteName}`}</title>
       </Head>
       {loading && <div className={Styles.loading} />}
       <div className={Styles.wrapper}>
