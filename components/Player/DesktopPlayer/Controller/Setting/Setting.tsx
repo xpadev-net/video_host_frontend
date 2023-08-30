@@ -18,6 +18,7 @@ import { Comments } from "@/components/Player/DesktopPlayer/Controller/Setting/p
 import { Main } from "@/components/Player/DesktopPlayer/Controller/Setting/pages/Main";
 import { PlaybackRate } from "@/components/Player/DesktopPlayer/Controller/Setting/pages/PlaybackRate";
 import Styles from "@/components/Player/DesktopPlayer/Controller/Setting/Setting.module.scss";
+import { EnableComments } from "@/contexts/env";
 import { useIsMobile } from "@/libraries/isMobile";
 
 type props = {
@@ -25,13 +26,13 @@ type props = {
 };
 
 const Menu: {
-  [key in SettingKey]: ForwardRefExoticComponent<
+  [key in SettingKey]?: ForwardRefExoticComponent<
     props & RefAttributes<HTMLDivElement>
   >;
 } = {
   main: Main,
   playbackRate: PlaybackRate,
-  comments: Comments,
+  comments: EnableComments ? Comments : undefined,
 };
 
 const Setting = ({ className }: props) => {
@@ -119,6 +120,7 @@ const Setting = ({ className }: props) => {
         >
           {playerSetting.map((key, index) => {
             const Target = Menu[key];
+            if (!Target) return;
             if (index + 1 === playerSetting.length) {
               return <Target key={key} ref={targetRef} />;
             }

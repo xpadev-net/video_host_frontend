@@ -15,7 +15,7 @@ import { CommentCanvas } from "@/components/Player/Shared/CommentCanvas";
 import { KeyboardHandler } from "@/components/Player/Shared/KeyboardHandler";
 import { MediaSessionHandler } from "@/components/Player/Shared/MediaSessionHandler";
 import { Video } from "@/components/Player/Shared/Video";
-import { ApiEndpoint } from "@/contexts/env";
+import { ApiEndpoint, EnableComments } from "@/contexts/env";
 
 type props = {
   className?: string;
@@ -73,7 +73,7 @@ const MobilePlayer = ({ className }: props) => {
             />
           </>
         )}
-        {isNiconicommentsEnable && (
+        {isNiconicommentsEnable && EnableComments && (
           <CommentCanvas
             url={data?.movie.url}
             className={Styles.canvas}
