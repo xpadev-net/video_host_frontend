@@ -55,17 +55,35 @@ const Slider = ({ className }: props) => {
       setProgress(((e.clientX - rect.left) / rect.width) * 100);
       return ((e.clientX - rect.left) / rect.width) * 100;
     };
+    const onTouchMove = (e: globalThis.TouchEvent) => {
+      if (!isDrugging || !wrapperRef.current) return;
+      e.preventDefault();
+      const rect = wrapperRef.current.getBoundingClientRect();
+      const clientX = e.touches.item(0)?.clientX ?? 0;
+      setProgress((clientX - rect.left / rect.width) * 100);
+      return (clientX - rect.left / rect.width) * 100;
+    };
     const onMouseUp = (e: globalThis.MouseEvent) => {
       const progress = onMouseMove(e);
       setIsDrugging(false);
       if (!videoRef || progress === undefined) return;
       videoRef.currentTime = (videoRef.duration * progress) / 100;
     };
+    const onTouchEnd = (e: globalThis.TouchEvent) => {
+      const progress = onTouchMove(e);
+      setIsDrugging(false);
+      if (!videoRef || progress === undefined) return;
+      videoRef.currentTime = (videoRef.duration * progress) / 100;
+    };
     window.addEventListener("mousemove", onMouseMove);
     window.addEventListener("mouseup", onMouseUp);
+    window.addEventListener("touchmove", onTouchMove);
+    window.addEventListener("touchend", onTouchEnd);
     return () => {
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("mouseup", onMouseUp);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("touchend", onTouchEnd);
     };
   }, [isDrugging]);
 
@@ -82,6 +100,7 @@ const Slider = ({ className }: props) => {
       className={`${Styles.wrapper} ${className}`}
       ref={wrapperRef}
       onMouseDown={onMouseDown}
+      onTouchStart={onMouseDown}
       onClick={onClick}
     >
       <div className={Styles.background} />
