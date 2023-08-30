@@ -39,7 +39,7 @@
   }
 }
 
-@media (max-width: 1000px){
+@media (max-width: 1000px) and (not (min-aspect-ratio: 1/1)){
   .wrapper,.wrapper.theatre{
     .container{
       grid-template-areas:
@@ -59,6 +59,39 @@
     .container{
       .metadata,.playlistWrapper{
         margin: 0;
+      }
+    }
+  }
+}
+
+.wrapper.mobile{
+  .container{
+    .playerWrapper{
+      margin: -24px;
+      padding-bottom: 12px;
+    }
+  }
+}
+
+@media (min-aspect-ratio: 1/1) {
+  .wrapper.mobile{
+    padding: 0;
+    .container{
+      grid-template-areas:
+      "player   playlist"
+      "metadata playlist";
+      grid-template-columns: 1fr minmax(200px,300px);
+      gap: 0;
+      .playerWrapper{
+        margin: 0;
+        padding: 0;
+        min-width: 500px;
+      }
+      .metadata{
+        padding: 24px;
+      }
+      .playlist{
+        max-height: calc(100vh - 104px)!important;
       }
     }
   }

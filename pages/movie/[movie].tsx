@@ -28,7 +28,6 @@ const MoviePage = () => {
   >();
   const [result, setResult] = useState<MovieRes | notFoundError | undefined>();
   const isMobile = useIsMobile();
-  const isWideVideo = isTheatre || isMobile;
   useEffect(() => {
     if (typeof query !== "string") return;
     void (async () => {
@@ -67,7 +66,7 @@ const MoviePage = () => {
   }
   return (
     <div
-      className={`${Styles.wrapper} ${isWideVideo && Styles.theatre} ${
+      className={`${Styles.wrapper} ${isTheatre && Styles.theatre} ${
         isMobile && Styles.mobile
       }`}
     >
