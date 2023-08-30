@@ -1,7 +1,7 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { MovieRes, MovieResponse, notFoundError } from "@/@types/api";
 import {
@@ -45,10 +45,6 @@ const MoviePage = () => {
       setResult(result);
     })();
   }, [query]);
-  const movieInfo = useMemo(() => {
-    if (!result || result.status !== "success") return <></>;
-    return <MovieInfo className={Styles.info} data={result?.data} />;
-  }, [result]);
   useEffect(() => {
     if (!wrapperRef) return;
     const resizeObserver = new ResizeObserver((entries) => {
@@ -70,20 +66,25 @@ const MoviePage = () => {
     );
   }
   return (
-    <div className={`${Styles.wrapper} ${isWideVideo && Styles.theatre}`}>
+    <div
+      className={`${Styles.wrapper} ${isWideVideo && Styles.theatre} ${
+        isMobile && Styles.mobile
+      }`}
+    >
       <Head>
         <title>{`${result.data.movie.title} / ${result.data.movie.seriesTitle} - ${SiteName}`}</title>
       </Head>
-      <div className={Styles.mainWrapper}>
+      <div className={Styles.container}>
         <div className={Styles.playerWrapper}>
           <Player data={result.data} />
         </div>
-        {!isWideVideo && movieInfo}
-      </div>
-      <div className={Styles.subWrapper}>
-        {isWideVideo && movieInfo}
+        <MovieInfo className={Styles.metadata} data={result?.data} />
         <div className={Styles.playlistWrapper}>
-          <PlayList data={result.data} maxHeight={playlistMaxHeight} />
+          <PlayList
+            className={Styles.playlist}
+            data={result.data}
+            maxHeight={playlistMaxHeight}
+          />
         </div>
       </div>
     </div>

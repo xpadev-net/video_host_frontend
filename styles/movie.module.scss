@@ -1,69 +1,64 @@
 .wrapper{
-  display: flex;
-  flex-direction: row;
   padding: 24px;
   max-width: 1800px;
   margin: 0 auto;
-  .mainWrapper{
-    flex: 1;
-    min-width: 640px;
-    margin-right: 24px;
-  }
-  .info{
-    margin-bottom: 10px;
-  }
-  .subWrapper{
-    flex: 1;
-    max-width: 400px;
-    width: 300px;
+  .container{
+    display: grid;
+    grid-template-areas:
+    "player   playlist"
+    "metadata playlist";
+    grid-template-columns: 1fr minmax(300px,400px);
+    gap: 24px;
+    .playerWrapper{
+      grid-area: player;
+      min-width: 640px;
+    }
+    .metadata{
+      grid-area: metadata;
+    }
     .playlistWrapper{
-      width: 100%;
+      grid-area: playlist;
     }
   }
 }
 
 .wrapper.theatre{
-  flex-direction: column;
-  padding: 0;
-  max-width: unset;
-  .mainWrapper{
-    width: 100%;
+  .container{
+    grid-template-areas:
+    "player   player"
+    "metadata playlist";
+    max-width: unset;
+    grid-template-columns: 1fr minmax(300px,400px);
     .playerWrapper{
-      width: 100%;
+      margin: -24px;
+      padding-bottom: 12px;
     }
-  }
-  .subWrapper{
-    padding: 24px;
-    width: 100%;
-    max-width: 1800px;
-    margin: 0 auto;
-    display: flex;
-    .info{
-      flex: 1;
-      margin-right: 24px;
-    }
-    .playlistWrapper{
-      max-width: 400px;
-      width: 300px;
+    .metadata{
+      min-width: 640px;
     }
   }
 }
 
 @media (max-width: 1000px){
-  .wrapper{
-    flex-direction: column;
-    .mainWrapper,.subWrapper{
-      width: 100%;
-      max-width: unset;
-      min-width: unset;
+  .wrapper,.wrapper.theatre{
+    .container{
+      grid-template-areas:
+      "player  "
+      "metadata"
+      "playlist";
+      grid-template-columns: 1fr;
+      .metadata,.playerWrapper{
+        min-width: unset;
+      }
+      .playlist{
+        max-height: unset!important;
+      }
     }
   }
   .wrapper.theatre{
-    .subWrapper{
-      flex-direction: column;
-      .playlistWrapper{
-        width: 100%;
-        max-width: unset;
+    .container{
+      .metadata,.playlistWrapper{
+        margin: 0;
       }
     }
   }
