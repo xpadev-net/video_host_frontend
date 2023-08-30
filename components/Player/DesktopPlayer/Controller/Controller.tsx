@@ -2,18 +2,19 @@ import { useAtom, useAtomValue } from "jotai";
 import { MouseEvent, useState } from "react";
 
 import { MovieItemAtom, VideoMetadataAtom, VideoRefAtom } from "@/atoms/Player";
-import { AutoPlayButton } from "@/components/Player/DesktopPlayer/Controller/AutoPlayButton";
-import Styles from "@/components/Player/DesktopPlayer/Controller/Controller.module.scss";
-import { FullscreenButton } from "@/components/Player/DesktopPlayer/Controller/FullscreenButton";
-import { PlayPauseButton } from "@/components/Player/DesktopPlayer/Controller/PlayPauseButton";
-import { PrevNextButton } from "@/components/Player/DesktopPlayer/Controller/PrevNextButton";
-import { Setting } from "@/components/Player/DesktopPlayer/Controller/Setting/Setting";
-import { SettingButton } from "@/components/Player/DesktopPlayer/Controller/SettingButton";
-import { Slider } from "@/components/Player/DesktopPlayer/Controller/Slider";
-import { TheatreButton } from "@/components/Player/DesktopPlayer/Controller/TheatreButton";
-import { VolumeIcon } from "@/components/Player/DesktopPlayer/Controller/VolumeIcon";
-import { VolumeSlider } from "@/components/Player/DesktopPlayer/Controller/VolumeSlider";
+import { AutoPlayButton } from "@/components/Player/Shared/Controller/AutoPlayButton";
+import { FullscreenButton } from "@/components/Player/Shared/Controller/FullscreenButton";
+import { PlayPauseButton } from "@/components/Player/Shared/Controller/PlayPauseButton";
+import { PrevNextButton } from "@/components/Player/Shared/Controller/PrevNextButton";
+import { SettingButton } from "@/components/Player/Shared/Controller/SettingButton";
+import { Setting } from "@/components/Player/Shared/Setting/Setting";
 import { time2str } from "@/libraries/time";
+
+import Styles from "./Controller.module.scss";
+import { Slider } from "./Slider";
+import { TheatreButton } from "./TheatreButton";
+import { VolumeIcon } from "./VolumeIcon";
+import { VolumeSlider } from "./VolumeSlider";
 
 type props = {
   className?: string;

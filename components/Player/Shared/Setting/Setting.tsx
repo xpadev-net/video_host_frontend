@@ -14,10 +14,10 @@ import {
   VideoMetadataAtom,
   WrapperRefAtom,
 } from "@/atoms/Player";
-import { Comments } from "@/components/Player/DesktopPlayer/Controller/Setting/pages/Comments";
-import { Main } from "@/components/Player/DesktopPlayer/Controller/Setting/pages/Main";
-import { PlaybackRate } from "@/components/Player/DesktopPlayer/Controller/Setting/pages/PlaybackRate";
 import Styles from "@/components/Player/DesktopPlayer/Controller/Setting/Setting.module.scss";
+import { Comments } from "@/components/Player/Shared/Setting/pages/Comments";
+import { Main } from "@/components/Player/Shared/Setting/pages/Main";
+import { PlaybackRate } from "@/components/Player/Shared/Setting/pages/PlaybackRate";
 import { EnableComments } from "@/contexts/env";
 import { useIsMobile } from "@/libraries/isMobile";
 

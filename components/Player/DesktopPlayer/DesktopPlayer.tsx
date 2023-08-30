@@ -9,13 +9,14 @@ import {
   VideoRefAtom,
   WrapperRefAtom,
 } from "@/atoms/Player";
-import { Controller } from "@/components/Player/DesktopPlayer/Controller";
-import Styles from "@/components/Player/DesktopPlayer/DesktopPlayer.module.scss";
 import { CommentCanvas } from "@/components/Player/Shared/CommentCanvas";
 import { KeyboardHandler } from "@/components/Player/Shared/KeyboardHandler";
 import { MediaSessionHandler } from "@/components/Player/Shared/MediaSessionHandler";
 import { Video } from "@/components/Player/Shared/Video";
 import { ApiEndpoint, EnableComments } from "@/contexts/env";
+
+import { Controller } from "./Controller";
+import Styles from "./DesktopPlayer.module.scss";
 
 type props = {
   className?: string;
