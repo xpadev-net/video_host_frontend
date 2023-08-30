@@ -95,11 +95,13 @@ const Video = ({ className, videoRef, movie }: props) => {
       if (playerConfig.isHls) {
         if (videoRef.current.canPlayType("application/vnd.apple.mpegurl")) {
           videoRef.current.src = movie.source.http;
-          videoRef.current.crossOrigin = "use-credentials";
+          videoRef.current.crossOrigin = movie.source.anonymous
+            ? ""
+            : "use-credentials";
         } else if (Hls.isSupported()) {
           const hls = new Hls({
             xhrSetup: function (xhr, url) {
-              xhr.withCredentials = true;
+              xhr.withCredentials = !movie.source.anonymous;
               xhr.open("GET", url);
             },
             enableWorker: true,
@@ -115,7 +117,9 @@ const Video = ({ className, videoRef, movie }: props) => {
         }
       } else {
         videoRef.current.src = movie.source.http;
-        videoRef.current.crossOrigin = "use-credentials";
+        videoRef.current.crossOrigin = movie.source.anonymous
+          ? ""
+          : "use-credentials";
         videoRef.current.load();
       }
       videoRef.current.playbackRate = playerConfig.playbackRate;

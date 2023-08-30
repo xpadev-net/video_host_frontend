@@ -42,6 +42,7 @@ export type SearchResponse = SearchRes | authenticationError;
 export type MovieItemSource = {
   hls: string;
   http: string;
+  anonymous?: boolean;
 }
 
 export type MovieItem = {
