@@ -14,12 +14,13 @@ import {
   VideoMetadataAtom,
   WrapperRefAtom,
 } from "@/atoms/Player";
-import Styles from "@/components/Player/DesktopPlayer/Controller/Setting/Setting.module.scss";
 import { Comments } from "@/components/Player/Shared/Setting/pages/Comments";
 import { Main } from "@/components/Player/Shared/Setting/pages/Main";
 import { PlaybackRate } from "@/components/Player/Shared/Setting/pages/PlaybackRate";
 import { EnableComments } from "@/contexts/env";
 import { useIsMobile } from "@/libraries/isMobile";
+
+import Styles from "./Setting.module.scss";
 
 type props = {
   className?: string;

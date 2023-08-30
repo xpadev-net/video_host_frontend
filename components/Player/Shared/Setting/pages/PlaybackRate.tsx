@@ -7,7 +7,8 @@ import {
   PlayerSettingAtom,
   VideoRefAtom,
 } from "@/atoms/Player";
-import Styles from "@/components/Player/DesktopPlayer/Controller/Setting/pages/pages.module.scss";
+
+import Styles from "./pages.module.scss";
 
 type props = {
   className?: string;

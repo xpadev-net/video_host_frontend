@@ -4,7 +4,8 @@ import { useAtom } from "jotai";
 import { MouseEvent } from "react";
 
 import { PlayerConfigAtom } from "@/atoms/Player";
-import Styles from "@/components/Player/DesktopPlayer/Controller/AutoPlayButton/AutoPlayButton.module.scss";
+
+import Styles from "./AutoPlayButton.module.scss";
 
 type props = {
   className?: string;
