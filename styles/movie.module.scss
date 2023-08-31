@@ -32,6 +32,9 @@
     .playerWrapper{
       margin: -24px;
       padding-bottom: 12px;
+      width: 100vw;
+      position: relative;
+      left: calc(max((100vw - 1800px),0px) / -2);
     }
     .metadata{
       min-width: 640px;
