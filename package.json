@@ -1,6 +1,7 @@
 {
   "name": "video_host_re",
   "version": "0.0.15",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "dev": "next dev",
