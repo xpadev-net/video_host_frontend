@@ -1,4 +1,4 @@
-import { useAtom } from "jotai";
+import { useAtomValue } from "jotai";
 import Image from "next/image";
 
 import type { ThumbnailProps } from "@/@types/Thumbnail";
@@ -9,7 +9,7 @@ import { time2str } from "@/libraries/time";
 import Styles from "./Thumbnail.module.scss";
 
 const Thumbnail = ({ movie }: ThumbnailProps) => {
-  const [history] = useAtom(watchedHistoryAtom);
+  const history = useAtomValue(watchedHistoryAtom);
 
   return (
     <div className={Styles.wrapper}>

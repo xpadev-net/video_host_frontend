@@ -20,16 +20,16 @@ const FullscreenButton = ({ className }: props) => {
   useEffect(() => {
     const handler = () => {
       if (playerConfig.windowFullscreen) return;
-      setMetadata({
-        ...metadata,
+      setMetadata((pv) => ({
+        ...pv,
         isFullscreen: document.fullscreenElement !== null,
-      });
+      }));
     };
     document.addEventListener("fullscreenchange", handler);
     return () => {
       document.removeEventListener("fullscreenchange", handler);
     };
-  }, [metadata, playerConfig.windowFullscreen]);
+  }, [playerConfig.windowFullscreen]);
 
   useEffect(() => {
     if (
@@ -40,7 +40,7 @@ const FullscreenButton = ({ className }: props) => {
     ) {
       wrapperRef
         .requestFullscreen()
-        .catch(() => setMetadata({ ...metadata, isFullscreen: false }));
+        .catch(() => setMetadata((pv) => ({ ...pv, isFullscreen: false })));
     } else if (!metadata.isFullscreen && document.fullscreenElement) {
       void document.exitFullscreen();
     }
@@ -48,12 +48,11 @@ const FullscreenButton = ({ className }: props) => {
 
   const toggleFullscreen = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
-    const isFullscreen = !metadata.isFullscreen;
-    setMetadata({
-      ...metadata,
+    setMetadata((pv) => ({
+      ...pv,
       isSetting: false,
-      isFullscreen: isFullscreen,
-    });
+      isFullscreen: !pv.isFullscreen,
+    }));
   };
 
   return (

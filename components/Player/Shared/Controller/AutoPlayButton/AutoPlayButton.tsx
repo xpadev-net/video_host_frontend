@@ -16,7 +16,7 @@ const AutoPlayButton = ({ className }: props) => {
 
   const toggleAutPlay = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
-    setPlayerConfig({ ...playerConfig, autoPlay: !playerConfig.autoPlay });
+    setPlayerConfig((pv) => ({ ...pv, autoPlay: !pv.autoPlay }));
   };
 
   return (

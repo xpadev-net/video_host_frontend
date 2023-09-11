@@ -51,45 +51,48 @@ const Setting = ({ className }: props) => {
   const isMobile = useIsMobile();
   useEffect(() => {
     const onClick = () => {
-      setMetadata({
-        ...metadata,
+      setMetadata((pv) => ({
+        ...pv,
         isSetting: false,
-      });
+      }));
     };
     window.addEventListener("click", onClick);
     return () => {
       window.removeEventListener("click", onClick);
     };
-  }, [metadata]);
+  }, []);
 
   useEffect(() => {
     if (!targetRef.current || !wrapperRef || !scrollContainerRef.current)
       return;
-    setSize({
-      ...size,
-      width: targetRef.current.clientWidth,
-      height: targetRef.current.clientHeight,
-      left: targetRef.current.offsetLeft,
+    const width = targetRef.current.clientWidth,
+      height = targetRef.current.clientHeight,
+      left = targetRef.current.offsetLeft;
+    setSize((pv) => ({
+      ...pv,
+      width,
+      height,
+      left,
       maxHeight: wrapperRef.clientHeight - 120,
-    });
-  }, [targetRef.current, wrapperRef, playerSetting]);
+    }));
+  }, [targetRef.current, wrapperRef]);
 
   useEffect(() => {
     if (!wrapperRef) return;
     const handler: ResizeObserverCallback = (entries) => {
       const wrapper = entries[0];
       if (!wrapper) return;
-      setSize({
-        ...size,
+      setSize((pv) => ({
+        ...pv,
         maxHeight: wrapper.contentRect.height - 120,
-      });
+      }));
     };
     const resizeObserver = new ResizeObserver(handler);
     resizeObserver.observe(wrapperRef);
     return () => {
       resizeObserver.disconnect();
     };
-  }, [size, wrapperRef]);
+  }, [wrapperRef]);
 
   const onClick = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();

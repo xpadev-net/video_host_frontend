@@ -11,7 +11,7 @@ const TheatreButton = ({ className }: props) => {
   const [playerConfig, setPlayerConfig] = useAtom(PlayerConfigAtom);
   const { isFullscreen } = useAtomValue(VideoMetadataAtom);
   const toggleTheatre = () => {
-    setPlayerConfig({ ...playerConfig, isTheatre: !playerConfig.isTheatre });
+    setPlayerConfig((pv) => ({ ...pv, isTheatre: !pv.isTheatre }));
   };
   if (isFullscreen) return <></>;
   return (

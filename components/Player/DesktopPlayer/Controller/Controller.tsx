@@ -36,10 +36,10 @@ const Controller = ({ className }: props) => {
   };
 
   const stopPropagation = (e: MouseEvent<HTMLDivElement>) => {
-    setMetadata({
-      ...metadata,
+    setMetadata((pv) => ({
+      ...pv,
       isSetting: false,
-    });
+    }));
     e.stopPropagation();
   };
 

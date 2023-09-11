@@ -13,7 +13,7 @@ const SettingButton = ({ className }: props) => {
   const setPlayerSetting = useSetAtom(PlayerSettingAtom);
   const toggleTheatre = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
-    setMetadata({ ...metadata, isSetting: !metadata.isSetting });
+    setMetadata((pv) => ({ ...pv, isSetting: !pv.isSetting }));
     if (!metadata.isSetting) {
       setPlayerSetting(["main"]);
     }

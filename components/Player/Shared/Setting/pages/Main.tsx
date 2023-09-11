@@ -30,15 +30,15 @@ const Main_ = ({ className }: props, ref: ForwardedRef<HTMLDivElement>) => {
   const wrapperRef = useAtomValue(WrapperRefAtom);
 
   const toggleWindowFullscreen = () => {
-    setPlayerConfig({
-      ...playerConfig,
-      windowFullscreen: !playerConfig.windowFullscreen,
-    });
+    setPlayerConfig((pv) => ({
+      ...pv,
+      windowFullscreen: !pv.windowFullscreen,
+    }));
     if (metadata.isFullscreen) {
       if (playerConfig.windowFullscreen) {
         wrapperRef
           ?.requestFullscreen()
-          .catch(() => setMetadata({ ...metadata, isFullscreen: false }));
+          .catch(() => setMetadata((pv) => ({ ...pv, isFullscreen: false })));
       } else {
         document.fullscreenElement && void document.exitFullscreen();
       }
@@ -53,10 +53,10 @@ const Main_ = ({ className }: props, ref: ForwardedRef<HTMLDivElement>) => {
     setPlayerSetting((prev) => [...prev, "comments"]);
   };
   const toggleHls = () => {
-    setPlayerConfig({
-      ...playerConfig,
-      isHls: !playerConfig.isHls,
-    });
+    setPlayerConfig((pv) => ({
+      ...pv,
+      isHls: !pv.isHls,
+    }));
   };
 
   return (

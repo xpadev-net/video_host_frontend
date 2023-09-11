@@ -1,5 +1,5 @@
 import { Menu, OndemandVideoSharp } from "@mui/icons-material";
-import { useAtom } from "jotai";
+import { useSetAtom } from "jotai";
 import Link from "next/link";
 
 import { sidebarState } from "@/atoms/SidebarState";
@@ -8,10 +8,10 @@ import { useIsMobile } from "@/libraries/isMobile";
 import ButtonStyles from "@/styles/button.module.scss";
 
 const HeaderMenu = () => {
-  const [isSidebarActive, setIsSidebarActive] = useAtom(sidebarState);
+  const setIsSidebarActive = useSetAtom(sidebarState);
   const isMobile = useIsMobile();
   const toggleSidebar = () => {
-    setIsSidebarActive(!isSidebarActive);
+    setIsSidebarActive((pv) => !pv);
   };
   return (
     <div className={Styles.wrapper}>

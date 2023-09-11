@@ -29,7 +29,7 @@ const PlaybackRate_ = (
   };
 
   const setPlaybackRate = (rate: number) => {
-    setPlayerConfig({ ...playerConfig, playbackRate: rate });
+    setPlayerConfig((pv) => ({ ...pv, playbackRate: rate }));
     if (videoRef) videoRef.playbackRate = rate;
     backToMain();
   };

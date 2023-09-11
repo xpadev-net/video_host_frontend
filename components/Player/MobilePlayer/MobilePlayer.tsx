@@ -44,7 +44,7 @@ const MobilePlayer = ({ className }: props) => {
   }, []);
 
   const toggleAfk = () => {
-    setIsAfk(!isAfk);
+    setIsAfk((pv) => !pv);
   };
 
   useEffect(() => {

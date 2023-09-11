@@ -26,7 +26,7 @@ const PlayList = ({ data, className, maxHeight }: props) => {
     >
       <div
         className={`${Styles.header} ${isOpen && Styles.open}`}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => setIsOpen((pv) => !pv)}
       >
         <PlaylistPlay className={Styles.icon} />
         <div className={Styles.textWrapper}>
