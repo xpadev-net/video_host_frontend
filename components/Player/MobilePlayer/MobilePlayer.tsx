@@ -75,6 +75,7 @@ const MobilePlayer = ({ className }: props) => {
         )}
         {isNiconicommentsEnable && EnableComments && (
           <CommentCanvas
+            key={data?.movie.url}
             url={data?.movie.url}
             className={Styles.canvas}
             videoRef={videoRef.current}

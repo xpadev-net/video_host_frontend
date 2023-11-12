@@ -1,7 +1,7 @@
 import Hls from "hls.js";
 import { useAtom } from "jotai";
 import { useRouter } from "next/router";
-import { RefObject, useEffect, useState } from "react";
+import { RefObject, useEffect, useRef, useState } from "react";
 
 import { MovieItem } from "@/@types/api";
 import { PlayerConfigAtom, VideoMetadataAtom } from "@/atoms/Player";
@@ -18,6 +18,8 @@ const Video = ({ className, videoRef, movie }: props) => {
   const [playerConfig, setPlayerConfig] = useAtom(PlayerConfigAtom);
   const [watchedHistory, setWatchedHistory] = useAtom(watchedHistoryAtom);
   const [url, setUrl] = useState<string>("");
+
+  const hlsRef = useRef<Hls>();
 
   const router = useRouter();
 
@@ -109,6 +111,7 @@ const Video = ({ className, videoRef, movie }: props) => {
           });
           hls.loadSource(movie.source.hls);
           hls.attachMedia(videoRef.current);
+          hlsRef.current = hls;
           videoRef.current.crossOrigin = "anonymous";
         } else {
           console.error(
@@ -141,6 +144,9 @@ const Video = ({ className, videoRef, movie }: props) => {
       setup();
     }
     setUrl(movie.movie.url);
+    return () => {
+      hlsRef.current?.destroy();
+    };
   }, [videoRef.current, movie?.source, playerConfig.isHls]);
 
   return (

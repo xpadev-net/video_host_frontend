@@ -107,6 +107,7 @@ const DesktopPlayer = ({ className }: props) => {
       <div className={Styles.videoWrapper}>
         {isNiconicommentsEnable && EnableComments && (
           <CommentCanvas
+            key={data?.movie.url}
             url={data?.movie.url}
             className={Styles.canvas}
             videoRef={videoRef.current}
