@@ -33,11 +33,11 @@ const MoviePage = () => {
     void (async () => {
       setVideoMetadata((prev) => ({ ...prev, isLoading: true }));
       const result: MovieResponse = await request(
-        `/movie/${encodeURIComponent(query)}`
+        `/movie/${encodeURIComponent(query)}`,
       );
       if (result.code === "401") {
         void router.push(
-          `/login?callback=${encodeURIComponent(router.asPath)}`
+          `/login?callback=${encodeURIComponent(router.asPath)}`,
         );
         return <></>;
       }

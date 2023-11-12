@@ -60,7 +60,7 @@ const CommentCanvas = ({ url, videoRef, pipVideoRef, className }: props) => {
             commentCount: 0,
           },
         ],
-        { ...niconicommentsConfig, video }
+        { ...niconicommentsConfig, video },
       );
     })();
     return () => {

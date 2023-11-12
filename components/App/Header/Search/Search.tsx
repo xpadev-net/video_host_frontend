@@ -44,11 +44,11 @@ const Search_ = ({ className }: props, ref: ForwardedRef<HTMLInputElement>) => {
     void (async () => {
       if (input.length < 2) return;
       const suggest: SuggestResponse = await request(
-        `/suggest/${encodeURIComponent(input)}`
+        `/suggest/${encodeURIComponent(input)}`,
       );
       if (suggest.status === "fail") {
         await router.push(
-          `/login?callback=${encodeURIComponent(router.asPath)}`
+          `/login?callback=${encodeURIComponent(router.asPath)}`,
         );
         return;
       }

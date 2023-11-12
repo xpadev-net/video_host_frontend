@@ -41,7 +41,7 @@ const Slider = ({ className }: props) => {
     const onTimeUpdate = () => {
       if (isDrugging) return;
       setProgress(
-        videoRef ? (videoRef.currentTime / videoRef.duration) * 100 : 0
+        videoRef ? (videoRef.currentTime / videoRef.duration) * 100 : 0,
       );
     };
     videoRef.addEventListener("progress", onProgress);

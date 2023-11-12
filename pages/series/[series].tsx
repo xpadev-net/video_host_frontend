@@ -14,7 +14,7 @@ const SearchPage = () => {
   const query = router.query.series;
   const { data: result } = useSWR<SeriesResponse>(
     `/series/${encodeURIComponent(typeof query === "string" ? query : "")}`,
-    request
+    request,
   );
   if (!result) {
     return <></>;

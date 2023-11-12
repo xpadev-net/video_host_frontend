@@ -18,7 +18,7 @@ const suggestedRate = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 3, 4];
 
 const PlaybackRate_ = (
   { className }: props,
-  ref: ForwardedRef<HTMLDivElement>
+  ref: ForwardedRef<HTMLDivElement>,
 ) => {
   const [playerConfig, setPlayerConfig] = useAtom(PlayerConfigAtom);
   const setPlayerSetting = useSetAtom(PlayerSettingAtom);

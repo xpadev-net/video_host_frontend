@@ -33,6 +33,11 @@ const MovieList = ({ movies, type, active, className }: props) => {
         ref={wrapperRef}
       >
         {movies.map((movie, index) => {
+          const indexLabel = (() => {
+            if (active === undefined) return undefined;
+            if (movie.url === active) return "active";
+            return index + 1;
+          })();
           return (
             <MovieCard
               key={`${movie.seriesUrl}/${movie.url}`}
@@ -43,19 +48,13 @@ const MovieList = ({ movies, type, active, className }: props) => {
                   ? activeRef
                   : undefined
               }
-              index={
-                active !== undefined
-                  ? movie.url === active
-                    ? "active"
-                    : index + 1
-                  : undefined
-              }
+              index={indexLabel}
             />
           );
         })}
       </div>
     );
-  }, [movies, type, active]);
+  }, [movies, type, active, className]);
 };
 
 export { MovieList };

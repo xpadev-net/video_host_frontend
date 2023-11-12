@@ -21,7 +21,7 @@ const Login = () => {
         void router.push(
           typeof router.query.callback === "string"
             ? `${decodeURIComponent(router.query.callback)}`
-            : "/"
+            : "/",
         );
         return;
       }
@@ -30,7 +30,7 @@ const Login = () => {
   }, []);
 
   const onSubmit = (
-    e: MouseEvent<HTMLButtonElement> | FormEvent<HTMLFormElement>
+    e: MouseEvent<HTMLButtonElement> | FormEvent<HTMLFormElement>,
   ) => {
     e.preventDefault();
     setLoading(true);
@@ -48,7 +48,7 @@ const Login = () => {
         return;
       }
       await router.push(
-        router.query.callback ? `${router.query.callback}` : "/"
+        router.query.callback ? `${router.query.callback}` : "/",
       );
     })();
   };

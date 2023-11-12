@@ -15,7 +15,7 @@ const SearchPage = () => {
   const query = router.query.query;
   const { data: result } = useSWR<SearchResponse>(
     `/search/${encodeURIComponent(typeof query === "string" ? query : "")}`,
-    request
+    request,
   );
   if (!result) {
     return <></>;

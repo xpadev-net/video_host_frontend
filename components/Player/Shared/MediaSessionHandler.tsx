@@ -65,7 +65,7 @@ const MediaSessionHandler = () => {
       const handler = mediaSessionHandler[key];
       navigator.mediaSession.setActionHandler(
         key as MediaSessionAction,
-        handler
+        handler,
       );
     }
     return () => {

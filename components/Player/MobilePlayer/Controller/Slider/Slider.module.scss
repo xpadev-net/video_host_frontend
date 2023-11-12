@@ -32,7 +32,9 @@
     background-color: colors.$accentColor;
     bottom: 20px;
     transform: translate(-50%, 50%);
-    transition: width 50ms ease, height 50ms ease;
+    transition:
+      width 50ms ease,
+      height 50ms ease;
   }
   &:hover {
     .grubber {

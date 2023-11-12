@@ -34,7 +34,7 @@ const Index = () => {
       const data = await request<recentUpdatesResponse>("/recentUpdates/");
       if (data.status === "fail") {
         void router.push(
-          `/login?callback=${encodeURIComponent(router.asPath)}`
+          `/login?callback=${encodeURIComponent(router.asPath)}`,
         );
         return;
       }

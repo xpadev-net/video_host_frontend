@@ -9,7 +9,9 @@
   }
   .wrapper {
     overflow: hidden;
-    transition: width 200ms ease, height 200ms ease;
+    transition:
+      width 200ms ease,
+      height 200ms ease;
     position: relative;
     .container {
       width: 1920px;

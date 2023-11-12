@@ -26,7 +26,7 @@ type props = {
 const Comments_ = ({ className }: props, ref: ForwardedRef<HTMLDivElement>) => {
   const [playerConfig, setPlayerConfig] = useAtom(PlayerConfigAtom);
   const [niconicommentsConfig, setNiconicommentsConfig] = useAtom(
-    NiconicommentsConfigAtom
+    NiconicommentsConfigAtom,
   );
   const setPlayerSetting = useSetAtom(PlayerSettingAtom);
 

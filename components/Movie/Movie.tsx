@@ -14,7 +14,7 @@ export type props = {
 
 const MovieCard_ = (
   { movie, index, type }: props,
-  ref: ForwardedRef<HTMLAnchorElement>
+  ref: ForwardedRef<HTMLAnchorElement>,
 ) => {
   if (type === "column") {
     return (
@@ -40,7 +40,9 @@ const MovieCard_ = (
       ref={ref}
     >
       {index !== undefined && (
-        <span className={Styles.index}>{index === "active" ? "▶" : index}</span>
+        <span className={Styles.index}>
+          {index === "active" ? "▶" : index}
+        </span>
       )}
       <div className={Styles.thumbnail}>
         <Thumbnail movie={movie} />
