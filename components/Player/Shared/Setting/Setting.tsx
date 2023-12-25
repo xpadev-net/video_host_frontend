@@ -4,7 +4,7 @@ import { FC, MouseEvent, useEffect, useRef, useState } from "react";
 import { SettingKey } from "@/@types/Player";
 import {
   PlayerSettingAtom,
-  VideoMetadataAtom,
+  PlayerStateAtom,
   WrapperRefAtom,
 } from "@/atoms/Player";
 import { Comments } from "@/components/Player/Shared/Setting/pages/Comments";
@@ -33,7 +33,7 @@ const Menu: {
 };
 
 const Setting = ({ className }: Props) => {
-  const [metadata, setMetadata] = useAtom(VideoMetadataAtom);
+  const [metadata, setMetadata] = useAtom(PlayerStateAtom);
   const [size, setSize] = useState({
     width: 0,
     height: 0,

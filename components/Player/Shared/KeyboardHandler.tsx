@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import {
   MovieItemAtom,
   PlayerConfigAtom,
-  VideoMetadataAtom,
+  PlayerStateAtom,
   VideoRefAtom,
 } from "@/atoms/Player";
 
@@ -15,7 +15,7 @@ const KeyboardHandler = () => {
   const videoRef = useAtomValue(VideoRefAtom);
   const movieItem = useAtomValue(MovieItemAtom);
   const [playerConfig, setPlayerConfig] = useAtom(PlayerConfigAtom);
-  const setVideoMetadata = useSetAtom(VideoMetadataAtom);
+  const setVideoMetadata = useSetAtom(PlayerStateAtom);
   const router = useRouter();
 
   useEffect(() => {

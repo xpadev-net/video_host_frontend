@@ -11,7 +11,7 @@ import { FC, useEffect, useRef } from "react";
 import {
   PlayerConfigAtom,
   PlayerSettingAtom,
-  VideoMetadataAtom,
+  PlayerStateAtom,
   WrapperRefAtom,
 } from "@/atoms/Player";
 import { MenuProps } from "@/components/Player/Shared/Setting";
@@ -22,7 +22,7 @@ import Styles from "./pages.module.scss";
 
 const Main: FC<MenuProps> = ({ className, updateScale }) => {
   const [playerConfig, setPlayerConfig] = useAtom(PlayerConfigAtom);
-  const [metadata, setMetadata] = useAtom(VideoMetadataAtom);
+  const [state, setState] = useAtom(PlayerStateAtom);
   const setPlayerSetting = useSetAtom(PlayerSettingAtom);
   const wrapperRef = useAtomValue(WrapperRefAtom);
   const ref = useRef<HTMLDivElement>(null);
@@ -37,11 +37,11 @@ const Main: FC<MenuProps> = ({ className, updateScale }) => {
       ...pv,
       windowFullscreen: !pv.windowFullscreen,
     }));
-    if (metadata.isFullscreen) {
+    if (state.isFullscreen) {
       if (playerConfig.windowFullscreen) {
         wrapperRef
           ?.requestFullscreen()
-          .catch(() => setMetadata((pv) => ({ ...pv, isFullscreen: false })));
+          .catch(() => setState((pv) => ({ ...pv, isFullscreen: false })));
       } else {
         document.fullscreenElement && void document.exitFullscreen();
       }

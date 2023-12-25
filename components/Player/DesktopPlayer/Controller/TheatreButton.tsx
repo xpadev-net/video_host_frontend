@@ -1,7 +1,7 @@
 import { Crop32Sharp, Crop169Sharp } from "@mui/icons-material";
 import { useAtom, useAtomValue } from "jotai";
 
-import { PlayerConfigAtom, VideoMetadataAtom } from "@/atoms/Player";
+import { PlayerConfigAtom, PlayerStateAtom } from "@/atoms/Player";
 
 type props = {
   className?: string;
@@ -9,7 +9,7 @@ type props = {
 
 const TheatreButton = ({ className }: props) => {
   const [playerConfig, setPlayerConfig] = useAtom(PlayerConfigAtom);
-  const { isFullscreen } = useAtomValue(VideoMetadataAtom);
+  const { isFullscreen } = useAtomValue(PlayerStateAtom);
   const toggleTheatre = () => {
     setPlayerConfig((pv) => ({ ...pv, isTheatre: !pv.isTheatre }));
   };

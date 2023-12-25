@@ -12,6 +12,9 @@ export type PlayerConfig = {
 export type VideoMetadata = {
   currentTime: number;
   duration: number;
+}
+
+export type PlayerState = {
   paused: boolean;
   isLoading: boolean;
   isSetting:boolean;

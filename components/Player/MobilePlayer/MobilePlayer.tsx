@@ -5,7 +5,7 @@ import { LoadingIcon } from "@/assets/LoadingIcon";
 import {
   MovieItemAtom,
   PlayerConfigAtom,
-  VideoMetadataAtom,
+  PlayerStateAtom,
   VideoRefAtom,
   WrapperRefAtom,
 } from "@/atoms/Player";
@@ -23,7 +23,7 @@ type props = {
 
 const MobilePlayer = ({ className }: props) => {
   const data = useAtomValue(MovieItemAtom);
-  const { isLoading, isFullscreen } = useAtomValue(VideoMetadataAtom);
+  const { isLoading, isFullscreen } = useAtomValue(PlayerStateAtom);
   const { isNiconicommentsEnable } = useAtomValue(PlayerConfigAtom);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);

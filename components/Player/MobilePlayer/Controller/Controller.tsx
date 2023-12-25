@@ -1,6 +1,6 @@
 import { useAtomValue } from "jotai";
 
-import { VideoMetadataAtom } from "@/atoms/Player";
+import { PlayerStateAtom, VideoMetadataAtom } from "@/atoms/Player";
 import { AutoPlayButton } from "@/components/Player/Shared/Controller/AutoPlayButton";
 import { FullscreenButton } from "@/components/Player/Shared/Controller/FullscreenButton";
 import { PlayPauseButton } from "@/components/Player/Shared/Controller/PlayPauseButton";
@@ -18,6 +18,7 @@ type props = {
 
 const Controller = ({ className }: props) => {
   const metadata = useAtomValue(VideoMetadataAtom);
+  const state = useAtomValue(PlayerStateAtom);
   return (
     <div className={`${className} ${Styles.wrapper}`}>
       <div className={Styles.top}>
@@ -43,7 +44,7 @@ const Controller = ({ className }: props) => {
         <FullscreenButton className={Styles.button} />
       </div>
       <Setting className={Styles.setting} />
-      {metadata.isSetting && <div className={Styles.settingBackground} />}
+      {state.isSetting && <div className={Styles.settingBackground} />}
     </div>
   );
 };

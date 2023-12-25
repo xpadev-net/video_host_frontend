@@ -5,7 +5,7 @@ import { LoadingIcon } from "@/assets/LoadingIcon";
 import {
   MovieItemAtom,
   PlayerConfigAtom,
-  VideoMetadataAtom,
+  PlayerStateAtom,
   VideoRefAtom,
   WrapperRefAtom,
 } from "@/atoms/Player";
@@ -33,7 +33,7 @@ const DesktopPlayer = ({ className }: props) => {
   const pipVideoRef = useRef<HTMLVideoElement>(null);
   const [isAfk, setIsAfk] = useState(false);
   const afkTimeout = useRef(-1);
-  const metadata = useAtomValue(VideoMetadataAtom);
+  const state = useAtomValue(PlayerStateAtom);
 
   const onPipPause = () => {
     void (async () => {
@@ -81,15 +81,15 @@ const DesktopPlayer = ({ className }: props) => {
   return (
     <div
       className={`${className} ${Styles.wrapper} ${
-        isTheatre && !metadata.isFullscreen && Styles.theatre
-      } ${metadata.isFullscreen && Styles.fullscreen} ${
-        isAfk && !metadata.paused && !metadata.isSetting && Styles.inactive
+        isTheatre && !state.isFullscreen && Styles.theatre
+      } ${state.isFullscreen && Styles.fullscreen} ${
+        isAfk && !state.paused && !state.isSetting && Styles.inactive
       }`}
       onMouseMove={onMouseMove}
       onClick={togglePlayerState}
       ref={wrapperRef}
     >
-      {metadata.isLoading && data && (
+      {state.isLoading && data && (
         <>
           <div
             className={Styles.loadingWrapper}

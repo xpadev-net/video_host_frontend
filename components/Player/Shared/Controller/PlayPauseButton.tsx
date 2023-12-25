@@ -2,7 +2,7 @@ import { Pause, PlayArrow } from "@mui/icons-material";
 import { useAtomValue } from "jotai";
 import { MouseEvent } from "react";
 
-import { VideoMetadataAtom, VideoRefAtom } from "@/atoms/Player";
+import { PlayerStateAtom, VideoRefAtom } from "@/atoms/Player";
 
 type props = {
   className?: string;
@@ -10,7 +10,7 @@ type props = {
 
 const PlayPauseButton = ({ className }: props) => {
   const videoRef = useAtomValue(VideoRefAtom);
-  const { paused } = useAtomValue(VideoMetadataAtom);
+  const { paused } = useAtomValue(PlayerStateAtom);
   const togglePlayerState = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     if (videoRef?.paused) {

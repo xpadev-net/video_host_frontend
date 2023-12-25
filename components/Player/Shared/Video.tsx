@@ -1,10 +1,14 @@
 import Hls from "hls.js";
-import { useAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import { useRouter } from "next/router";
 import { RefObject, useEffect, useRef, useState } from "react";
 
 import { MovieItem } from "@/@types/api";
-import { PlayerConfigAtom, VideoMetadataAtom } from "@/atoms/Player";
+import {
+  PlayerConfigAtom,
+  PlayerStateAtom,
+  VideoMetadataAtom,
+} from "@/atoms/Player";
 import { watchedHistoryAtom } from "@/atoms/WatchedHistory";
 
 type props = {
@@ -14,7 +18,8 @@ type props = {
 };
 
 const Video = ({ className, videoRef, movie }: props) => {
-  const [metadata, setMetadata] = useAtom(VideoMetadataAtom);
+  const setMetadata = useSetAtom(VideoMetadataAtom);
+  const setState = useSetAtom(PlayerStateAtom);
   const [playerConfig, setPlayerConfig] = useAtom(PlayerConfigAtom);
   const [watchedHistory, setWatchedHistory] = useAtom(watchedHistoryAtom);
   const [url, setUrl] = useState<string>("");
@@ -24,11 +29,11 @@ const Video = ({ className, videoRef, movie }: props) => {
   const router = useRouter();
 
   const onVideoPlay = () => {
-    setMetadata({ ...metadata, paused: false });
+    setState((pv) => ({ ...pv, paused: false }));
   };
 
   const onVideoPause = () => {
-    setMetadata({ ...metadata, paused: true });
+    setState((pv) => ({ ...pv, paused: true }));
   };
 
   const onVideoVolumeChange = () => {
@@ -36,12 +41,11 @@ const Video = ({ className, videoRef, movie }: props) => {
   };
 
   const onVideoLoadedMetadata = () => {
-    setMetadata({
-      ...metadata,
+    setMetadata((pv) => ({
+      ...pv,
       duration: videoRef.current?.duration || 0,
-      paused: true,
-      isLoading: true,
-    });
+    }));
+    setState((pv) => ({ ...pv, paused: true, isLoading: true }));
     void videoRef.current?.play().catch();
   };
 
@@ -55,10 +59,10 @@ const Video = ({ className, videoRef, movie }: props) => {
   };
 
   const onVideoTimeUpdate = () => {
-    setMetadata({
-      ...metadata,
+    setMetadata((pv) => ({
+      ...pv,
       currentTime: videoRef.current?.currentTime || 0,
-    });
+    }));
     if (
       videoRef.current &&
       Math.floor(videoRef.current.currentTime) % 10 === 0 &&
@@ -80,11 +84,11 @@ const Video = ({ className, videoRef, movie }: props) => {
   };
 
   const onVideoCanPlay = () => {
-    setMetadata({ ...metadata, isLoading: false });
+    setState((pv) => ({ ...pv, isLoading: false }));
   };
 
-  const onVideoSeeked = () => setMetadata({ ...metadata, isLoading: false });
-  const onVideoSeeking = () => setMetadata({ ...metadata, isLoading: true });
+  const onVideoSeeked = () => setState((pv) => ({ ...pv, isLoading: false }));
+  const onVideoSeeking = () => setState((pv) => ({ ...pv, isLoading: true }));
 
   useEffect(() => {
     if (!videoRef.current) return;

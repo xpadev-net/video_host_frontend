@@ -4,7 +4,7 @@ import { MouseEvent, useEffect } from "react";
 
 import {
   PlayerConfigAtom,
-  VideoMetadataAtom,
+  PlayerStateAtom,
   WrapperRefAtom,
 } from "@/atoms/Player";
 
@@ -13,7 +13,7 @@ type props = {
 };
 
 const FullscreenButton = ({ className }: props) => {
-  const [metadata, setMetadata] = useAtom(VideoMetadataAtom);
+  const [metadata, setMetadata] = useAtom(PlayerStateAtom);
   const playerConfig = useAtomValue(PlayerConfigAtom);
   const wrapperRef = useAtomValue(WrapperRefAtom);
 
