@@ -1,14 +1,14 @@
-import { useAtom, useAtomValue } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import { MouseEvent, useState } from "react";
 
 import { MovieItemAtom, VideoMetadataAtom, VideoRefAtom } from "@/atoms/Player";
+import { TimeDisplay } from "@/components/Player/DesktopPlayer/Controller/TimeDisplay";
 import { AutoPlayButton } from "@/components/Player/Shared/Controller/AutoPlayButton";
 import { FullscreenButton } from "@/components/Player/Shared/Controller/FullscreenButton";
 import { PlayPauseButton } from "@/components/Player/Shared/Controller/PlayPauseButton";
 import { PrevNextButton } from "@/components/Player/Shared/Controller/PrevNextButton";
 import { SettingButton } from "@/components/Player/Shared/Controller/SettingButton";
 import { Setting } from "@/components/Player/Shared/Setting/Setting";
-import { time2str } from "@/libraries/time";
 
 import Styles from "./Controller.module.scss";
 import { Slider } from "./Slider";
@@ -23,7 +23,7 @@ type props = {
 const Controller = ({ className }: props) => {
   const data = useAtomValue(MovieItemAtom);
   const videoRef = useAtomValue(VideoRefAtom);
-  const [metadata, setMetadata] = useAtom(VideoMetadataAtom);
+  const setMetadata = useSetAtom(VideoMetadataAtom);
   const [isVolumeExtend, setIsVolumeExtend] = useState(false);
   const [mutedVolume, setMutedVolume] = useState<number | undefined>(undefined);
   if (!data) return <></>;
@@ -79,13 +79,7 @@ const Controller = ({ className }: props) => {
           >
             <VolumeSlider />
           </div>
-          <div className={Styles.timeDisplay}>
-            <span className={Styles.text}>
-              {time2str(metadata.currentTime)}
-            </span>
-            <span className={Styles.text}>/</span>
-            <span className={Styles.text}>{time2str(metadata.duration)}</span>
-          </div>
+          <TimeDisplay />
         </div>
         <div className={Styles.rightSideWrapper}>
           <AutoPlayButton className={Styles.button} />

@@ -1,5 +1,5 @@
 import { useAtom, useAtomValue } from "jotai";
-import { FC, MouseEvent, useEffect, useRef, useState } from "react";
+import { FC, MouseEvent, useEffect, useMemo, useRef, useState } from "react";
 
 import { SettingKey } from "@/@types/Player";
 import {
@@ -33,7 +33,7 @@ const Menu: {
 };
 
 const Setting = ({ className }: Props) => {
-  const [metadata, setMetadata] = useAtom(PlayerStateAtom);
+  const [state, setState] = useAtom(PlayerStateAtom);
   const [size, setSize] = useState({
     width: 0,
     height: 0,
@@ -46,7 +46,7 @@ const Setting = ({ className }: Props) => {
   const isMobile = useIsMobile();
   useEffect(() => {
     const onClick = () => {
-      setMetadata((pv) => ({
+      setState((pv) => ({
         ...pv,
         isSetting: false,
       }));
@@ -57,19 +57,21 @@ const Setting = ({ className }: Props) => {
     };
   }, []);
 
-  const updateScale = (ref: HTMLDivElement) => {
-    if (!wrapperRef) return;
-    const width = ref.clientWidth,
-      height = ref.clientHeight,
-      left = ref.offsetLeft;
-    setSize((pv) => ({
-      ...pv,
-      width,
-      height,
-      left,
-      maxHeight: wrapperRef.clientHeight - 120,
-    }));
-  };
+  const updateScale = useMemo<(ref: HTMLDivElement) => void>(() => {
+    return (ref: HTMLDivElement) => {
+      if (!wrapperRef) return;
+      const width = ref.clientWidth,
+        height = ref.clientHeight,
+        left = ref.offsetLeft;
+      setSize((pv) => ({
+        ...pv,
+        width,
+        height,
+        left,
+        maxHeight: wrapperRef.clientHeight - 120,
+      }));
+    };
+  }, []);
 
   useEffect(() => {
     if (!wrapperRef) return;
@@ -96,7 +98,7 @@ const Setting = ({ className }: Props) => {
     <div
       ref={scrollContainerRef}
       className={`${Styles.scrollContainer} ${className} ${
-        !metadata.isSetting && Styles.inactive
+        !state.isSetting && Styles.inactive
       }`}
       style={{
         maxHeight: isMobile ? "unset" : `${size.maxHeight}px`,
