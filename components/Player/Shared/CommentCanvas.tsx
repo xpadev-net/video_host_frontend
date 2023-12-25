@@ -85,7 +85,10 @@ const CommentCanvas = ({ url, videoRef, pipVideoRef, className }: props) => {
   useEffect(() => {
     if (!niconicommentsRef.current || !canvasRef.current || !pipVideoRef)
       return;
-    niconicommentsRef.current.video = playerConfig.isPipEnable
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    niconicommentsRef.current.renderer.video = playerConfig.isPipEnable
       ? videoRef || undefined
       : undefined;
     pipVideoRef.srcObject = canvasRef.current.captureStream(60);
