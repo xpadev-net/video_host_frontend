@@ -8,27 +8,30 @@ import {
 } from "@mui/icons-material";
 import { Options } from "@xpadev-net/niconicomments";
 import { useAtom, useSetAtom } from "jotai";
-import { ForwardedRef, forwardRef } from "react";
+import { FC, useEffect, useRef } from "react";
 
 import {
   NiconicommentsConfigAtom,
   PlayerConfigAtom,
   PlayerSettingAtom,
 } from "@/atoms/Player";
+import { MenuProps } from "@/components/Player/Shared/Setting";
 import { Switch } from "@/components/Switch/Switch";
 
 import Styles from "./pages.module.scss";
 
-type props = {
-  className?: string;
-};
-
-const Comments_ = ({ className }: props, ref: ForwardedRef<HTMLDivElement>) => {
+const Comments: FC<MenuProps> = ({ className, updateScale }) => {
   const [playerConfig, setPlayerConfig] = useAtom(PlayerConfigAtom);
   const [niconicommentsConfig, setNiconicommentsConfig] = useAtom(
     NiconicommentsConfigAtom,
   );
   const setPlayerSetting = useSetAtom(PlayerSettingAtom);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!ref.current) return;
+    updateScale?.(ref.current);
+  }, [updateScale]);
 
   const backToMain = () => {
     setPlayerSetting((prev) => prev.filter((page) => page !== "comments"));
@@ -141,7 +144,5 @@ const Comments_ = ({ className }: props, ref: ForwardedRef<HTMLDivElement>) => {
     </div>
   );
 };
-
-const Comments = forwardRef(Comments_);
 
 export { Comments };

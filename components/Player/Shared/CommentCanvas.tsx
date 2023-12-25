@@ -21,23 +21,17 @@ const CommentCanvas = ({ url, videoRef, pipVideoRef, className }: props) => {
   const commentSmoothingRef = useRef({ offset: 0, timestamp: 0 });
 
   useEffect(() => {
-    const onVideoPlay = () => {
+    const updateTimestamp = () => {
       commentSmoothingRef.current = {
-        offset: videoRef?.currentTime || 0,
+        offset: videoRef?.currentTime ?? 0,
         timestamp: performance.now(),
       };
     };
-    const onTimeUpdate = () => {
-      commentSmoothingRef.current = {
-        offset: videoRef?.currentTime || 0,
-        timestamp: performance.now(),
-      };
-    };
-    videoRef?.addEventListener("play", onVideoPlay);
-    videoRef?.addEventListener("timeupdate", onTimeUpdate);
+    videoRef?.addEventListener("play", updateTimestamp);
+    videoRef?.addEventListener("timeupdate", updateTimestamp);
     return () => {
-      videoRef?.removeEventListener("play", onVideoPlay);
-      videoRef?.removeEventListener("timeupdate", onTimeUpdate);
+      videoRef?.removeEventListener("play", updateTimestamp);
+      videoRef?.removeEventListener("timeupdate", updateTimestamp);
     };
   }, [videoRef]);
 
@@ -47,9 +41,7 @@ const CommentCanvas = ({ url, videoRef, pipVideoRef, className }: props) => {
       niconicommentsRef.current = undefined;
       const res = await request<CommentResponse>(`/comments/${url}/`);
       if (res.status !== "success") return;
-      const video = playerConfig.isPipEnable
-        ? videoRef || undefined
-        : undefined;
+      const video = (playerConfig.isPipEnable && videoRef) || undefined;
       niconicommentsRef.current = new NiconiComments(
         canvasRef.current,
         [
@@ -88,9 +80,8 @@ const CommentCanvas = ({ url, videoRef, pipVideoRef, className }: props) => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    niconicommentsRef.current.renderer.video = playerConfig.isPipEnable
-      ? videoRef || undefined
-      : undefined;
+    niconicommentsRef.current.renderer.video =
+      (playerConfig.isPipEnable && videoRef) || undefined;
     pipVideoRef.srcObject = canvasRef.current.captureStream(60);
   }, [
     playerConfig.isPipEnable,

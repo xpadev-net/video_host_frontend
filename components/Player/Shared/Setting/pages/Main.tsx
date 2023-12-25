@@ -6,7 +6,7 @@ import {
   SlowMotionVideo,
 } from "@mui/icons-material";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { ForwardedRef, forwardRef } from "react";
+import { FC, useEffect, useRef } from "react";
 
 import {
   PlayerConfigAtom,
@@ -14,20 +14,23 @@ import {
   VideoMetadataAtom,
   WrapperRefAtom,
 } from "@/atoms/Player";
+import { MenuProps } from "@/components/Player/Shared/Setting";
 import { Switch } from "@/components/Switch/Switch";
 import { EnableComments } from "@/contexts/env";
 
 import Styles from "./pages.module.scss";
 
-type props = {
-  className?: string;
-};
-
-const Main_ = ({ className }: props, ref: ForwardedRef<HTMLDivElement>) => {
+const Main: FC<MenuProps> = ({ className, updateScale }) => {
   const [playerConfig, setPlayerConfig] = useAtom(PlayerConfigAtom);
   const [metadata, setMetadata] = useAtom(VideoMetadataAtom);
   const setPlayerSetting = useSetAtom(PlayerSettingAtom);
   const wrapperRef = useAtomValue(WrapperRefAtom);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!ref.current) return;
+    updateScale?.(ref.current);
+  }, [updateScale]);
 
   const toggleWindowFullscreen = () => {
     setPlayerConfig((pv) => ({
@@ -120,7 +123,5 @@ const Main_ = ({ className }: props, ref: ForwardedRef<HTMLDivElement>) => {
     </div>
   );
 };
-
-const Main = forwardRef(Main_);
 
 export { Main };

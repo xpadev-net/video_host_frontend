@@ -1,28 +1,28 @@
 import { Check, KeyboardArrowLeft } from "@mui/icons-material";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { ForwardedRef, forwardRef } from "react";
+import { FC, useEffect, useRef } from "react";
 
 import {
   PlayerConfigAtom,
   PlayerSettingAtom,
   VideoRefAtom,
 } from "@/atoms/Player";
+import { MenuProps } from "@/components/Player/Shared/Setting";
 
 import Styles from "./pages.module.scss";
 
-type props = {
-  className?: string;
-};
-
 const suggestedRate = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 3, 4];
 
-const PlaybackRate_ = (
-  { className }: props,
-  ref: ForwardedRef<HTMLDivElement>,
-) => {
+const PlaybackRate: FC<MenuProps> = ({ className, updateScale }) => {
   const [playerConfig, setPlayerConfig] = useAtom(PlayerConfigAtom);
   const setPlayerSetting = useSetAtom(PlayerSettingAtom);
   const videoRef = useAtomValue(VideoRefAtom);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!ref.current) return;
+    updateScale?.(ref.current);
+  }, [updateScale]);
 
   const backToMain = () => {
     setPlayerSetting((prev) => prev.filter((page) => page !== "playbackRate"));
@@ -65,7 +65,5 @@ const PlaybackRate_ = (
     </div>
   );
 };
-
-const PlaybackRate = forwardRef(PlaybackRate_);
 
 export { PlaybackRate };

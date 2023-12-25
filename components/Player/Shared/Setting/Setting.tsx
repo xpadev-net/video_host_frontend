@@ -1,12 +1,5 @@
 import { useAtom, useAtomValue } from "jotai";
-import {
-  ForwardRefExoticComponent,
-  MouseEvent,
-  RefAttributes,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { FC, MouseEvent, useEffect, useRef, useState } from "react";
 
 import { SettingKey } from "@/@types/Player";
 import {
@@ -22,21 +15,24 @@ import { useIsMobile } from "@/libraries/isMobile";
 
 import Styles from "./Setting.module.scss";
 
-type props = {
+type Props = {
   className?: string;
 };
 
+export type MenuProps = {
+  className?: string;
+  updateScale?: (ref: HTMLDivElement) => void;
+};
+
 const Menu: {
-  [key in SettingKey]?: ForwardRefExoticComponent<
-    props & RefAttributes<HTMLDivElement>
-  >;
+  [key in SettingKey]?: FC<MenuProps>;
 } = {
   main: Main,
   playbackRate: PlaybackRate,
   comments: EnableComments ? Comments : undefined,
 };
 
-const Setting = ({ className }: props) => {
+const Setting = ({ className }: Props) => {
   const [metadata, setMetadata] = useAtom(VideoMetadataAtom);
   const [size, setSize] = useState({
     width: 0,
@@ -47,7 +43,6 @@ const Setting = ({ className }: props) => {
   const playerSetting = useAtomValue(PlayerSettingAtom);
   const wrapperRef = useAtomValue(WrapperRefAtom);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const targetRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
   useEffect(() => {
     const onClick = () => {
@@ -62,12 +57,11 @@ const Setting = ({ className }: props) => {
     };
   }, []);
 
-  useEffect(() => {
-    if (!targetRef.current || !wrapperRef || !scrollContainerRef.current)
-      return;
-    const width = targetRef.current.clientWidth,
-      height = targetRef.current.clientHeight,
-      left = targetRef.current.offsetLeft;
+  const updateScale = (ref: HTMLDivElement) => {
+    if (!wrapperRef) return;
+    const width = ref.clientWidth,
+      height = ref.clientHeight,
+      left = ref.offsetLeft;
     setSize((pv) => ({
       ...pv,
       width,
@@ -75,7 +69,7 @@ const Setting = ({ className }: props) => {
       left,
       maxHeight: wrapperRef.clientHeight - 120,
     }));
-  }, [targetRef.current, wrapperRef]);
+  };
 
   useEffect(() => {
     if (!wrapperRef) return;
@@ -126,7 +120,7 @@ const Setting = ({ className }: props) => {
             const Target = Menu[key];
             if (!Target) return;
             if (index + 1 === playerSetting.length) {
-              return <Target key={key} ref={targetRef} />;
+              return <Target key={key} updateScale={updateScale} />;
             }
             return <Target key={key} />;
           })}
