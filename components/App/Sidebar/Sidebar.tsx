@@ -1,9 +1,9 @@
-import { History, Home } from "@mui/icons-material";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { OverlaySidebar } from "@/components/App/Sidebar/OverlaySidebar";
 import Styles from "@/components/App/Sidebar/Sidebar.module.scss";
+import { History, Home } from "@/components/icons";
 import { useIsMobile } from "@/libraries/isMobile";
 
 const Sidebar = () => {
@@ -18,11 +18,11 @@ const Sidebar = () => {
     >
       <div className={Styles.container}>
         <Link className={Styles.buttonWrapper} href={"/"}>
-          <Home className={Styles.icon} />
+          <Home />
           <span className={Styles.text}>ホーム</span>
         </Link>
         <Link className={Styles.buttonWrapper} href={"/history"}>
-          <History className={Styles.icon} />
+          <History />
           <span className={Styles.text}>履歴</span>
         </Link>
       </div>

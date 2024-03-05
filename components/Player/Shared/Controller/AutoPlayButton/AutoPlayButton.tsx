@@ -1,9 +1,9 @@
-import { Pause, PlayArrow } from "@mui/icons-material";
 import * as Switch from "@radix-ui/react-switch";
 import { useAtom } from "jotai";
 import { MouseEvent } from "react";
 
 import { PlayerConfigAtom } from "@/atoms/Player";
+import { Pause, PlayArrow } from "@/components/icons";
 
 import Styles from "./AutoPlayButton.module.scss";
 

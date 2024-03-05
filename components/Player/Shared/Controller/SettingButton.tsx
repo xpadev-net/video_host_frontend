@@ -1,8 +1,8 @@
-import { Settings } from "@mui/icons-material";
 import { useAtom, useSetAtom } from "jotai";
 import { MouseEvent } from "react";
 
 import { PlayerSettingAtom, PlayerStateAtom } from "@/atoms/Player";
+import { Settings } from "@/components/icons";
 
 type props = {
   className?: string;

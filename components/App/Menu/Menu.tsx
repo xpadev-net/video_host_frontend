@@ -1,9 +1,9 @@
-import { Menu, OndemandVideoSharp } from "@mui/icons-material";
 import { useSetAtom } from "jotai";
 import Link from "next/link";
 
 import { sidebarState } from "@/atoms/SidebarState";
 import Styles from "@/components/App/Menu/Menu.module.scss";
+import { Menu, OndemandVideo } from "@/components/icons";
 import { useIsMobile } from "@/libraries/isMobile";
 import ButtonStyles from "@/styles/button.module.scss";
 
@@ -20,12 +20,12 @@ const HeaderMenu = () => {
           className={`${ButtonStyles.buttonWrapper} ${ButtonStyles.hover}`}
           onClick={toggleSidebar}
         >
-          <Menu className={ButtonStyles.button} />
+          <Menu />
         </div>
       )}
       <Link href={"/"} className={Styles.homeButton}>
         <div className={ButtonStyles.buttonWrapper}>
-          <OndemandVideoSharp className={ButtonStyles.button} />
+          <OndemandVideo />
         </div>
       </Link>
     </div>

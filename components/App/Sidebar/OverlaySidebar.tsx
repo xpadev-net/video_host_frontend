@@ -1,10 +1,10 @@
-import { History, Home } from "@mui/icons-material";
 import { useAtom } from "jotai";
 import Link from "next/link";
 
 import { sidebarState } from "@/atoms/SidebarState";
 import { HeaderMenu } from "@/components/App/Menu/Menu";
 import Styles from "@/components/App/Sidebar/OverlaySidebar.module.scss";
+import { History, Home } from "@/components/icons";
 
 const OverlaySidebar = () => {
   const [isActive, setIsActive] = useAtom(sidebarState);
@@ -16,11 +16,11 @@ const OverlaySidebar = () => {
           <HeaderMenu />
         </div>
         <Link className={Styles.overlayItem} href={"/"}>
-          <Home className={Styles.icon} />
+          <Home />
           <span className={Styles.text}>ホーム</span>
         </Link>
         <Link className={Styles.overlayItem} href={"/history"}>
-          <History className={Styles.icon} />
+          <History />
           <span className={Styles.text}>履歴</span>
         </Link>
       </div>

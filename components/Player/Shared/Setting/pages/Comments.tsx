@@ -1,11 +1,3 @@
-import {
-  ChatBubble,
-  Filter9,
-  KeyboardArrowLeft,
-  PictureInPictureAlt,
-  SelectAll,
-  SixtyFpsSelect,
-} from "@mui/icons-material";
 import { Options } from "@xpadev-net/niconicomments";
 import { useAtom, useSetAtom } from "jotai";
 import { FC, useEffect, useRef } from "react";
@@ -15,6 +7,14 @@ import {
   PlayerConfigAtom,
   PlayerSettingAtom,
 } from "@/atoms/Player";
+import {
+  ChatBubble,
+  Filter9,
+  KeyboardArrowLeft,
+  PictureInPictureAlt,
+  SelectAll,
+  SixtyFpsSelect,
+} from "@/components/icons";
 import { MenuProps } from "@/components/Player/Shared/Setting";
 import { Switch } from "@/components/Switch/Switch";
 
@@ -62,7 +62,7 @@ const Comments: FC<MenuProps> = ({ className, updateScale }) => {
       <div className={`${Styles.item} ${Styles.header}`} onClick={backToMain}>
         <div className={Styles.left}>
           <div className={Styles.iconWrapper}>
-            <KeyboardArrowLeft className={Styles.icon} />
+            <KeyboardArrowLeft />
           </div>
           <span className={Styles.text}>コメント</span>
         </div>
@@ -70,7 +70,7 @@ const Comments: FC<MenuProps> = ({ className, updateScale }) => {
       <div className={Styles.item} onClick={toggleCommentActive}>
         <div className={Styles.left}>
           <div className={Styles.iconWrapper}>
-            <ChatBubble className={Styles.icon} />
+            <ChatBubble />
           </div>
           <span className={Styles.text}>コメント</span>
         </div>
@@ -86,7 +86,7 @@ const Comments: FC<MenuProps> = ({ className, updateScale }) => {
       >
         <div className={Styles.left}>
           <div className={Styles.iconWrapper}>
-            <SixtyFpsSelect className={Styles.icon} />
+            <SixtyFpsSelect />
           </div>
           <span className={Styles.text}>FPS表示</span>
         </div>
@@ -102,7 +102,7 @@ const Comments: FC<MenuProps> = ({ className, updateScale }) => {
       >
         <div className={Styles.left}>
           <div className={Styles.iconWrapper}>
-            <SelectAll className={Styles.icon} />
+            <SelectAll />
           </div>
           <span className={Styles.text}>当たり判定表示</span>
         </div>
@@ -118,7 +118,7 @@ const Comments: FC<MenuProps> = ({ className, updateScale }) => {
       >
         <div className={Styles.left}>
           <div className={Styles.iconWrapper}>
-            <Filter9 className={Styles.icon} />
+            <Filter9 />
           </div>
           <span className={Styles.text}>コメント数表示</span>
         </div>
@@ -131,7 +131,7 @@ const Comments: FC<MenuProps> = ({ className, updateScale }) => {
       <div className={Styles.item} onClick={togglePipEnable}>
         <div className={Styles.left}>
           <div className={Styles.iconWrapper}>
-            <PictureInPictureAlt className={Styles.icon} />
+            <PictureInPictureAlt />
           </div>
           <span className={Styles.text}>PiP</span>
         </div>

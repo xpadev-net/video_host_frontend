@@ -1,12 +1,12 @@
+import { useAtomValue } from "jotai";
+
+import { PlayerConfigAtom } from "@/atoms/Player";
 import {
   VolumeDown,
   VolumeMute,
   VolumeOff,
   VolumeUp,
-} from "@mui/icons-material";
-import { useAtomValue } from "jotai";
-
-import { PlayerConfigAtom } from "@/atoms/Player";
+} from "@/components/icons";
 
 const VolumeIcon = () => {
   const { volume } = useAtomValue(PlayerConfigAtom);

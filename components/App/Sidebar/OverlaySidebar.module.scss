@@ -38,11 +38,7 @@
     padding: 8px 0;
     margin: 8px 0;
     display: flex;
-    .icon {
-      width: 24px;
-      height: 24px;
-      margin-right: 8px;
-    }
+    gap: 8px;
     .text {
       line-height: 24px;
       height: 24px;

@@ -1,4 +1,3 @@
-import { Check, KeyboardArrowLeft } from "@mui/icons-material";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { FC, useEffect, useRef } from "react";
 
@@ -7,6 +6,7 @@ import {
   PlayerSettingAtom,
   VideoRefAtom,
 } from "@/atoms/Player";
+import { Check, KeyboardArrowLeft } from "@/components/icons";
 import { MenuProps } from "@/components/Player/Shared/Setting";
 
 import Styles from "./pages.module.scss";
@@ -39,7 +39,7 @@ const PlaybackRate: FC<MenuProps> = ({ className, updateScale }) => {
       <div className={`${Styles.item} ${Styles.header}`} onClick={backToMain}>
         <div className={Styles.left}>
           <div className={Styles.iconWrapper}>
-            <KeyboardArrowLeft className={Styles.icon} />
+            <KeyboardArrowLeft />
           </div>
           <span className={Styles.text}>再生速度</span>
         </div>
@@ -53,9 +53,7 @@ const PlaybackRate: FC<MenuProps> = ({ className, updateScale }) => {
           >
             <div className={Styles.left}>
               <div className={Styles.iconWrapper}>
-                {playerConfig.playbackRate === value && (
-                  <Check className={Styles.icon} />
-                )}
+                {playerConfig.playbackRate === value && <Check />}
               </div>
               <span className={Styles.text}>{value}</span>
             </div>
