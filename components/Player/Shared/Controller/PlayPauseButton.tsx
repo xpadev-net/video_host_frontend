@@ -1,8 +1,8 @@
-import { Pause, PlayArrow } from "@mui/icons-material";
 import { useAtomValue } from "jotai";
 import { MouseEvent } from "react";
 
 import { PlayerStateAtom, VideoRefAtom } from "@/atoms/Player";
+import { Pause, PlayArrow } from "@/components/icons";
 
 type props = {
   className?: string;

@@ -1,10 +1,3 @@
-import {
-  ChatBubble,
-  Hls,
-  KeyboardArrowRight,
-  OpenInFull,
-  SlowMotionVideo,
-} from "@mui/icons-material";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { FC, useEffect, useRef } from "react";
 
@@ -14,6 +7,13 @@ import {
   PlayerStateAtom,
   WrapperRefAtom,
 } from "@/atoms/Player";
+import {
+  ChatBubble,
+  Hls,
+  KeyboardArrowRight,
+  OpenInFull,
+  SlowMotionVideo,
+} from "@/components/icons";
 import { MenuProps } from "@/components/Player/Shared/Setting";
 import { Switch } from "@/components/Switch/Switch";
 import { EnableComments } from "@/contexts/env";
@@ -67,14 +67,14 @@ const Main: FC<MenuProps> = ({ className, updateScale }) => {
       <div className={Styles.item} onClick={openPlaybackRate}>
         <div className={Styles.left}>
           <div className={Styles.iconWrapper}>
-            <SlowMotionVideo className={Styles.icon} />
+            <SlowMotionVideo />
           </div>
           <span className={Styles.text}>再生速度</span>
         </div>
         <div className={Styles.right}>
           <span>{playerConfig.playbackRate}</span>
           <div className={Styles.iconWrapper}>
-            <KeyboardArrowRight className={Styles.icon} />
+            <KeyboardArrowRight />
           </div>
         </div>
       </div>
@@ -82,14 +82,14 @@ const Main: FC<MenuProps> = ({ className, updateScale }) => {
         <div className={Styles.item} onClick={openComments}>
           <div className={Styles.left}>
             <div className={Styles.iconWrapper}>
-              <ChatBubble className={Styles.icon} />
+              <ChatBubble />
             </div>
             <span className={Styles.text}>コメント</span>
           </div>
           <div className={Styles.right}>
             <span>{playerConfig.isNiconicommentsEnable ? "有効" : "無効"}</span>
             <div className={Styles.iconWrapper}>
-              <KeyboardArrowRight className={Styles.icon} />
+              <KeyboardArrowRight />
             </div>
           </div>
         </div>
@@ -97,7 +97,7 @@ const Main: FC<MenuProps> = ({ className, updateScale }) => {
       <div className={Styles.item} onClick={toggleWindowFullscreen}>
         <div className={Styles.left}>
           <div className={Styles.iconWrapper}>
-            <OpenInFull className={Styles.icon} />
+            <OpenInFull />
           </div>
           <span className={Styles.text}>ウィンドウフルスクリーン</span>
         </div>
@@ -110,7 +110,7 @@ const Main: FC<MenuProps> = ({ className, updateScale }) => {
       <div className={Styles.item} onClick={toggleHls}>
         <div className={Styles.left}>
           <div className={Styles.iconWrapper}>
-            <Hls className={Styles.icon} />
+            <Hls />
           </div>
           <span className={Styles.text}>HLS有効化</span>
         </div>

@@ -1,4 +1,3 @@
-import { Search as SearchIcon } from "@mui/icons-material";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import {
@@ -11,6 +10,7 @@ import {
 
 import { SuggestRes, SuggestResponse } from "@/@types/api";
 import Styles from "@/components/App/Header/Search/Search.module.scss";
+import { Search as SearchIcon } from "@/components/icons";
 import { useIsMobile } from "@/libraries/isMobile";
 import { request } from "@/libraries/request";
 import { useForwardRef } from "@/libraries/useForwardRef";
@@ -89,7 +89,7 @@ const Search_ = ({ className }: props, ref: ForwardedRef<HTMLInputElement>) => {
         )}
       </div>
       <button className={Styles.button} onClick={onSearchClick}>
-        <SearchIcon className={Styles.icon} />
+        <SearchIcon />
       </button>
     </div>
   );

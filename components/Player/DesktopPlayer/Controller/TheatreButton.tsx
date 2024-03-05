@@ -1,7 +1,7 @@
-import { Crop32Sharp, Crop169Sharp } from "@mui/icons-material";
 import { useAtom, useAtomValue } from "jotai";
 
 import { PlayerConfigAtom, PlayerStateAtom } from "@/atoms/Player";
+import { Crop32, Crop169 } from "@/components/icons";
 
 type props = {
   className?: string;
@@ -16,7 +16,7 @@ const TheatreButton = ({ className }: props) => {
   if (isFullscreen) return <></>;
   return (
     <div className={className} onClick={toggleTheatre}>
-      {playerConfig.isTheatre ? <Crop169Sharp /> : <Crop32Sharp />}
+      {playerConfig.isTheatre ? <Crop169 /> : <Crop32 />}
     </div>
   );
 };

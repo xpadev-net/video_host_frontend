@@ -15,10 +15,6 @@
     "lint:fix": "npm run format&&npm run eslint:fix&&npm run check-types"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.3",
-    "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^5.15.2",
-    "@mui/material": "^5.15.2",
     "@radix-ui/react-switch": "^1.0.3",
     "@types/node": "^20.10.5",
     "@types/react": "^18.2.45",

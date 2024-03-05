@@ -1,11 +1,11 @@
+import { useState } from "react";
+
+import { MovieItem } from "@/@types/api";
 import {
   KeyboardArrowDown,
   KeyboardArrowUp,
   PlaylistPlay,
-} from "@mui/icons-material";
-import { useState } from "react";
-
-import { MovieItem } from "@/@types/api";
+} from "@/components/icons";
 import { MovieList } from "@/components/MovieList";
 import Styles from "@/components/PlayList/PlayList.module.scss";
 
@@ -28,18 +28,14 @@ const PlayList = ({ data, className, maxHeight }: props) => {
         className={`${Styles.header} ${isOpen && Styles.open}`}
         onClick={() => setIsOpen((pv) => !pv)}
       >
-        <PlaylistPlay className={Styles.icon} />
+        <PlaylistPlay />
         <div className={Styles.textWrapper}>
           {data.next && !isOpen && (
             <span className={Styles.nextTitle}>次: {data.next.title}</span>
           )}
           <span className={Styles.title}>{data.movie.seriesTitle}</span>
         </div>
-        {isOpen ? (
-          <KeyboardArrowUp className={Styles.icon} />
-        ) : (
-          <KeyboardArrowDown className={Styles.icon} />
-        )}
+        {isOpen ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
       </div>
       {isOpen && (
         <MovieList
