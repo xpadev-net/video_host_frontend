@@ -6,7 +6,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: process.env.NEXT_PUBLIC_ALLOWED_IMAGE_HOSTNAME,
+        hostname: process.env.NEXT_PUBLIC_ALLOWED_IMAGE_HOSTNAME ?? "*",
       },
     ],
     formats: ['image/webp'],
