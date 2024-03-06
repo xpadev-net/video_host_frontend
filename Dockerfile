@@ -4,11 +4,12 @@ ARG NODE_VERSION=20-slim
 FROM node:$NODE_VERSION AS builder
 WORKDIR /app
 
-# Prepare node_modules
-COPY ./ ./
+COPY package.json pnpm-lock.yaml ./
 RUN npm install -g pnpm
 RUN pnpm install --frozen-lockfile
 
+# Prepare node_modules
+COPY ./ ./
 
 # Run phase
 FROM node:$NODE_VERSION AS runner
