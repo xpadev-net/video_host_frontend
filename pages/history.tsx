@@ -9,9 +9,11 @@ import Styles from "@/styles/history.module.scss";
 const History = () => {
   const history = useAtomValue(watchedHistoryAtom);
 
-  const historyList = Object.keys(history).map((key) => {
-    return history[key].movie.movie;
-  });
+  const historyList = Object.keys(history)
+    .map((key) => {
+      return history[key].movie.movie;
+    })
+    .toReversed();
 
   return (
     <div className={Styles.wrapper}>
