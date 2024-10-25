@@ -25,35 +25,8 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@/atoms/*": [
-        "atoms/*"
-      ],
-      "@/components/*": [
-        "components/*"
-      ],
-      "@/public/*": [
-        "public/*"
-      ],
-      "@/pages/*": [
-        "pages/*"
-      ],
-      "@/app/*": [
-        "app/*"
-      ],
-      "@/@types/*": [
-        "@types/*"
-      ],
-      "@/styles/*": [
-        "styles/*"
-      ],
-      "@/libraries/*": [
-        "libraries/*"
-      ],
-      "@/assets/*": [
-        "assets/*"
-      ],
-      "@/contexts/*": [
-        "contexts/*"
+      "@/*": [
+        "src/*"
       ]
     }
   },
