@@ -11,7 +11,7 @@
     "prepare": "husky",
     "check-types": "npx tsc --noEmit --jsx react-jsx",
     "eslint:fix": "next lint --fix",
-    "format": "prettier --write \"{app,pages,components}/**/*.{tsx,ts,js,json,css,scss}\"",
+    "format": "prettier --write \"src/**/*.{tsx,ts,js,json,css,scss}\"",
     "lint:fix": "npm run format&&npm run eslint:fix&&npm run check-types"
   },
   "dependencies": {
