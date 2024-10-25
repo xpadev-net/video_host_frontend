@@ -3,17 +3,18 @@ import { useAtom, useSetAtom } from "jotai";
 import { useRouter } from "next/router";
 import { RefObject, useEffect, useRef, useState } from "react";
 
-import { MovieItem } from "@/@types/api";
+import {FilteredMovie} from "@/@types/v4Api";
 import {
   PlayerConfigAtom,
   PlayerStateAtom,
   VideoMetadataAtom,
 } from "@/atoms/Player";
 import { watchedHistoryAtom } from "@/atoms/WatchedHistory";
+import {findNext} from "@/components/Player/utils/findNext";
 
 type props = {
   className?: string;
-  movie?: MovieItem;
+  movie?: FilteredMovie;
   videoRef: RefObject<HTMLVideoElement>;
 };
 
@@ -70,7 +71,7 @@ const Video = ({ className, videoRef, movie }: props) => {
     ) {
       setWatchedHistory({
         ...watchedHistory,
-        [movie.movie.url]: {
+        [movie.id]: {
           movie: movie,
           watched: videoRef.current.currentTime / videoRef.current.duration,
         },
@@ -79,8 +80,10 @@ const Video = ({ className, videoRef, movie }: props) => {
   };
 
   const onVideoEnded = () => {
-    if (!playerConfig.autoPlay || !movie?.next) return;
-    void router.push(`/movie/${movie.next.url}`);
+    if (!playerConfig.autoPlay || !movie) return;
+    const next = findNext(movie);
+    if (!next) return;
+    void router.push(`/movies/${next}`);
   };
 
   const onVideoCanPlay = () => {
@@ -92,66 +95,56 @@ const Video = ({ className, videoRef, movie }: props) => {
 
   useEffect(() => {
     if (!videoRef.current) return;
-    if (!movie?.source) {
+    if (!movie?.contentUrl) {
       videoRef.current.srcObject = null;
       return;
     }
     const setup = () => {
       if (!videoRef.current) return;
-      if (playerConfig.isHls) {
-        if (videoRef.current.canPlayType("application/vnd.apple.mpegurl")) {
-          videoRef.current.src = movie.source.http;
-          videoRef.current.crossOrigin = movie.source.anonymous
-            ? ""
-            : "use-credentials";
-        } else if (Hls.isSupported()) {
-          const hls = new Hls({
-            xhrSetup: function (xhr, url) {
-              xhr.withCredentials = !movie.source.anonymous;
-              xhr.open("GET", url);
-            },
-            enableWorker: true,
-            lowLatencyMode: true,
-          });
-          hls.loadSource(movie.source.hls);
-          hls.attachMedia(videoRef.current);
-          hlsRef.current = hls;
-          videoRef.current.crossOrigin = "anonymous";
-        } else {
-          console.error(
-            "This is an old browser that does not support MSE https://developer.mozilla.org/en-US/docs/Web/API/Media_Source_Extensions_API",
-          );
-        }
+      if (videoRef.current.canPlayType("application/vnd.apple.mpegurl")) {
+        videoRef.current.src = movie.contentUrl;
+        videoRef.current.crossOrigin = "use-credentials";
+      } else if (Hls.isSupported()) {
+        const hls = new Hls({
+          xhrSetup: function (xhr, url) {
+            xhr.withCredentials = true;
+            xhr.open("GET", url);
+          },
+          enableWorker: true,
+          lowLatencyMode: true,
+        });
+        hls.loadSource(movie.contentUrl);
+        hls.attachMedia(videoRef.current);
+        hlsRef.current = hls;
+        videoRef.current.crossOrigin = "anonymous";
       } else {
-        videoRef.current.src = movie.source.http;
-        videoRef.current.crossOrigin = movie.source.anonymous
-          ? ""
-          : "use-credentials";
-        videoRef.current.load();
+        console.error(
+          "This is an old browser that does not support MSE https://developer.mozilla.org/en-US/docs/Web/API/Media_Source_Extensions_API",
+        );
       }
       videoRef.current.playbackRate = playerConfig.playbackRate;
       videoRef.current.volume = playerConfig.volume;
     };
 
-    if (movie.movie.url === url) {
+    if (movie.contentUrl=== url) {
       const currentTIme = videoRef.current.currentTime;
       setup();
       videoRef.current.currentTime = currentTIme;
     } else {
       setWatchedHistory({
         ...watchedHistory,
-        [movie.movie.url]: {
+        [movie.id]: {
           movie: movie,
           watched: 0,
         },
       });
       setup();
     }
-    setUrl(movie.movie.url);
+    setUrl(movie.contentUrl);
     return () => {
       hlsRef.current?.destroy();
     };
-  }, [videoRef.current, movie?.source, playerConfig.isHls]);
+  }, [videoRef.current, movie, playerConfig.isHls]);
 
   return (
     <video

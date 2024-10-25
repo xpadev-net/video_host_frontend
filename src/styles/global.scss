@@ -1,15 +1,26 @@
 @use "colors.scss";
-a{
+a {
   text-decoration: none;
 }
-*{
+* {
   color: colors.$textColor;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
-body{
+body {
   background-color: colors.$backgroundColor;
-  font-family: 'メイリオ', 'Meiryo', BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-  Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family:
+    "メイリオ",
+    "Meiryo",
+    BlinkMacSystemFont,
+    Segoe UI,
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    Fira Sans,
+    Droid Sans,
+    Helvetica Neue,
+    sans-serif;
 }

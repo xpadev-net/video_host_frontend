@@ -4,9 +4,10 @@ import { Movie } from "@/@types/Movie";
 import { MovieCard } from "@/components/Movie";
 
 import Styles from "./MovieList.module.scss";
+import {FilteredMovie} from "@/@types/v4Api";
 
 export type props = {
-  movies: Movie[];
+  movies: FilteredMovie[];
   type: "row" | "column" | "minColumn";
   active?: string;
   className?: string;
@@ -35,16 +36,16 @@ const MovieList = ({ movies, type, active, className }: props) => {
         {movies.map((movie, index) => {
           const indexLabel = (() => {
             if (active === undefined) return undefined;
-            if (movie.url === active) return "active";
+            if (movie.id === active) return "active";
             return index + 1;
           })();
           return (
             <MovieCard
-              key={`${movie.seriesUrl}/${movie.url}`}
+              key={movie.id}
               movie={movie}
               type={type}
               ref={
-                active !== undefined && movie.url === active
+                active !== undefined && movie.id === active
                   ? activeRef
                   : undefined
               }

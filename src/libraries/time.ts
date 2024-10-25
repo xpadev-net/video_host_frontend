@@ -1,4 +1,4 @@
-const time2str = (time:number):string => {
+const time2str = (time: number): string => {
   time = Math.floor(time);
   const sec = `00${(time % 60) % 60}`.slice(-2);
   const min = `00${Math.floor(time / 60) % 60}`.slice(-2);
@@ -8,6 +8,6 @@ const time2str = (time:number):string => {
     return `${hour}:${min}:${sec}`;
   }
   return `${min}:${sec}`;
-}
+};
 
-export {time2str};
+export { time2str };

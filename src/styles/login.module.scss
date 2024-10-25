@@ -1,13 +1,13 @@
-.wrapper{
+.wrapper {
   max-width: 300px;
   width: 100%;
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
-  .form{
+  transform: translate(-50%, -50%);
+  .form {
     text-align: center;
-    .input{
+    .input {
       padding: 10px 10px 10px;
       margin: 10px 0;
       border: none;
@@ -18,24 +18,24 @@
       width: 100%;
       border-radius: 0;
     }
-    .button{
+    .button {
       border: solid 2px #2ecc71;
-      background: rgba(0,0,0,0);
+      background: rgba(0, 0, 0, 0);
       transition: background 250ms;
       margin: 10px 0;
       padding: 15px 50px;
       border-radius: 15px;
-      &:hover{
+      &:hover {
         background: #2ecc71;
       }
     }
   }
 }
-.loading{
+.loading {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0,0,0,0.75);
+  background-color: rgba(0, 0, 0, 0.75);
 }

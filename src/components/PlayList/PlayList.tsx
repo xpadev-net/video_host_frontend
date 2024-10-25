@@ -8,15 +8,18 @@ import {
 } from "@/components/icons";
 import { MovieList } from "@/components/MovieList";
 import Styles from "@/components/PlayList/PlayList.module.scss";
+import {FilteredMovie} from "@/@types/v4Api";
+import {findNext} from "@/components/Player/utils/findNext";
 
 type props = {
-  data: MovieItem;
+  data: FilteredMovie;
   className?: string;
   maxHeight?: number;
 };
 
 const PlayList = ({ data, className, maxHeight }: props) => {
   const [isOpen, setIsOpen] = useState(true);
+  const next = findNext(data);
   return (
     <div
       className={`${Styles.wrapper} ${className}`}
@@ -30,18 +33,18 @@ const PlayList = ({ data, className, maxHeight }: props) => {
       >
         <PlaylistPlay />
         <div className={Styles.textWrapper}>
-          {data.next && !isOpen && (
-            <span className={Styles.nextTitle}>次: {data.next.title}</span>
+          {next && !isOpen && (
+            <span className={Styles.nextTitle}>次: {next.title}</span>
           )}
-          <span className={Styles.title}>{data.movie.seriesTitle}</span>
+          <span className={Styles.title}>{data.series?.title}</span>
         </div>
         {isOpen ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
       </div>
       {isOpen && (
         <MovieList
-          movies={data.playlist}
+          movies={data.series?.movies || []}
           type={"minColumn"}
-          active={data.movie.url}
+          active={data.id}
           className={Styles.list}
         />
       )}

@@ -17,13 +17,14 @@ import { ApiEndpoint, EnableComments } from "@/contexts/env";
 
 import { Controller } from "./Controller";
 import Styles from "./DesktopPlayer.module.scss";
+import {FilteredMovie} from "@/@types/v4Api";
 
 type props = {
   className?: string;
+  data: FilteredMovie;
 };
 
-const DesktopPlayer = ({ className }: props) => {
-  const data = useAtomValue(MovieItemAtom);
+const DesktopPlayer = ({ className, data }: props) => {
   const setVideoAtom = useSetAtom(VideoRefAtom);
   const setWrapperAtom = useSetAtom(WrapperRefAtom);
   const { isPipEnable, isTheatre, isNiconicommentsEnable } =
@@ -98,22 +99,22 @@ const DesktopPlayer = ({ className }: props) => {
             <LoadingIcon className={Styles.icon} />
           </div>
           <img
-            src={`${ApiEndpoint}/img/${data.movie.url}`}
+            src={data.thumbnailUrl||undefined}
             alt={""}
             className={Styles.thumbnail}
           />
         </>
       )}
       <div className={Styles.videoWrapper}>
-        {isNiconicommentsEnable && EnableComments && (
-          <CommentCanvas
-            key={data?.movie.url}
-            url={data?.movie.url}
-            className={Styles.canvas}
-            videoRef={videoRef.current}
-            pipVideoRef={pipVideoRef.current}
-          />
-        )}
+        {/*{isNiconicommentsEnable && EnableComments && (*/}
+        {/*  <CommentCanvas*/}
+        {/*    key={data?.movie.url}*/}
+        {/*    url={data?.movie.url}*/}
+        {/*    className={Styles.canvas}*/}
+        {/*    videoRef={videoRef.current}*/}
+        {/*    pipVideoRef={pipVideoRef.current}*/}
+        {/*  />*/}
+        {/*)}*/}
         <Video className={Styles.video} videoRef={videoRef} movie={data} />
         <video
           className={`${Styles.pipVideo} ${

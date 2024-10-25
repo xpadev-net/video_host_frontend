@@ -1,9 +1,9 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useRef, useState } from "react";
 
+import {FilteredMovie} from "@/@types/v4Api";
 import { LoadingIcon } from "@/assets/LoadingIcon";
 import {
-  MovieItemAtom,
   PlayerConfigAtom,
   PlayerStateAtom,
   VideoRefAtom,
@@ -19,10 +19,10 @@ import { ApiEndpoint, EnableComments } from "@/contexts/env";
 
 type props = {
   className?: string;
+  data: FilteredMovie;
 };
 
-const MobilePlayer = ({ className }: props) => {
-  const data = useAtomValue(MovieItemAtom);
+const MobilePlayer = ({ className, data }: props) => {
   const { isLoading, isFullscreen } = useAtomValue(PlayerStateAtom);
   const { isNiconicommentsEnable } = useAtomValue(PlayerConfigAtom);
   const wrapperRef = useRef<HTMLDivElement>(null);

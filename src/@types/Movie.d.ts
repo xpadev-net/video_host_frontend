@@ -6,4 +6,4 @@ export type Movie = {
   title: string;
   duration: number;
   addAt: number;
-}
+};

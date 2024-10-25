@@ -1,8 +1,8 @@
-import {MovieItem} from "@/@types/api";
+import {FilteredMovie} from "@/@types/v4Api";
 
 export type WatchedHistory = {
   [key: string]: {
-    movie: MovieItem;
+    movie: FilteredMovie;
     watched: number;
-  }
-}
+  };
+};

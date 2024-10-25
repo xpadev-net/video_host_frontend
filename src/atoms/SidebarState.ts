@@ -1,6 +1,7 @@
-import {SidebarState} from "@/@types/SidebarState";
-import {atomWithStorage} from "jotai/utils";
+import { atomWithStorage } from "jotai/utils";
 
-const sidebarState = atomWithStorage<SidebarState>("SidebarState",false);
+import { SidebarState } from "@/@types/SidebarState";
 
-export {sidebarState};
+const sidebarState = atomWithStorage<SidebarState>("SidebarState", false);
+
+export { sidebarState };

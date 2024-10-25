@@ -20,6 +20,7 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@xpadev-net/niconicomments": "^0.2.71",
+    "axios": "^1.7.7",
     "hls.js": "^1.5.13",
     "husky": "^9.1.2",
     "jotai": "^2.9.1",

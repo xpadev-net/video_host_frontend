@@ -1,10 +1,10 @@
 import Link from "next/link";
 
-import { MovieItem } from "@/@types/api";
+import {FilteredMovie} from "@/@types/v4Api";
 import Styles from "@/components/MovieInfo/MovieInfo.module.scss";
 
 type props = {
-  data: MovieItem;
+  data: FilteredMovie;
   className?: string;
 };
 
@@ -12,13 +12,13 @@ const MovieInfo = ({ data, className }: props) => {
   return (
     <div className={`${className} ${Styles.wrapper}`}>
       <div className={Styles.titleWrapper}>
-        <div className={Styles.title}>{data.movie.title}</div>
+        <div className={Styles.title}>{data.title}</div>
         <div className={Styles.postDate}>
-          {new Date(data.movie.addAt * 1000).toLocaleDateString()}
+          {new Date(data.createdAt).toLocaleDateString()}
         </div>
       </div>
-      <Link href={`/series/${data.movie.seriesUrl}`}>
-        {data.movie.seriesTitle}
+      <Link href={`/series/${data.series?.id}`}>
+        {data.series?.title}
       </Link>
     </div>
   );
