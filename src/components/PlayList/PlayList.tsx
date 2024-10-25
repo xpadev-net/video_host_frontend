@@ -6,7 +6,7 @@ import {
   KeyboardArrowUp,
   PlaylistPlay,
 } from "@/components/icons";
-import { MovieList } from "@/components/MovieList";
+import { SeriesList } from "@/components/MovieList/SeriesList";
 import { findNext } from "@/components/Player/utils/findPrevNext";
 import Styles from "@/components/PlayList/PlayList.module.scss";
 
@@ -39,9 +39,9 @@ const PlayList = ({ data, className, maxHeight }: props) => {
         </div>
         {isOpen ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
       </div>
-      {isOpen && (
-        <MovieList
-          movies={data.series?.movies || []}
+      {isOpen && data.series && (
+        <SeriesList
+          series={data.series}
           type={"minColumn"}
           active={data.id}
           className={Styles.list}

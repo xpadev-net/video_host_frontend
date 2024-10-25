@@ -16,6 +16,9 @@ const MoviePage = () => {
   const router = useRouter();
   const query = router.query.movie;
   const data = useMovie(query ? `${query}` : undefined);
+  console.log(data.isLoading, structuredClone(data.data));
+  console.log(query);
+
   const { isTheatre } = useAtomValue(PlayerConfigAtom);
   const wrapperRef = useAtomValue(WrapperRefAtom);
   const [playlistMaxHeight, setPlaylistMaxHeight] = useState<
@@ -35,7 +38,7 @@ const MoviePage = () => {
       resizeObserver.disconnect();
     };
   }, [wrapperRef]);
-  if (data.isLoading || !data.data) return <></>;
+  if (!data.data) return <></>;
   if (data.data.status !== "success") {
     return (
       <div>
