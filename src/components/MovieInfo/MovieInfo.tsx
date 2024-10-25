@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import {FilteredMovie} from "@/@types/v4Api";
+import { FilteredMovie } from "@/@types/v4Api";
 import Styles from "@/components/MovieInfo/MovieInfo.module.scss";
 
 type props = {
@@ -17,9 +17,7 @@ const MovieInfo = ({ data, className }: props) => {
           {new Date(data.createdAt).toLocaleDateString()}
         </div>
       </div>
-      <Link href={`/series/${data.series?.id}`}>
-        {data.series?.title}
-      </Link>
+      <Link href={`/series/${data.series?.id}`}>{data.series?.title}</Link>
     </div>
   );
 };

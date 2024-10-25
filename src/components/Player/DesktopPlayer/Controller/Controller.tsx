@@ -1,7 +1,8 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import { MouseEvent, useState } from "react";
 
-import { MovieItemAtom, VideoMetadataAtom, VideoRefAtom } from "@/atoms/Player";
+import { FilteredMovie } from "@/@types/v4Api";
+import { VideoMetadataAtom, VideoRefAtom } from "@/atoms/Player";
 import { TimeDisplay } from "@/components/Player/DesktopPlayer/Controller/TimeDisplay";
 import { AutoPlayButton } from "@/components/Player/Shared/Controller/AutoPlayButton";
 import { FullscreenButton } from "@/components/Player/Shared/Controller/FullscreenButton";
@@ -17,11 +18,11 @@ import { VolumeIcon } from "./VolumeIcon";
 import { VolumeSlider } from "./VolumeSlider";
 
 type props = {
+  data: FilteredMovie;
   className?: string;
 };
 
-const Controller = ({ className }: props) => {
-  const data = useAtomValue(MovieItemAtom);
+const Controller = ({ className, data }: props) => {
   const videoRef = useAtomValue(VideoRefAtom);
   const setMetadata = useSetAtom(VideoMetadataAtom);
   const [isVolumeExtend, setIsVolumeExtend] = useState(false);
@@ -62,9 +63,9 @@ const Controller = ({ className }: props) => {
       <div className={Styles.background}></div>
       <div className={Styles.buttons} onMouseLeave={onMouseLeave}>
         <div className={Styles.leftSideWrapper}>
-          <PrevNextButton className={Styles.button} type={"prev"} />
+          <PrevNextButton className={Styles.button} type={"prev"} data={data} />
           <PlayPauseButton className={Styles.button} />
-          <PrevNextButton className={Styles.button} type={"next"} />
+          <PrevNextButton className={Styles.button} type={"next"} data={data} />
           <button
             onClick={onVolumeClick}
             onMouseOver={onVolumeMouseOver}

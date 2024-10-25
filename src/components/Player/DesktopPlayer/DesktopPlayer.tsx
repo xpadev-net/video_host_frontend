@@ -1,9 +1,9 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useRef, useState } from "react";
 
+import { FilteredMovie } from "@/@types/v4Api";
 import { LoadingIcon } from "@/assets/LoadingIcon";
 import {
-  MovieItemAtom,
   PlayerConfigAtom,
   PlayerStateAtom,
   VideoRefAtom,
@@ -13,11 +13,10 @@ import { CommentCanvas } from "@/components/Player/Shared/CommentCanvas";
 import { KeyboardHandler } from "@/components/Player/Shared/KeyboardHandler";
 import { MediaSessionHandler } from "@/components/Player/Shared/MediaSessionHandler";
 import { Video } from "@/components/Player/Shared/Video";
-import { ApiEndpoint, EnableComments } from "@/contexts/env";
+import { EnableComments } from "@/contexts/env";
 
 import { Controller } from "./Controller";
 import Styles from "./DesktopPlayer.module.scss";
-import {FilteredMovie} from "@/@types/v4Api";
 
 type props = {
   className?: string;
@@ -99,22 +98,22 @@ const DesktopPlayer = ({ className, data }: props) => {
             <LoadingIcon className={Styles.icon} />
           </div>
           <img
-            src={data.thumbnailUrl||undefined}
+            src={data.thumbnailUrl || undefined}
             alt={""}
             className={Styles.thumbnail}
           />
         </>
       )}
       <div className={Styles.videoWrapper}>
-        {/*{isNiconicommentsEnable && EnableComments && (*/}
-        {/*  <CommentCanvas*/}
-        {/*    key={data?.movie.url}*/}
-        {/*    url={data?.movie.url}*/}
-        {/*    className={Styles.canvas}*/}
-        {/*    videoRef={videoRef.current}*/}
-        {/*    pipVideoRef={pipVideoRef.current}*/}
-        {/*  />*/}
-        {/*)}*/}
+        {isNiconicommentsEnable && EnableComments && (
+          <CommentCanvas
+            key={data?.id}
+            url={data?.id}
+            className={Styles.canvas}
+            videoRef={videoRef.current}
+            pipVideoRef={pipVideoRef.current}
+          />
+        )}
         <Video className={Styles.video} videoRef={videoRef} movie={data} />
         <video
           className={`${Styles.pipVideo} ${
@@ -126,9 +125,9 @@ const DesktopPlayer = ({ className, data }: props) => {
           onPause={onPipPause}
         />
       </div>
-      <Controller className={Styles.controller} />
-      <KeyboardHandler />
-      <MediaSessionHandler />
+      <Controller className={Styles.controller} data={data} />
+      <KeyboardHandler data={data} />
+      <MediaSessionHandler data={data} />
     </div>
   );
 };

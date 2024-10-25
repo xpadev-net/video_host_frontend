@@ -1,15 +1,14 @@
 import { useState } from "react";
 
-import { MovieItem } from "@/@types/api";
+import { FilteredMovie } from "@/@types/v4Api";
 import {
   KeyboardArrowDown,
   KeyboardArrowUp,
   PlaylistPlay,
 } from "@/components/icons";
 import { MovieList } from "@/components/MovieList";
+import { findNext } from "@/components/Player/utils/findPrevNext";
 import Styles from "@/components/PlayList/PlayList.module.scss";
-import {FilteredMovie} from "@/@types/v4Api";
-import {findNext} from "@/components/Player/utils/findNext";
 
 type props = {
   data: FilteredMovie;

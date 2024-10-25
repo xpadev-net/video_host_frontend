@@ -1,24 +1,25 @@
-import { useAtomValue } from "jotai";
 import { useRouter } from "next/router";
 import { MouseEvent } from "react";
 
-import { MovieItemAtom } from "@/atoms/Player";
+import { FilteredMovie } from "@/@types/v4Api";
 import { SkipNext, SkipPrevious } from "@/components/icons";
+import { findNext, findPrev } from "@/components/Player/utils/findPrevNext";
 
 type props = {
   className?: string;
   type: "prev" | "next";
+  data: FilteredMovie;
 };
 
-const PrevNextButton = ({ className, type }: props) => {
+const PrevNextButton = ({ className, type, data }: props) => {
   const router = useRouter();
-  const data = useAtomValue(MovieItemAtom);
 
-  const item = data?.[type];
+  const item = type === "prev" ? findPrev(data) : findNext(data);
+
   if (!item) return <></>;
   const onPrevClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    void router.push(`/movie/${item.url}`);
+    void router.push(`/movie/${item.id}`);
   };
   return (
     <button onClick={onPrevClick} className={className}>

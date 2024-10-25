@@ -30,7 +30,7 @@ const Main: FC<MenuProps> = ({ className, updateScale }) => {
   useEffect(() => {
     if (!ref.current) return;
     updateScale?.(ref.current);
-  }, [updateScale]);
+  }, [updateScale, ref.current]);
 
   const toggleWindowFullscreen = () => {
     setPlayerConfig((pv) => ({

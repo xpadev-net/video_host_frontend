@@ -1,25 +1,21 @@
-import { useAtomValue, useSetAtom } from "jotai";
+import { useAtomValue } from "jotai";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-import {
-  PlayerConfigAtom,
-  VideoMetadataAtom,
-  WrapperRefAtom,
-} from "@/atoms/Player";
+import { PlayerConfigAtom, WrapperRefAtom } from "@/atoms/Player";
 import { MovieInfo } from "@/components/MovieInfo";
 import { Player } from "@/components/Player";
 import { PlayList } from "@/components/PlayList";
 import { SiteName } from "@/contexts/env";
-import {useMovie} from "@/hooks/useMovie";
+import { useMovie } from "@/hooks/useMovie";
 import { useIsMobile } from "@/libraries/isMobile";
 import Styles from "@/styles/movie.module.scss";
 
 const MoviePage = () => {
   const router = useRouter();
   const query = router.query.movie;
-  const data = useMovie(query? `${query}` : undefined);
+  const data = useMovie(query ? `${query}` : undefined);
   const { isTheatre } = useAtomValue(PlayerConfigAtom);
   const wrapperRef = useAtomValue(WrapperRefAtom);
   const [playlistMaxHeight, setPlaylistMaxHeight] = useState<

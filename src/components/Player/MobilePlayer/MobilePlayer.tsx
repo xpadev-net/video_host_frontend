@@ -1,7 +1,7 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useRef, useState } from "react";
 
-import {FilteredMovie} from "@/@types/v4Api";
+import { FilteredMovie } from "@/@types/v4Api";
 import { LoadingIcon } from "@/assets/LoadingIcon";
 import {
   PlayerConfigAtom,
@@ -15,7 +15,7 @@ import { CommentCanvas } from "@/components/Player/Shared/CommentCanvas";
 import { KeyboardHandler } from "@/components/Player/Shared/KeyboardHandler";
 import { MediaSessionHandler } from "@/components/Player/Shared/MediaSessionHandler";
 import { Video } from "@/components/Player/Shared/Video";
-import { ApiEndpoint, EnableComments } from "@/contexts/env";
+import { EnableComments } from "@/contexts/env";
 
 type props = {
   className?: string;
@@ -67,7 +67,7 @@ const MobilePlayer = ({ className, data }: props) => {
               <LoadingIcon className={Styles.icon} />
             </div>
             <img
-              src={`${ApiEndpoint}/img/${data.movie.url}`}
+              src={data.thumbnailUrl ?? ""}
               alt={""}
               className={Styles.thumbnail}
             />
@@ -75,8 +75,8 @@ const MobilePlayer = ({ className, data }: props) => {
         )}
         {isNiconicommentsEnable && EnableComments && (
           <CommentCanvas
-            key={data?.movie.url}
-            url={data?.movie.url}
+            key={data?.id}
+            url={data?.id}
             className={Styles.canvas}
             videoRef={videoRef.current}
             pipVideoRef={null}
@@ -84,9 +84,9 @@ const MobilePlayer = ({ className, data }: props) => {
         )}
         <Video className={Styles.video} videoRef={videoRef} movie={data} />
       </div>
-      <Controller className={Styles.controller} />
-      <KeyboardHandler />
-      <MediaSessionHandler />
+      <Controller className={Styles.controller} data={data} />
+      <KeyboardHandler data={data} />
+      <MediaSessionHandler data={data} />
     </div>
   );
 };

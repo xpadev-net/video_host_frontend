@@ -1,11 +1,10 @@
 import Link from "next/link";
 import { ForwardedRef, forwardRef } from "react";
 
-import type { Movie } from "@/@types/Movie";
+import { FilteredMovie } from "@/@types/v4Api";
 import { Thumbnail } from "@/components/Thumbnail";
 
 import Styles from "./Movie.module.scss";
-import {FilteredMovie} from "@/@types/v4Api";
 
 export type props = {
   movie: FilteredMovie;

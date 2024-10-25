@@ -1,10 +1,9 @@
 import { useEffect, useMemo, useRef } from "react";
 
-import { Movie } from "@/@types/Movie";
+import { FilteredMovie } from "@/@types/v4Api";
 import { MovieCard } from "@/components/Movie";
 
 import Styles from "./MovieList.module.scss";
-import {FilteredMovie} from "@/@types/v4Api";
 
 export type props = {
   movies: FilteredMovie[];

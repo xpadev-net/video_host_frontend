@@ -11,7 +11,7 @@ const History = () => {
 
   const historyList = Object.keys(history)
     .map((key) => {
-      return history[key].movie.movie;
+      return history[key].movie;
     })
     .toReversed();
 

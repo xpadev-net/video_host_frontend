@@ -1,12 +1,14 @@
-export type v4GetMovieRes = {
-  status: "success";
-  data: FilteredMovie & { isOwner: boolean };
-} | v4ErrorRes;
+export type v4GetMovieRes =
+  | {
+      status: "success";
+      data: FilteredMovie & { isOwner: boolean };
+    }
+  | v4ErrorRes;
 
 export type v4ErrorRes = {
   status: "error";
   message: string;
-}
+};
 
 export type FilteredUser = {
   name: string;
@@ -14,12 +16,12 @@ export type FilteredUser = {
 };
 
 export type FilteredSeries = {
-  id: string,
-  title: string,
-  description?: string | null,
-  author: FilteredUser,
-  movies?: FilteredMovie[],
-}
+  id: string;
+  title: string;
+  description?: string | null;
+  author: FilteredUser;
+  movies?: FilteredMovie[];
+};
 
 export type FilteredMovie = {
   id: string;
@@ -30,5 +32,5 @@ export type FilteredMovie = {
   thumbnailUrl?: string | null;
   author: FilteredUser;
   series?: FilteredSeries | null;
-  createdAt: string,
+  createdAt: string;
 };

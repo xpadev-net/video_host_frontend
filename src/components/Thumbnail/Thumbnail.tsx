@@ -12,13 +12,15 @@ const Thumbnail = ({ movie }: ThumbnailProps) => {
 
   return (
     <div className={Styles.wrapper}>
-      <Image
-        src={movie.thumbnailUrl??""}
-        alt={`${movie.series?.title} ${movie.title}`}
-        fill={true}
-        sizes={"360px"}
-        className={Styles.image}
-      />
+      {movie.thumbnailUrl && (
+        <Image
+          src={movie.thumbnailUrl ?? ""}
+          alt={`${movie.series?.title} ${movie.title}`}
+          fill={true}
+          sizes={"360px"}
+          className={Styles.image}
+        />
+      )}
       <div
         className={Styles.watched}
         style={{

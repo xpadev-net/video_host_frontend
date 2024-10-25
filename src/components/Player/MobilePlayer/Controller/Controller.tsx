@@ -1,5 +1,6 @@
 import { useAtomValue } from "jotai";
 
+import { FilteredMovie } from "@/@types/v4Api";
 import { PlayerStateAtom } from "@/atoms/Player";
 import { TimeDisplay } from "@/components/Player/MobilePlayer/Controller/TimeDisplay";
 import { AutoPlayButton } from "@/components/Player/Shared/Controller/AutoPlayButton";
@@ -13,10 +14,11 @@ import Styles from "./Controller.module.scss";
 import { Slider } from "./Slider";
 
 type props = {
+  data: FilteredMovie;
   className?: string;
 };
 
-const Controller = ({ className }: props) => {
+const Controller = ({ className, data }: props) => {
   const state = useAtomValue(PlayerStateAtom);
   return (
     <div className={`${className} ${Styles.wrapper}`}>
@@ -26,11 +28,11 @@ const Controller = ({ className }: props) => {
       </div>
       <div className={Styles.middle}>
         <div className={Styles.buttonWrapper}>
-          <PrevNextButton type={"prev"} className={Styles.button} />
+          <PrevNextButton type={"prev"} className={Styles.button} data={data} />
         </div>
         <PlayPauseButton className={Styles.playPauseButton} />
         <div className={Styles.buttonWrapper}>
-          <PrevNextButton type={"next"} className={Styles.button} />
+          <PrevNextButton type={"next"} className={Styles.button} data={data} />
         </div>
       </div>
       <div className={Styles.bottom}>

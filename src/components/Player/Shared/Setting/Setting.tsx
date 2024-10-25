@@ -71,7 +71,7 @@ const Setting = ({ className }: Props) => {
         maxHeight: wrapperRef.clientHeight - 120,
       }));
     };
-  }, []);
+  }, [wrapperRef]);
 
   useEffect(() => {
     if (!wrapperRef) return;

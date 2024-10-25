@@ -1,14 +1,21 @@
 import { useAtomValue } from "jotai";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { FC, useEffect, useMemo } from "react";
 
-import { MovieItemAtom, VideoRefAtom } from "@/atoms/Player";
-import { ApiEndpoint } from "@/contexts/env";
+import { FilteredMovie } from "@/@types/v4Api";
+import { VideoRefAtom } from "@/atoms/Player";
+import { findNext, findPrev } from "@/components/Player/utils/findPrevNext";
 
-const MediaSessionHandler = () => {
-  const movieItem = useAtomValue(MovieItemAtom);
+type Props = {
+  data: FilteredMovie;
+};
+
+const MediaSessionHandler: FC<Props> = ({ data }) => {
   const videoRef = useAtomValue(VideoRefAtom);
   const router = useRouter();
+
+  const next = useMemo(() => findNext(data), [data]);
+  const prev = useMemo(() => findPrev(data), [data]);
 
   const mediaSessionHandler: {
     [key: string]: MediaSessionActionHandler | null;
@@ -31,35 +38,37 @@ const MediaSessionHandler = () => {
         videoRef.currentTime += 5;
       }
     },
-    nexttrack: movieItem?.next
+    nexttrack: next
       ? () => {
-          if (!movieItem?.next) return;
-          void router.push(movieItem.next.url);
+          if (!next) return;
+          void router.push(`/movies/${next.id}`);
         }
       : null,
-    previoustrack: movieItem?.prev
+    previoustrack: prev
       ? () => {
-          if (!movieItem?.prev) return;
-          void router.push(movieItem.prev.url);
+          if (!prev) return;
+          void router.push(`/movies/${prev.id}`);
         }
       : null,
   };
 
   useEffect(() => {
-    if (!movieItem) {
+    if (!data) {
       navigator.mediaSession.metadata = null;
       return;
     }
     navigator.mediaSession.metadata = new MediaMetadata({
-      title: movieItem.movie.title,
-      artist: movieItem.movie.seriesTitle,
-      artwork: [
-        {
-          src: `${ApiEndpoint}/img/${movieItem.movie.url}`,
-          sizes: "256x256",
-          type: "image/jpg",
-        },
-      ],
+      title: data.title,
+      artist: data.series?.title,
+      artwork: data.thumbnailUrl
+        ? [
+            {
+              src: data.thumbnailUrl,
+              sizes: "256x256",
+              type: "image/jpg",
+            },
+          ]
+        : [],
     });
     for (const key of Object.keys(mediaSessionHandler)) {
       const handler = mediaSessionHandler[key];
@@ -71,7 +80,7 @@ const MediaSessionHandler = () => {
     return () => {
       navigator.mediaSession.metadata = null;
     };
-  }, [movieItem, videoRef]);
+  }, [data, videoRef]);
 
   useEffect(() => {
     if (!videoRef) return;

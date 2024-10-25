@@ -2,7 +2,6 @@ import { Options } from "@xpadev-net/niconicomments";
 import { atom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
 
-import { MovieItem } from "@/@types/api";
 import {
   PlayerConfig,
   PlayerState,
@@ -10,7 +9,6 @@ import {
   VideoMetadata,
 } from "@/@types/Player";
 
-const MovieItemAtom = atom<MovieItem | undefined>(undefined);
 const WrapperRefAtom = atom<HTMLDivElement | null>(null);
 const VideoRefAtom = atom<HTMLVideoElement | null>(null);
 const VideoMetadataAtom = atom<VideoMetadata>({ currentTime: 0, duration: 0 });
@@ -39,7 +37,6 @@ const NiconicommentsConfigAtom = atomWithStorage<Options>(
 const PlayerSettingAtom = atom<SettingKey[]>(["main"]);
 
 export {
-  MovieItemAtom,
   NiconicommentsConfigAtom,
   PlayerConfigAtom,
   PlayerSettingAtom,

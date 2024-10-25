@@ -1,26 +1,30 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { FC, useEffect } from "react";
 
+import { FilteredMovie } from "@/@types/v4Api";
 import {
-  MovieItemAtom,
   PlayerConfigAtom,
   PlayerStateAtom,
   VideoRefAtom,
 } from "@/atoms/Player";
+import { findNext, findPrev } from "@/components/Player/utils/findPrevNext";
 
 const rates = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 3, 4];
 
-const KeyboardHandler = () => {
+type Props = {
+  data: FilteredMovie;
+};
+
+const KeyboardHandler: FC<Props> = ({ data }) => {
   const videoRef = useAtomValue(VideoRefAtom);
-  const movieItem = useAtomValue(MovieItemAtom);
   const [playerConfig, setPlayerConfig] = useAtom(PlayerConfigAtom);
   const setVideoMetadata = useSetAtom(PlayerStateAtom);
   const router = useRouter();
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      if (!videoRef || !movieItem) return false;
+      if (!videoRef || !data) return false;
       if (e.code === "ArrowRight" || e.code === "ArrowLeft") {
         e.preventDefault();
         videoRef.currentTime += 5 * (e.code === "ArrowRight" ? 1 : -1);
@@ -49,9 +53,9 @@ const KeyboardHandler = () => {
       }
       if ((e.code === "KeyN" || e.code === "KeyP") && e.shiftKey) {
         e.preventDefault();
-        const item = movieItem[e.code === "KeyN" ? "next" : "prev"];
+        const item = e.code === "KeyN" ? findNext(data) : findPrev(data);
         if (!item) return false;
-        void router.push(`/movie/${item.url}`);
+        void router.push(`/movie/${item.id}`);
         return true;
       }
       if (e.code === "KeyT") {
@@ -79,7 +83,7 @@ const KeyboardHandler = () => {
     return () => {
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [videoRef, movieItem, playerConfig, setPlayerConfig, setVideoMetadata]);
+  }, [videoRef, data, playerConfig, setPlayerConfig, setVideoMetadata]);
 
   return <></>;
 };

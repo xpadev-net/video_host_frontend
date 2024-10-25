@@ -3,14 +3,14 @@ import { useAtom, useSetAtom } from "jotai";
 import { useRouter } from "next/router";
 import { RefObject, useEffect, useRef, useState } from "react";
 
-import {FilteredMovie} from "@/@types/v4Api";
+import { FilteredMovie } from "@/@types/v4Api";
 import {
   PlayerConfigAtom,
   PlayerStateAtom,
   VideoMetadataAtom,
 } from "@/atoms/Player";
 import { watchedHistoryAtom } from "@/atoms/WatchedHistory";
-import {findNext} from "@/components/Player/utils/findNext";
+import { findNext } from "@/components/Player/utils/findPrevNext";
 
 type props = {
   className?: string;
@@ -83,7 +83,7 @@ const Video = ({ className, videoRef, movie }: props) => {
     if (!playerConfig.autoPlay || !movie) return;
     const next = findNext(movie);
     if (!next) return;
-    void router.push(`/movies/${next}`);
+    void router.push(`/movies/${next.id}`);
   };
 
   const onVideoCanPlay = () => {
@@ -126,7 +126,7 @@ const Video = ({ className, videoRef, movie }: props) => {
       videoRef.current.volume = playerConfig.volume;
     };
 
-    if (movie.contentUrl=== url) {
+    if (movie.contentUrl === url) {
       const currentTIme = videoRef.current.currentTime;
       setup();
       videoRef.current.currentTime = currentTIme;
