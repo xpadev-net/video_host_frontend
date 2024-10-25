@@ -49,7 +49,7 @@ const MovieCard_ = (
       </div>
       <div className={Styles.titles}>
         <span className={Styles.title}>{movie.title}</span>
-        <span className={Styles.seriesTitle}>{movie.series?.title}</span>
+        <span className={Styles.seriesTitle}>{movie.author.name}</span>
       </div>
     </Link>
   );

@@ -17,7 +17,11 @@ const MovieInfo = ({ data, className }: props) => {
           {new Date(data.createdAt).toLocaleDateString()}
         </div>
       </div>
-      <Link href={`/series/${data.series?.id}`}>{data.series?.title}</Link>
+      <div className={Styles.author}>{data.author.name}</div>
+      <div className={Styles.series}>
+        <p>この動画を含むプレイリスト</p>
+        <Link className={Styles.link} href={`/series/${data.series?.id}`}>{data.series?.title}</Link>
+      </div>
     </div>
   );
 };
