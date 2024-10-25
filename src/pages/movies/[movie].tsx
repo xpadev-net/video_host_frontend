@@ -11,11 +11,12 @@ import { SiteName } from "@/contexts/env";
 import { useMovie } from "@/hooks/useMovie";
 import { useIsMobile } from "@/libraries/isMobile";
 import Styles from "@/styles/movie.module.scss";
+import {query2str} from "@/utils/query2str";
 
 const MoviePage = () => {
   const router = useRouter();
   const query = router.query.movie;
-  const data = useMovie(query ? `${query}` : undefined);
+  const data = useMovie(query2str(query));
   console.log(data.isLoading, structuredClone(data.data));
   console.log(query);
 
@@ -39,7 +40,7 @@ const MoviePage = () => {
     };
   }, [wrapperRef]);
   if (!data.data) return <></>;
-  if (data.data.status !== "success") {
+  if (data.data.status !== "ok") {
     return (
       <div>
         <h2>見つかりませんでした</h2>

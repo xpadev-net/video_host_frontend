@@ -1,12 +1,22 @@
 export type v4GetMovieRes =
   | {
-      status: "success";
+      status: "ok";
+      code: 200;
       data: FilteredMovie & { isOwner: boolean };
+    }
+  | v4ErrorRes;
+
+export type v4GetSeriesRes =
+  | {
+      status: "ok";
+      code: 200;
+      data: FilteredSeries;
     }
   | v4ErrorRes;
 
 export type v4ErrorRes = {
   status: "error";
+  code: 400 | 401 | 403 | 404;
   message: string;
 };
 

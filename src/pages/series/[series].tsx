@@ -1,58 +1,43 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import useSWR from "swr";
 
-import { SeriesResponse } from "@/@types/api";
-import { Error } from "@/components/Error";
 import { MovieList } from "@/components/MovieList";
 import { SiteName } from "@/contexts/env";
-import { request } from "@/libraries/request";
+import {useSeries} from "@/hooks/useSeries";
 import Styles from "@/styles/search.module.scss";
+import {query2str} from "@/utils/query2str";
 
-const SearchPage = () => {
+const SeriesPage = () => {
   const router = useRouter();
   const query = router.query.series;
-  const { data: result } = useSWR<SeriesResponse>(
-    `/series/${encodeURIComponent(typeof query === "string" ? query : "")}`,
-    request,
-  );
-  if (!result) {
+  const {data} = useSeries(query2str(query));
+  if (!data) {
     return <></>;
   }
-  if (result.code === "401") {
+  if (data.code === 401) {
     void router.push(`/login?callback=${encodeURIComponent(router.asPath)}`);
     return <></>;
   }
-  if (result.code === "404") {
+  if (data.status !== "ok") {
     return (
       <div>
         <h2>見つかりませんでした</h2>
       </div>
     );
   }
-  if (!result.data.seriesTitle) {
-    return (
-      <>
-        <Head>
-          <title>{`検索 - ${SiteName}`}</title>
-        </Head>
-        <Error title={"条件に合致するものが見つかりませんでした"} />
-      </>
-    );
-  }
   return (
     <div className={Styles.wrapper}>
       <Head>
-        <title>{`${result.data.seriesTitle} - ${SiteName}`}</title>
+        <title>{`${data.data.title} - ${SiteName}`}</title>
       </Head>
       <div className={Styles.moviesWrapper}>
-        <h1>{result.data.seriesTitle}</h1>
+        <h1>{data.data.title}</h1>
         <div className={Styles.moviesContainer}>
-          <MovieList movies={result.data.movies} type={"column"} />
+          <MovieList movies={data.data.movies??[]} type={"column"} />
         </div>
       </div>
     </div>
   );
 };
 
-export default SearchPage;
+export default SeriesPage;

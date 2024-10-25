@@ -1,13 +1,13 @@
-import { v4GetMovieRes } from "@/@types/v4Api";
+import {v4GetSeriesRes} from "@/@types/v4Api";
 import { useStickySWR } from "@/hooks/useStickySWR";
 import { requests } from "@/libraries/requests";
 
-const fetcher = async (key?: string): Promise<v4GetMovieRes> => {
+const fetcher = async (key?: string): Promise<v4GetSeriesRes> => {
   if (!key) return Promise.resolve({status: "error", message: "not found"});
-  const res = await requests.get<v4GetMovieRes>(`/movies/${key}`);
+  const res = await requests.get<v4GetSeriesRes>(`/series/${key}`);
   return res.data;
 };
 
-export const useMovie = (query?: string) => {
+export const useSeries = (query?: string) => {
   return useStickySWR(query, fetcher, {});
 };
