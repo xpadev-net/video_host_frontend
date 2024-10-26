@@ -1,5 +1,6 @@
 import "@/styles/global.scss";
 import "@/styles/nprogress.css";
+import "@radix-ui/themes/styles.css";
 
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
@@ -7,6 +8,7 @@ import NProgress from "nprogress";
 import { useEffect } from "react";
 
 import { App } from "@/components/App";
+import {Theme} from "@/components/Theme";
 
 export default function Main({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -29,8 +31,10 @@ export default function Main({ Component, pageProps }: AppProps) {
     };
   }, [router]);
   return (
-    <App>
-      <Component {...pageProps} />
-    </App>
+    <Theme>
+      <App>
+        <Component {...pageProps} />
+      </App>
+    </Theme>
   );
 }
