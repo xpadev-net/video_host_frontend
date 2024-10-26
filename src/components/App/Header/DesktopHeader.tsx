@@ -1,6 +1,7 @@
 import Styles from "@/components/App/Header/Header.module.scss";
 import { Logout } from "@/components/App/Header/Logout";
 import { Search } from "@/components/App/Header/Search";
+import { ToggleTheme } from "@/components/App/Header/Theme";
 import { HeaderMenu } from "@/components/App/Menu";
 
 type props = {
@@ -17,6 +18,7 @@ const DesktopHeader = ({ className }: props) => {
         <Search />
       </div>
       <div className={Styles.rightSideWrapper}>
+        <ToggleTheme />
         <Logout />
       </div>
     </header>

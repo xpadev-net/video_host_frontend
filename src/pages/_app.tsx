@@ -8,7 +8,7 @@ import NProgress from "nprogress";
 import { useEffect } from "react";
 
 import { App } from "@/components/App";
-import {Theme} from "@/components/Theme";
+import { Theme } from "@/components/Theme";
 
 export default function Main({ Component, pageProps }: AppProps) {
   const router = useRouter();

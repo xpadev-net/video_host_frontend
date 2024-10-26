@@ -11,7 +11,7 @@ import { SiteName } from "@/contexts/env";
 import { useMovie } from "@/hooks/useMovie";
 import { useIsMobile } from "@/libraries/isMobile";
 import Styles from "@/styles/movie.module.scss";
-import {query2str} from "@/utils/query2str";
+import { query2str } from "@/utils/query2str";
 
 const MoviePage = () => {
   const router = useRouter();

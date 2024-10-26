@@ -3,14 +3,14 @@ import { useRouter } from "next/router";
 
 import { MovieList } from "@/components/MovieList";
 import { SiteName } from "@/contexts/env";
-import {useSeries} from "@/hooks/useSeries";
+import { useSeries } from "@/hooks/useSeries";
 import Styles from "@/styles/search.module.scss";
-import {query2str} from "@/utils/query2str";
+import { query2str } from "@/utils/query2str";
 
 const SeriesPage = () => {
   const router = useRouter();
   const query = router.query.series;
-  const {data} = useSeries(query2str(query));
+  const { data } = useSeries(query2str(query));
   if (!data) {
     return <></>;
   }
@@ -33,7 +33,7 @@ const SeriesPage = () => {
       <div className={Styles.moviesWrapper}>
         <h1>{data.data.title}</h1>
         <div className={Styles.moviesContainer}>
-          <MovieList movies={data.data.movies??[]} type={"column"} />
+          <MovieList movies={data.data.movies ?? []} type={"column"} />
         </div>
       </div>
     </div>

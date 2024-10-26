@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Styles from "@/components/App/Header/Header.module.scss";
 import { Logout } from "@/components/App/Header/Logout";
 import { Search } from "@/components/App/Header/Search";
+import { ToggleTheme } from "@/components/App/Header/Theme";
 import { HeaderMenu } from "@/components/App/Menu";
 import { ArrowBack, Search as SearchIcon } from "@/components/icons";
 import ButtonStyles from "@/styles/button.module.scss";
@@ -39,6 +40,7 @@ const MobileHeader = ({ className }: props) => {
         >
           <SearchIcon />
         </div>
+        <ToggleTheme />
         <Logout />
       </div>
       <div

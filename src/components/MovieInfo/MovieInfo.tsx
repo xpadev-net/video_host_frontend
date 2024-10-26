@@ -20,7 +20,9 @@ const MovieInfo = ({ data, className }: props) => {
       <div className={Styles.author}>{data.author.name}</div>
       <div className={Styles.series}>
         <p>この動画を含むプレイリスト</p>
-        <Link className={Styles.link} href={`/series/${data.series?.id}`}>{data.series?.title}</Link>
+        <Link className={Styles.link} href={`/series/${data.series?.id}`}>
+          {data.series?.title}
+        </Link>
       </div>
     </div>
   );
