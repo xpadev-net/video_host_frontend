@@ -15,33 +15,33 @@
     "lint:fix": "npm run format&&npm run eslint:fix&&npm run check-types"
   },
   "dependencies": {
-    "@radix-ui/react-switch": "^1.1.0",
-    "@types/node": "^20.14.12",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "@xpadev-net/niconicomments": "^0.2.71",
+    "@radix-ui/react-switch": "^1.1.1",
+    "@types/node": "^20.17.1",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@xpadev-net/niconicomments": "^0.2.72",
     "axios": "^1.7.7",
-    "hls.js": "^1.5.13",
-    "husky": "^9.1.2",
-    "jotai": "^2.9.1",
-    "next": "^14.2.5",
+    "hls.js": "^1.5.17",
+    "husky": "^9.1.6",
+    "jotai": "^2.10.1",
+    "next": "^14.2.16",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "sharp": "^0.33.4",
+    "sharp": "^0.33.5",
     "swr": "^2.2.5",
-    "typescript": "^5.5.4"
+    "typescript": "^5.6.3"
   },
   "devDependencies": {
     "@types/nprogress": "^0.2.3",
-    "@typescript-eslint/eslint-plugin": "^7.17.0",
-    "@typescript-eslint/parser": "^7.17.0",
-    "eslint": "^8.57.0",
-    "eslint-config-next": "^14.2.5",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "^14.2.16",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-simple-import-sort": "^12.1.1",
-    "lint-staged": "^15.2.7",
+    "lint-staged": "^15.2.10",
     "nprogress": "^0.2.0",
     "prettier": "3.3.3",
-    "sass": "^1.77.8"
+    "sass": "^1.80.4"
   }
 }
