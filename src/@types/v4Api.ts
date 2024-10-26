@@ -14,6 +14,14 @@ export type v4GetSeriesRes =
     }
   | v4ErrorRes;
 
+export type v4GetUserRes =
+  | {
+      status: "ok";
+      code: 200;
+      data: FilteredUser;
+    }
+  | v4ErrorRes;
+
 export type v4ErrorRes = {
   status: "error";
   code: 400 | 401 | 403 | 404;
