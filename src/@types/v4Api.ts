@@ -30,6 +30,25 @@ export type v4PostAuthLoginRes =
     }
   | v4ErrorRes;
 
+export type v4PostUsersRes =
+  | {
+      status: "ok";
+      code: 200;
+      data: {
+        user: FilteredUser;
+        token: string;
+      };
+    }
+  | v4ErrorRes;
+
+export type v4DeleteAuthLogoutRes =
+  | {
+      status: "ok";
+      code: 200;
+      data: null;
+    }
+  | v4ErrorRes;
+
 export type v4ErrorRes = {
   status: "error";
   code: 400 | 401 | 403 | 404;

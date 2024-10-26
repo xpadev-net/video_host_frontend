@@ -1,4 +1,8 @@
+import { useAtomValue } from "jotai";
+import { useEffect } from "react";
+
 import { v4GetUserRes } from "@/@types/v4Api";
+import { AuthTokenAtom } from "@/atoms/Auth";
 import { useStickySWR } from "@/hooks/useStickySWR";
 import { requests } from "@/libraries/requests";
 
@@ -14,9 +18,19 @@ const fetcher = async (key?: string): Promise<v4GetUserRes> => {
 };
 
 export const useUser = (query?: string) => {
-  return useStickySWR(query, fetcher, {});
+  const swr = useStickySWR(query, fetcher, {});
+  const token = useAtomValue(AuthTokenAtom);
+  useEffect(() => {
+    void swr.mutate();
+  }, [token]);
+  return swr;
 };
 
 export const useSelf = () => {
-  return useStickySWR("me", fetcher, {});
+  const swr = useStickySWR("me", fetcher, {});
+  const token = useAtomValue(AuthTokenAtom);
+  useEffect(() => {
+    void swr.mutate();
+  }, [token]);
+  return swr;
 };

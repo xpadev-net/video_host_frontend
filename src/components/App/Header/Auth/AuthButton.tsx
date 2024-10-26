@@ -1,8 +1,9 @@
 import { useSetAtom } from "jotai";
-import { MdPerson } from "react-icons/md";
+import { MdLogout, MdPerson } from "react-icons/md";
 
-import { AuthModalOpenAtom } from "@/atoms/Auth";
+import { AuthModalOpenAtom, AuthTokenAtom } from "@/atoms/Auth";
 import { useSelf } from "@/hooks/useUser";
+import { deleteAuth } from "@/service/deleteAuth";
 
 import styles from "../Button.module.scss";
 
@@ -10,12 +11,21 @@ const AuthButton = () => {
   const user = useSelf();
 
   const setAuthModalOpen = useSetAtom(AuthModalOpenAtom);
+  const setAuthToken = useSetAtom(AuthTokenAtom);
 
   if (user.data?.status === "ok" && user.data.data) {
     return (
-      <div>
-        <button>Logout</button>
-      </div>
+      <button
+        onClick={() => {
+          void deleteAuth().then(() => {
+            setAuthToken(null);
+            location.reload();
+          });
+        }}
+        className={`${styles.button}`}
+      >
+        <MdLogout />
+      </button>
     );
   }
   return (
