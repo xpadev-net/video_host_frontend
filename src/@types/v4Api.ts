@@ -22,6 +22,14 @@ export type v4GetUserRes =
     }
   | v4ErrorRes;
 
+export type v4PostAuthLoginRes =
+  | {
+      status: "ok";
+      code: 200;
+      data: string;
+    }
+  | v4ErrorRes;
+
 export type v4ErrorRes = {
   status: "error";
   code: 400 | 401 | 403 | 404;

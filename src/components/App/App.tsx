@@ -3,6 +3,7 @@ import { ReactElement } from "react";
 
 import { Header } from "@/components/App/Header";
 import { Sidebar } from "@/components/App/Sidebar";
+import { Auth } from "@/components/Auth";
 import { useIsMobile } from "@/libraries/isMobile";
 
 import Styles from "./App.module.scss";
@@ -28,6 +29,7 @@ const App = ({ children }: props) => {
         </div>
         <div className={Styles.container}>{children}</div>
       </div>
+      <Auth />
     </>
   );
 };

@@ -1,5 +1,6 @@
+import { AuthButton } from "src/components/App/Header/Auth";
+
 import Styles from "@/components/App/Header/Header.module.scss";
-import { Logout } from "@/components/App/Header/Logout";
 import { Search } from "@/components/App/Header/Search";
 import { ToggleTheme } from "@/components/App/Header/Theme";
 import { HeaderMenu } from "@/components/App/Menu";
@@ -19,7 +20,7 @@ const DesktopHeader = ({ className }: props) => {
       </div>
       <div className={Styles.rightSideWrapper}>
         <ToggleTheme />
-        <Logout />
+        <AuthButton />
       </div>
     </header>
   );

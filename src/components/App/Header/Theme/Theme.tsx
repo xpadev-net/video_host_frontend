@@ -2,7 +2,7 @@ import { MdDarkMode, MdLightMode } from "react-icons/md";
 
 import { useTheme } from "@/hooks/useTheme";
 
-import styles from "./Theme.module.scss";
+import styles from "../Button.module.scss";
 
 export const ToggleTheme = () => {
   const { theme, setTheme } = useTheme();

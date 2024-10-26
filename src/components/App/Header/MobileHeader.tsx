@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
+import { AuthButton } from "src/components/App/Header/Auth";
 
 import Styles from "@/components/App/Header/Header.module.scss";
-import { Logout } from "@/components/App/Header/Logout";
 import { Search } from "@/components/App/Header/Search";
 import { ToggleTheme } from "@/components/App/Header/Theme";
 import { HeaderMenu } from "@/components/App/Menu";
@@ -41,7 +41,7 @@ const MobileHeader = ({ className }: props) => {
           <SearchIcon />
         </div>
         <ToggleTheme />
-        <Logout />
+        <AuthButton />
       </div>
       <div
         className={`${Styles.inputWrapper} ${isInputActive && Styles.active}`}

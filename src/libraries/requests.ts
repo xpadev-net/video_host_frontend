@@ -4,4 +4,7 @@ import { ApiEndpoint } from "@/contexts/env";
 
 export const requests = axios.create({
   baseURL: ApiEndpoint,
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
