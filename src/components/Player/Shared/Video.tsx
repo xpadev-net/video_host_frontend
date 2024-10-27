@@ -1,9 +1,10 @@
 import Hls from "hls.js";
-import { useAtom, useSetAtom } from "jotai";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { useRouter } from "next/router";
 import { RefObject, useEffect, useRef, useState } from "react";
 
 import { FilteredMovie } from "@/@types/v4Api";
+import { AuthTokenAtom } from "@/atoms/Auth";
 import {
   PlayerConfigAtom,
   PlayerStateAtom,
@@ -21,6 +22,7 @@ type props = {
 const Video = ({ className, videoRef, movie }: props) => {
   const setMetadata = useSetAtom(VideoMetadataAtom);
   const setState = useSetAtom(PlayerStateAtom);
+  const token = useAtomValue(AuthTokenAtom);
   const [playerConfig, setPlayerConfig] = useAtom(PlayerConfigAtom);
   const [watchedHistory, setWatchedHistory] = useAtom(watchedHistoryAtom);
   const [url, setUrl] = useState<string>("");
@@ -107,8 +109,10 @@ const Video = ({ className, videoRef, movie }: props) => {
       } else if (Hls.isSupported()) {
         const hls = new Hls({
           xhrSetup: function (xhr, url) {
-            xhr.withCredentials = true;
             xhr.open("GET", url);
+            if (token) {
+              xhr.setRequestHeader("Authorization", `Bearer ${token}`);
+            }
           },
           enableWorker: true,
           lowLatencyMode: true,
@@ -144,7 +148,7 @@ const Video = ({ className, videoRef, movie }: props) => {
     return () => {
       hlsRef.current?.destroy();
     };
-  }, [videoRef.current, movie, playerConfig.isHls]);
+  }, [videoRef.current, movie, playerConfig.isHls, token]);
 
   return (
     <video

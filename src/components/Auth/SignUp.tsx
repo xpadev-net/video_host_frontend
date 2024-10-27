@@ -12,6 +12,7 @@ import { IoMdInformationCircleOutline } from "react-icons/io";
 import { MdKey, MdMail, MdPerson, MdTag } from "react-icons/md";
 
 import { AuthModalOpenAtom, AuthTokenAtom } from "@/atoms/Auth";
+import { requests } from "@/libraries/requests";
 import { postUsers } from "@/service/postUsers";
 
 type Props = {
@@ -39,6 +40,8 @@ export const SignUp: FC<Props> = ({ isLoading, setIsLoading }) => {
       invitationCode,
     );
     if (res.data.status === "ok") {
+      requests.defaults.headers["Authorization"] =
+        `Bearer ${res.data.data.token}`;
       setAuthToken(res.data.data.token);
       setOpen(false);
     } else {

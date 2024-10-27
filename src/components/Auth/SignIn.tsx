@@ -12,6 +12,7 @@ import { IoMdInformationCircleOutline } from "react-icons/io";
 import { MdKey, MdTag } from "react-icons/md";
 
 import { AuthModalOpenAtom, AuthTokenAtom } from "@/atoms/Auth";
+import { requests } from "@/libraries/requests";
 import { postAuth } from "@/service/postAuth";
 
 type Props = {
@@ -32,6 +33,7 @@ export const SignIn: FC<Props> = ({ isLoading, setIsLoading }) => {
     setIsLoading(true);
     const token = await postAuth(username, password);
     if (token.data.status === "ok") {
+      requests.defaults.headers["Authorization"] = `Bearer ${token.data.data}`;
       setAuthToken(token.data.data);
       setOpen(false);
     } else {
