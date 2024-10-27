@@ -1,4 +1,5 @@
-import { useAtomValue } from "jotai";
+import { AxiosError } from "axios";
+import { useAtom, useAtomValue } from "jotai";
 import { useEffect } from "react";
 
 import { v4GetUserRes } from "@/@types/v4Api";
@@ -13,8 +14,15 @@ const fetcher = async (key?: string): Promise<v4GetUserRes> => {
       code: 404,
       message: "not found",
     });
-  const res = await requests.get<v4GetUserRes>(`/users/${key}`);
-  return res.data;
+  try {
+    const res = await requests.get<v4GetUserRes>(`/users/${key}`);
+    return res.data;
+  } catch (e) {
+    if (e instanceof AxiosError && e.response) {
+      return e.response.data as v4GetUserRes;
+    }
+    throw e;
+  }
 };
 
 export const useUser = (query?: string) => {
@@ -28,9 +36,16 @@ export const useUser = (query?: string) => {
 
 export const useSelf = () => {
   const swr = useStickySWR("me", fetcher, {});
-  const token = useAtomValue(AuthTokenAtom);
+  const [token, setToken] = useAtom(AuthTokenAtom);
   useEffect(() => {
     void swr.mutate();
   }, [token]);
+
+  useEffect(() => {
+    if (swr.data && swr.data.code === 401) {
+      setToken(null);
+    }
+  }, [swr.data]);
+
   return swr;
 };

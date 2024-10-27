@@ -65,7 +65,7 @@
       height: 56px;
     }
     .titles {
-      margin-left: 5px;
+      padding: 2px 0 2px 5px;
       flex: 1;
       .title {
         margin: 0 0 4px;
@@ -90,13 +90,14 @@
       }
     }
   }
+  color: $textColor;
   .title {
+    color: $textColor;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal;
     display: block;
     letter-spacing: 0;
-    color: $textColor;
   }
   .seriesTitle {
     overflow: hidden;

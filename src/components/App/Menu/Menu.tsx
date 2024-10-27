@@ -1,5 +1,6 @@
 import { useSetAtom } from "jotai";
 import Link from "next/link";
+import { MdMenu, MdOndemandVideo } from "react-icons/md";
 
 import { sidebarState } from "@/atoms/SidebarState";
 import Styles from "@/components/App/Menu/Menu.module.scss";
@@ -20,12 +21,12 @@ const HeaderMenu = () => {
           className={`${ButtonStyles.buttonWrapper} ${ButtonStyles.hover}`}
           onClick={toggleSidebar}
         >
-          <Menu />
+          <MdMenu />
         </div>
       )}
       <Link href={"/"} className={Styles.homeButton}>
         <div className={ButtonStyles.buttonWrapper}>
-          <OndemandVideo />
+          <MdOndemandVideo />
         </div>
       </Link>
     </div>

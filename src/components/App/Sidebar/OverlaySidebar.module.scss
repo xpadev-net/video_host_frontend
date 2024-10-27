@@ -39,9 +39,15 @@
     margin: 8px 0;
     display: flex;
     gap: 8px;
+    color: colors.$textColor;
     .text {
       line-height: 24px;
       height: 24px;
+    }
+    svg {
+      width: 24px;
+      height: 24px;
+      fill: colors.$textColor;
     }
   }
 }

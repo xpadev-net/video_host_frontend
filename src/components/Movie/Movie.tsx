@@ -26,8 +26,8 @@ const MovieCard_ = (
           <Link href={`/movies/${movie.id}`}>
             <span className={Styles.title}>{movie.title}</span>
           </Link>
-          <Link href={`/series/${movie.series?.id}`}>
-            <span className={Styles.seriesTitle}>{movie.series?.title}</span>
+          <Link href={`/users/${movie.author.id}`}>
+            <span className={Styles.seriesTitle}>{movie.author.name}</span>
           </Link>
         </div>
       </div>

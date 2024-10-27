@@ -3,43 +3,52 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  border: solid 1px colors.$quaternaryBackgroundColor;
   user-select: none;
   max-height: min(700px, 50vh);
+  border-radius: 12px;
+  border: solid 1px colors.$quaternaryBackgroundColor;
+  overflow: hidden;
   .header {
     display: flex;
     height: 60px;
-    padding: 5px;
+    padding: 4px 16px;
+    flex-shrink: 0;
+    background-color: colors.$thirdlyBackgroundColor;
+    flex-direction: row;
     align-items: center;
     .icon {
       height: 50px;
       width: 25px;
     }
-    .textWrapper {
+    .row {
       display: flex;
       flex-direction: column;
-      line-height: 25px;
       flex: 1;
-      padding: 0 10px;
-      vertical-align: middle;
-      justify-content: center;
-      .nextTitle {
+      .textWrapper {
+        display: flex;
+        flex-direction: column;
         line-height: 25px;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 1;
-        overflow: hidden;
-      }
-      .title {
-        font-size: 12px;
-        color: colors.$subTextColor;
-        line-height: 25px;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 1;
-        overflow: hidden;
+        flex: 1;
+        vertical-align: middle;
+        justify-content: center;
+        .nextTitle {
+          line-height: 25px;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 1;
+          overflow: hidden;
+        }
+        .title {
+          font-size: 12px;
+          color: colors.$subTextColor;
+          line-height: 15px;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 1;
+          overflow: hidden;
+        }
       }
     }
     &.open {
@@ -57,6 +66,17 @@
         }
       }
     }
+  }
+  .visibility,
+  .author {
+    font-size: 12px;
+    color: colors.$subTextColor;
+    line-height: 15px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
   }
   .list {
     border-top: solid 1px colors.$quaternaryBackgroundColor;

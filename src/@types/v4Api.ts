@@ -55,15 +55,19 @@ export type v4ErrorRes = {
   message: string;
 };
 
+export type Visibility = "PUBLIC" | "UNLISTED" | "PRIVATE";
+
 export type FilteredUser = {
+  id: string;
   name: string;
-  username: string;
+  avatarUrl?: string | null;
 };
 
 export type FilteredSeries = {
   id: string;
   title: string;
   description?: string | null;
+  visibility: Visibility;
   author: FilteredUser;
   movies?: FilteredMovie[];
 };
@@ -75,6 +79,7 @@ export type FilteredMovie = {
   duration: number;
   contentUrl: string;
   thumbnailUrl?: string | null;
+  visibility: Visibility;
   author: FilteredUser;
   series?: FilteredSeries | null;
   createdAt: string;

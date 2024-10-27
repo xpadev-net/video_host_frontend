@@ -1,3 +1,5 @@
+@use "../../../styles/colors";
+
 .button {
   background: none;
   cursor: pointer;
@@ -16,5 +18,9 @@
     width: min-content;
     padding: 0 10px;
     text-wrap: nowrap;
+  }
+
+  .icon {
+    fill: colors.$textColor;
   }
 }

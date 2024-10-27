@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 
 import { MovieList } from "@/components/MovieList";
+import { User } from "@/components/User/User";
 import { SiteName } from "@/contexts/env";
 import { useSeries } from "@/hooks/useSeries";
 import Styles from "@/styles/search.module.scss";
@@ -31,7 +32,10 @@ const SeriesPage = () => {
         <title>{`${data.data.title} - ${SiteName}`}</title>
       </Head>
       <div className={Styles.moviesWrapper}>
-        <h1>{data.data.title}</h1>
+        <div className={Styles.header}>
+          <h1>{data.data.title}</h1>
+          <User user={data.data.author} />
+        </div>
         <div className={Styles.moviesContainer}>
           <MovieList movies={data.data.movies ?? []} type={"column"} />
         </div>

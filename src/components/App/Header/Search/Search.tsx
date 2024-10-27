@@ -7,6 +7,7 @@ import {
   useEffect,
   useState,
 } from "react";
+import { MdSearch } from "react-icons/md";
 
 import { SuggestRes, SuggestResponse } from "@/@types/api";
 import Styles from "@/components/App/Header/Search/Search.module.scss";
@@ -89,7 +90,7 @@ const Search_ = ({ className }: props, ref: ForwardedRef<HTMLInputElement>) => {
         )}
       </div>
       <button className={Styles.button} onClick={onSearchClick}>
-        <SearchIcon />
+        <MdSearch className={Styles.icon} />
       </button>
     </div>
   );

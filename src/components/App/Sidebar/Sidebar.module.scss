@@ -26,9 +26,11 @@
       flex-direction: column;
       align-items: center;
       padding: 15px 0;
+      color: colors.$textColor;
       .icon {
         width: 24px;
         height: 24px;
+        fill: colors.$textColor;
       }
       .text {
         font-size: 10px;

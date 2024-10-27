@@ -9,4 +9,9 @@
   &.hover:hover {
     background-color: colors.$hoverColor;
   }
+  svg {
+    width: 24px;
+    height: 24px;
+    fill: colors.$textColor;
+  }
 }

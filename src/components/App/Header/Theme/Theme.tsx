@@ -14,7 +14,11 @@ export const ToggleTheme = () => {
       }}
       className={styles.button}
     >
-      {theme === "dark" ? <MdDarkMode /> : <MdLightMode />}
+      {theme === "dark" ? (
+        <MdDarkMode className={styles.icon} />
+      ) : (
+        <MdLightMode className={styles.icon} />
+      )}
     </button>
   );
 };

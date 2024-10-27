@@ -1,7 +1,9 @@
+import { Avatar } from "@radix-ui/themes";
 import Link from "next/link";
 
 import { FilteredMovie } from "@/@types/v4Api";
 import Styles from "@/components/MovieInfo/MovieInfo.module.scss";
+import { User } from "@/components/User/User";
 
 type props = {
   data: FilteredMovie;
@@ -17,7 +19,9 @@ const MovieInfo = ({ data, className }: props) => {
           {new Date(data.createdAt).toLocaleDateString()}
         </div>
       </div>
-      <div className={Styles.author}>{data.author.name}</div>
+      <div className={Styles.author}>
+        <User user={data.author} />
+      </div>
       <div className={Styles.series}>
         <p>この動画を含むプレイリスト</p>
         <Link className={Styles.link} href={`/series/${data.series?.id}`}>

@@ -24,7 +24,7 @@ const AuthButton = () => {
         }}
         className={`${styles.button}`}
       >
-        <MdLogout />
+        <MdLogout className={styles.icon} />
       </button>
     );
   }
@@ -35,7 +35,7 @@ const AuthButton = () => {
       }}
       className={`${styles.button} ${styles.textButton}`}
     >
-      <MdPerson />
+      <MdPerson className={styles.icon} />
       Sign In
     </button>
   );
