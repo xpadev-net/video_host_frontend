@@ -13,5 +13,6 @@ export const AuthTokenAtom = atom<
   } else {
     delete requests.defaults.headers["Authorization"];
   }
+  set(AuthTokenAtom, token);
   return token;
 });
