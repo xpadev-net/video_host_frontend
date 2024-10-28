@@ -4,7 +4,6 @@ import { MdMenu, MdOndemandVideo } from "react-icons/md";
 
 import { sidebarState } from "@/atoms/SidebarState";
 import Styles from "@/components/App/Menu/Menu.module.scss";
-import { Menu, OndemandVideo } from "@/components/icons";
 import { useIsMobile } from "@/libraries/isMobile";
 import ButtonStyles from "@/styles/button.module.scss";
 

@@ -1,4 +1,3 @@
-import { Avatar } from "@radix-ui/themes";
 import Link from "next/link";
 
 import { FilteredMovie } from "@/@types/v4Api";

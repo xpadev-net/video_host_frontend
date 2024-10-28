@@ -11,7 +11,6 @@ import { MdSearch } from "react-icons/md";
 
 import { SuggestRes, SuggestResponse } from "@/@types/api";
 import Styles from "@/components/App/Header/Search/Search.module.scss";
-import { Search as SearchIcon } from "@/components/icons";
 import { useIsMobile } from "@/libraries/isMobile";
 import { request } from "@/libraries/request";
 import { useForwardRef } from "@/libraries/useForwardRef";
