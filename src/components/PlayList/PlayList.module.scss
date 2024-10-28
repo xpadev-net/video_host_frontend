@@ -50,6 +50,11 @@
           overflow: hidden;
         }
       }
+      .description {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+      }
     }
     &.open {
       .textWrapper {

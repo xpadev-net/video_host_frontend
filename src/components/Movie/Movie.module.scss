@@ -54,6 +54,9 @@
     flex-direction: row;
     height: 64px;
     padding: 4px 8px 4px 0;
+    &:hover {
+      background-color: $hoverColor;
+    }
     .index {
       width: 24px;
       line-height: 56px;

@@ -41,7 +41,7 @@ const PlayList = ({ data, className, maxHeight }: props) => {
             <span className={Styles.title}>{data.series.title}</span>
           </div>
           {isOpen && (
-            <div className={Styles.row}>
+            <div className={Styles.description}>
               {data.series.visibility !== "PUBLIC" && (
                 <>
                   <span className={Styles.visibility}>
