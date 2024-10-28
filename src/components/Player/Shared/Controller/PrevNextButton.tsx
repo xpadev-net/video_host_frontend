@@ -19,7 +19,7 @@ const PrevNextButton = ({ className, type, data }: props) => {
   if (!item) return <></>;
   const onPrevClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    void router.push(`/movie/${item.id}`);
+    void router.push(`/movies/${item.id}`);
   };
   return (
     <button onClick={onPrevClick} className={className}>
