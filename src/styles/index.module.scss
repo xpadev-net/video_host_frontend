@@ -6,3 +6,8 @@
   font-size: 25px;
   text-decoration: none;
 }
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--width), 1fr));
+}

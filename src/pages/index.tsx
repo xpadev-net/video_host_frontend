@@ -1,22 +1,18 @@
 import Head from "next/head";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { CSSProperties, useEffect, useRef, useState } from "react";
+import { CSSProperties, useRef, useState } from "react";
 
-import { recentUpdatesRes, recentUpdatesResponse } from "@/@types/api";
-import { MovieList } from "@/components/MovieList";
+import { MovieCard } from "@/components/Movie";
 import { SiteName } from "@/contexts/env";
+import { useMovies } from "@/hooks/useMovies";
 import { useIsomorphicEffect } from "@/libraries/IsomorphicEffect";
-import { request } from "@/libraries/request";
 import Styles from "@/styles/index.module.scss";
 
 const Index = () => {
-  const router = useRouter();
+  const { data } = useMovies();
 
   const [width, setWidth] = useState(360);
   const wrapper = useRef<HTMLDivElement>(null);
   const observer = useRef<ResizeObserver>();
-  const [updates, setUpdates] = useState<recentUpdatesRes | undefined>();
   const isomorphicEffect = useIsomorphicEffect();
   const handleResize = () => {
     const width = wrapper.current?.clientWidth || 1920;
@@ -29,18 +25,11 @@ const Index = () => {
     handleResize();
     observer.current?.observe(wrapper.current);
   }, [wrapper.current]);
-  useEffect(() => {
-    void (async () => {
-      const data = await request<recentUpdatesResponse>("/recentUpdates/");
-      if (data.status === "fail") {
-        void router.push(
-          `/login?callback=${encodeURIComponent(router.asPath)}`,
-        );
-        return;
-      }
-      setUpdates(data);
-    })();
-  }, []);
+
+  if (!data || data.status !== "ok") {
+    return <></>;
+  }
+
   return (
     <div className={Styles.wrapper}>
       <Head>
@@ -49,18 +38,19 @@ const Index = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div ref={wrapper} style={{ "--width": `${width}px` } as CSSProperties}>
-        {updates?.data.map((update) => {
+      <div
+        ref={wrapper}
+        style={{ "--width": `${width}px` } as CSSProperties}
+        className={Styles.container}
+      >
+        {data.data.map((movie) => {
           return (
-            <div key={update.seriesUrl}>
-              <Link
-                href={`/series/${update.seriesUrl}`}
-                className={Styles.title}
-              >
-                {update.seriesTitle}
-              </Link>
-              <MovieList movies={update.movies} type={"row"} />
-            </div>
+            <MovieCard
+              key={movie.id}
+              movie={movie}
+              type={"row"}
+              showSeries={true}
+            />
           );
         })}
       </div>

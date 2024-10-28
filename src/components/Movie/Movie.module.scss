@@ -21,9 +21,14 @@
         max-height: 40px;
       }
       .seriesTitle {
-        max-height: 36px;
+        height: 18px;
         line-height: 18px;
         font-size: 13px;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        overflow: hidden;
       }
     }
   }

@@ -1,3 +1,11 @@
+export type v4GetMoviesRes =
+  | {
+      status: "ok";
+      code: 200;
+      data: FilteredMovie[];
+    }
+  | v4ErrorRes;
+
 export type v4GetMovieRes =
   | {
       status: "ok";

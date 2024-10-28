@@ -10,10 +10,11 @@ export type props = {
   movie: FilteredMovie;
   type: "row" | "column" | "minColumn";
   index?: number | "active";
+  showSeries?: boolean;
 };
 
 const MovieCard_ = (
-  { movie, index, type }: props,
+  { movie, index, type, showSeries }: props,
   ref: ForwardedRef<HTMLAnchorElement>,
 ) => {
   if (type === "column") {
@@ -26,9 +27,15 @@ const MovieCard_ = (
           <Link href={`/movies/${movie.id}`}>
             <span className={Styles.title}>{movie.title}</span>
           </Link>
-          <Link href={`/users/${movie.author.id}`}>
-            <span className={Styles.seriesTitle}>{movie.author.name}</span>
-          </Link>
+          {showSeries && movie.series ? (
+            <Link href={`/series/${movie.series.id}`}>
+              <span className={Styles.seriesTitle}>{movie.series.title}</span>
+            </Link>
+          ) : (
+            <Link href={`/users/${movie.author.id}`}>
+              <span className={Styles.seriesTitle}>{movie.author.name}</span>
+            </Link>
+          )}
         </div>
       </div>
     );
@@ -49,7 +56,15 @@ const MovieCard_ = (
       </div>
       <div className={Styles.titles}>
         <span className={Styles.title}>{movie.title}</span>
-        <span className={Styles.seriesTitle}>{movie.author.name}</span>
+        {showSeries && movie.series ? (
+          <Link href={`/series/${movie.series.id}`}>
+            <span className={Styles.seriesTitle}>{movie.series.title}</span>
+          </Link>
+        ) : (
+          <Link href={`/users/${movie.author.id}`}>
+            <span className={Styles.seriesTitle}>{movie.author.name}</span>
+          </Link>
+        )}
       </div>
     </Link>
   );
