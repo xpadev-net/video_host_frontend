@@ -16,7 +16,7 @@ export const User: FC<Props> = ({ user, size }) => {
     <Link href={`/users/${user.id}`}>
       <Flex direction={"row"} align={"center"} gap={"2"}>
         <Avatar
-          fallback={user.name.slice(0, 1)}
+          fallback={user.name.slice(0, 2)}
           size={size}
           src={user.avatarUrl || undefined}
         />

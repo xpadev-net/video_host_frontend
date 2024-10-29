@@ -1,5 +1,5 @@
 import { AxiosError } from "axios";
-import { useAtom, useAtomValue } from "jotai";
+import { useAtom } from "jotai";
 import { useEffect } from "react";
 
 import { v4GetUserRes } from "@/@types/v4Api";
@@ -26,12 +26,7 @@ const fetcher = async (key?: string): Promise<v4GetUserRes> => {
 };
 
 export const useUser = (query?: string) => {
-  const swr = useStickySWR(query, fetcher, {});
-  const token = useAtomValue(AuthTokenAtom);
-  useEffect(() => {
-    void swr.mutate();
-  }, [token]);
-  return swr;
+  return useStickySWR(query, fetcher, {});
 };
 
 export const useSelf = () => {

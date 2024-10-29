@@ -8,11 +8,20 @@ const fetcher = async (
   movies: v4GetMoviesRes;
   series: v4GetSeriesListRes;
 }> => {
-  const [query, page] = key.split("/");
-  const urlSearchParam = new URLSearchParams({
-    page: page,
-    query: query,
-  }).toString();
+  const [query, page, author] = key.split("/");
+
+  const params: Record<string, string> = {};
+  if (query) {
+    params.query = query;
+  }
+  if (page) {
+    params.page = page;
+  }
+  if (author) {
+    params.author = author;
+  }
+
+  const urlSearchParam = new URLSearchParams(params).toString();
   const movies = await requests.get<v4GetMoviesRes>(
     `/movies/?${urlSearchParam}`,
   );
@@ -28,10 +37,12 @@ const fetcher = async (
 type Props = {
   page?: number;
   query?: string;
+  author?: string;
 };
 
 export const useSearch = (data?: Props) => {
   const page = data?.page || 1;
   const query = data?.query || "";
-  return useStickySWR(`${query}/${page}`, fetcher, {});
+  const author = data?.author || "";
+  return useStickySWR(`${encodeURI(query)}/${page}/${author}`, fetcher, {});
 };
