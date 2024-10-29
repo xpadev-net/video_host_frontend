@@ -8,3 +8,10 @@ a {
   margin: 0;
   box-sizing: border-box;
 }
+
+html,
+body,
+#__next,
+.radix-themes {
+  height: 100%;
+}

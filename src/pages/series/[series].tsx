@@ -31,14 +31,12 @@ const SeriesPage = () => {
       <Head>
         <title>{`${data.data.title} - ${SiteName}`}</title>
       </Head>
-      <div className={Styles.moviesWrapper}>
-        <div className={Styles.header}>
-          <h1>{data.data.title}</h1>
-          <User user={data.data.author} />
-        </div>
-        <div className={Styles.moviesContainer}>
-          <MovieList movies={data.data.movies ?? []} type={"column"} />
-        </div>
+      <div className={Styles.header}>
+        <h1>{data.data.title}</h1>
+        <User user={data.data.author} />
+      </div>
+      <div className={Styles.moviesContainer}>
+        <MovieList movies={data.data.movies ?? []} type={"column"} />
       </div>
     </div>
   );

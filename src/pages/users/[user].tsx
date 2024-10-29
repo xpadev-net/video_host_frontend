@@ -32,11 +32,11 @@ const UserPage = () => {
   return (
     <div className={Styles.wrapper}>
       <Head>
-        <title>{`検索: ${user.data.name} - ${SiteName}`}</title>
+        <title>{`${user.data.name} - ${SiteName}`}</title>
       </Head>
       <User user={user.data} size={"4"} />
       <Tabs.Root defaultValue={"series"} className={Styles.tab}>
-        <Tabs.List>
+        <Tabs.List className={Styles.list}>
           <Tabs.Trigger value="series">シリーズ</Tabs.Trigger>
           <Tabs.Trigger value="movies">動画</Tabs.Trigger>
         </Tabs.List>
