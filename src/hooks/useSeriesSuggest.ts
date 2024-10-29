@@ -15,7 +15,7 @@ const fetcher = async (key: string): Promise<v4GetSeriesListRes> => {
     suggest: "1",
   }).toString();
   const res = await requests.get<v4GetSeriesListRes>(
-    `/series/?${urlSearchParam}`,
+    `/series?${urlSearchParam}`,
   );
   return res.data;
 };

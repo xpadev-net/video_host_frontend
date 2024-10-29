@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FC } from "react";
 
 import { FilteredSeries } from "@/@types/v4Api";
@@ -12,14 +13,14 @@ type SeriesCardProps = {
 
 export const SeriesCard: FC<SeriesCardProps> = ({ series }) => {
   return (
-    <div className={styles.card}>
+    <Link className={styles.card} href={`/series/${series.id}`}>
       <div className={styles.thumbnail}>
-        <Thumbnail movie={series.movies?.[0]} />
+        <Thumbnail movie={series.movies?.[0]} hideMetadata={true} />
       </div>
       <div className={styles.titles}>
         <span className={styles.title}>{series.title}</span>
         <User user={series.author} size={"2"} />
       </div>
-    </div>
+    </Link>
   );
 };

@@ -9,9 +9,10 @@ import Styles from "./Thumbnail.module.scss";
 
 export type ThumbnailProps = {
   movie?: FilteredMovie;
+  hideMetadata?: boolean;
 };
 
-const Thumbnail = ({ movie }: ThumbnailProps) => {
+const Thumbnail = ({ movie, hideMetadata }: ThumbnailProps) => {
   const history = useAtomValue(watchedHistoryAtom);
 
   return (
@@ -25,7 +26,7 @@ const Thumbnail = ({ movie }: ThumbnailProps) => {
           className={Styles.image}
         />
       )}
-      {movie && (
+      {movie && !hideMetadata && (
         <>
           <div
             className={Styles.watched}

@@ -30,13 +30,13 @@ const MovieCard_ = (
           </Link>
           {showSeries && movie.series ? (
             <div className={Styles.list}>
-              <User user={movie.author} size={"2"} />
+              <User user={movie.author} size={"2"} />・
               <span className={Styles.seriesTitle}>
                 <Link
                   href={`/series/${movie.series.id}`}
                   className={Styles.link}
                 >
-                  <span>{movie.series.title}</span>
+                  {movie.series.title}
                 </Link>
               </span>
             </div>

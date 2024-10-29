@@ -1,8 +1,10 @@
+@use "../../styles/colors";
+
 .card {
   display: flex;
   flex-direction: row;
-  padding: 0 10px;
-  margin-top: 16px;
+  padding: 8px;
+  border-radius: 12px;
   .thumbnail {
     max-width: 40%;
     width: 357px;
@@ -15,6 +17,10 @@
     gap: 12px;
     .title {
       font-size: min(1.7vw, 24px);
+      color: colors.$textColor;
     }
+  }
+  &:hover {
+    background-color: colors.$hoverColor;
   }
 }
