@@ -1,18 +1,11 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import {
-  ForwardedRef,
-  forwardRef,
-  KeyboardEvent,
-  useEffect,
-  useState,
-} from "react";
+import { ForwardedRef, forwardRef, KeyboardEvent, useState } from "react";
 import { MdSearch } from "react-icons/md";
 
-import { SuggestRes, SuggestResponse } from "@/@types/api";
 import Styles from "@/components/App/Header/Search/Search.module.scss";
+import { useSeriesSuggest } from "@/hooks/useSeriesSuggest";
 import { useIsMobile } from "@/libraries/isMobile";
-import { request } from "@/libraries/request";
 import { useForwardRef } from "@/libraries/useForwardRef";
 
 type props = {
@@ -21,7 +14,7 @@ type props = {
 
 const Search_ = ({ className }: props, ref: ForwardedRef<HTMLInputElement>) => {
   const [input, setInput] = useState("");
-  const [suggest, setSuggest] = useState<SuggestRes | undefined>();
+  const suggest = useSeriesSuggest({ query: input });
   const inputRef = useForwardRef<HTMLInputElement>(ref);
   const isMobile = useIsMobile();
 
@@ -40,22 +33,6 @@ const Search_ = ({ className }: props, ref: ForwardedRef<HTMLInputElement>) => {
     }
   };
 
-  useEffect(() => {
-    void (async () => {
-      if (input.length < 2) return;
-      const suggest: SuggestResponse = await request(
-        `/suggest/${encodeURIComponent(input)}`,
-      );
-      if (suggest.status === "fail") {
-        await router.push(
-          `/login?callback=${encodeURIComponent(router.asPath)}`,
-        );
-        return;
-      }
-      setSuggest(suggest);
-    })();
-  }, [input]);
-
   return (
     <div
       className={`${isMobile && Styles.mobile} ${Styles.wrapper} ${className}`}
@@ -72,13 +49,13 @@ const Search_ = ({ className }: props, ref: ForwardedRef<HTMLInputElement>) => {
           onChange={(e) => setInput(e.target.value)}
         />
 
-        {suggest?.status === "success" && suggest.data.length > 0 && (
+        {suggest.data?.status === "ok" && suggest.data.data.length > 0 && (
           <label htmlFor={"headerSearchInput"} className={Styles.suggest}>
-            {suggest.data.map((item) => {
+            {suggest.data.data.map((item) => {
               return (
                 <Link
                   href={`/search/${encodeURIComponent(item.title)}`}
-                  key={item.title}
+                  key={item.id}
                   className={Styles.suggestItem}
                 >
                   <div>{item.title}</div>
