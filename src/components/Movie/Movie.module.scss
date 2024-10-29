@@ -44,13 +44,20 @@
     .titles {
       flex: 1;
       padding-left: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
       .title {
         font-size: min(1.7vw, 18px);
-        margin: 2px 0;
       }
-      .seriesTitle {
-        font-size: min(1.2vw, 13px);
-        margin-top: 10px;
+      .list {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+        .seriesTitle {
+          font-size: min(1.2vw, 13px);
+        }
       }
     }
   }
@@ -110,8 +117,16 @@
   .seriesTitle {
     overflow: hidden;
     text-overflow: ellipsis;
-    display: block;
     letter-spacing: 0;
     color: $subTextColor;
+    display: flex;
+    flex-direction: row;
+    .link {
+      color: $subTextColor;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 }

@@ -10,9 +10,10 @@ export type props = {
   type: "row" | "column" | "minColumn";
   active?: string;
   className?: string;
+  showSeries?: boolean;
 };
 
-const MovieList = ({ movies, type, active, className }: props) => {
+const MovieList = ({ movies, type, active, className, showSeries }: props) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const activeRef = useRef<HTMLAnchorElement>(null);
   useEffect(() => {
@@ -49,6 +50,7 @@ const MovieList = ({ movies, type, active, className }: props) => {
                   : undefined
               }
               index={indexLabel}
+              showSeries={showSeries}
             />
           );
         })}

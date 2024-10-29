@@ -1,18 +1,22 @@
 import { useAtomValue } from "jotai";
 import Image from "next/image";
 
-import type { ThumbnailProps } from "@/@types/Thumbnail";
+import { FilteredMovie } from "@/@types/v4Api";
 import { watchedHistoryAtom } from "@/atoms/WatchedHistory";
 import { time2str } from "@/libraries/time";
 
 import Styles from "./Thumbnail.module.scss";
+
+export type ThumbnailProps = {
+  movie?: FilteredMovie;
+};
 
 const Thumbnail = ({ movie }: ThumbnailProps) => {
   const history = useAtomValue(watchedHistoryAtom);
 
   return (
     <div className={Styles.wrapper}>
-      {movie.thumbnailUrl && (
+      {movie?.thumbnailUrl && (
         <Image
           src={movie.thumbnailUrl ?? ""}
           alt={`${movie.series?.title} ${movie.title}`}
@@ -21,13 +25,17 @@ const Thumbnail = ({ movie }: ThumbnailProps) => {
           className={Styles.image}
         />
       )}
-      <div
-        className={Styles.watched}
-        style={{
-          width: `${(history[movie.id]?.watched || 0) * 100}%`,
-        }}
-      />
-      <span className={Styles.duration}>{time2str(movie.duration)}</span>
+      {movie && (
+        <>
+          <div
+            className={Styles.watched}
+            style={{
+              width: `${(history[movie?.id]?.watched || 0) * 100}%`,
+            }}
+          />
+          <span className={Styles.duration}>{time2str(movie.duration)}</span>
+        </>
+      )}
     </div>
   );
 };

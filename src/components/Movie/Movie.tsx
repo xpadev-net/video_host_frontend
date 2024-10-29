@@ -3,6 +3,7 @@ import { ForwardedRef, forwardRef } from "react";
 
 import { FilteredMovie } from "@/@types/v4Api";
 import { Thumbnail } from "@/components/Thumbnail";
+import { User } from "@/components/User/User";
 
 import Styles from "./Movie.module.scss";
 
@@ -28,13 +29,19 @@ const MovieCard_ = (
             <span className={Styles.title}>{movie.title}</span>
           </Link>
           {showSeries && movie.series ? (
-            <Link href={`/series/${movie.series.id}`}>
-              <span className={Styles.seriesTitle}>{movie.series.title}</span>
-            </Link>
+            <div className={Styles.list}>
+              <User user={movie.author} size={"2"} />
+              <span className={Styles.seriesTitle}>
+                <Link
+                  href={`/series/${movie.series.id}`}
+                  className={Styles.link}
+                >
+                  <span>{movie.series.title}</span>
+                </Link>
+              </span>
+            </div>
           ) : (
-            <Link href={`/users/${movie.author.id}`}>
-              <span className={Styles.seriesTitle}>{movie.author.name}</span>
-            </Link>
+            <User user={movie.author} size={"2"} />
           )}
         </div>
       </div>
@@ -57,9 +64,15 @@ const MovieCard_ = (
       <div className={Styles.titles}>
         <span className={Styles.title}>{movie.title}</span>
         {showSeries && movie.series ? (
-          <Link href={`/series/${movie.series.id}`}>
-            <span className={Styles.seriesTitle}>{movie.series.title}</span>
-          </Link>
+          <span className={Styles.seriesTitle}>
+            <Link href={`/series/${movie.series.id}`} className={Styles.link}>
+              <span>{movie.series.title}</span>
+            </Link>
+            ・
+            <Link href={`/users/${movie.author.id}`} className={Styles.link}>
+              <span>{movie.author.name}</span>
+            </Link>
+          </span>
         ) : (
           <Link href={`/users/${movie.author.id}`}>
             <span className={Styles.seriesTitle}>{movie.author.name}</span>

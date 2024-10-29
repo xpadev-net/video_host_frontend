@@ -14,6 +14,14 @@ export type v4GetMovieRes =
     }
   | v4ErrorRes;
 
+export type v4GetSeriesListRes =
+  | {
+      status: "ok";
+      code: 200;
+      data: FilteredSeries[];
+    }
+  | v4ErrorRes;
+
 export type v4GetSeriesRes =
   | {
       status: "ok";
