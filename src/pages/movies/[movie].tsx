@@ -17,8 +17,6 @@ const MoviePage = () => {
   const router = useRouter();
   const query = router.query.movie;
   const data = useMovie(query2str(query));
-  console.log(data.isLoading, structuredClone(data.data));
-  console.log(query);
 
   const { isTheatre } = useAtomValue(PlayerConfigAtom);
   const wrapperRef = useAtomValue(WrapperRefAtom);
