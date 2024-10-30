@@ -20,7 +20,7 @@ const History = () => {
       <Head>
         <title>{`履歴 - ${SiteName}`}</title>
       </Head>
-      <MovieList movies={historyList} type={"column"} />
+      <MovieList movies={historyList} type={"column"} showSeries={true} />
     </div>
   );
 };
