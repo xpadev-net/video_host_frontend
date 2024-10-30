@@ -49,9 +49,11 @@ const Controller = ({ className, data }: props) => {
     if (mutedVolume && videoRef.volume === 0) {
       setMutedVolume(undefined);
       videoRef.volume = mutedVolume;
+      videoRef.muted = false;
     } else if (mutedVolume === 0 && videoRef.volume === 0) {
       setMutedVolume(undefined);
       videoRef.volume = 1;
+      videoRef.muted = false;
     } else {
       setMutedVolume(videoRef.volume);
       videoRef.volume = 0;

@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import { MouseEvent } from "react";
+import { MdSkipNext, MdSkipPrevious } from "react-icons/md";
 
 import { FilteredMovie } from "@/@types/v4Api";
-import { SkipNext, SkipPrevious } from "@/components/icons";
 import { findNext, findPrev } from "@/components/Player/utils/findPrevNext";
 
 type props = {
@@ -23,7 +23,7 @@ const PrevNextButton = ({ className, type, data }: props) => {
   };
   return (
     <button onClick={onPrevClick} className={className}>
-      {type === "prev" ? <SkipPrevious /> : <SkipNext />}
+      {type === "prev" ? <MdSkipPrevious /> : <MdSkipNext />}
     </button>
   );
 };

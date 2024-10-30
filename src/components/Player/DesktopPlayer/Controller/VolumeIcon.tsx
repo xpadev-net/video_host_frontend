@@ -1,25 +1,25 @@
 import { useAtomValue } from "jotai";
+import {
+  MdVolumeDown,
+  MdVolumeMute,
+  MdVolumeOff,
+  MdVolumeUp,
+} from "react-icons/md";
 
 import { PlayerConfigAtom } from "@/atoms/Player";
-import {
-  VolumeDown,
-  VolumeMute,
-  VolumeOff,
-  VolumeUp,
-} from "@/components/icons";
 
 const VolumeIcon = () => {
   const { volume } = useAtomValue(PlayerConfigAtom);
   if (volume > 0.5) {
-    return <VolumeUp />;
+    return <MdVolumeUp />;
   }
   if (volume > 0.1) {
-    return <VolumeDown />;
+    return <MdVolumeDown />;
   }
   if (volume > 0) {
-    return <VolumeMute />;
+    return <MdVolumeMute />;
   }
-  return <VolumeOff />;
+  return <MdVolumeOff />;
 };
 
 export { VolumeIcon };

@@ -1,8 +1,8 @@
 import { useAtom, useSetAtom } from "jotai";
 import { MouseEvent } from "react";
+import { MdSettings } from "react-icons/md";
 
 import { PlayerSettingAtom, PlayerStateAtom } from "@/atoms/Player";
-import { Settings } from "@/components/icons";
 
 type props = {
   className?: string;
@@ -20,7 +20,7 @@ const SettingButton = ({ className }: props) => {
   };
   return (
     <div className={className} onClick={toggleTheatre}>
-      <Settings />
+      <MdSettings />
     </div>
   );
 };

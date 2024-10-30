@@ -1,9 +1,9 @@
 import * as Switch from "@radix-ui/react-switch";
 import { useAtom } from "jotai";
 import { MouseEvent } from "react";
+import { MdPause, MdPlayArrow } from "react-icons/md";
 
 import { PlayerConfigAtom } from "@/atoms/Player";
-import { Pause, PlayArrow } from "@/components/icons";
 
 import Styles from "./AutoPlayButton.module.scss";
 
@@ -33,9 +33,9 @@ const AutoPlayButton = ({ className }: props) => {
       >
         <Switch.Thumb className={Styles.thumb}>
           {playerConfig.autoPlay ? (
-            <PlayArrow className={Styles.icon} />
+            <MdPlayArrow className={Styles.icon} />
           ) : (
-            <Pause className={Styles.icon} />
+            <MdPause className={Styles.icon} />
           )}
         </Switch.Thumb>
       </Switch.Root>

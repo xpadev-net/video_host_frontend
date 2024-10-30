@@ -1,12 +1,12 @@
 import { useAtom, useAtomValue } from "jotai";
 import { MouseEvent, useEffect } from "react";
+import { MdFullscreen, MdFullscreenExit } from "react-icons/md";
 
 import {
   PlayerConfigAtom,
   PlayerStateAtom,
   WrapperRefAtom,
 } from "@/atoms/Player";
-import { Fullscreen, FullscreenExit } from "@/components/icons";
 
 type props = {
   className?: string;
@@ -57,7 +57,7 @@ const FullscreenButton = ({ className }: props) => {
 
   return (
     <div className={className} onClick={toggleFullscreen}>
-      {metadata.isFullscreen ? <FullscreenExit /> : <Fullscreen />}
+      {metadata.isFullscreen ? <MdFullscreenExit /> : <MdFullscreen />}
     </div>
   );
 };

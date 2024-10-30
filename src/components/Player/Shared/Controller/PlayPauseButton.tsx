@@ -1,8 +1,8 @@
 import { useAtomValue } from "jotai";
 import { MouseEvent } from "react";
+import { MdPause, MdPlayArrow } from "react-icons/md";
 
 import { PlayerStateAtom, VideoRefAtom } from "@/atoms/Player";
-import { Pause, PlayArrow } from "@/components/icons";
 
 type props = {
   className?: string;
@@ -22,7 +22,7 @@ const PlayPauseButton = ({ className }: props) => {
 
   return (
     <button onClick={togglePlayerState} className={className}>
-      {paused ? <PlayArrow /> : <Pause />}
+      {paused ? <MdPlayArrow /> : <MdPause />}
     </button>
   );
 };
