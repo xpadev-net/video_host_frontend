@@ -37,7 +37,7 @@ export const useSelf = () => {
   }, [token]);
 
   useEffect(() => {
-    if (swr.data && swr.data.code === 401) {
+    if (swr.data && swr.data.code === 401 && token) {
       setToken(null);
       location.reload();
     }
