@@ -93,10 +93,15 @@ export type FilteredMovie = {
   title: string;
   description?: string | null;
   duration: number;
-  contentUrl: string;
+  variants: FilteredMovieVariant[];
   thumbnailUrl?: string | null;
   visibility: Visibility;
   author: FilteredUser;
   series?: FilteredSeries | null;
-  createdAt: string;
+  createdAt: Date;
+};
+
+export type FilteredMovieVariant = {
+  variantId: string;
+  contentUrl: string;
 };

@@ -97,14 +97,15 @@ const Video = ({ className, videoRef, movie }: props) => {
 
   useEffect(() => {
     if (!videoRef.current) return;
-    if (!movie?.contentUrl) {
+    const variant = movie?.variants[0];
+    if (!variant) {
       videoRef.current.srcObject = null;
       return;
     }
     const setup = () => {
       if (!videoRef.current) return;
       if (videoRef.current.canPlayType("application/vnd.apple.mpegurl")) {
-        videoRef.current.src = movie.contentUrl;
+        videoRef.current.src = variant.contentUrl;
         videoRef.current.crossOrigin = "use-credentials";
       } else if (Hls.isSupported()) {
         const hls = new Hls({
@@ -117,7 +118,7 @@ const Video = ({ className, videoRef, movie }: props) => {
           enableWorker: true,
           lowLatencyMode: true,
         });
-        hls.loadSource(movie.contentUrl);
+        hls.loadSource(variant.contentUrl);
         hls.attachMedia(videoRef.current);
         hlsRef.current = hls;
         videoRef.current.crossOrigin = "anonymous";
@@ -130,7 +131,7 @@ const Video = ({ className, videoRef, movie }: props) => {
       videoRef.current.volume = playerConfig.volume;
     };
 
-    if (movie.contentUrl === url) {
+    if (variant.contentUrl === url) {
       const currentTIme = videoRef.current.currentTime;
       setup();
       videoRef.current.currentTime = currentTIme;
@@ -144,7 +145,7 @@ const Video = ({ className, videoRef, movie }: props) => {
       });
       setup();
     }
-    setUrl(movie.contentUrl);
+    setUrl(variant.contentUrl);
     return () => {
       hlsRef.current?.destroy();
     };
