@@ -21,7 +21,6 @@ COPY --from=builder /app ./
 
 COPY ./docker/.env.placeholder ./.env
 
-RUN npx prisma generate
 RUN npm run build
 
 COPY ./docker/env-replacer.sh ./
