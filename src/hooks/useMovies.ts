@@ -1,5 +1,6 @@
+import useSWRInfinite from "swr/infinite";
+
 import { v4GetMoviesRes } from "@/@types/v4Api";
-import { useStickySWR } from "@/hooks/useStickySWR";
 import { requests } from "@/libraries/requests";
 import { buildQueryParams } from "@/utils/buildQueryParams";
 
@@ -9,23 +10,46 @@ const fetcher = async (key: string): Promise<v4GetMoviesRes> => {
 };
 
 type Props = {
-  page?: number;
   query?: string;
   author?: string;
 };
 
-export const useMovies = (data?: Props) => {
-  const page = data?.page || 1;
-  const query = data?.query || undefined;
-  const author = data?.author || undefined;
+export const useMovies = (params?: Props) => {
+  const getKey = (
+    pageIndex: number,
+    previousPageData: v4GetMoviesRes | null,
+  ) => {
+    // データが空配列ならこれ以上取得しない
+    if (
+      previousPageData &&
+      previousPageData.status === "ok" &&
+      !previousPageData.data.hasNext
+    )
+      return null;
+    return `/movies?${buildQueryParams({
+      page: pageIndex + 1,
+      query: params?.query,
+      author: params?.author,
+    })}`;
+  };
 
-  return useStickySWR(
-    `/movies?${buildQueryParams({
-      page,
-      query,
-      author,
-    })}`,
-    fetcher,
-    {},
-  );
+  const { data, error, size, setSize, isValidating } = useSWRInfinite<
+    v4GetMoviesRes,
+    unknown
+  >(getKey, fetcher);
+
+  // 全ページのデータをフラット化
+  const movies =
+    data?.flatMap((page) => (page.status === "ok" ? page.data.items : [])) ??
+    [];
+  const lastPage = data?.[size - 1];
+  const hasNext = lastPage?.status !== "ok" || lastPage.data.hasNext;
+  return {
+    movies,
+    error,
+    size,
+    setSize,
+    hasNext,
+    isValidating,
+  };
 };

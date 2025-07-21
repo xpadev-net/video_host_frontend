@@ -1,14 +1,27 @@
 import Head from "next/head";
-import { CSSProperties, useRef, useState } from "react";
+import { CSSProperties, useEffect, useRef, useState } from "react";
 
-import { MovieCard } from "@/components/Movie";
+import { MovieCard, MovieCardSkeleton } from "@/components/Movie";
 import { SiteName } from "@/contexts/env";
 import { useMovies } from "@/hooks/useMovies";
 import { useIsomorphicEffect } from "@/libraries/IsomorphicEffect";
 import Styles from "@/styles/index.module.scss";
 
+const elementIsVisibleInViewport = (
+  el: HTMLElement,
+  partiallyVisible = false,
+) => {
+  const { top, left, bottom, right } = el.getBoundingClientRect();
+  const { innerHeight, innerWidth } = window;
+  return partiallyVisible
+    ? ((top > 0 && top < innerHeight) ||
+        (bottom > 0 && bottom < innerHeight)) &&
+        ((left > 0 && left < innerWidth) || (right > 0 && right < innerWidth))
+    : top >= 0 && left >= 0 && bottom <= innerHeight && right <= innerWidth;
+};
+
 const Index = () => {
-  const { data } = useMovies();
+  const { movies, setSize, hasNext, isValidating } = useMovies();
 
   const [width, setWidth] = useState(360);
   const wrapper = useRef<HTMLDivElement>(null);
@@ -26,9 +39,24 @@ const Index = () => {
     observer.current?.observe(wrapper.current);
   }, [wrapper.current]);
 
-  if (!data || data.status !== "ok") {
-    return <></>;
-  }
+  // 無限スクロール用Intersection Observer
+  const loadMoreRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!loadMoreRef.current || !hasNext) return;
+    const io = new window.IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && hasNext && !isValidating) {
+        void setSize((size) => size + 1);
+      }
+    });
+    io.observe(loadMoreRef.current);
+    if (loadMoreRef.current) {
+      const isVisible = elementIsVisibleInViewport(loadMoreRef.current);
+      if (isVisible && hasNext && !isValidating) {
+        void setSize((size) => size + 1);
+      }
+    }
+    return () => io.disconnect();
+  }, [hasNext, isValidating, setSize]);
 
   return (
     <div className={Styles.wrapper}>
@@ -43,17 +71,34 @@ const Index = () => {
         style={{ "--width": `${width}px` } as CSSProperties}
         className={Styles.container}
       >
-        {data.data.map((movie) => {
-          return (
-            <MovieCard
-              key={movie.id}
-              movie={movie}
-              type={"row"}
-              showSeries={true}
-            />
-          );
-        })}
+        {movies.map((movie) => (
+          <MovieCard
+            key={movie.id}
+            movie={movie}
+            type={"row"}
+            showSeries={true}
+          />
+        ))}
+        {/* ローディング時にスケルトンを表示。最後のスケルトンにrefを付与 */}
+        {hasNext && (
+          <>
+            <MovieCardSkeleton ref={loadMoreRef} />
+            {Array.from({ length: 50 }).map((_, i) => (
+              <MovieCardSkeleton
+                key={`skeleton-${
+                  // biome-ignore lint/suspicious/noArrayIndexKey: ignore
+                  i
+                }`}
+              />
+            ))}
+          </>
+        )}
       </div>
+      {!hasNext && (
+        <div style={{ textAlign: "center", color: "#888" }}>
+          これ以上データはありません
+        </div>
+      )}
     </div>
   );
 };

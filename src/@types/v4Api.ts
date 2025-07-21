@@ -2,7 +2,10 @@ export type v4GetMoviesRes =
   | {
       status: "ok";
       code: 200;
-      data: FilteredMovie[];
+      data: {
+        items: FilteredMovie[];
+        hasNext: boolean;
+      };
     }
   | v4ErrorRes;
 

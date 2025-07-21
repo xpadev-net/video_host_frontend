@@ -12,6 +12,14 @@
     .thumbnail {
       margin-bottom: 7px;
       width: calc(var(--width, unset) - 8px);
+      &.skeleton {
+        background: #fff1;
+        border-radius: 8px;
+        height: calc(var(--width, unset) * 0.5625);
+        animation: skeleton-loading 1.2s infinite linear;
+        position: relative;
+        overflow: hidden;
+      }
     }
     .titles {
       min-height: 40px;
@@ -20,6 +28,15 @@
         line-height: 20px;
         font-weight: 700;
         max-height: 40px;
+        &.skeleton {
+          background: #fff1;
+          border-radius: 4px;
+          height: 20px;
+          width: 100%;
+          animation: skeleton-loading 1.2s infinite linear;
+          position: relative;
+          overflow: hidden;
+        }
       }
       .seriesTitle {
         height: 18px;
