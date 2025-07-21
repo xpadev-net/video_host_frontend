@@ -1,5 +1,5 @@
 import { useAtom, useAtomValue } from "jotai";
-import { type MouseEvent, useEffect } from "react";
+import { type KeyboardEvent, type MouseEvent, useEffect } from "react";
 import { MdFullscreen, MdFullscreenExit } from "react-icons/md";
 
 import {
@@ -51,7 +51,7 @@ const FullscreenButton = ({ className }: props) => {
     wrapperRef,
   ]);
 
-  const toggleFullscreen = (e: MouseEvent<HTMLDivElement>) => {
+  const toggleFullscreen = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     setMetadata((pv) => ({
       ...pv,
@@ -60,10 +60,31 @@ const FullscreenButton = ({ className }: props) => {
     }));
   };
 
+  const handleKeyDown = (e: KeyboardEvent<HTMLButtonElement>) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      e.stopPropagation();
+      setMetadata((pv) => ({
+        ...pv,
+        isSetting: false,
+        isFullscreen: !pv.isFullscreen,
+      }));
+    }
+  };
+
   return (
-    <div className={className} onClick={toggleFullscreen}>
+    <button
+      className={className}
+      onClick={toggleFullscreen}
+      onKeyDown={handleKeyDown}
+      type="button"
+      tabIndex={0}
+      aria-label={
+        metadata.isFullscreen ? "フルスクリーンを終了" : "フルスクリーンにする"
+      }
+    >
       {metadata.isFullscreen ? <MdFullscreenExit /> : <MdFullscreen />}
-    </div>
+    </button>
   );
 };
 

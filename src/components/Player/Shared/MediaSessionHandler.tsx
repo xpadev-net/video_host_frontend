@@ -19,38 +19,41 @@ const MediaSessionHandler: FC<Props> = ({ data }) => {
 
   const mediaSessionHandler: {
     [key: string]: MediaSessionActionHandler | null;
-  } = {
-    seekbackward: () => {
-      if (!videoRef) return;
-      const time = videoRef.currentTime - 5;
-      if (time < 0) {
-        videoRef.currentTime = 0;
-      } else {
-        videoRef.currentTime -= 5;
-      }
-    },
-    seekforward: () => {
-      if (!videoRef) return;
-      const time = videoRef.currentTime + 5;
-      if (time > videoRef.duration) {
-        videoRef.currentTime = videoRef.duration;
-      } else {
-        videoRef.currentTime += 5;
-      }
-    },
-    nexttrack: next
-      ? () => {
-          if (!next) return;
-          void router.push(`/movies/${next.id}`);
+  } = useMemo(
+    () => ({
+      seekbackward: () => {
+        if (!videoRef) return;
+        const time = videoRef.currentTime - 5;
+        if (time < 0) {
+          videoRef.currentTime = 0;
+        } else {
+          videoRef.currentTime -= 5;
         }
-      : null,
-    previoustrack: prev
-      ? () => {
-          if (!prev) return;
-          void router.push(`/movies/${prev.id}`);
+      },
+      seekforward: () => {
+        if (!videoRef) return;
+        const time = videoRef.currentTime + 5;
+        if (time > videoRef.duration) {
+          videoRef.currentTime = videoRef.duration;
+        } else {
+          videoRef.currentTime += 5;
         }
-      : null,
-  };
+      },
+      nexttrack: next
+        ? () => {
+            if (!next) return;
+            void router.push(`/movies/${next.id}`);
+          }
+        : null,
+      previoustrack: prev
+        ? () => {
+            if (!prev) return;
+            void router.push(`/movies/${prev.id}`);
+          }
+        : null,
+    }),
+    [videoRef, next, prev, router],
+  );
 
   useEffect(() => {
     if (!data) {
@@ -98,7 +101,7 @@ const MediaSessionHandler: FC<Props> = ({ data }) => {
     };
   }, [videoRef]);
 
-  return <></>;
+  return null;
 };
 
 export { MediaSessionHandler };

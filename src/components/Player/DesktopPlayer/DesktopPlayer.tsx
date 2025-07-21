@@ -28,7 +28,7 @@ const DesktopPlayer = ({ className, data }: props) => {
   const setWrapperAtom = useSetAtom(WrapperRefAtom);
   const { isPipEnable, isTheatre, isNiconicommentsEnable } =
     useAtomValue(PlayerConfigAtom);
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLButtonElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const pipVideoRef = useRef<HTMLVideoElement>(null);
   const [isAfk, setIsAfk] = useState(false);
@@ -78,8 +78,21 @@ const DesktopPlayer = ({ className, data }: props) => {
     }
   };
 
+  const handlePlayerKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      togglePlayerState();
+    }
+  };
+
+  const handleLoadingKeyDown = (event: React.KeyboardEvent) => {
+    // Prevent any interaction with loading overlay
+    event.preventDefault();
+    event.stopPropagation();
+  };
+
   return (
-    <div
+    <button
       className={`${className} ${Styles.wrapper} ${
         isTheatre && !state.isFullscreen && Styles.theatre
       } ${state.isFullscreen && Styles.fullscreen} ${
@@ -87,16 +100,23 @@ const DesktopPlayer = ({ className, data }: props) => {
       }`}
       onMouseMove={onMouseMove}
       onClick={togglePlayerState}
+      onKeyDown={handlePlayerKeyDown}
+      type="button"
+      tabIndex={0}
+      aria-label={state.paused ? "Play video" : "Pause video"}
       ref={wrapperRef}
     >
       {state.isLoading && data && (
         <>
-          <div
+          <button
             className={Styles.loadingWrapper}
             onClick={(e) => e.preventDefault()}
+            onKeyDown={handleLoadingKeyDown}
+            aria-label="Video loading"
+            type="button"
           >
             <LoadingIcon className={Styles.icon} />
-          </div>
+          </button>
           <img
             src={data.thumbnailUrl || undefined}
             alt={""}
@@ -128,7 +148,7 @@ const DesktopPlayer = ({ className, data }: props) => {
       <Controller className={Styles.controller} data={data} />
       <KeyboardHandler data={data} />
       <MediaSessionHandler data={data} />
-    </div>
+    </button>
   );
 };
 

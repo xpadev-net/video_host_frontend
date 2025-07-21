@@ -37,7 +37,7 @@ const MoviePage = () => {
       resizeObserver.disconnect();
     };
   }, [wrapperRef]);
-  if (!data.data) return <></>;
+  if (!data.data) return null;
   if (data.data.status !== "ok") {
     return (
       <div>

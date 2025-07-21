@@ -16,6 +16,7 @@ const AuthButton = () => {
   if (user.data?.status === "ok" && user.data.data) {
     return (
       <button
+        type="button"
         onClick={() => {
           void deleteAuth().then(() => {
             setAuthToken(null);
@@ -30,6 +31,7 @@ const AuthButton = () => {
   }
   return (
     <button
+      type="button"
       onClick={() => {
         setAuthModalOpen(true);
       }}

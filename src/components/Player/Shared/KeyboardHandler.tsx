@@ -92,7 +92,7 @@ const KeyboardHandler: FC<Props> = ({ data }) => {
     router.push,
   ]);
 
-  return <></>;
+  return null;
 };
 
 export { KeyboardHandler };

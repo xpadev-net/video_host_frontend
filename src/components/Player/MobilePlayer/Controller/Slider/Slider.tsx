@@ -15,7 +15,7 @@ type RangeItemProps = {
 
 const Slider = ({ className }: props) => {
   const videoRef = useAtomValue(VideoRefAtom);
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLButtonElement>(null);
   const [buffered, setBuffered] = useState<RangeItemProps[]>([]);
   const [isDrugging, setIsDrugging] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -94,17 +94,18 @@ const Slider = ({ className }: props) => {
     setIsDrugging(true);
   };
 
-  const onClick = (e: MouseEvent<HTMLDivElement>) => {
+  const onClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
   };
 
   return (
-    <div
+    <button
       className={`${Styles.wrapper} ${className}`}
       ref={wrapperRef}
       onMouseDown={onMouseDown}
       onTouchStart={onMouseDown}
       onClick={onClick}
+      type="button"
     >
       <div className={Styles.background} />
       {buffered.map((item) => {
@@ -133,7 +134,7 @@ const Slider = ({ className }: props) => {
           left: `${progress}%`,
         }}
       />
-    </div>
+    </button>
   );
 };
 

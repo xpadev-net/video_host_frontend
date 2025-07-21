@@ -97,7 +97,7 @@ const Setting = ({ className }: Props) => {
     };
   }, [wrapperRef]);
 
-  const onClick = (e: MouseEvent<HTMLDivElement>) => {
+  const onClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
   };
 
@@ -111,13 +111,14 @@ const Setting = ({ className }: Props) => {
         maxHeight: isMobile ? "unset" : `${size.maxHeight}px`,
       }}
     >
-      <div
+      <button
         onClick={onClick}
         className={Styles.wrapper}
         style={{
           width: `${size.width}px`,
           height: `${size.height}px`,
         }}
+        type="button"
       >
         <div
           className={Styles.container}
@@ -134,7 +135,7 @@ const Setting = ({ className }: Props) => {
             return <Target key={key} />;
           })}
         </div>
-      </div>
+      </button>
     </div>
   );
 };

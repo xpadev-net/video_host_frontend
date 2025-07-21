@@ -34,26 +34,39 @@ const MobileHeader = ({ className }: props) => {
         <HeaderMenu />
       </div>
       <div className={Styles.rightSideWrapper}>
-        <div
+        <button
+          type="button"
           className={`${ButtonStyles.buttonWrapper} ${ButtonStyles.hover}`}
           onClick={onSearchButtonClick}
         >
           <SearchIcon />
-        </div>
+        </button>
         <ToggleTheme />
         <AuthButton />
       </div>
       <div
         className={`${Styles.inputWrapper} ${isInputActive && Styles.active}`}
       >
-        <div
+        <button
+          type="button"
           className={`${ButtonStyles.buttonWrapper} ${ButtonStyles.hover}`}
           onClick={closeSearch}
         >
           <ArrowBack />
-        </div>
+        </button>
         <Search className={Styles.input} ref={inputRef} />
-        <div className={Styles.background} onClick={closeSearch} />
+        <div
+          className={Styles.background}
+          onClick={closeSearch}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              closeSearch();
+            }
+          }}
+          role="button"
+          tabIndex={0}
+        />
       </div>
     </header>
   );

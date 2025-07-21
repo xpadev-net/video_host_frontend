@@ -21,7 +21,7 @@ const PlayPauseButton = ({ className }: props) => {
   };
 
   return (
-    <button onClick={togglePlayerState} className={className}>
+    <button type="button" onClick={togglePlayerState} className={className}>
       {paused ? <MdPlayArrow /> : <MdPause />}
     </button>
   );

@@ -7,6 +7,8 @@ const OpenInFull: FC = () => (
     viewBox="0 -960 960 960"
     width="24"
     fill="white"
+    aria-label="Open in full screen"
+    role="img"
   >
     <path d="M120-120v-320h80v184l504-504H520v-80h320v320h-80v-184L256-200h184v80H120Z" />
   </svg>

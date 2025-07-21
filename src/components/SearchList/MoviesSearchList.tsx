@@ -84,7 +84,7 @@ export const MoviesSearchList: FC<MovieResultProps> = ({
         {hasNext && (
           <>
             <MovieCardSkeleton ref={loadMoreRef} />
-            {Array.from({ length: 8 }).map((_, i) => (
+            {Array.from({ length: 8 }).map((_,i)=>i).map((i) => (
               <MovieCardSkeleton key={`skeleton-${i}`} />
             ))}
           </>

@@ -70,7 +70,7 @@ const Search_ = ({ className }: props, ref: ForwardedRef<HTMLInputElement>) => {
           </label>
         )}
       </div>
-      <button className={Styles.button} onClick={onSearchClick}>
+      <button type="button" className={Styles.button} onClick={onSearchClick}>
         <MdSearch className={Styles.icon} />
       </button>
     </div>

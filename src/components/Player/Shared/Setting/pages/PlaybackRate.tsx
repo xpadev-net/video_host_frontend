@@ -1,5 +1,5 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { type FC, useEffect, useRef } from "react";
+import { type FC, type KeyboardEvent, useEffect, useRef } from "react";
 
 import {
   PlayerConfigAtom,
@@ -28,28 +28,56 @@ const PlaybackRate: FC<MenuProps> = ({ className, updateScale }) => {
     setPlayerSetting((prev) => prev.filter((page) => page !== "playbackRate"));
   };
 
+  const handleBackKeyDown = (e: KeyboardEvent<HTMLButtonElement>) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      backToMain();
+    }
+  };
+
   const setPlaybackRate = (rate: number) => {
     setPlayerConfig((pv) => ({ ...pv, playbackRate: rate }));
     if (videoRef) videoRef.playbackRate = rate;
     backToMain();
   };
 
+  const handleRateKeyDown = (
+    e: KeyboardEvent<HTMLDivElement>,
+    rate: number,
+  ) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      setPlaybackRate(rate);
+    }
+  };
+
   return (
     <div className={`${Styles.wrapper} ${className}`} ref={ref}>
-      <div className={`${Styles.item} ${Styles.header}`} onClick={backToMain}>
+      <button
+        className={`${Styles.item} ${Styles.header}`}
+        onClick={backToMain}
+        onKeyDown={handleBackKeyDown}
+        type="button"
+        tabIndex={0}
+        aria-label="戻る"
+      >
         <div className={Styles.left}>
           <div className={Styles.iconWrapper}>
             <KeyboardArrowLeft />
           </div>
           <span className={Styles.text}>再生速度</span>
         </div>
-      </div>
+      </button>
       {suggestedRate.map((value) => {
         return (
-          <div
+          <button
             className={Styles.item}
             key={value}
             onClick={() => setPlaybackRate(value)}
+            onKeyDown={(e) => handleRateKeyDown(e, value)}
+            type="button"
+            tabIndex={0}
+            aria-label={`再生速度を${value}倍に設定`}
           >
             <div className={Styles.left}>
               <div className={Styles.iconWrapper}>
@@ -57,7 +85,7 @@ const PlaybackRate: FC<MenuProps> = ({ className, updateScale }) => {
               </div>
               <span className={Styles.text}>{value}</span>
             </div>
-          </div>
+          </button>
         );
       })}
     </div>

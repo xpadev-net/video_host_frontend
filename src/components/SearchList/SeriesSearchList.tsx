@@ -14,7 +14,7 @@ export const SeriesSearchList: FC<Props> = ({ query, author }) => {
   const { data: series, isLoading } = useSeriesList({ query, author, page: 1 });
 
   if (isLoading || !series) {
-    return <></>;
+    return null;
   }
 
   if (series.status !== "ok") {

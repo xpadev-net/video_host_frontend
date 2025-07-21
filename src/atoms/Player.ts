@@ -9,7 +9,7 @@ import type {
   VideoMetadata,
 } from "@/@types/Player";
 
-const WrapperRefAtom = atom<HTMLDivElement | null>(null);
+const WrapperRefAtom = atom<HTMLButtonElement | null>(null);
 const VideoRefAtom = atom<HTMLVideoElement | null>(null);
 const VideoMetadataAtom = atom<VideoMetadata>({ currentTime: 0, duration: 0 });
 

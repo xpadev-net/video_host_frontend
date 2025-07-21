@@ -16,7 +16,7 @@ type RangeItemProps = {
 
 const Slider = ({ className }: props) => {
   const videoRef = useAtomValue(VideoRefAtom);
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLButtonElement>(null);
   const metadata = useAtomValue(VideoMetadataAtom);
   const [buffered, setBuffered] = useState<RangeItemProps[]>([]);
   const [isDrugging, setIsDrugging] = useState(false);
@@ -76,18 +76,19 @@ const Slider = ({ className }: props) => {
     setIsDrugging(true);
   };
 
-  const onMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+  const onMouseMove = (e: MouseEvent<HTMLButtonElement>) => {
     if (!wrapperRef.current) return;
     const rect = wrapperRef.current.getBoundingClientRect();
     setTimeDisplayPos(((e.clientX - rect.left) / rect.width) * 100);
   };
 
   return (
-    <div
+    <button
       className={`${Styles.wrapper} ${className}`}
       ref={wrapperRef}
       onMouseDown={onMouseDown}
       onMouseMove={onMouseMove}
+      type="button"
     >
       <div className={Styles.background} />
       {buffered.map((item) => {
@@ -124,7 +125,7 @@ const Slider = ({ className }: props) => {
       >
         {time2str((timeDisplayPos / 100) * metadata.duration)}
       </div>
-    </div>
+    </button>
   );
 };
 

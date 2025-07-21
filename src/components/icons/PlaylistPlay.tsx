@@ -7,6 +7,8 @@ const PlaylistPlay: FC = () => (
     viewBox="0 -960 960 960"
     width="24"
     fill="white"
+    aria-label="Play playlist"
+    role="img"
   >
     <path d="M120-320v-80h320v80H120Zm0-160v-80h480v80H120Zm0-160v-80h480v80H120Zm520 520v-320l240 160-240 160Z" />
   </svg>

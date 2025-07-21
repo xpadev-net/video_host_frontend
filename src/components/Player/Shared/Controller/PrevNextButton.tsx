@@ -16,13 +16,13 @@ const PrevNextButton = ({ className, type, data }: props) => {
 
   const item = type === "prev" ? findPrev(data) : findNext(data);
 
-  if (!item) return <></>;
+  if (!item) return null;
   const onPrevClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     void router.push(`/movies/${item.id}`);
   };
   return (
-    <button onClick={onPrevClick} className={className}>
+    <button type="button" onClick={onPrevClick} className={className}>
       {type === "prev" ? <MdSkipPrevious /> : <MdSkipNext />}
     </button>
   );

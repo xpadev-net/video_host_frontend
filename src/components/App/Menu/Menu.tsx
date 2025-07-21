@@ -16,12 +16,14 @@ const HeaderMenu = () => {
   return (
     <div className={Styles.wrapper}>
       {!isMobile && (
-        <div
+        <button
+          type="button"
           className={`${ButtonStyles.buttonWrapper} ${ButtonStyles.hover}`}
           onClick={toggleSidebar}
+          aria-label="Toggle sidebar"
         >
           <MdMenu />
-        </div>
+        </button>
       )}
       <Link href={"/"} className={Styles.homeButton}>
         <div className={ButtonStyles.buttonWrapper}>

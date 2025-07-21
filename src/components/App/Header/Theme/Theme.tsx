@@ -9,6 +9,7 @@ export const ToggleTheme = () => {
 
   return (
     <button
+      type="button"
       onClick={() => {
         setTheme(theme === "dark" ? "light" : "dark");
       }}

@@ -1,5 +1,5 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { type FC, useEffect, useRef } from "react";
+import { type FC, type KeyboardEvent, useEffect, useRef } from "react";
 
 import {
   PlayerConfigAtom,
@@ -62,9 +62,46 @@ const Main: FC<MenuProps> = ({ className, updateScale }) => {
     }));
   };
 
+  const handlePlaybackRateKeyDown = (e: KeyboardEvent<HTMLButtonElement>) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      openPlaybackRate();
+    }
+  };
+
+  const handleCommentsKeyDown = (e: KeyboardEvent<HTMLButtonElement>) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      openComments();
+    }
+  };
+
+  const handleWindowFullscreenKeyDown = (
+    e: KeyboardEvent<HTMLButtonElement>,
+  ) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      toggleWindowFullscreen();
+    }
+  };
+
+  const handleHlsKeyDown = (e: KeyboardEvent<HTMLButtonElement>) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      toggleHls();
+    }
+  };
+
   return (
     <div className={`${Styles.wrapper} ${className}`} ref={ref}>
-      <div className={Styles.item} onClick={openPlaybackRate}>
+      <button
+        className={Styles.item}
+        onClick={openPlaybackRate}
+        onKeyDown={handlePlaybackRateKeyDown}
+        type="button"
+        tabIndex={0}
+        aria-label="再生速度設定を開く"
+      >
         <div className={Styles.left}>
           <div className={Styles.iconWrapper}>
             <SlowMotionVideo />
@@ -77,9 +114,16 @@ const Main: FC<MenuProps> = ({ className, updateScale }) => {
             <KeyboardArrowRight />
           </div>
         </div>
-      </div>
+      </button>
       {EnableComments && (
-        <div className={Styles.item} onClick={openComments}>
+        <button
+          className={Styles.item}
+          onClick={openComments}
+          onKeyDown={handleCommentsKeyDown}
+          type="button"
+          tabIndex={0}
+          aria-label="コメント設定を開く"
+        >
           <div className={Styles.left}>
             <div className={Styles.iconWrapper}>
               <ChatBubble />
@@ -92,9 +136,18 @@ const Main: FC<MenuProps> = ({ className, updateScale }) => {
               <KeyboardArrowRight />
             </div>
           </div>
-        </div>
+        </button>
       )}
-      <div className={Styles.item} onClick={toggleWindowFullscreen}>
+      <button
+        className={Styles.item}
+        onClick={toggleWindowFullscreen}
+        onKeyDown={handleWindowFullscreenKeyDown}
+        type="button"
+        tabIndex={0}
+        aria-label={`ウィンドウフルスクリーンを${
+          playerConfig.windowFullscreen ? "無効" : "有効"
+        }にする`}
+      >
         <div className={Styles.left}>
           <div className={Styles.iconWrapper}>
             <OpenInFull />
@@ -106,8 +159,15 @@ const Main: FC<MenuProps> = ({ className, updateScale }) => {
             <Switch checked={playerConfig.windowFullscreen} />
           </div>
         </div>
-      </div>
-      <div className={Styles.item} onClick={toggleHls}>
+      </button>
+      <button
+        className={Styles.item}
+        onClick={toggleHls}
+        onKeyDown={handleHlsKeyDown}
+        type="button"
+        tabIndex={0}
+        aria-label={`HLSを${playerConfig.isHls ? "無効" : "有効"}にする`}
+      >
         <div className={Styles.left}>
           <div className={Styles.iconWrapper}>
             <Hls />
@@ -119,7 +179,7 @@ const Main: FC<MenuProps> = ({ className, updateScale }) => {
             <Switch checked={playerConfig.isHls} />
           </div>
         </div>
-      </div>
+      </button>
     </div>
   );
 };

@@ -2,7 +2,7 @@ type props = {
   title: string;
   message?: string;
 };
-const Error = ({ title, message }: props) => {
+const ErrorComponent = ({ title, message }: props) => {
   return (
     <div>
       <div>
@@ -13,4 +13,4 @@ const Error = ({ title, message }: props) => {
   );
 };
 
-export { Error };
+export { ErrorComponent as Error };

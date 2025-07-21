@@ -27,7 +27,7 @@ const Controller = ({ className, data }: props) => {
   const setMetadata = useSetAtom(VideoMetadataAtom);
   const [isVolumeExtend, setIsVolumeExtend] = useState(false);
   const [mutedVolume, setMutedVolume] = useState<number | undefined>(undefined);
-  if (!data) return <></>;
+  if (!data) return null;
   const onMouseLeave = () => {
     setIsVolumeExtend(false);
   };
@@ -36,7 +36,18 @@ const Controller = ({ className, data }: props) => {
     setIsVolumeExtend(true);
   };
 
-  const stopPropagation = (e: MouseEvent<HTMLDivElement>) => {
+  const stopPropagation = (e: MouseEvent<HTMLButtonElement>) => {
+    setMetadata((pv) => ({
+      ...pv,
+      isSetting: false,
+    }));
+    e.stopPropagation();
+  };
+
+  const handleControllerKeyDown = (
+    e: React.KeyboardEvent<HTMLButtonElement>,
+  ) => {
+    // Handle keyboard interaction for controller wrapper
     setMetadata((pv) => ({
       ...pv,
       isSetting: false,
@@ -61,16 +72,29 @@ const Controller = ({ className, data }: props) => {
   };
 
   return (
-    <div className={`${className} ${Styles.wrapper}`} onClick={stopPropagation}>
+    <button
+      className={`${className} ${Styles.wrapper}`}
+      onClick={stopPropagation}
+      onKeyDown={handleControllerKeyDown}
+      aria-label="Video player controls"
+      type="button"
+    >
       <div className={Styles.background}></div>
-      <div className={Styles.buttons} onMouseLeave={onMouseLeave}>
+      <button
+        className={Styles.buttons}
+        onMouseLeave={onMouseLeave}
+        aria-label="Video controls"
+        type="button"
+      >
         <div className={Styles.leftSideWrapper}>
           <PrevNextButton className={Styles.button} type={"prev"} data={data} />
           <PlayPauseButton className={Styles.button} />
           <PrevNextButton className={Styles.button} type={"next"} data={data} />
           <button
+            type="button"
             onClick={onVolumeClick}
             onMouseOver={onVolumeMouseOver}
+            onFocus={onVolumeMouseOver}
             className={Styles.button}
           >
             <VolumeIcon />
@@ -90,10 +114,10 @@ const Controller = ({ className, data }: props) => {
           <TheatreButton className={Styles.button} />
           <FullscreenButton className={Styles.button} />
         </div>
-      </div>
+      </button>
       <Slider className={Styles.Slider} />
       <Setting className={Styles.setting} />
-    </div>
+    </button>
   );
 };
 

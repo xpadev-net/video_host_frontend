@@ -13,11 +13,11 @@ const SeriesPage = () => {
   const query = router.query.series;
   const { data } = useSeries(query2str(query));
   if (!data) {
-    return <></>;
+    return null;
   }
   if (data.code === 401) {
     void router.push(`/login?callback=${encodeURIComponent(router.asPath)}`);
-    return <></>;
+    return null;
   }
   if (data.status !== "ok") {
     return (

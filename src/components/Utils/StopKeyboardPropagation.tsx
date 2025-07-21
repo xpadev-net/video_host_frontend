@@ -6,7 +6,8 @@ type Props = {
 
 export const StopKeyboardPropagation: FC<Props> = ({ children }) => {
   return (
-    <div
+    <button
+      type="button"
       onKeyDown={(e) => {
         e.stopPropagation();
       }}
@@ -18,6 +19,6 @@ export const StopKeyboardPropagation: FC<Props> = ({ children }) => {
       }}
     >
       {children}
-    </div>
+    </button>
   );
 };

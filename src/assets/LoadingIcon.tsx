@@ -22,6 +22,8 @@ const LoadingIcon = ({ className }: props) => (
     xmlns="http://www.w3.org/2000/svg"
     stroke="#fff"
     className={className}
+    aria-label="Loading"
+    role="img"
   >
     <g fill="none" fillRule="evenodd">
       <g transform="translate(1 1)" strokeWidth="2">

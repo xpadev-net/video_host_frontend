@@ -9,6 +9,13 @@ import Styles from "@/components/App/Sidebar/OverlaySidebar.module.scss";
 const OverlaySidebar = () => {
   const [isActive, setIsActive] = useAtom(sidebarState);
 
+  const handleBackgroundKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      setIsActive(false);
+    }
+  };
+
   return (
     <div className={`${isActive || Styles.disable}`}>
       <div className={Styles.overlay}>
@@ -24,10 +31,15 @@ const OverlaySidebar = () => {
           <span className={Styles.text}>履歴</span>
         </Link>
       </div>
-      <div
+      {/* Background overlay that closes sidebar when clicked */}
+      <button
         className={Styles.background}
         onClick={() => setIsActive(false)}
-      ></div>
+        onKeyDown={handleBackgroundKeyDown}
+        type="button"
+        tabIndex={0}
+        aria-label="Close sidebar"
+      />
     </div>
   );
 };

@@ -15,7 +15,7 @@ const UserPage = () => {
   const { data: user, isLoading } = useUser(query as string);
 
   if (isLoading || !user) {
-    return <></>;
+    return null;
   }
 
   if (user.status !== "ok") {

@@ -18,6 +18,13 @@ const PlayList = ({ data, className, maxHeight }: props) => {
   const [isOpen, setIsOpen] = useState(true);
   const next = findNext(data);
 
+  const handleToggleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      setIsOpen((pv) => !pv);
+    }
+  };
+
   if (!data.series) {
     return null;
   }
@@ -29,9 +36,14 @@ const PlayList = ({ data, className, maxHeight }: props) => {
         maxHeight: maxHeight ? `${maxHeight}px` : "none",
       }}
     >
-      <div
+      <button
         className={`${Styles.header} ${isOpen && Styles.open}`}
         onClick={() => setIsOpen((pv) => !pv)}
+        onKeyDown={handleToggleKeyDown}
+        type="button"
+        tabIndex={0}
+        aria-label={isOpen ? "Collapse playlist" : "Expand playlist"}
+        aria-expanded={isOpen}
       >
         <div className={Styles.row}>
           <div className={Styles.textWrapper}>
@@ -60,7 +72,7 @@ const PlayList = ({ data, className, maxHeight }: props) => {
           )}
         </div>
         {isOpen ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}
-      </div>
+      </button>
       {isOpen && data.series && (
         <SeriesList
           series={data.series}

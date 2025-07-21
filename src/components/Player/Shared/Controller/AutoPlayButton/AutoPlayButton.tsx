@@ -14,17 +14,18 @@ type props = {
 const AutoPlayButton = ({ className }: props) => {
   const [playerConfig, setPlayerConfig] = useAtom(PlayerConfigAtom);
 
-  const toggleAutPlay = (e: MouseEvent<HTMLDivElement>) => {
+  const toggleAutoPlay = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     setPlayerConfig((pv) => ({ ...pv, autoPlay: !pv.autoPlay }));
   };
 
   return (
-    <div
+    <button
       className={`${className} ${Styles.wrapper} ${
         playerConfig.autoPlay ? Styles.on : Styles.off
       }`}
-      onClick={toggleAutPlay}
+      onClick={toggleAutoPlay}
+      type="button"
     >
       <Switch.Root
         className={Styles.root}
@@ -39,7 +40,7 @@ const AutoPlayButton = ({ className }: props) => {
           )}
         </Switch.Thumb>
       </Switch.Root>
-    </div>
+    </button>
   );
 };
 

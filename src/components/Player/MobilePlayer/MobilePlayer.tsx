@@ -25,7 +25,7 @@ type props = {
 const MobilePlayer = ({ className, data }: props) => {
   const { isLoading, isFullscreen } = useAtomValue(PlayerStateAtom);
   const { isNiconicommentsEnable } = useAtomValue(PlayerConfigAtom);
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLButtonElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const setVideoAtom = useSetAtom(VideoRefAtom);
   const setWrapperAtom = useSetAtom(WrapperRefAtom);
@@ -53,12 +53,13 @@ const MobilePlayer = ({ className, data }: props) => {
   }, [setVideoAtom, setWrapperAtom]);
 
   return (
-    <div
+    <button
       className={`${className} ${Styles.wrapper} ${isAfk && Styles.inactive} ${
         isFullscreen && Styles.fullscreen
       }`}
       onClick={toggleAfk}
       ref={wrapperRef}
+      type="button"
     >
       <div className={Styles.videoWrapper}>
         {isLoading && data && (
@@ -87,7 +88,7 @@ const MobilePlayer = ({ className, data }: props) => {
       <Controller className={Styles.controller} data={data} />
       <KeyboardHandler data={data} />
       <MediaSessionHandler data={data} />
-    </div>
+    </button>
   );
 };
 

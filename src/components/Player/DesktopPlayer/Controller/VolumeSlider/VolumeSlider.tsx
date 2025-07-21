@@ -1,5 +1,11 @@
 import { useAtomValue } from "jotai";
-import { type MouseEvent, useEffect, useRef, useState } from "react";
+import {
+  type MouseEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 import { PlayerConfigAtom, VideoRefAtom } from "@/atoms/Player";
 import Styles from "@/components/Player/DesktopPlayer/Controller/VolumeSlider/VolumeSlider.module.scss";
@@ -9,6 +15,18 @@ const VolumeSlider = () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const playerConfig = useAtomValue(PlayerConfigAtom);
   const [isDrugging, setIsDrugging] = useState(false);
+
+  const updateVolume = useCallback(
+    (clientX: number) => {
+      if (!wrapperRef.current || !videoRef) return;
+      const rect = wrapperRef.current.getBoundingClientRect();
+      let x = clientX - rect.left;
+      if (x < 0) x = 0;
+      else if (x > rect.width) x = rect.width;
+      videoRef.volume = x / rect.width;
+    },
+    [videoRef],
+  );
 
   useEffect(() => {
     const onMouseMove = (e: globalThis.MouseEvent) => {
@@ -30,17 +48,33 @@ const VolumeSlider = () => {
     updateVolume(e.clientX);
   };
 
-  const updateVolume = (clientX: number) => {
-    if (!wrapperRef.current || !videoRef) return;
-    const rect = wrapperRef.current.getBoundingClientRect();
-    let x = clientX - rect.left;
-    if (x < 0) x = 0;
-    else if (x > rect.width) x = rect.width;
-    videoRef.volume = x / rect.width;
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (!videoRef) return;
+
+    if (event.key === "ArrowLeft" || event.key === "ArrowDown") {
+      event.preventDefault();
+      const newVolume = Math.max(0, videoRef.volume - 0.05);
+      videoRef.volume = newVolume;
+    } else if (event.key === "ArrowRight" || event.key === "ArrowUp") {
+      event.preventDefault();
+      const newVolume = Math.min(1, videoRef.volume + 0.05);
+      videoRef.volume = newVolume;
+    }
   };
 
   return (
-    <div className={Styles.wrapper} onMouseDown={onMouseDown} ref={wrapperRef}>
+    <div
+      className={Styles.wrapper}
+      onMouseDown={onMouseDown}
+      onKeyDown={handleKeyDown}
+      ref={wrapperRef}
+      role="slider"
+      tabIndex={0}
+      aria-label="Volume slider"
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-valuenow={Math.round(playerConfig.volume * 100)}
+    >
       <div
         className={Styles.grubber}
         style={{

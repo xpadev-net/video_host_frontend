@@ -1,6 +1,6 @@
 import type { Options } from "@xpadev-net/niconicomments";
 import { useAtom, useSetAtom } from "jotai";
-import { type FC, useEffect, useRef } from "react";
+import { type FC, type KeyboardEvent, useEffect, useRef } from "react";
 
 import {
   NiconicommentsConfigAtom,
@@ -37,6 +37,13 @@ const Comments: FC<MenuProps> = ({ className, updateScale }) => {
     setPlayerSetting((prev) => prev.filter((page) => page !== "comments"));
   };
 
+  const handleBackKeyDown = (e: KeyboardEvent<HTMLButtonElement>) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      backToMain();
+    }
+  };
+
   const toggleCommentActive = () => {
     setPlayerConfig((prev) => ({
       ...prev,
@@ -57,17 +64,57 @@ const Comments: FC<MenuProps> = ({ className, updateScale }) => {
     }));
   };
 
+  const handleCommentActiveKeyDown = (e: KeyboardEvent<HTMLButtonElement>) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      toggleCommentActive();
+    }
+  };
+
+  const handleNiconicommentsConfigKeyDown = (
+    e: KeyboardEvent<HTMLButtonElement>,
+    key: keyof Options,
+  ) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      toggleNiconicommentsConfig(key);
+    }
+  };
+
+  const handlePipKeyDown = (e: KeyboardEvent<HTMLButtonElement>) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      togglePipEnable();
+    }
+  };
+
   return (
     <div className={`${Styles.wrapper} ${className}`} ref={ref}>
-      <div className={`${Styles.item} ${Styles.header}`} onClick={backToMain}>
+      <button
+        className={`${Styles.item} ${Styles.header}`}
+        onClick={backToMain}
+        onKeyDown={handleBackKeyDown}
+        type="button"
+        tabIndex={0}
+        aria-label="戻る"
+      >
         <div className={Styles.left}>
           <div className={Styles.iconWrapper}>
             <KeyboardArrowLeft />
           </div>
           <span className={Styles.text}>コメント</span>
         </div>
-      </div>
-      <div className={Styles.item} onClick={toggleCommentActive}>
+      </button>
+      <button
+        className={Styles.item}
+        onClick={toggleCommentActive}
+        onKeyDown={handleCommentActiveKeyDown}
+        type="button"
+        tabIndex={0}
+        aria-label={`コメントを${
+          playerConfig.isNiconicommentsEnable ? "無効" : "有効"
+        }にする`}
+      >
         <div className={Styles.left}>
           <div className={Styles.iconWrapper}>
             <ChatBubble />
@@ -79,10 +126,16 @@ const Comments: FC<MenuProps> = ({ className, updateScale }) => {
             <Switch checked={playerConfig.isNiconicommentsEnable} />
           </div>
         </div>
-      </div>
-      <div
+      </button>
+      <button
         className={Styles.item}
         onClick={() => toggleNiconicommentsConfig("showFPS")}
+        onKeyDown={(e) => handleNiconicommentsConfigKeyDown(e, "showFPS")}
+        type="button"
+        tabIndex={0}
+        aria-label={`FPS表示を${
+          niconicommentsConfig.showFPS ? "無効" : "有効"
+        }にする`}
       >
         <div className={Styles.left}>
           <div className={Styles.iconWrapper}>
@@ -95,10 +148,16 @@ const Comments: FC<MenuProps> = ({ className, updateScale }) => {
             <Switch checked={!!niconicommentsConfig.showFPS} />
           </div>
         </div>
-      </div>
-      <div
+      </button>
+      <button
         className={Styles.item}
         onClick={() => toggleNiconicommentsConfig("showCollision")}
+        onKeyDown={(e) => handleNiconicommentsConfigKeyDown(e, "showCollision")}
+        type="button"
+        tabIndex={0}
+        aria-label={`当たり判定表示を${
+          niconicommentsConfig.showCollision ? "無効" : "有効"
+        }にする`}
       >
         <div className={Styles.left}>
           <div className={Styles.iconWrapper}>
@@ -111,10 +170,18 @@ const Comments: FC<MenuProps> = ({ className, updateScale }) => {
             <Switch checked={!!niconicommentsConfig.showCollision} />
           </div>
         </div>
-      </div>
-      <div
+      </button>
+      <button
         className={Styles.item}
         onClick={() => toggleNiconicommentsConfig("showCommentCount")}
+        onKeyDown={(e) =>
+          handleNiconicommentsConfigKeyDown(e, "showCommentCount")
+        }
+        type="button"
+        tabIndex={0}
+        aria-label={`コメント数表示を${
+          niconicommentsConfig.showCommentCount ? "無効" : "有効"
+        }にする`}
       >
         <div className={Styles.left}>
           <div className={Styles.iconWrapper}>
@@ -127,8 +194,15 @@ const Comments: FC<MenuProps> = ({ className, updateScale }) => {
             <Switch checked={!!niconicommentsConfig.showCommentCount} />
           </div>
         </div>
-      </div>
-      <div className={Styles.item} onClick={togglePipEnable}>
+      </button>
+      <button
+        className={Styles.item}
+        onClick={togglePipEnable}
+        onKeyDown={handlePipKeyDown}
+        type="button"
+        tabIndex={0}
+        aria-label={`PiPを${playerConfig.isPipEnable ? "無効" : "有効"}にする`}
+      >
         <div className={Styles.left}>
           <div className={Styles.iconWrapper}>
             <PictureInPictureAlt />
@@ -140,7 +214,7 @@ const Comments: FC<MenuProps> = ({ className, updateScale }) => {
             <Switch checked={playerConfig.isPipEnable} />
           </div>
         </div>
-      </div>
+      </button>
     </div>
   );
 };
