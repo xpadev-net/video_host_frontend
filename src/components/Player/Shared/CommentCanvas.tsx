@@ -2,7 +2,7 @@ import NiconiComments from "@xpadev-net/niconicomments";
 import { useAtomValue } from "jotai";
 import { useEffect, useRef } from "react";
 
-import { CommentResponse } from "@/@types/api";
+import type { CommentResponse } from "@/@types/api";
 import { NiconicommentsConfigAtom, PlayerConfigAtom } from "@/atoms/Player";
 import { request } from "@/libraries/request";
 
@@ -58,7 +58,7 @@ const CommentCanvas = ({ url, videoRef, pipVideoRef, className }: props) => {
     return () => {
       niconicommentsRef.current = undefined;
     };
-  }, [url]);
+  }, [url, niconicommentsConfig, playerConfig.isPipEnable, videoRef]);
 
   useEffect(() => {
     const interval = window.setInterval(() => {
@@ -72,7 +72,7 @@ const CommentCanvas = ({ url, videoRef, pipVideoRef, className }: props) => {
     return () => {
       window.clearInterval(interval);
     };
-  }, [niconicommentsRef.current, videoRef?.paused, playerConfig.playbackRate]);
+  }, [videoRef?.paused, playerConfig.playbackRate, videoRef.currentTime]);
 
   useEffect(() => {
     if (!niconicommentsRef.current || !canvasRef.current || !pipVideoRef)
@@ -83,12 +83,7 @@ const CommentCanvas = ({ url, videoRef, pipVideoRef, className }: props) => {
     niconicommentsRef.current.renderer.video =
       (playerConfig.isPipEnable && videoRef) || undefined;
     pipVideoRef.srcObject = canvasRef.current.captureStream(60);
-  }, [
-    playerConfig.isPipEnable,
-    niconicommentsRef.current,
-    videoRef,
-    pipVideoRef,
-  ]);
+  }, [playerConfig.isPipEnable, videoRef, pipVideoRef]);
 
   return (
     <canvas ref={canvasRef} className={className} width={1920} height={1080} />

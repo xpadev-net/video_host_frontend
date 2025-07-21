@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef } from "react";
 
-import { FilteredMovie } from "@/@types/v4Api";
+import type { FilteredMovie } from "@/@types/v4Api";
 import { MovieCard } from "@/components/Movie";
 
 import Styles from "./MovieList.module.scss";
@@ -26,7 +26,7 @@ const MovieList = ({ movies, type, active, className, showSeries }: props) => {
       return;
     wrapperRef.current.scrollTop =
       activeRef.current.offsetTop - activeRef.current.clientHeight;
-  }, [movies, type, active]);
+  }, [type, active]);
   return useMemo(() => {
     return (
       <div
@@ -56,7 +56,7 @@ const MovieList = ({ movies, type, active, className, showSeries }: props) => {
         })}
       </div>
     );
-  }, [movies, type, active, className]);
+  }, [movies, type, active, className, showSeries]);
 };
 
 export { MovieList };

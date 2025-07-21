@@ -1,8 +1,8 @@
 import { Avatar, Flex } from "@radix-ui/themes";
 import Link from "next/link";
-import { FC } from "react";
+import type { FC } from "react";
 
-import { FilteredUser } from "@/@types/v4Api";
+import type { FilteredUser } from "@/@types/v4Api";
 
 import styles from "./User.module.scss";
 

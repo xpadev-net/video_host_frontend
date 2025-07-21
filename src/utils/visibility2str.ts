@@ -1,4 +1,4 @@
-import { Visibility } from "@/@types/v4Api";
+import type { Visibility } from "@/@types/v4Api";
 
 export const visibility2str = (input: Visibility): string => {
   switch (input) {

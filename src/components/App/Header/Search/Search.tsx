@@ -1,6 +1,11 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { ForwardedRef, forwardRef, KeyboardEvent, useState } from "react";
+import {
+  type ForwardedRef,
+  forwardRef,
+  type KeyboardEvent,
+  useState,
+} from "react";
 import { MdSearch } from "react-icons/md";
 
 import Styles from "@/components/App/Header/Search/Search.module.scss";
@@ -23,13 +28,13 @@ const Search_ = ({ className }: props, ref: ForwardedRef<HTMLInputElement>) => {
     e.stopPropagation();
     const key = e.keyCode || e.charCode || 0;
     if (!e.nativeEvent.isComposing && key === 13) {
-      void router.push(`/search/` + encodeURIComponent(input));
+      void router.push(`/search/${encodeURIComponent(input)}`);
       inputRef.current?.blur();
     }
   };
   const onSearchClick = () => {
     if (input && input.length > 1) {
-      void router.push(`/search/` + encodeURIComponent(input));
+      void router.push(`/search/${encodeURIComponent(input)}`);
     }
   };
 

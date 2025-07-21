@@ -1,4 +1,4 @@
-import { FC } from "react";
+import type { FC } from "react";
 
 import { SeriesCard } from "@/components/SeriesCard";
 import { useSeriesList } from "@/hooks/useSeriesList";

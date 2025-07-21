@@ -1,8 +1,8 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { useRouter } from "next/router";
-import { FC, useEffect } from "react";
+import { type FC, useEffect } from "react";
 
-import { FilteredMovie } from "@/@types/v4Api";
+import type { FilteredMovie } from "@/@types/v4Api";
 import {
   PlayerConfigAtom,
   PlayerStateAtom,
@@ -83,7 +83,14 @@ const KeyboardHandler: FC<Props> = ({ data }) => {
     return () => {
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [videoRef, data, playerConfig, setPlayerConfig, setVideoMetadata]);
+  }, [
+    videoRef,
+    data,
+    playerConfig,
+    setPlayerConfig,
+    setVideoMetadata,
+    router.push,
+  ]);
 
   return <></>;
 };

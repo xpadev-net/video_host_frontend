@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
 
 import { Header } from "@/components/App/Header";
 import { Sidebar } from "@/components/App/Sidebar";

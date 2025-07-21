@@ -1,5 +1,5 @@
 import { useAtomValue } from "jotai";
-import { MouseEvent } from "react";
+import type { MouseEvent } from "react";
 import { MdPause, MdPlayArrow } from "react-icons/md";
 
 import { PlayerStateAtom, VideoRefAtom } from "@/atoms/Player";

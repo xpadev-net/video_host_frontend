@@ -7,7 +7,7 @@ import {
   VisuallyHidden,
 } from "@radix-ui/themes";
 import { useSetAtom } from "jotai";
-import { FC, useState } from "react";
+import { type FC, useState } from "react";
 import { IoMdInformationCircleOutline } from "react-icons/io";
 import { MdKey, MdMail, MdPerson, MdTag } from "react-icons/md";
 
@@ -40,8 +40,7 @@ export const SignUp: FC<Props> = ({ isLoading, setIsLoading }) => {
       invitationCode,
     );
     if (res.data.status === "ok") {
-      requests.defaults.headers["Authorization"] =
-        `Bearer ${res.data.data.token}`;
+      requests.defaults.headers.Authorization = `Bearer ${res.data.data.token}`;
       setAuthToken(res.data.data.token);
       setOpen(false);
     } else {

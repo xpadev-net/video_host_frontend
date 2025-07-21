@@ -1,5 +1,5 @@
 import { useAtomValue } from "jotai";
-import { MouseEvent, useEffect, useRef, useState } from "react";
+import { type MouseEvent, useEffect, useRef, useState } from "react";
 
 import { VideoMetadataAtom, VideoRefAtom } from "@/atoms/Player";
 import Styles from "@/components/Player/DesktopPlayer/Controller/Slider/Slider.module.scss";
@@ -70,7 +70,7 @@ const Slider = ({ className }: props) => {
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("mouseup", onMouseUp);
     };
-  }, [isDrugging]);
+  }, [isDrugging, videoRef]);
 
   const onMouseDown = () => {
     setIsDrugging(true);

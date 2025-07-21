@@ -1,5 +1,5 @@
 import { useAtomValue } from "jotai";
-import { MouseEvent, useEffect, useRef, useState } from "react";
+import { type MouseEvent, useEffect, useRef, useState } from "react";
 
 import { VideoRefAtom } from "@/atoms/Player";
 import Styles from "@/components/Player/MobilePlayer/Controller/Slider/Slider.module.scss";
@@ -88,7 +88,7 @@ const Slider = ({ className }: props) => {
       window.removeEventListener("touchmove", onTouchMove);
       window.removeEventListener("touchend", onTouchEnd);
     };
-  }, [isDrugging]);
+  }, [isDrugging, videoRef]);
 
   const onMouseDown = () => {
     setIsDrugging(true);

@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { ForwardedRef, forwardRef } from "react";
+import { type ForwardedRef, forwardRef } from "react";
 
-import { FilteredMovie } from "@/@types/v4Api";
+import type { FilteredMovie } from "@/@types/v4Api";
 import { Thumbnail } from "@/components/Thumbnail";
 import { User } from "@/components/User/User";
 
@@ -54,9 +54,7 @@ const MovieCard_ = (
       ref={ref}
     >
       {index !== undefined && (
-        <span className={Styles.index}>
-          {index === "active" ? "▶" : index}
-        </span>
+        <span className={Styles.index}>{index === "active" ? "▶" : index}</span>
       )}
       <div className={Styles.thumbnail}>
         <Thumbnail movie={movie} />

@@ -1,4 +1,4 @@
-import { FilteredMovie } from "@/@types/v4Api";
+import type { FilteredMovie } from "@/@types/v4Api";
 
 export const findNext = (data: FilteredMovie) => {
   if (!data?.series) return undefined;

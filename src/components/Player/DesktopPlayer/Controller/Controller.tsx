@@ -1,7 +1,7 @@
 import { useAtomValue, useSetAtom } from "jotai";
-import { MouseEvent, useState } from "react";
+import { type MouseEvent, useState } from "react";
 
-import { FilteredMovie } from "@/@types/v4Api";
+import type { FilteredMovie } from "@/@types/v4Api";
 import { VideoMetadataAtom, VideoRefAtom } from "@/atoms/Player";
 import { TimeDisplay } from "@/components/Player/DesktopPlayer/Controller/TimeDisplay";
 import { AutoPlayButton } from "@/components/Player/Shared/Controller/AutoPlayButton";

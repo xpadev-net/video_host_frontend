@@ -1,5 +1,5 @@
 import { useAtom, useSetAtom } from "jotai";
-import { MouseEvent } from "react";
+import type { MouseEvent } from "react";
 import { MdSettings } from "react-icons/md";
 
 import { PlayerSettingAtom, PlayerStateAtom } from "@/atoms/Player";

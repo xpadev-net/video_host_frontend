@@ -16,10 +16,10 @@ type props = {
 const MobileHeader = ({ className }: props) => {
   const [isInputActive, setIsInputActive] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  const router = useRouter();
+  const _router = useRouter();
   useEffect(() => {
     setIsInputActive(false);
-  }, [router.asPath]);
+  }, []);
 
   const onSearchButtonClick = () => {
     setIsInputActive(true);

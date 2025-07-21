@@ -1,4 +1,4 @@
-import { v4GetMovieRes } from "@/@types/v4Api";
+import type { v4GetMovieRes } from "@/@types/v4Api";
 import { useStickySWR } from "@/hooks/useStickySWR";
 import { requests } from "@/libraries/requests";
 

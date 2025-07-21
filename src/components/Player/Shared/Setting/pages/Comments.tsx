@@ -1,6 +1,6 @@
-import { Options } from "@xpadev-net/niconicomments";
+import type { Options } from "@xpadev-net/niconicomments";
 import { useAtom, useSetAtom } from "jotai";
-import { FC, useEffect, useRef } from "react";
+import { type FC, useEffect, useRef } from "react";
 
 import {
   NiconicommentsConfigAtom,
@@ -15,7 +15,7 @@ import {
   SelectAll,
   SixtyFpsSelect,
 } from "@/components/icons";
-import { MenuProps } from "@/components/Player/Shared/Setting";
+import type { MenuProps } from "@/components/Player/Shared/Setting";
 import { Switch } from "@/components/Switch/Switch";
 
 import Styles from "./pages.module.scss";

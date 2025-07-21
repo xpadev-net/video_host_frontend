@@ -1,6 +1,6 @@
 import { useAtomValue } from "jotai";
 
-import { FilteredMovie } from "@/@types/v4Api";
+import type { FilteredMovie } from "@/@types/v4Api";
 import { PlayerStateAtom } from "@/atoms/Player";
 import { TimeDisplay } from "@/components/Player/MobilePlayer/Controller/TimeDisplay";
 import { AutoPlayButton } from "@/components/Player/Shared/Controller/AutoPlayButton";

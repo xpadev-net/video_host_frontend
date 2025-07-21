@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
-import { MouseEvent } from "react";
+import type { MouseEvent } from "react";
 import { MdSkipNext, MdSkipPrevious } from "react-icons/md";
 
-import { FilteredMovie } from "@/@types/v4Api";
+import type { FilteredMovie } from "@/@types/v4Api";
 import { findNext, findPrev } from "@/components/Player/utils/findPrevNext";
 
 type props = {

@@ -1,5 +1,5 @@
 import { useAtomValue } from "jotai";
-import { MouseEvent, useEffect, useRef, useState } from "react";
+import { type MouseEvent, useEffect, useRef, useState } from "react";
 
 import { PlayerConfigAtom, VideoRefAtom } from "@/atoms/Player";
 import Styles from "@/components/Player/DesktopPlayer/Controller/VolumeSlider/VolumeSlider.module.scss";
@@ -24,7 +24,7 @@ const VolumeSlider = () => {
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("mouseup", onMouseUp);
     };
-  }, [isDrugging]);
+  }, [isDrugging, updateVolume]);
   const onMouseDown = (e: MouseEvent<HTMLDivElement>) => {
     setIsDrugging(true);
     updateVolume(e.clientX);

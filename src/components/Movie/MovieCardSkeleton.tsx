@@ -1,8 +1,8 @@
-import React, { forwardRef } from "react";
+import { forwardRef } from "react";
 
 import Styles from "./Movie.module.scss";
 
-export const MovieCardSkeleton = forwardRef<HTMLDivElement>((props, ref) => (
+export const MovieCardSkeleton = forwardRef<HTMLDivElement>((_props, ref) => (
   <div
     ref={ref}
     className={`${Styles.wrapper} ${Styles.row} ${Styles.skeletonCard}`}

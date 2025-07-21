@@ -1,8 +1,8 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { FormEvent, MouseEvent, useEffect, useState } from "react";
+import { type FormEvent, type MouseEvent, useEffect, useState } from "react";
 
-import { authResponse, tryAuthResponse } from "@/@types/api";
+import type { authResponse, tryAuthResponse } from "@/@types/api";
 import { SiteName } from "@/contexts/env";
 import { request } from "@/libraries/request";
 import Styles from "@/styles/login.module.scss";
@@ -27,7 +27,7 @@ const Login = () => {
       }
       setLoading(false);
     })();
-  }, []);
+  }, [router.pathname, router.push, router.query.callback]);
 
   const onSubmit = (
     e: MouseEvent<HTMLButtonElement> | FormEvent<HTMLFormElement>,

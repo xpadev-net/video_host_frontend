@@ -1,6 +1,6 @@
-import { AxiosError, AxiosResponse } from "axios";
+import { AxiosError, type AxiosResponse } from "axios";
 
-import { v4DeleteAuthLogoutRes } from "@/@types/v4Api";
+import type { v4DeleteAuthLogoutRes } from "@/@types/v4Api";
 import { requests } from "@/libraries/requests";
 
 export const deleteAuth = async () => {

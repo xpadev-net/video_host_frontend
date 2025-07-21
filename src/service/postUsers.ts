@@ -1,6 +1,6 @@
-import { AxiosError, AxiosResponse } from "axios";
+import { AxiosError, type AxiosResponse } from "axios";
 
-import { v4PostUsersRes } from "@/@types/v4Api";
+import type { v4PostUsersRes } from "@/@types/v4Api";
 import { requests } from "@/libraries/requests";
 
 export const postUsers = async (

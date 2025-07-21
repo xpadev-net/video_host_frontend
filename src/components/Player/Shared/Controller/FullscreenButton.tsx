@@ -1,5 +1,5 @@
 import { useAtom, useAtomValue } from "jotai";
-import { MouseEvent, useEffect } from "react";
+import { type MouseEvent, useEffect } from "react";
 import { MdFullscreen, MdFullscreenExit } from "react-icons/md";
 
 import {
@@ -29,7 +29,7 @@ const FullscreenButton = ({ className }: props) => {
     return () => {
       document.removeEventListener("fullscreenchange", handler);
     };
-  }, [playerConfig.windowFullscreen]);
+  }, [playerConfig.windowFullscreen, setMetadata]);
 
   useEffect(() => {
     if (
@@ -44,7 +44,12 @@ const FullscreenButton = ({ className }: props) => {
     } else if (!metadata.isFullscreen && document.fullscreenElement) {
       void document.exitFullscreen();
     }
-  }, [metadata.isFullscreen]);
+  }, [
+    metadata.isFullscreen,
+    playerConfig.windowFullscreen,
+    setMetadata,
+    wrapperRef,
+  ]);
 
   const toggleFullscreen = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();

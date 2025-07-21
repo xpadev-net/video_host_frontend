@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { CSSProperties, useEffect, useRef, useState } from "react";
+import { type CSSProperties, useEffect, useRef, useState } from "react";
 
 import { MovieCard, MovieCardSkeleton } from "@/components/Movie";
 import { SiteName } from "@/contexts/env";

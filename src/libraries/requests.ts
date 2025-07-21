@@ -4,7 +4,7 @@ import { AuthTokenLocalStorageKey } from "@/atoms/Auth";
 import { ApiEndpoint } from "@/contexts/env";
 
 const token =
-  typeof window == "undefined"
+  typeof window === "undefined"
     ? null
     : localStorage.getItem(AuthTokenLocalStorageKey);
 

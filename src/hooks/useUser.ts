@@ -2,7 +2,7 @@ import { AxiosError } from "axios";
 import { useAtom } from "jotai";
 import { useEffect } from "react";
 
-import { v4GetUserRes } from "@/@types/v4Api";
+import type { v4GetUserRes } from "@/@types/v4Api";
 import { AuthTokenAtom } from "@/atoms/Auth";
 import { useStickySWR } from "@/hooks/useStickySWR";
 import { requests } from "@/libraries/requests";
@@ -34,14 +34,14 @@ export const useSelf = () => {
   const [token, setToken] = useAtom(AuthTokenAtom);
   useEffect(() => {
     void swr.mutate();
-  }, [token]);
+  }, [swr.mutate]);
 
   useEffect(() => {
     if (swr.data && swr.data.code === 401 && token) {
       setToken(null);
       location.reload();
     }
-  }, [swr.data]);
+  }, [swr.data, setToken, token]);
 
   return swr;
 };

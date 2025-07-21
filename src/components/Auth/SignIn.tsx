@@ -7,7 +7,7 @@ import {
   VisuallyHidden,
 } from "@radix-ui/themes";
 import { useSetAtom } from "jotai";
-import { FC, useState } from "react";
+import { type FC, useState } from "react";
 import { IoMdInformationCircleOutline } from "react-icons/io";
 import { MdKey, MdTag } from "react-icons/md";
 
@@ -33,7 +33,7 @@ export const SignIn: FC<Props> = ({ isLoading, setIsLoading }) => {
     setIsLoading(true);
     const token = await postAuth(username, password);
     if (token.data.status === "ok") {
-      requests.defaults.headers["Authorization"] = `Bearer ${token.data.data}`;
+      requests.defaults.headers.Authorization = `Bearer ${token.data.data}`;
       setAuthToken(token.data.data);
       setOpen(false);
     } else {

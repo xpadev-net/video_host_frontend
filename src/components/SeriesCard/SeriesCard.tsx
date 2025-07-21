@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { FC } from "react";
+import type { FC } from "react";
 
-import { FilteredSeries } from "@/@types/v4Api";
+import type { FilteredSeries } from "@/@types/v4Api";
 import { Thumbnail } from "@/components/Thumbnail";
 import { User } from "@/components/User/User";
 

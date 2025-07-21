@@ -1,9 +1,9 @@
 import Hls from "hls.js";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { useRouter } from "next/router";
-import { RefObject, useEffect, useRef, useState } from "react";
+import { type RefObject, useEffect, useRef, useState } from "react";
 
-import { FilteredMovie } from "@/@types/v4Api";
+import type { FilteredMovie } from "@/@types/v4Api";
 import { AuthTokenAtom } from "@/atoms/Auth";
 import {
   PlayerConfigAtom,
@@ -109,7 +109,7 @@ const Video = ({ className, videoRef, movie }: props) => {
         videoRef.current.crossOrigin = "use-credentials";
       } else if (Hls.isSupported()) {
         const hls = new Hls({
-          xhrSetup: function (xhr, url) {
+          xhrSetup: (xhr, url) => {
             xhr.open("GET", url);
             if (token) {
               xhr.setRequestHeader("Authorization", `Bearer ${token}`);
@@ -149,7 +149,16 @@ const Video = ({ className, videoRef, movie }: props) => {
     return () => {
       hlsRef.current?.destroy();
     };
-  }, [videoRef.current, movie, playerConfig.isHls, token]);
+  }, [
+    videoRef.current,
+    movie,
+    token,
+    playerConfig.playbackRate,
+    playerConfig.volume,
+    setWatchedHistory,
+    url,
+    watchedHistory,
+  ]);
 
   return (
     <video

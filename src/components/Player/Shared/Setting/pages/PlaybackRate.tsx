@@ -1,5 +1,5 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { FC, useEffect, useRef } from "react";
+import { type FC, useEffect, useRef } from "react";
 
 import {
   PlayerConfigAtom,
@@ -7,7 +7,7 @@ import {
   VideoRefAtom,
 } from "@/atoms/Player";
 import { Check, KeyboardArrowLeft } from "@/components/icons";
-import { MenuProps } from "@/components/Player/Shared/Setting";
+import type { MenuProps } from "@/components/Player/Shared/Setting";
 
 import Styles from "./pages.module.scss";
 

@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import useSWR, { SWRConfiguration } from "swr";
+import useSWR, { type SWRConfiguration } from "swr";
 
 const useStickyResult = <T>(value: T | undefined): T | undefined => {
   const val = useRef<T>();

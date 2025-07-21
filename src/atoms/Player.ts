@@ -1,8 +1,8 @@
-import { Options } from "@xpadev-net/niconicomments";
+import type { Options } from "@xpadev-net/niconicomments";
 import { atom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
 
-import {
+import type {
   PlayerConfig,
   PlayerState,
   SettingKey,

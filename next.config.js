@@ -5,13 +5,13 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
+        protocol: "https",
         hostname: process.env.NEXT_PUBLIC_ALLOWED_IMAGE_HOSTNAME ?? "*",
       },
     ],
-    formats: ['image/webp'],
-    deviceSizes: [300]
-  }
-}
+    formats: ["image/webp"],
+    deviceSizes: [300],
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

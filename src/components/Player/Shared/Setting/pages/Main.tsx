@@ -1,5 +1,5 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { FC, useEffect, useRef } from "react";
+import { type FC, useEffect, useRef } from "react";
 
 import {
   PlayerConfigAtom,
@@ -14,7 +14,7 @@ import {
   OpenInFull,
   SlowMotionVideo,
 } from "@/components/icons";
-import { MenuProps } from "@/components/Player/Shared/Setting";
+import type { MenuProps } from "@/components/Player/Shared/Setting";
 import { Switch } from "@/components/Switch/Switch";
 import { EnableComments } from "@/contexts/env";
 
@@ -30,7 +30,7 @@ const Main: FC<MenuProps> = ({ className, updateScale }) => {
   useEffect(() => {
     if (!ref.current) return;
     updateScale?.(ref.current);
-  }, [updateScale, ref.current]);
+  }, [updateScale]);
 
   const toggleWindowFullscreen = () => {
     setPlayerConfig((pv) => ({

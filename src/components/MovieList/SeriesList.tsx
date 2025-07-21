@@ -1,6 +1,6 @@
-import { ComponentProps, FC } from "react";
+import type { ComponentProps, FC } from "react";
 
-import { FilteredSeries } from "@/@types/v4Api";
+import type { FilteredSeries } from "@/@types/v4Api";
 import { MovieList } from "@/components/MovieList/MovieList";
 
 type Props = Omit<ComponentProps<typeof MovieList>, "movies"> & {

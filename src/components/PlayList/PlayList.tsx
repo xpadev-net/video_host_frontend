@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 
-import { FilteredMovie } from "@/@types/v4Api";
+import type { FilteredMovie } from "@/@types/v4Api";
 import { SeriesList } from "@/components/MovieList/SeriesList";
 import { findNext } from "@/components/Player/utils/findPrevNext";
 import Styles from "@/components/PlayList/PlayList.module.scss";

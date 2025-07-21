@@ -7,12 +7,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "prepare": "husky",
-    "check-types": "npx tsc --noEmit --jsx react-jsx",
-    "eslint:fix": "next lint --fix",
-    "format": "prettier --write \"src/**/*.{tsx,ts,js,json,css,scss}\"",
-    "lint:fix": "npm run format&&npm run eslint:fix&&npm run check-types"
+    "lint": "biome check ./src",
+    "lint:fix": "biome check ./src --write --unsafe",
+    "format": "biome format ./src --write",
+    "typecheck": "tsc --noEmit --skipLibCheck --pretty --noErrorTruncation --skipDefaultLibCheck --project tsconfig.json",
+    "prepare": "lefthook install || true"
   },
   "dependencies": {
     "@radix-ui/react-switch": "^1.1.2",
@@ -34,16 +33,15 @@
     "typescript": "^5.7.3"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.1.2",
     "@types/nprogress": "^0.2.3",
-    "@typescript-eslint/eslint-plugin": "^7.18.0",
-    "@typescript-eslint/parser": "^7.18.0",
-    "eslint": "^8.57.1",
-    "eslint-config-next": "^14.2.23",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-simple-import-sort": "^12.1.1",
-    "lint-staged": "^15.4.2",
+    "lefthook": "^1.12.2",
     "nprogress": "^0.2.0",
-    "prettier": "3.3.3",
     "sass": "^1.83.4"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "lefthook"
+    ]
   }
 }

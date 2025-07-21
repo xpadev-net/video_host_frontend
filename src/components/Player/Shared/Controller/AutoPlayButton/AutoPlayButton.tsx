@@ -1,6 +1,6 @@
 import * as Switch from "@radix-ui/react-switch";
 import { useAtom } from "jotai";
-import { MouseEvent } from "react";
+import type { MouseEvent } from "react";
 import { MdPause, MdPlayArrow } from "react-icons/md";
 
 import { PlayerConfigAtom } from "@/atoms/Player";

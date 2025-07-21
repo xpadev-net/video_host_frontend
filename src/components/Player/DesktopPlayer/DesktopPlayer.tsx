@@ -1,7 +1,7 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useRef, useState } from "react";
 
-import { FilteredMovie } from "@/@types/v4Api";
+import type { FilteredMovie } from "@/@types/v4Api";
 import { LoadingIcon } from "@/assets/LoadingIcon";
 import {
   PlayerConfigAtom,
@@ -60,7 +60,7 @@ const DesktopPlayer = ({ className, data }: props) => {
   useEffect(() => {
     setVideoAtom(videoRef.current);
     setWrapperAtom(wrapperRef.current);
-  }, [videoRef, wrapperRef]);
+  }, [setVideoAtom, setWrapperAtom]);
 
   const onMouseMove = () => {
     window.clearTimeout(afkTimeout.current);

@@ -1,7 +1,14 @@
 import { useAtom, useAtomValue } from "jotai";
-import { FC, MouseEvent, useEffect, useMemo, useRef, useState } from "react";
+import {
+  type FC,
+  type MouseEvent,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
-import { SettingKey } from "@/@types/Player";
+import type { SettingKey } from "@/@types/Player";
 import {
   PlayerSettingAtom,
   PlayerStateAtom,
@@ -55,7 +62,7 @@ const Setting = ({ className }: Props) => {
     return () => {
       window.removeEventListener("click", onClick);
     };
-  }, []);
+  }, [setState]);
 
   const updateScale = useMemo<(ref: HTMLDivElement) => void>(() => {
     return (ref: HTMLDivElement) => {

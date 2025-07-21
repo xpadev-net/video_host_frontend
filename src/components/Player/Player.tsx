@@ -1,4 +1,4 @@
-import { FilteredMovie } from "@/@types/v4Api";
+import type { FilteredMovie } from "@/@types/v4Api";
 import { DesktopPlayer } from "@/components/Player/DesktopPlayer";
 import { MobilePlayer } from "@/components/Player/MobilePlayer";
 import { useIsMobile } from "@/libraries/isMobile";

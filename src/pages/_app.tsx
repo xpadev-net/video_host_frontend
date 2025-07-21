@@ -39,7 +39,7 @@ export default function Main({ Component, pageProps }: AppProps) {
 
   isomorphicEffect(() => {
     if (token) {
-      requests.defaults.headers["Authorization"] = `Bearer ${token}`;
+      requests.defaults.headers.Authorization = `Bearer ${token}`;
     }
   }, [token]);
 

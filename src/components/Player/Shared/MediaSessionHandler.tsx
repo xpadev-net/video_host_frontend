@@ -1,8 +1,8 @@
 import { useAtomValue } from "jotai";
 import { useRouter } from "next/router";
-import { FC, useEffect, useMemo } from "react";
+import { type FC, useEffect, useMemo } from "react";
 
-import { FilteredMovie } from "@/@types/v4Api";
+import type { FilteredMovie } from "@/@types/v4Api";
 import { VideoRefAtom } from "@/atoms/Player";
 import { findNext, findPrev } from "@/components/Player/utils/findPrevNext";
 
@@ -80,12 +80,12 @@ const MediaSessionHandler: FC<Props> = ({ data }) => {
     return () => {
       navigator.mediaSession.metadata = null;
     };
-  }, [data, videoRef]);
+  }, [data, mediaSessionHandler]);
 
   useEffect(() => {
     if (!videoRef) return;
     const handler = () => {
-      if (!videoRef || isNaN(videoRef.duration)) return;
+      if (!videoRef || Number.isNaN(videoRef.duration)) return;
       navigator.mediaSession.setPositionState({
         duration: videoRef.duration,
         position: videoRef.currentTime,

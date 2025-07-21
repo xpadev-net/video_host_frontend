@@ -1,6 +1,6 @@
 import useSWRInfinite from "swr/infinite";
 
-import { v4GetMoviesRes } from "@/@types/v4Api";
+import type { v4GetMoviesRes } from "@/@types/v4Api";
 import { requests } from "@/libraries/requests";
 import { buildQueryParams } from "@/utils/buildQueryParams";
 

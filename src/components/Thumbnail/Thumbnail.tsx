@@ -1,7 +1,7 @@
 import { useAtomValue } from "jotai";
 import Image from "next/image";
 
-import { FilteredMovie } from "@/@types/v4Api";
+import type { FilteredMovie } from "@/@types/v4Api";
 import { watchedHistoryAtom } from "@/atoms/WatchedHistory";
 import { time2str } from "@/libraries/time";
 
