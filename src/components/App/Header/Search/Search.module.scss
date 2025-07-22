@@ -41,6 +41,9 @@
         padding: 3px 10px;
         margin: 5px 0;
         display: block;
+        &:hover {
+          background-color: colors.$hoverColor;
+        }
       }
     }
     .input:focus + .suggest,
