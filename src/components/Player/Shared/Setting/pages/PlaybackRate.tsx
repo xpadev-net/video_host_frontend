@@ -42,7 +42,7 @@ const PlaybackRate: FC<MenuProps> = ({ className, updateScale }) => {
   };
 
   const handleRateKeyDown = (
-    e: KeyboardEvent<HTMLDivElement>,
+    e: KeyboardEvent<HTMLButtonElement>,
     rate: number,
   ) => {
     if (e.key === "Enter" || e.key === " ") {

@@ -2,10 +2,7 @@ export type v4GetMoviesRes =
   | {
       status: "ok";
       code: 200;
-      data: {
-        items: FilteredMovie[];
-        hasNext: boolean;
-      };
+      data: PaginatedResponse<FilteredMovie>;
     }
   | v4ErrorRes;
 
@@ -21,7 +18,7 @@ export type v4GetSeriesListRes =
   | {
       status: "ok";
       code: 200;
-      data: FilteredSeries[];
+      data: PaginatedResponse<FilteredSeries>;
     }
   | v4ErrorRes;
 
@@ -72,6 +69,20 @@ export type v4ErrorRes = {
   status: "error";
   code: 400 | 401 | 403 | 404;
   message: string;
+};
+
+export type PaginationMeta = {
+  page: number;
+  limit: number;
+  totalCount: number;
+  totalPages: number;
+  hasNext: boolean;
+  hasPrev: boolean;
+};
+
+export type PaginatedResponse<T> = {
+  items: T[];
+  pagination: PaginationMeta;
 };
 
 export type Visibility = "PUBLIC" | "UNLISTED" | "PRIVATE";

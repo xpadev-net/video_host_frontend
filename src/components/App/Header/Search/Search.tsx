@@ -54,21 +54,22 @@ const Search_ = ({ className }: props, ref: ForwardedRef<HTMLInputElement>) => {
           onChange={(e) => setInput(e.target.value)}
         />
 
-        {suggest.data?.status === "ok" && suggest.data.data.length > 0 && (
-          <label htmlFor={"headerSearchInput"} className={Styles.suggest}>
-            {suggest.data.data.map((item) => {
-              return (
-                <Link
-                  href={`/search/${encodeURIComponent(item.title)}`}
-                  key={item.id}
-                  className={Styles.suggestItem}
-                >
-                  <div>{item.title}</div>
-                </Link>
-              );
-            })}
-          </label>
-        )}
+        {suggest.data?.status === "ok" &&
+          suggest.data.data.items.length > 0 && (
+            <label htmlFor={"headerSearchInput"} className={Styles.suggest}>
+              {suggest.data.data.items.map((item) => {
+                return (
+                  <Link
+                    href={`/search/${encodeURIComponent(item.title)}`}
+                    key={item.id}
+                    className={Styles.suggestItem}
+                  >
+                    <div>{item.title}</div>
+                  </Link>
+                );
+              })}
+            </label>
+          )}
       </div>
       <button type="button" className={Styles.button} onClick={onSearchClick}>
         <MdSearch className={Styles.icon} />

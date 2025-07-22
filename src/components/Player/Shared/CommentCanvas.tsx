@@ -72,7 +72,7 @@ const CommentCanvas = ({ url, videoRef, pipVideoRef, className }: props) => {
     return () => {
       window.clearInterval(interval);
     };
-  }, [videoRef?.paused, playerConfig.playbackRate, videoRef.currentTime]);
+  }, [videoRef?.paused, playerConfig.playbackRate, videoRef?.currentTime]);
 
   useEffect(() => {
     if (!niconicommentsRef.current || !canvasRef.current || !pipVideoRef)

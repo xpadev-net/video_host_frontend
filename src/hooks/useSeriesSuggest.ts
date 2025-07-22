@@ -7,7 +7,17 @@ const fetcher = async (key: string): Promise<v4GetSeriesListRes> => {
     return {
       status: "ok",
       code: 200,
-      data: [],
+      data: {
+        items: [],
+        pagination: {
+          page: 1,
+          hasNext: false,
+          totalCount: 0,
+          totalPages: 0,
+          limit: 0,
+          hasPrev: false,
+        },
+      },
     };
   }
   const urlSearchParam = new URLSearchParams({

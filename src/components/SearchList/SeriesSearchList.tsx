@@ -28,7 +28,7 @@ export const SeriesSearchList: FC<Props> = ({ query, author }) => {
     );
   }
 
-  if (series.data.length === 0) {
+  if (series.data.items.length === 0) {
     return (
       <div className={styles.wrapper}>
         <h2>検索結果がありません</h2>
@@ -39,7 +39,7 @@ export const SeriesSearchList: FC<Props> = ({ query, author }) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.list}>
-        {series.data.map((series) => (
+        {series.data.items.map((series) => (
           <SeriesCard series={series} key={series.id} />
         ))}
       </div>

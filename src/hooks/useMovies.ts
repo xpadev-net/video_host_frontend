@@ -23,7 +23,7 @@ export const useMovies = (params?: Props) => {
     if (
       previousPageData &&
       previousPageData.status === "ok" &&
-      !previousPageData.data.hasNext
+      !previousPageData.data.pagination.hasNext
     )
       return null;
     return `/movies?${buildQueryParams({
@@ -43,7 +43,7 @@ export const useMovies = (params?: Props) => {
     data?.flatMap((page) => (page.status === "ok" ? page.data.items : [])) ??
     [];
   const lastPage = data?.[size - 1];
-  const hasNext = lastPage?.status !== "ok" || lastPage.data.hasNext;
+  const hasNext = lastPage?.status !== "ok" || lastPage.data.pagination.hasNext;
   return {
     movies,
     error,
