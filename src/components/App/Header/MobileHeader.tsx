@@ -1,13 +1,12 @@
+import { ArrowLeft, SearchIcon } from "lucide-react";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { AuthButton } from "src/components/App/Header/Auth";
-
 import Styles from "@/components/App/Header/Header.module.scss";
 import { Search } from "@/components/App/Header/Search";
 import { ToggleTheme } from "@/components/App/Header/Theme";
 import { HeaderMenu } from "@/components/App/Menu";
-import { ArrowBack, Search as SearchIcon } from "@/components/icons";
-import ButtonStyles from "@/styles/button.module.scss";
+import { Button } from "@/components/ui/button";
 
 type props = {
   className?: string;
@@ -34,27 +33,21 @@ const MobileHeader = ({ className }: props) => {
         <HeaderMenu />
       </div>
       <div className={Styles.rightSideWrapper}>
-        <button
-          type="button"
-          className={`${ButtonStyles.buttonWrapper} ${ButtonStyles.hover}`}
-          onClick={onSearchButtonClick}
-        >
-          <SearchIcon />
-        </button>
+        <Button variant="ghost" size="icon" onClick={onSearchButtonClick}>
+          <SearchIcon size={16} />
+        </Button>
         <ToggleTheme />
         <AuthButton />
       </div>
       <div
         className={`${Styles.inputWrapper} ${isInputActive && Styles.active}`}
       >
-        <button
-          type="button"
-          className={`${ButtonStyles.buttonWrapper} ${ButtonStyles.hover}`}
-          onClick={closeSearch}
-        >
-          <ArrowBack />
-        </button>
+        <Button variant="ghost" onClick={closeSearch} size={"icon"}>
+          <ArrowLeft />
+        </Button>
         <Search className={Styles.input} ref={inputRef} />
+      </div>
+      {isInputActive && (
         <div
           className={Styles.background}
           onClick={closeSearch}
@@ -67,7 +60,7 @@ const MobileHeader = ({ className }: props) => {
           role="button"
           tabIndex={0}
         />
-      </div>
+      )}
     </header>
   );
 };

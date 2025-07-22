@@ -1,25 +1,24 @@
-import { MdDarkMode, MdLightMode } from "react-icons/md";
-
+import { MoonStar, Sun } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { useTheme } from "@/hooks/useTheme";
-
 import styles from "../Button.module.scss";
 
 export const ToggleTheme = () => {
   const { theme, setTheme } = useTheme();
 
   return (
-    <button
-      type="button"
+    <Button
+      size={"icon"}
       onClick={() => {
         setTheme(theme === "dark" ? "light" : "dark");
       }}
-      className={styles.button}
+      variant={"ghost"}
     >
       {theme === "dark" ? (
-        <MdDarkMode className={styles.icon} />
+        <MoonStar className={styles.icon} />
       ) : (
-        <MdLightMode className={styles.icon} />
+        <Sun className={styles.icon} />
       )}
-    </button>
+    </Button>
   );
 };

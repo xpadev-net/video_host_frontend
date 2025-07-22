@@ -1,3 +1,4 @@
+import { SearchIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import {
@@ -6,8 +7,6 @@ import {
   type KeyboardEvent,
   useState,
 } from "react";
-import { MdSearch } from "react-icons/md";
-
 import Styles from "@/components/App/Header/Search/Search.module.scss";
 import { useSeriesSuggest } from "@/hooks/useSeriesSuggest";
 import { useIsMobile } from "@/libraries/isMobile";
@@ -72,7 +71,7 @@ const Search_ = ({ className }: props, ref: ForwardedRef<HTMLInputElement>) => {
           )}
       </div>
       <button type="button" className={Styles.button} onClick={onSearchClick}>
-        <MdSearch className={Styles.icon} />
+        <SearchIcon size={16} />
       </button>
     </div>
   );

@@ -35,7 +35,7 @@
       width: calc(100% + 2px);
       background-color: colors.$backgroundColor;
       border: solid 1px colors.$secondaryBackgroundColor;
-      padding-top: 10px;
+      padding-top: 12px;
       .suggestItem {
         color: colors.$textColor;
         padding: 3px 10px;
@@ -55,16 +55,10 @@
     background-color: colors.$quaternaryBackgroundColor;
     border-radius: 0 2px 2px 0;
     margin: 0;
-    display: inline-block;
+    display: inline-flex;
     text-align: center;
-    .icon {
-      height: 20px;
-      width: 20px;
-      fill: colors.$textColor;
-      opacity: 0.6;
-      display: inline-block;
-      vertical-align: middle;
-    }
+    place-items: center;
+    justify-content: center;
   }
   &.mobile {
     .suggest {

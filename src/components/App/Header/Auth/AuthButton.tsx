@@ -1,11 +1,9 @@
 import { useSetAtom } from "jotai";
-import { MdLogout, MdPerson } from "react-icons/md";
-
+import { LogIn, LogOut } from "lucide-react";
 import { AuthModalOpenAtom, AuthTokenAtom } from "@/atoms/Auth";
+import { Button } from "@/components/ui/button";
 import { useSelf } from "@/hooks/useUser";
 import { deleteAuth } from "@/service/deleteAuth";
-
-import styles from "../Button.module.scss";
 
 const AuthButton = () => {
   const user = useSelf();
@@ -15,31 +13,32 @@ const AuthButton = () => {
 
   if (user.data?.status === "ok" && user.data.data) {
     return (
-      <button
-        type="button"
+      <Button
+        size={"icon"}
+        variant={"ghost"}
         onClick={() => {
           void deleteAuth().then(() => {
             setAuthToken(null);
             location.reload();
           });
         }}
-        className={`${styles.button}`}
+        className="cursor-pointer"
       >
-        <MdLogout className={styles.icon} />
-      </button>
+        <LogOut />
+      </Button>
     );
   }
   return (
-    <button
-      type="button"
+    <Button
+      variant={"ghost"}
       onClick={() => {
         setAuthModalOpen(true);
       }}
-      className={`${styles.button} ${styles.textButton}`}
+      size={"icon"}
+      className="cursor-pointer"
     >
-      <MdPerson className={styles.icon} />
-      Sign In
-    </button>
+      <LogIn />
+    </Button>
   );
 };
 
