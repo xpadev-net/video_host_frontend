@@ -23,4 +23,46 @@
   &:hover {
     background-color: colors.$hoverColor;
   }
+  
+  &.skeletonCard {
+    pointer-events: none;
+    .thumbnail.skeleton {
+      background: #fff1;
+      border-radius: 8px;
+      height: 100px;
+      animation: skeleton-loading 1.2s infinite linear;
+      position: relative;
+      overflow: hidden;
+    }
+    .title.skeleton {
+      background: #fff1;
+      border-radius: 4px;
+      height: 24px;
+      width: 80%;
+      animation: skeleton-loading 1.2s infinite linear;
+      position: relative;
+      overflow: hidden;
+    }
+    .user.skeleton {
+      background: #fff1;
+      border-radius: 4px;
+      height: 20px;
+      width: 60%;
+      animation: skeleton-loading 1.2s infinite linear;
+      position: relative;
+      overflow: hidden;
+    }
+  }
+}
+
+@keyframes skeleton-loading {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0.3;
+  }
 }

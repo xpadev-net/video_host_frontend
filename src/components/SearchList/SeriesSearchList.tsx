@@ -1,9 +1,22 @@
-import type { FC } from "react";
+import { type FC, useEffect, useRef } from "react";
 
-import { SeriesCard } from "@/components/SeriesCard";
-import { useSeriesList } from "@/hooks/useSeriesList";
+import { SeriesCard, SeriesCardSkeleton } from "@/components/SeriesCard";
+import { useSeriesListInfinite } from "@/hooks/useSeriesListInfinite";
 
 import styles from "./SearchList.module.scss";
+
+const elementIsVisibleInViewport = (
+  el: HTMLElement,
+  partiallyVisible = false,
+) => {
+  const { top, left, bottom, right } = el.getBoundingClientRect();
+  const { innerHeight, innerWidth } = window;
+  return partiallyVisible
+    ? ((top > 0 && top < innerHeight) ||
+        (bottom > 0 && bottom < innerHeight)) &&
+        ((left > 0 && left < innerWidth) || (right > 0 && right < innerWidth))
+    : top >= 0 && left >= 0 && bottom <= innerHeight && right <= innerWidth;
+};
 
 type Props = {
   query?: string;
@@ -11,24 +24,30 @@ type Props = {
 };
 
 export const SeriesSearchList: FC<Props> = ({ query, author }) => {
-  const { data: series, isLoading } = useSeriesList({ query, author, page: 1 });
+  const { series, setSize, hasNext, isValidating } = useSeriesListInfinite({
+    query,
+    author,
+  });
+  const loadMoreRef = useRef<HTMLDivElement>(null);
 
-  if (isLoading || !series) {
-    return null;
-  }
+  useEffect(() => {
+    if (!loadMoreRef.current || !hasNext) return;
+    const io = new window.IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && hasNext && !isValidating) {
+        void setSize((size) => size + 1);
+      }
+    });
+    io.observe(loadMoreRef.current);
+    if (loadMoreRef.current) {
+      const isVisible = elementIsVisibleInViewport(loadMoreRef.current);
+      if (isVisible && hasNext && !isValidating) {
+        void setSize((size) => size + 1);
+      }
+    }
+    return () => io.disconnect();
+  }, [hasNext, isValidating, setSize]);
 
-  if (series.status !== "ok") {
-    return (
-      <div className={styles.wrapper}>
-        <h2>読み込みに失敗しました</h2>
-        <span>
-          {series.code} - {series.message}
-        </span>
-      </div>
-    );
-  }
-
-  if (series.data.items.length === 0) {
+  if (!isValidating && (!series || series.length === 0)) {
     return (
       <div className={styles.wrapper}>
         <h2>検索結果がありません</h2>
@@ -39,9 +58,19 @@ export const SeriesSearchList: FC<Props> = ({ query, author }) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.list}>
-        {series.data.items.map((series) => (
-          <SeriesCard series={series} key={series.id} />
+        {series.map((seriesItem) => (
+          <SeriesCard series={seriesItem} key={seriesItem.id} />
         ))}
+        {hasNext && (
+          <>
+            <SeriesCardSkeleton ref={loadMoreRef} />
+            {Array.from({ length: 8 })
+              .map((_, i) => i)
+              .map((i) => (
+                <SeriesCardSkeleton key={`skeleton-${i}`} />
+              ))}
+          </>
+        )}
       </div>
     </div>
   );
