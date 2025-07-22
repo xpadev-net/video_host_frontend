@@ -1,4 +1,5 @@
-import "@/styles/global.scss";
+import "@/styles/global.css";
+import "@/styles/colors.scss";
 import "@/styles/nprogress.css";
 import "@radix-ui/themes/styles.css";
 
