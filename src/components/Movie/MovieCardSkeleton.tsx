@@ -18,7 +18,7 @@ export const MovieCardSkeleton = forwardRef<HTMLDivElement, Props>(
       <div className={Styles.titles}>
         <span className={`${Styles.title} ${Styles.skeleton}`}>&nbsp;</span>
         <div className={Styles.list}>
-          <UserSkeleton size={"2"} />
+          {!grid && <UserSkeleton size={"2"} />}
         </div>
       </div>
     </div>

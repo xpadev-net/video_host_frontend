@@ -40,8 +40,10 @@ export const useSeriesListInfinite = (params?: Props) => {
 
   // 全ページのデータをフラット化
   const series =
-    data?.flatMap((page) => (page.status === "ok" ? page.data.items : [])) ??
-    [];
+    (
+      data?.flatMap((page) => (page.status === "ok" ? page.data.items : [])) ??
+      []
+    ).filter((item) => item.movies && item.movies.length > 0) || [];
   const lastPage = data?.[size - 1];
   const hasNext = lastPage?.status !== "ok" || lastPage.data.pagination.hasNext;
   return {

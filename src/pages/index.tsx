@@ -82,13 +82,14 @@ const Index = () => {
         {/* ローディング時にスケルトンを表示。最後のスケルトンにrefを付与 */}
         {hasNext && (
           <>
-            <MovieCardSkeleton ref={loadMoreRef} />
+            <MovieCardSkeleton ref={loadMoreRef} grid />
             {Array.from({ length: 50 }).map((_, i) => (
               <MovieCardSkeleton
                 key={`skeleton-${
                   // biome-ignore lint/suspicious/noArrayIndexKey: ignore
                   i
                 }`}
+                grid
               />
             ))}
           </>

@@ -40,8 +40,10 @@ export const useMovies = (params?: Props) => {
 
   // 全ページのデータをフラット化
   const movies =
-    data?.flatMap((page) => (page.status === "ok" ? page.data.items : [])) ??
-    [];
+    (
+      data?.flatMap((page) => (page.status === "ok" ? page.data.items : [])) ??
+      []
+    ).filter((item) => item.duration > 0) || [];
   const lastPage = data?.[size - 1];
   const hasNext = lastPage?.status !== "ok" || lastPage.data.pagination.hasNext;
   return {

@@ -13,6 +13,7 @@ export const ToggleTheme = () => {
         setTheme(theme === "dark" ? "light" : "dark");
       }}
       variant={"ghost"}
+      className="cursor-pointer"
     >
       {theme === "dark" ? (
         <MoonStar className={styles.icon} />
