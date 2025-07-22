@@ -29,10 +29,10 @@
     .thumbnail.skeleton {
       background: #fff1;
       border-radius: 8px;
-      height: 100px;
       animation: skeleton-loading 1.2s infinite linear;
       position: relative;
       overflow: hidden;
+      aspect-ratio: 16 / 9;
     }
     .title.skeleton {
       background: #fff1;
