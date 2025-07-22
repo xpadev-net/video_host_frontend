@@ -13,7 +13,7 @@ type Props = {
 
 export const User: FC<Props> = ({ user, size }) => {
   return (
-    <Link href={`/users/${user.id}`}>
+    <Link href={`/users/${user.id}`} className={styles.link}>
       <Flex direction={"row"} align={"center"} gap={"2"}>
         <Avatar
           fallback={user.name.slice(0, 2)}

@@ -1,5 +1,11 @@
 @import "../../styles/colors";
 
-.span {
-  color: $textColor;
+.link{
+  &:hover {
+    text-decoration: underline;
+  }
+  .span {
+    color: $textColor;
+    text-wrap: nowrap;
+  }
 }
