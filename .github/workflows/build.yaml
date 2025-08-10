@@ -1,6 +1,7 @@
-name: test
+name: release
 
 on:
+  workflow_dispatch:
   push:
     branches-ignore:
       - "**"
@@ -14,7 +15,6 @@ env:
 jobs:
   build-container-and-push-image:
     runs-on: ubuntu-latest
-
     permissions:
       contents: read
       packages: write
@@ -36,9 +36,12 @@ jobs:
         id: get_tag
         run: echo "TAG_NAME=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v5
+      - name: Build and push multi-arch with registry cache
+        uses: docker/build-push-action@v6
         with:
           context: .
+          platforms: linux/amd64
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG_NAME }}
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache
+          cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache,mode=max
