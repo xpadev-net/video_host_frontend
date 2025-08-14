@@ -8,7 +8,6 @@ export type PlayerConfig = {
   isHls: boolean;
   isPipEnable: boolean;
   isNiconicommentsEnable: boolean;
-  volume: number;
 };
 
 export type VideoMetadata = {

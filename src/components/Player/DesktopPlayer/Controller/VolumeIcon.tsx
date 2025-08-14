@@ -6,10 +6,10 @@ import {
   MdVolumeUp,
 } from "react-icons/md";
 
-import { PlayerConfigAtom } from "@/atoms/Player";
+import { PlayerVolumeAtom } from "@/atoms/Player";
 
 const VolumeIcon = () => {
-  const { volume } = useAtomValue(PlayerConfigAtom);
+  const volume = useAtomValue(PlayerVolumeAtom);
   if (volume > 0.5) {
     return <MdVolumeUp />;
   }

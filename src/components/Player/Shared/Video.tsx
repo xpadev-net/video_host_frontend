@@ -14,6 +14,7 @@ import { AuthTokenAtom } from "@/atoms/Auth";
 import {
   PlayerConfigAtom,
   PlayerStateAtom,
+  PlayerVolumeAtom,
   VideoMetadataAtom,
 } from "@/atoms/Player";
 import { watchedHistoryAtom } from "@/atoms/WatchedHistory";
@@ -30,6 +31,7 @@ const Video = ({ className, videoRef, movie }: props) => {
   const setState = useSetAtom(PlayerStateAtom);
   const token = useAtomValue(AuthTokenAtom);
   const [playerConfig, setPlayerConfig] = useAtom(PlayerConfigAtom);
+  const [configVolume, setConfigVolume] = useAtom(PlayerVolumeAtom);
   const setWatchedHistory = useSetAtom(watchedHistoryAtom);
   const [url, setUrl] = useState<string>("");
 
@@ -46,7 +48,7 @@ const Video = ({ className, videoRef, movie }: props) => {
   };
 
   const onVideoVolumeChange = () => {
-    setPlayerConfig((pv) => ({ ...pv, volume: videoRef.current?.volume || 0 }));
+    setConfigVolume(videoRef.current?.volume || 0);
   };
 
   const onVideoLoadedMetadata = () => {
@@ -131,8 +133,12 @@ const Video = ({ className, videoRef, movie }: props) => {
   useEffect(() => {
     if (!videoRef.current) return;
     videoRef.current.playbackRate = playerConfig.playbackRate;
-    videoRef.current.volume = playerConfig.volume;
   }, [playerConfig, videoRef.current]);
+
+  useEffect(() => {
+    if (!videoRef.current) return;
+    videoRef.current.volume = configVolume;
+  }, [configVolume, videoRef.current]);
 
   useEffect(() => {
     if (!videoRef.current) return;
@@ -143,9 +149,9 @@ const Video = ({ className, videoRef, movie }: props) => {
     }
 
     if (variant.contentUrl === url) {
-      const currentTIme = videoRef.current.currentTime;
+      const currentTime = videoRef.current.currentTime;
       void loadVideo(videoRef.current, variant.contentUrl);
-      videoRef.current.currentTime = currentTIme;
+      videoRef.current.currentTime = currentTime;
     } else {
       setWatchedHistory((pv) => ({
         ...pv,

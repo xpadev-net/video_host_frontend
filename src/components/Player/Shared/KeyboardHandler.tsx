@@ -42,7 +42,7 @@ const KeyboardHandler: FC<Props> = ({ data }) => {
           rates.indexOf(playerConfig.playbackRate) +
           (e.code === "Period" ? 1 : -1);
         if (!rates[key]) return false;
-        setPlayerConfig({ ...playerConfig, playbackRate: rates[key] });
+        setPlayerConfig((pv) => ({ ...pv, playbackRate: rates[key] }));
         videoRef.playbackRate = rates[key];
         return true;
       }

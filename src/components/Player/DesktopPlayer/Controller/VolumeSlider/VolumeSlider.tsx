@@ -7,13 +7,13 @@ import {
   useState,
 } from "react";
 
-import { PlayerConfigAtom, VideoRefAtom } from "@/atoms/Player";
+import { PlayerVolumeAtom, VideoRefAtom } from "@/atoms/Player";
 import Styles from "@/components/Player/DesktopPlayer/Controller/VolumeSlider/VolumeSlider.module.scss";
 
 const VolumeSlider = () => {
   const videoRef = useAtomValue(VideoRefAtom);
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const playerConfig = useAtomValue(PlayerConfigAtom);
+  const configVolume = useAtomValue(PlayerVolumeAtom);
   const [isDrugging, setIsDrugging] = useState(false);
 
   const updateVolume = useCallback(
@@ -73,12 +73,12 @@ const VolumeSlider = () => {
       aria-label="Volume slider"
       aria-valuemin={0}
       aria-valuemax={100}
-      aria-valuenow={Math.round(playerConfig.volume * 100)}
+      aria-valuenow={Math.round(configVolume * 100)}
     >
       <div
         className={Styles.grubber}
         style={{
-          left: `${playerConfig.volume * 100}%`,
+          left: `${configVolume * 100}%`,
         }}
       />
     </div>

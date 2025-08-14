@@ -53,7 +53,6 @@ const GenericPage: FC<GenericPageProps> = ({
 
   const renderItem = (item: SettingItem, index: number) => {
     const baseProps = {
-      key: `${item.type}-${index}`,
       className:
         item.type === "back" ? `${Styles.item} ${Styles.header}` : Styles.item,
       type: "button" as const,
@@ -65,6 +64,7 @@ const GenericPage: FC<GenericPageProps> = ({
         const currentValue = item.getValue();
         return (
           <button
+            key={`${item.type}-${index}`}
             {...baseProps}
             onClick={() => handleNavigation(item.targetPage)}
             onKeyDown={(e) =>
@@ -94,6 +94,7 @@ const GenericPage: FC<GenericPageProps> = ({
         const isChecked = item.getValue();
         return (
           <button
+            key={`${item.type}-${index}`}
             {...baseProps}
             onClick={() => item.onChange(!isChecked)}
             onKeyDown={(e) => handleKeyDown(e, () => item.onChange(!isChecked))}
@@ -148,6 +149,7 @@ const GenericPage: FC<GenericPageProps> = ({
       case "back": {
         return (
           <button
+            key={`${item.type}-${index}`}
             {...baseProps}
             onClick={() => handleBack(item.targetPage)}
             onKeyDown={(e) =>

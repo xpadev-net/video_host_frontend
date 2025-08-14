@@ -26,9 +26,13 @@ const PlayerConfigAtom = atomWithStorage<PlayerConfig>("playerConfig", {
   isTheatre: false,
   isHls: true,
   isPipEnable: false,
-  volume: 1,
   isNiconicommentsEnable: true,
 });
+const PlayerVolumeAtom = atomWithStorage<number>(
+  "playerConfig.playerVolume",
+  1,
+);
+
 const NiconicommentsConfigAtom = atomWithStorage<Options>(
   "niconicommentsConfig",
   { format: "v1", enableLegacyPiP: true },
@@ -39,6 +43,7 @@ const PlayerSettingAtom = atom<SettingKey[]>(["main"]);
 export {
   NiconicommentsConfigAtom,
   PlayerConfigAtom,
+  PlayerVolumeAtom,
   PlayerSettingAtom,
   PlayerStateAtom,
   VideoMetadataAtom,
