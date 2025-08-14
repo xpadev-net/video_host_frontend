@@ -46,7 +46,9 @@ const PlayList = ({ data, className, maxHeight }: props) => {
         aria-expanded={isOpen}
       >
         <div className={Styles.row}>
-          <div className={Styles.textWrapper}>
+          <div
+            className={`${Styles.textWrapper} flex flex-col leading-[25px] flex-1 align-middle justify-center text-left`}
+          >
             {next && !isOpen && (
               <span className={Styles.nextTitle}>次: {next.title}</span>
             )}

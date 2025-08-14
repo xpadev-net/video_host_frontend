@@ -78,18 +78,7 @@ const DesktopPlayer = ({ className, data }: props) => {
     }
   };
 
-  const handlePlayerKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      togglePlayerState();
-    }
-  };
-
-  const handleLoadingKeyDown = (event: React.KeyboardEvent) => {
-    // Prevent any interaction with loading overlay
-    event.preventDefault();
-    event.stopPropagation();
-  };
+  const handlePlayerKeyDown = () => {};
 
   return (
     <button
@@ -108,19 +97,17 @@ const DesktopPlayer = ({ className, data }: props) => {
     >
       {state.isLoading && data && (
         <>
-          <button
-            className={Styles.loadingWrapper}
-            onClick={(e) => e.preventDefault()}
-            onKeyDown={handleLoadingKeyDown}
-            aria-label="Video loading"
-            type="button"
+          <div
+            className={
+              "absolute z-20 left-0 top-0 w-full h-full bg-black opacity-50 grid place-items-center pointer-events-none"
+            }
           >
             <LoadingIcon className={Styles.icon} />
-          </button>
+          </div>
           <img
             src={data.thumbnailUrl || undefined}
             alt={""}
-            className={Styles.thumbnail}
+            className={"absolute z-10 left-0 top-0 w-full h-full"}
           />
         </>
       )}
