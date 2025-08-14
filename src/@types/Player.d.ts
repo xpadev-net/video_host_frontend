@@ -61,6 +61,6 @@ export type BackItem = {
 export type SettingItem =
   | NavigationItem
   | ToggleItem
-  | SelectionItem<any>
+  | SelectionItem<T>
   | BackItem;
 export type SettingPageConfig = SettingItem[];
