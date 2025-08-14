@@ -1,23 +1,13 @@
 import { useAtom, useAtomValue } from "jotai";
-import {
-  type FC,
-  type MouseEvent,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { type MouseEvent, useEffect, useMemo, useRef, useState } from "react";
 
-import type { SettingKey } from "@/@types/Player";
 import {
   PlayerSettingAtom,
   PlayerStateAtom,
   WrapperRefAtom,
 } from "@/atoms/Player";
-import { Comments } from "@/components/Player/Shared/Setting/pages/Comments";
-import { Main } from "@/components/Player/Shared/Setting/pages/Main";
-import { PlaybackRate } from "@/components/Player/Shared/Setting/pages/PlaybackRate";
-import { EnableComments } from "@/contexts/env";
+import { GenericPage } from "@/components/Player/Shared/Setting/pages/GenericPage";
+import { useSettingDefinitions } from "@/components/Player/Shared/Setting/settingDefinitions";
 import { useIsMobile } from "@/libraries/isMobile";
 
 import Styles from "./Setting.module.scss";
@@ -29,14 +19,6 @@ type Props = {
 export type MenuProps = {
   className?: string;
   updateScale?: (ref: HTMLDivElement) => void;
-};
-
-const Menu: {
-  [key in SettingKey]?: FC<MenuProps>;
-} = {
-  main: Main,
-  playbackRate: PlaybackRate,
-  comments: EnableComments ? Comments : undefined,
 };
 
 const Setting = ({ className }: Props) => {
@@ -51,6 +33,7 @@ const Setting = ({ className }: Props) => {
   const wrapperRef = useAtomValue(WrapperRefAtom);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
+  const settingDefinitions = useSettingDefinitions();
   useEffect(() => {
     const onClick = () => {
       setState((pv) => ({
@@ -127,12 +110,18 @@ const Setting = ({ className }: Props) => {
           }}
         >
           {playerSetting.map((key, index) => {
-            const Target = Menu[key];
-            if (!Target) return;
+            const config = settingDefinitions[key];
+            if (!config) return null;
             if (index + 1 === playerSetting.length) {
-              return <Target key={key} updateScale={updateScale} />;
+              return (
+                <GenericPage
+                  key={key}
+                  config={config}
+                  updateScale={updateScale}
+                />
+              );
             }
-            return <Target key={key} />;
+            return <GenericPage key={key} config={config} />;
           })}
         </div>
       </button>
