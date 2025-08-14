@@ -1,6 +1,6 @@
 import { useAtomValue, useSetAtom } from "jotai";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-
 import type { FilteredMovie } from "@/@types/v4Api";
 import { LoadingIcon } from "@/assets/LoadingIcon";
 import {
@@ -67,11 +67,13 @@ const MobilePlayer = ({ className, data }: props) => {
             <div className={Styles.loadingWrapper}>
               <LoadingIcon className={Styles.icon} />
             </div>
-            <img
-              src={data.thumbnailUrl ?? ""}
-              alt={""}
-              className={Styles.thumbnail}
-            />
+            {data.thumbnailUrl && (
+              <Image
+                src={data.thumbnailUrl}
+                alt={""}
+                className={Styles.thumbnail}
+              />
+            )}
           </>
         )}
         {isNiconicommentsEnable && EnableComments && (

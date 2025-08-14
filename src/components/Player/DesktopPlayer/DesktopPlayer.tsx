@@ -1,6 +1,6 @@
 import { useAtomValue, useSetAtom } from "jotai";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-
 import type { FilteredMovie } from "@/@types/v4Api";
 import { LoadingIcon } from "@/assets/LoadingIcon";
 import {
@@ -14,7 +14,6 @@ import { KeyboardHandler } from "@/components/Player/Shared/KeyboardHandler";
 import { MediaSessionHandler } from "@/components/Player/Shared/MediaSessionHandler";
 import { Video } from "@/components/Player/Shared/Video";
 import { EnableComments } from "@/contexts/env";
-
 import { Controller } from "./Controller";
 import Styles from "./DesktopPlayer.module.scss";
 
@@ -104,11 +103,14 @@ const DesktopPlayer = ({ className, data }: props) => {
           >
             <LoadingIcon className={Styles.icon} />
           </div>
-          <img
-            src={data.thumbnailUrl || undefined}
-            alt={""}
-            className={"absolute z-10 left-0 top-0 w-full h-full"}
-          />
+          {data.thumbnailUrl && (
+            <Image
+              src={data.thumbnailUrl}
+              width={720}
+              alt={""}
+              className={"absolute z-10 left-0 top-0 w-full h-full"}
+            />
+          )}
         </>
       )}
       <div className={Styles.videoWrapper}>
