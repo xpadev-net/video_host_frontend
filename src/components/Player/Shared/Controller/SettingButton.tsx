@@ -1,7 +1,6 @@
 import { useAtom, useSetAtom } from "jotai";
+import { Settings } from "lucide-react";
 import type { KeyboardEvent, MouseEvent } from "react";
-import { MdSettings } from "react-icons/md";
-
 import { PlayerSettingAtom, PlayerStateAtom } from "@/atoms/Player";
 
 type props = {
@@ -38,7 +37,7 @@ const SettingButton = ({ className }: props) => {
       tabIndex={0}
       aria-label={`設定メニューを${metadata.isSetting ? "閉じる" : "開く"}`}
     >
-      <MdSettings />
+      <Settings />
     </button>
   );
 };

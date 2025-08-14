@@ -1,7 +1,6 @@
 import { useAtom, useAtomValue } from "jotai";
+import { Maximize, Minimize } from "lucide-react";
 import { type KeyboardEvent, type MouseEvent, useEffect } from "react";
-import { MdFullscreen, MdFullscreenExit } from "react-icons/md";
-
 import {
   PlayerConfigAtom,
   PlayerStateAtom,
@@ -83,7 +82,7 @@ const FullscreenButton = ({ className }: props) => {
         metadata.isFullscreen ? "フルスクリーンを終了" : "フルスクリーンにする"
       }
     >
-      {metadata.isFullscreen ? <MdFullscreenExit /> : <MdFullscreen />}
+      {metadata.isFullscreen ? <Minimize /> : <Maximize />}
     </button>
   );
 };

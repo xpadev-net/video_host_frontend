@@ -1,23 +1,16 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { AppWindow, Film, Gauge, MessageSquareText } from "lucide-react";
 import { type FC, type KeyboardEvent, useEffect, useRef } from "react";
-
 import {
   PlayerConfigAtom,
   PlayerSettingAtom,
   PlayerStateAtom,
   WrapperRefAtom,
 } from "@/atoms/Player";
-import {
-  ChatBubble,
-  Hls,
-  KeyboardArrowRight,
-  OpenInFull,
-  SlowMotionVideo,
-} from "@/components/icons";
+import { KeyboardArrowRight } from "@/components/icons";
 import type { MenuProps } from "@/components/Player/Shared/Setting";
 import { Switch } from "@/components/Switch/Switch";
 import { EnableComments } from "@/contexts/env";
-
 import Styles from "./pages.module.scss";
 
 const Main: FC<MenuProps> = ({ className, updateScale }) => {
@@ -104,7 +97,7 @@ const Main: FC<MenuProps> = ({ className, updateScale }) => {
       >
         <div className={Styles.left}>
           <div className={Styles.iconWrapper}>
-            <SlowMotionVideo />
+            <Gauge />
           </div>
           <span className={Styles.text}>再生速度</span>
         </div>
@@ -126,7 +119,7 @@ const Main: FC<MenuProps> = ({ className, updateScale }) => {
         >
           <div className={Styles.left}>
             <div className={Styles.iconWrapper}>
-              <ChatBubble />
+              <MessageSquareText />
             </div>
             <span className={Styles.text}>コメント</span>
           </div>
@@ -150,7 +143,7 @@ const Main: FC<MenuProps> = ({ className, updateScale }) => {
       >
         <div className={Styles.left}>
           <div className={Styles.iconWrapper}>
-            <OpenInFull />
+            <AppWindow />
           </div>
           <span className={Styles.text}>ウィンドウフルスクリーン</span>
         </div>
@@ -170,7 +163,7 @@ const Main: FC<MenuProps> = ({ className, updateScale }) => {
       >
         <div className={Styles.left}>
           <div className={Styles.iconWrapper}>
-            <Hls />
+            <Film />
           </div>
           <span className={Styles.text}>HLS有効化</span>
         </div>

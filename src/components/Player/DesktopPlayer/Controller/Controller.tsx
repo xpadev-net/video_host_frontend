@@ -73,7 +73,7 @@ const Controller = ({ className, data }: props) => {
 
   return (
     <button
-      className={`${className} ${Styles.wrapper}`}
+      className={`${className} ${Styles.wrapper} text-white`}
       onClick={stopPropagation}
       onKeyDown={handleControllerKeyDown}
       aria-label="Video player controls"

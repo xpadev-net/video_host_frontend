@@ -21,7 +21,7 @@ type props = {
 const Controller = ({ className, data }: props) => {
   const state = useAtomValue(PlayerStateAtom);
   return (
-    <div className={`${className} ${Styles.wrapper}`}>
+    <div className={`${className} ${Styles.wrapper} text-white`}>
       <div className={Styles.top}>
         <AutoPlayButton className={Styles.button} />
         <SettingButton className={Styles.button} />
