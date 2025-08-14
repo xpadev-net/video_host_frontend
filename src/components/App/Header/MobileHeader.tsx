@@ -48,7 +48,7 @@ const MobileHeader = ({ className }: props) => {
         <Search className={Styles.input} ref={inputRef} />
       </div>
       {isInputActive && (
-        <div
+        <button
           className={Styles.background}
           onClick={closeSearch}
           onKeyDown={(e) => {
@@ -57,7 +57,7 @@ const MobileHeader = ({ className }: props) => {
               closeSearch();
             }
           }}
-          role="button"
+          type="button"
           tabIndex={0}
         />
       )}
