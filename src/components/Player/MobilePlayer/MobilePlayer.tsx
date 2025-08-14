@@ -70,6 +70,8 @@ const MobilePlayer = ({ className, data }: props) => {
             {data.thumbnailUrl && (
               <Image
                 src={data.thumbnailUrl}
+                width={360}
+                height={240}
                 alt={""}
                 className={Styles.thumbnail}
               />

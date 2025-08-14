@@ -107,6 +107,7 @@ const DesktopPlayer = ({ className, data }: props) => {
             <Image
               src={data.thumbnailUrl}
               width={720}
+              height={480}
               alt={""}
               className={"absolute z-10 left-0 top-0 w-full h-full"}
             />
