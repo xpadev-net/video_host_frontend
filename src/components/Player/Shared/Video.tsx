@@ -1,7 +1,13 @@
 import Hls from "hls.js";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { useRouter } from "next/router";
-import { type RefObject, useEffect, useRef, useState } from "react";
+import {
+  type RefObject,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 import type { FilteredMovie } from "@/@types/v4Api";
 import { AuthTokenAtom } from "@/atoms/Auth";
@@ -24,7 +30,7 @@ const Video = ({ className, videoRef, movie }: props) => {
   const setState = useSetAtom(PlayerStateAtom);
   const token = useAtomValue(AuthTokenAtom);
   const [playerConfig, setPlayerConfig] = useAtom(PlayerConfigAtom);
-  const [watchedHistory, setWatchedHistory] = useAtom(watchedHistoryAtom);
+  const setWatchedHistory = useSetAtom(watchedHistoryAtom);
   const [url, setUrl] = useState<string>("");
 
   const hlsRef = useRef<Hls>();
@@ -40,7 +46,7 @@ const Video = ({ className, videoRef, movie }: props) => {
   };
 
   const onVideoVolumeChange = () => {
-    setPlayerConfig({ ...playerConfig, volume: videoRef.current?.volume || 0 });
+    setPlayerConfig((pv) => ({ ...pv, volume: videoRef.current?.volume || 0 }));
   };
 
   const onVideoLoadedMetadata = () => {
@@ -66,18 +72,15 @@ const Video = ({ className, videoRef, movie }: props) => {
       ...pv,
       currentTime: videoRef.current?.currentTime || 0,
     }));
-    if (
-      videoRef.current &&
-      Math.floor(videoRef.current.currentTime) % 10 === 0 &&
-      movie
-    ) {
-      setWatchedHistory({
-        ...watchedHistory,
+    const ref = videoRef.current;
+    if (ref && Math.floor(ref.currentTime) % 10 === 0 && movie) {
+      setWatchedHistory((pv) => ({
+        ...pv,
         [movie.id]: {
           movie: movie,
-          watched: videoRef.current.currentTime / videoRef.current.duration,
+          watched: ref.currentTime / ref.duration,
         },
-      });
+      }));
     }
   };
 
@@ -95,18 +98,11 @@ const Video = ({ className, videoRef, movie }: props) => {
   const onVideoSeeked = () => setState((pv) => ({ ...pv, isLoading: false }));
   const onVideoSeeking = () => setState((pv) => ({ ...pv, isLoading: true }));
 
-  useEffect(() => {
-    if (!videoRef.current) return;
-    const variant = movie?.variants[0];
-    if (!variant) {
-      videoRef.current.srcObject = null;
-      return;
-    }
-    const setup = () => {
-      if (!videoRef.current) return;
-      if (videoRef.current.canPlayType("application/vnd.apple.mpegurl")) {
-        videoRef.current.src = variant.contentUrl;
-        videoRef.current.crossOrigin = "use-credentials";
+  const loadVideo = useCallback(
+    (video: HTMLVideoElement, url: string) => {
+      if (video.canPlayType("application/vnd.apple.mpegurl")) {
+        video.src = url;
+        video.crossOrigin = "use-credentials";
       } else if (Hls.isSupported()) {
         const hls = new Hls({
           xhrSetup: (xhr, url) => {
@@ -118,47 +114,53 @@ const Video = ({ className, videoRef, movie }: props) => {
           enableWorker: true,
           lowLatencyMode: true,
         });
-        hls.loadSource(variant.contentUrl);
-        hls.attachMedia(videoRef.current);
+        hls.loadSource(url);
+        hls.attachMedia(video);
         hlsRef.current = hls;
-        videoRef.current.crossOrigin = "anonymous";
+        video.crossOrigin = "anonymous";
       } else {
         console.error(
           "This is an old browser that does not support MSE https://developer.mozilla.org/en-US/docs/Web/API/Media_Source_Extensions_API",
         );
       }
-      videoRef.current.playbackRate = playerConfig.playbackRate;
-      videoRef.current.volume = playerConfig.volume;
-    };
+      setPlayerConfig((pv) => ({ ...pv }));
+    },
+    [token, setPlayerConfig],
+  );
+
+  useEffect(() => {
+    if (!videoRef.current) return;
+    videoRef.current.playbackRate = playerConfig.playbackRate;
+    videoRef.current.volume = playerConfig.volume;
+  }, [playerConfig, videoRef.current]);
+
+  useEffect(() => {
+    if (!videoRef.current) return;
+    const variant = movie?.variants[0];
+    if (!variant) {
+      videoRef.current.srcObject = null;
+      return;
+    }
 
     if (variant.contentUrl === url) {
       const currentTIme = videoRef.current.currentTime;
-      setup();
+      void loadVideo(videoRef.current, variant.contentUrl);
       videoRef.current.currentTime = currentTIme;
     } else {
-      setWatchedHistory({
-        ...watchedHistory,
+      setWatchedHistory((pv) => ({
+        ...pv,
         [movie.id]: {
           movie: movie,
           watched: 0,
         },
-      });
-      setup();
+      }));
+      void loadVideo(videoRef.current, variant.contentUrl);
     }
     setUrl(variant.contentUrl);
     return () => {
       hlsRef.current?.destroy();
     };
-  }, [
-    videoRef.current,
-    movie,
-    token,
-    playerConfig.playbackRate,
-    playerConfig.volume,
-    setWatchedHistory,
-    url,
-    watchedHistory,
-  ]);
+  }, [videoRef.current, movie, setWatchedHistory, url, loadVideo]);
 
   return (
     <video
