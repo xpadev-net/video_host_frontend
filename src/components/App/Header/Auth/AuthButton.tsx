@@ -1,14 +1,14 @@
 import { useSetAtom } from "jotai";
 import { LogIn, LogOut } from "lucide-react";
-import { AuthModalOpenAtom, AuthTokenAtom } from "@/atoms/Auth";
+import { useRouter } from "next/router";
+import { AuthTokenAtom } from "@/atoms/Auth";
 import { Button } from "@/components/ui/button";
 import { useSelf } from "@/hooks/useUser";
 import { deleteAuth } from "@/service/deleteAuth";
 
 const AuthButton = () => {
   const user = useSelf();
-
-  const setAuthModalOpen = useSetAtom(AuthModalOpenAtom);
+  const router = useRouter();
   const setAuthToken = useSetAtom(AuthTokenAtom);
 
   if (user.data?.status === "ok" && user.data.data) {
@@ -32,7 +32,7 @@ const AuthButton = () => {
     <Button
       variant={"ghost"}
       onClick={() => {
-        setAuthModalOpen(true);
+        void router.push("/login");
       }}
       size={"icon"}
       className="cursor-pointer"
