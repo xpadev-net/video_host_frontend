@@ -1,4 +1,4 @@
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 import type { ReactElement } from "react";
 
 import { Header } from "@/components/App/Header";
@@ -12,10 +12,10 @@ type props = {
 };
 
 const App = ({ children }: props) => {
-  const router = useRouter();
+  const pathname = usePathname();
   const isMobile = useIsMobile();
 
-  if (router.pathname === "/login" || router.pathname === "/register") {
+  if (pathname === "/login" || pathname === "/register") {
     return children;
   }
 
