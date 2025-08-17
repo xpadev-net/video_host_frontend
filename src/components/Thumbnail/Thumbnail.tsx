@@ -1,8 +1,8 @@
 import { useAtomValue } from "jotai";
-import Image from "next/image";
 
 import type { FilteredMovie } from "@/@types/v4Api";
 import { watchedHistoryAtom } from "@/atoms/WatchedHistory";
+import { ImageWithFallback } from "@/components/ImageWithFallback";
 import { time2str } from "@/libraries/time";
 
 import Styles from "./Thumbnail.module.scss";
@@ -18,7 +18,7 @@ const Thumbnail = ({ movie, hideMetadata }: ThumbnailProps) => {
   return (
     <div className={Styles.wrapper}>
       {movie?.thumbnailUrl && (
-        <Image
+        <ImageWithFallback
           src={movie.thumbnailUrl ?? ""}
           alt={`${movie.series?.title} ${movie.title}`}
           fill={true}
