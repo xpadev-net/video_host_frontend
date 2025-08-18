@@ -1,9 +1,9 @@
-import { Tabs } from "@radix-ui/themes";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
 import { MoviesSearchList } from "@/components/SearchList/MoviesSearchList";
 import { SeriesSearchList } from "@/components/SearchList/SeriesSearchList";
+import { type TabItem, TabSwitcher } from "@/components/TabSwitcher";
 import { User } from "@/components/User/User";
 import { SiteName } from "@/contexts/env";
 import { useUser } from "@/hooks/useUser";
@@ -29,25 +29,26 @@ const UserPage = () => {
     );
   }
 
+  const tabs: TabItem[] = [
+    {
+      value: "series",
+      label: "シリーズ",
+      content: <SeriesSearchList author={user.data.id} />,
+    },
+    {
+      value: "movies",
+      label: "動画",
+      content: <MoviesSearchList author={user.data.id} />,
+    },
+  ];
+
   return (
     <div className={Styles.wrapper}>
       <Head>
         <title>{`${user.data.name} - ${SiteName}`}</title>
       </Head>
       <User user={user.data} size={"4"} />
-      <Tabs.Root defaultValue={"series"} className={Styles.tab}>
-        <Tabs.List className={Styles.list}>
-          <Tabs.Trigger value="series">シリーズ</Tabs.Trigger>
-          <Tabs.Trigger value="movies">動画</Tabs.Trigger>
-        </Tabs.List>
-
-        <Tabs.Content value="series">
-          <SeriesSearchList author={user.data.id} />
-        </Tabs.Content>
-        <Tabs.Content value="movies">
-          <MoviesSearchList author={user.data.id} />
-        </Tabs.Content>
-      </Tabs.Root>
+      <TabSwitcher tabs={tabs} defaultValue="series" />
     </div>
   );
 };
