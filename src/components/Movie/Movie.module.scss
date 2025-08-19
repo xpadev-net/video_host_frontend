@@ -173,3 +173,15 @@
     background-color: $hoverColor;
   }
 }
+
+@keyframes skeleton-loading {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}

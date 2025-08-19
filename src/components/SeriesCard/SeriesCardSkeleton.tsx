@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-
+import { UserSkeleton } from "../User/UserSkeleton";
 import styles from "./SeriesCard.module.scss";
 
 export const SeriesCardSkeleton = forwardRef<HTMLDivElement>((_props, ref) => (
@@ -7,7 +7,7 @@ export const SeriesCardSkeleton = forwardRef<HTMLDivElement>((_props, ref) => (
     <div className={`${styles.thumbnail} ${styles.skeleton}`}></div>
     <div className={styles.titles}>
       <span className={`${styles.title} ${styles.skeleton}`} />
-      <div className={`${styles.user} ${styles.skeleton}`} />
+      <UserSkeleton size="2" />
     </div>
   </div>
 ));

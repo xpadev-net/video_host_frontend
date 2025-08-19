@@ -1,6 +1,5 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-
 import { MoviesSearchList } from "@/components/SearchList/MoviesSearchList";
 import { SeriesSearchList } from "@/components/SearchList/SeriesSearchList";
 import { type TabItem, TabSwitcher } from "@/components/TabSwitcher";
