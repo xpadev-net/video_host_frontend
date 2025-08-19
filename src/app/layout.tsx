@@ -4,7 +4,7 @@ import "@/styles/nprogress.css";
 import "@radix-ui/themes/styles.css";
 
 import type { Metadata } from "next";
-import type { ReactNode } from "react";
+import { type ReactNode, Suspense } from "react";
 
 import { SiteName } from "@/contexts/env";
 
@@ -19,7 +19,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ja">
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          <Suspense>{children}</Suspense>
+        </Providers>
       </body>
     </html>
   );
