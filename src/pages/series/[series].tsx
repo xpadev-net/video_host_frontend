@@ -31,9 +31,9 @@ const SeriesPage = () => {
       <Head>
         <title>{`${data.data.title} - ${SiteName}`}</title>
       </Head>
-      <div className={Styles.header}>
-        <h1>{data.data.title}</h1>
-        <User user={data.data.author} />
+      <div className="sticky top-0 z-10 bg-background py-4 flex flex-col gap-2">
+        <h1 className="text-2xl">{data.data.title}</h1>
+        <User user={data.data.author} size="1" />
       </div>
       <div className={Styles.moviesContainer}>
         <MovieList movies={data.data.movies ?? []} type={"column"} />
