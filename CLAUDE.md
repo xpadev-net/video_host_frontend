@@ -37,7 +37,7 @@ pnpm run lint:fix     # Fix linting, formatting, and type issues
 ### Technology Stack
 - **Framework**: Next.js 14.2.23 with React 18.3.1
 - **Language**: TypeScript with strict mode and `@/*` path aliases
-- **Styling**: SCSS modules + Radix UI themes
+- **Styling**: Tailwind CSS (preferred) + Radix UI themes. Use Tailwind for all new components instead of CSS modules
 - **State Management**: Jotai (atomic state management)
 - **Data Fetching**: SWR + Axios
 - **Video Playback**: HLS.js for HTTP Live Streaming
@@ -82,3 +82,9 @@ Uses Jotai atoms for global state management. State is organized in `src/atoms/`
 - Mobile/desktop component variations for responsive design
 - Custom hooks abstract data fetching logic
 - TypeScript definitions ensure type safety across API boundaries
+
+### Styling Guidelines
+- **Primary**: Use Tailwind CSS for all new components and styling
+- **Legacy**: Existing SCSS modules are maintained but should be converted to Tailwind when modified
+- **Avoid**: Do not create new CSS modules or SCSS files
+- **Components**: Prefer utility-first approach with Tailwind classes
