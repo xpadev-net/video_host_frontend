@@ -44,17 +44,6 @@ const Controller = ({ className, data }: props) => {
     e.stopPropagation();
   };
 
-  const handleControllerKeyDown = (
-    e: React.KeyboardEvent<HTMLButtonElement>,
-  ) => {
-    // Handle keyboard interaction for controller wrapper
-    setMetadata((pv) => ({
-      ...pv,
-      isSetting: false,
-    }));
-    e.stopPropagation();
-  };
-
   const onVolumeClick = () => {
     if (!videoRef) return;
     if (mutedVolume && videoRef.volume === 0) {
@@ -75,7 +64,6 @@ const Controller = ({ className, data }: props) => {
     <button
       className={`${className} ${Styles.wrapper} text-white`}
       onClick={stopPropagation}
-      onKeyDown={handleControllerKeyDown}
       aria-label="Video player controls"
       type="button"
     >

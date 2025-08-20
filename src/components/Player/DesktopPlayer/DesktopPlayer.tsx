@@ -77,8 +77,6 @@ const DesktopPlayer = ({ className, data }: props) => {
     }
   };
 
-  const handlePlayerKeyDown = () => {};
-
   return (
     <button
       className={`${className} ${Styles.wrapper} ${
@@ -88,7 +86,6 @@ const DesktopPlayer = ({ className, data }: props) => {
       }`}
       onMouseMove={onMouseMove}
       onClick={togglePlayerState}
-      onKeyDown={handlePlayerKeyDown}
       type="button"
       tabIndex={0}
       aria-label={state.paused ? "Play video" : "Pause video"}
