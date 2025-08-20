@@ -13,13 +13,11 @@ const PlaybackRateDisplay = () => {
 
     const timer = setTimeout(() => {
       setVisible(false);
-      console.log("Playback rate display hidden");
     }, 1500);
 
     return () => {
       clearTimeout(timer);
       setVisible(false);
-      console.log("Playback rate display cleared");
     };
   }, [playbackRate]);
 
