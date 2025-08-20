@@ -57,7 +57,7 @@ const Video = ({ className, videoRef, movie }: props) => {
       duration: videoRef.current?.duration || 0,
     }));
     setState((pv) => ({ ...pv, paused: true, isLoading: true }));
-    void videoRef.current?.play().catch();
+    void videoRef.current?.play().catch(console.warn);
   };
 
   const onVideoRateChange = () => {
