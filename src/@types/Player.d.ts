@@ -5,7 +5,6 @@ export type PlayerConfig = {
   windowFullscreen: boolean;
   autoPlay: boolean;
   isTheatre: boolean;
-  isHls: boolean;
   isPipEnable: boolean;
   isNiconicommentsEnable: boolean;
 };

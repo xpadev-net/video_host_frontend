@@ -1,6 +1,6 @@
 import type { Options } from "@xpadev-net/niconicomments";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { AppWindow, Film, Gauge, MessageSquareText } from "lucide-react";
+import { AppWindow, Gauge, MessageSquareText } from "lucide-react";
 import type {
   SelectionItem,
   SettingKey,
@@ -72,13 +72,6 @@ export const useSettingDefinitions = (): Record<
     }
   };
 
-  const toggleHls = () => {
-    setPlayerConfig((pv) => ({
-      ...pv,
-      isHls: !pv.isHls,
-    }));
-  };
-
   const setPlaybackRate = (rate: number) => {
     setPlayerConfig((pv) => ({ ...pv, playbackRate: rate }));
     if (videoRef) videoRef.playbackRate = rate;
@@ -135,14 +128,6 @@ export const useSettingDefinitions = (): Record<
       icon: AppWindow,
       getValue: () => playerConfig.windowFullscreen,
       onChange: toggleWindowFullscreen,
-    },
-    {
-      type: "toggle",
-      id: "isHls",
-      label: "HLS有効化",
-      icon: Film,
-      getValue: () => playerConfig.isHls,
-      onChange: toggleHls,
     },
   ];
 

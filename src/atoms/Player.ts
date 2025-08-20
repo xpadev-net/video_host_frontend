@@ -24,7 +24,6 @@ const PlayerConfigAtom = atomWithStorage<PlayerConfig>("playerConfig", {
   windowFullscreen: true,
   autoPlay: true,
   isTheatre: false,
-  isHls: true,
   isPipEnable: false,
   isNiconicommentsEnable: true,
 });
