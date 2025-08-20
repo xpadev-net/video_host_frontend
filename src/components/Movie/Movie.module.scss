@@ -3,7 +3,7 @@
 .wrapper {
   &.row {
     display: block;
-    padding: 4px;
+    padding: 8px;
     border-radius: 8px;
     max-width: 360px;
     max-height: 300px;
@@ -11,7 +11,7 @@
     width: var(--width, unset);
     .thumbnail {
       margin-bottom: 7px;
-      width: calc(var(--width, unset) - 8px);
+      width: calc(var(--width, unset) - 16px);
     }
     .titles {
       min-height: 40px;

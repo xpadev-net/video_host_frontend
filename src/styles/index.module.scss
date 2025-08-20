@@ -9,6 +9,6 @@
 
 .container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(var(--width), 1fr));
+  grid-template-columns: repeat(auto-fill, var(--width));
   gap: 2px;
 }

@@ -1,10 +1,10 @@
 import Head from "next/head";
-import { type CSSProperties, useEffect, useRef, useState } from "react";
+import { type CSSProperties, useEffect, useMemo, useRef } from "react";
 
 import { MovieCard, MovieCardSkeleton } from "@/components/Movie";
 import { SiteName } from "@/contexts/env";
 import { useMovies } from "@/hooks/useMovies";
-import { useIsomorphicEffect } from "@/libraries/IsomorphicEffect";
+import { useWindowWidth } from "@/hooks/useWindowWidth";
 import Styles from "@/styles/index.module.scss";
 
 const elementIsVisibleInViewport = (
@@ -23,21 +23,13 @@ const elementIsVisibleInViewport = (
 const Index = () => {
   const { movies, setSize, hasNext, isValidating } = useMovies();
 
-  const [width, setWidth] = useState(360);
   const wrapper = useRef<HTMLDivElement>(null);
-  const observer = useRef<ResizeObserver>();
-  const isomorphicEffect = useIsomorphicEffect();
-  const handleResize = () => {
-    const width = wrapper.current?.clientWidth || 1920;
-    const cardCount = Math.floor(width / 380) + 1;
-    setWidth(width / cardCount - 20);
-  };
-  isomorphicEffect(() => {
-    if (!observer.current) observer.current = new ResizeObserver(handleResize);
-    if (!wrapper.current) return;
-    handleResize();
-    observer.current?.observe(wrapper.current);
-  }, [wrapper.current]);
+  const containerWidth = useWindowWidth(wrapper);
+
+  const width = useMemo(() => {
+    const cardCount = Math.floor(containerWidth / 380) + 1;
+    return containerWidth / cardCount - 4;
+  }, [containerWidth]);
 
   // 無限スクロール用Intersection Observer
   const loadMoreRef = useRef<HTMLDivElement>(null);
