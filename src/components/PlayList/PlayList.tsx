@@ -37,7 +37,9 @@ const PlayList = ({ data, className, maxHeight }: props) => {
       }}
     >
       <button
-        className={`${Styles.header} ${isOpen && Styles.open}`}
+        className={`${Styles.header} ${isOpen && Styles.open} ${
+          next && Styles.hasNext
+        }`}
         onClick={() => setIsOpen((pv) => !pv)}
         onKeyDown={handleToggleKeyDown}
         type="button"
@@ -54,7 +56,7 @@ const PlayList = ({ data, className, maxHeight }: props) => {
             )}
             <span className={Styles.title}>{data.series.title}</span>
           </div>
-          {isOpen && (
+          {(isOpen || !next) && (
             <div className={Styles.description}>
               {data.series.visibility !== "PUBLIC" && (
                 <>
