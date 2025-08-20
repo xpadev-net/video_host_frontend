@@ -9,6 +9,7 @@ import type {
 import {
   NiconicommentsConfigAtom,
   PlayerConfigAtom,
+  PlayerPlaybackRateAtom,
   PlayerSettingAtom,
   PlayerStateAtom,
   VideoRefAtom,
@@ -55,6 +56,7 @@ export const useSettingDefinitions = (): Record<
   const wrapperRef = useAtomValue(WrapperRefAtom);
   const videoRef = useAtomValue(VideoRefAtom);
   const setPlayerSetting = useSetAtom(PlayerSettingAtom);
+  const [playbackRate, setPlaybackRate] = useAtom(PlayerPlaybackRateAtom);
 
   const toggleWindowFullscreen = () => {
     setPlayerConfig((pv) => ({
@@ -72,8 +74,8 @@ export const useSettingDefinitions = (): Record<
     }
   };
 
-  const setPlaybackRate = (rate: number) => {
-    setPlayerConfig((pv) => ({ ...pv, playbackRate: rate }));
+  const updatePlaybackRate = (rate: number) => {
+    setPlaybackRate(rate);
     if (videoRef) videoRef.playbackRate = rate;
     setPlayerSetting((prev) => prev.filter((page) => page !== "playbackRate"));
   };
@@ -106,7 +108,7 @@ export const useSettingDefinitions = (): Record<
       label: "再生速度",
       icon: Gauge,
       targetPage: "playbackRate",
-      getValue: () => playerConfig.playbackRate,
+      getValue: () => playbackRate,
     },
     ...(EnableComments
       ? [
@@ -141,8 +143,8 @@ export const useSettingDefinitions = (): Record<
       "playbackRate",
       "再生速度",
       suggestedRate.map((value) => ({ value, label: value })),
-      () => playerConfig.playbackRate,
-      setPlaybackRate,
+      () => playbackRate,
+      updatePlaybackRate,
     ),
   ];
 

@@ -3,7 +3,11 @@ import { useAtomValue } from "jotai";
 import { useEffect, useRef } from "react";
 
 import type { CommentResponse } from "@/@types/api";
-import { NiconicommentsConfigAtom, PlayerConfigAtom } from "@/atoms/Player";
+import {
+  NiconicommentsConfigAtom,
+  PlayerConfigAtom,
+  PlayerPlaybackRateAtom,
+} from "@/atoms/Player";
 import { request } from "@/libraries/request";
 
 type props = {
@@ -15,6 +19,7 @@ type props = {
 
 const CommentCanvas = ({ url, videoRef, pipVideoRef, className }: props) => {
   const playerConfig = useAtomValue(PlayerConfigAtom);
+  const playbackRate = useAtomValue(PlayerPlaybackRateAtom);
   const niconicommentsConfig = useAtomValue(NiconicommentsConfigAtom);
   const niconicommentsRef = useRef<NiconiComments | undefined>(undefined);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -65,14 +70,14 @@ const CommentCanvas = ({ url, videoRef, pipVideoRef, className }: props) => {
       const vposMs = videoRef?.paused
         ? Math.floor(videoRef.currentTime * 1000)
         : (performance.now() - commentSmoothingRef.current.timestamp) *
-            playerConfig.playbackRate +
+            playbackRate +
           commentSmoothingRef.current.offset * 1000;
       niconicommentsRef.current?.drawCanvas(Math.floor(vposMs / 10));
     }, 1);
     return () => {
       window.clearInterval(interval);
     };
-  }, [videoRef?.paused, playerConfig.playbackRate, videoRef?.currentTime]);
+  }, [videoRef?.paused, playbackRate, videoRef?.currentTime]);
 
   useEffect(() => {
     if (!niconicommentsRef.current || !canvasRef.current || !pipVideoRef)

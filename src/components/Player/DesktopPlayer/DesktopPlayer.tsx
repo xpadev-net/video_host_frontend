@@ -12,6 +12,7 @@ import {
 import { CommentCanvas } from "@/components/Player/Shared/CommentCanvas";
 import { KeyboardHandler } from "@/components/Player/Shared/KeyboardHandler";
 import { MediaSessionHandler } from "@/components/Player/Shared/MediaSessionHandler";
+import { PlaybackRateDisplay } from "@/components/Player/Shared/PlaybackRateDisplay";
 import { Video } from "@/components/Player/Shared/Video";
 import { EnableComments } from "@/contexts/env";
 import { Controller } from "./Controller";
@@ -131,6 +132,7 @@ const DesktopPlayer = ({ className, data }: props) => {
           muted={true}
           onPause={onPipPause}
         />
+        <PlaybackRateDisplay />
       </div>
       <Controller className={Styles.controller} data={data} />
       <KeyboardHandler data={data} />

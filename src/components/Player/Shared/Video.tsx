@@ -13,6 +13,7 @@ import type { FilteredMovie } from "@/@types/v4Api";
 import { AuthTokenAtom } from "@/atoms/Auth";
 import {
   PlayerConfigAtom,
+  PlayerPlaybackRateAtom,
   PlayerStateAtom,
   PlayerVolumeAtom,
   VideoMetadataAtom,
@@ -31,6 +32,7 @@ const Video = ({ className, videoRef, movie }: props) => {
   const setState = useSetAtom(PlayerStateAtom);
   const token = useAtomValue(AuthTokenAtom);
   const [playerConfig, setPlayerConfig] = useAtom(PlayerConfigAtom);
+  const playbackRate = useAtomValue(PlayerPlaybackRateAtom);
   const [configVolume, setConfigVolume] = useAtom(PlayerVolumeAtom);
   const setWatchedHistory = useSetAtom(watchedHistoryAtom);
   const [url, setUrl] = useState<string>("");
@@ -61,11 +63,8 @@ const Video = ({ className, videoRef, movie }: props) => {
   };
 
   const onVideoRateChange = () => {
-    if (
-      videoRef.current &&
-      videoRef.current.playbackRate !== playerConfig.playbackRate
-    ) {
-      videoRef.current.playbackRate = playerConfig.playbackRate;
+    if (videoRef.current && videoRef.current.playbackRate !== playbackRate) {
+      videoRef.current.playbackRate = playbackRate;
     }
   };
 
@@ -132,8 +131,8 @@ const Video = ({ className, videoRef, movie }: props) => {
 
   useEffect(() => {
     if (!videoRef.current) return;
-    videoRef.current.playbackRate = playerConfig.playbackRate;
-  }, [playerConfig, videoRef.current]);
+    videoRef.current.playbackRate = playbackRate;
+  }, [playbackRate, videoRef.current]);
 
   useEffect(() => {
     if (!videoRef.current) return;

@@ -5,6 +5,7 @@ import { type FC, useEffect } from "react";
 import type { FilteredMovie } from "@/@types/v4Api";
 import {
   PlayerConfigAtom,
+  PlayerPlaybackRateAtom,
   PlayerStateAtom,
   VideoRefAtom,
 } from "@/atoms/Player";
@@ -18,7 +19,8 @@ type Props = {
 
 const KeyboardHandler: FC<Props> = ({ data }) => {
   const videoRef = useAtomValue(VideoRefAtom);
-  const [playerConfig, setPlayerConfig] = useAtom(PlayerConfigAtom);
+  const [_playerConfig, setPlayerConfig] = useAtom(PlayerConfigAtom);
+  const setPlaybackRate = useSetAtom(PlayerPlaybackRateAtom);
   const setVideoMetadata = useSetAtom(PlayerStateAtom);
   const router = useRouter();
 
@@ -38,12 +40,12 @@ const KeyboardHandler: FC<Props> = ({ data }) => {
       }
       if ((e.code === "Period" || e.code === "Comma") && e.shiftKey) {
         e.preventDefault();
-        const key =
-          rates.indexOf(playerConfig.playbackRate) +
-          (e.code === "Period" ? 1 : -1);
-        if (!rates[key]) return false;
-        setPlayerConfig((pv) => ({ ...pv, playbackRate: rates[key] }));
-        videoRef.playbackRate = rates[key];
+        setPlaybackRate((prev) => {
+          const key = rates.indexOf(prev) + (e.code === "Period" ? 1 : -1);
+          if (!rates[key]) return prev;
+          videoRef.playbackRate = rates[key];
+          return rates[key];
+        });
         return true;
       }
       if (e.code === "Space" || e.code === "KeyK") {
@@ -86,7 +88,7 @@ const KeyboardHandler: FC<Props> = ({ data }) => {
   }, [
     videoRef,
     data,
-    playerConfig,
+    setPlaybackRate,
     setPlayerConfig,
     setVideoMetadata,
     router.push,

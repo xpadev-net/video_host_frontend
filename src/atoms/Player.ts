@@ -20,13 +20,18 @@ const PlayerStateAtom = atom<PlayerState>({
   isFullscreen: false,
 });
 const PlayerConfigAtom = atomWithStorage<PlayerConfig>("playerConfig", {
-  playbackRate: 1,
   windowFullscreen: true,
   autoPlay: true,
   isTheatre: false,
   isPipEnable: false,
   isNiconicommentsEnable: true,
 });
+
+const PlayerPlaybackRateAtom = atomWithStorage<number>(
+  "playerConfig.playerPlaybackRate",
+  1,
+);
+
 const PlayerVolumeAtom = atomWithStorage<number>(
   "playerConfig.playerVolume",
   1,
@@ -42,6 +47,7 @@ const PlayerSettingAtom = atom<SettingKey[]>(["main"]);
 export {
   NiconicommentsConfigAtom,
   PlayerConfigAtom,
+  PlayerPlaybackRateAtom,
   PlayerVolumeAtom,
   PlayerSettingAtom,
   PlayerStateAtom,

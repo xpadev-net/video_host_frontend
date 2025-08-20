@@ -1,7 +1,6 @@
 import type { ComponentType } from "react";
 
 export type PlayerConfig = {
-  playbackRate: number;
   windowFullscreen: boolean;
   autoPlay: boolean;
   isTheatre: boolean;
