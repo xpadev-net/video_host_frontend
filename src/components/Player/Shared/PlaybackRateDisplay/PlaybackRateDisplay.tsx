@@ -29,7 +29,7 @@ const PlaybackRateDisplay = () => {
         visible ? "opacity-100" : "opacity-0"
       }`}
     >
-      <div className="bg-black/80 text-white px-5 py-3 rounded-lg text-lg font-bold text-center backdrop-blur-sm border border-white/10">
+      <div className="bg-black/50 text-white px-5 py-3 rounded-lg text-lg font-bold text-center">
         {playbackRate}x
       </div>
     </div>
