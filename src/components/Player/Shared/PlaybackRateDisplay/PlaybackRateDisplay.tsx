@@ -1,25 +1,26 @@
 import { useAtomValue } from "jotai";
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 
 import { PlayerPlaybackRateAtom } from "@/atoms/Player";
+import { useTemporaryVisible } from "@/hooks/useTemporaryVisible";
 
 const PlaybackRateDisplay = () => {
   const playbackRate = useAtomValue(PlayerPlaybackRateAtom);
-  const [visible, setVisible] = useState(false);
+  const { visible, show } = useTemporaryVisible(1500);
+  const previousPlaybackRate = useRef<number | undefined>(undefined);
 
   useEffect(() => {
-    setVisible(true);
-    console.log("Playback rate changed to:", playbackRate);
-
-    const timer = setTimeout(() => {
-      setVisible(false);
-    }, 1500);
-
-    return () => {
-      clearTimeout(timer);
-      setVisible(false);
-    };
-  }, [playbackRate]);
+    if (previousPlaybackRate.current === undefined) {
+      previousPlaybackRate.current = playbackRate;
+      return;
+    }
+    if (previousPlaybackRate.current === playbackRate) {
+      console.log("Playback rate changed to:", playbackRate);
+      return;
+    }
+    show();
+    previousPlaybackRate.current = playbackRate;
+  }, [playbackRate, show]);
 
   return (
     <div
