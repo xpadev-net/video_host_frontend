@@ -1,19 +1,36 @@
 import { useAtomValue } from "jotai";
-import { useEffect, useRef, useState } from "react";
+import {
+  FastForward,
+  Pause,
+  Play,
+  Rabbit,
+  Rewind,
+  Volume1,
+  Volume2,
+  VolumeX,
+} from "lucide-react";
+import { type ReactNode, useEffect, useRef, useState } from "react";
 
-import { PlayerPlaybackRateAtom, PlayerVolumeAtom } from "@/atoms/Player";
+import {
+  PlayerPlaybackRateAtom,
+  PlayerPlayPauseNotificationAtom,
+  PlayerSeekNotificationAtom,
+  PlayerVolumeAtom,
+} from "@/atoms/Player";
 import { useTemporaryVisible } from "@/hooks/useTemporaryVisible";
 
-type StatusType = "playbackRate" | "volume";
+type StatusType = "playbackRate" | "volume" | "seek" | "playPause";
 
 interface StatusInfo {
   type: StatusType;
-  value: string;
+  value: ReactNode;
 }
 
 const PlayerStatusDisplay = () => {
   const playbackRate = useAtomValue(PlayerPlaybackRateAtom);
   const volume = useAtomValue(PlayerVolumeAtom);
+  const seekNotification = useAtomValue(PlayerSeekNotificationAtom);
+  const playPauseNotification = useAtomValue(PlayerPlayPauseNotificationAtom);
   const { visible, show } = useTemporaryVisible(1500);
   const [currentStatus, setCurrentStatus] = useState<StatusInfo | null>(null);
 
@@ -28,7 +45,12 @@ const PlayerStatusDisplay = () => {
     if (previousPlaybackRate.current !== playbackRate) {
       setCurrentStatus({
         type: "playbackRate",
-        value: `${playbackRate}x`,
+        value: (
+          <div className="flex items-center justify-center gap-2">
+            <Rabbit size={24} />
+            <span>{playbackRate}x</span>
+          </div>
+        ),
       });
       show();
       previousPlaybackRate.current = playbackRate;
@@ -43,12 +65,59 @@ const PlayerStatusDisplay = () => {
     if (previousVolume.current !== volume) {
       setCurrentStatus({
         type: "volume",
-        value: `音量: ${Math.round(volume * 100)}%`,
+        value: (
+          <div className="flex items-center justify-center gap-2">
+            {volume === 0 ? (
+              <VolumeX size={24} />
+            ) : volume < 0.5 ? (
+              <Volume1 size={24} />
+            ) : (
+              <Volume2 size={24} />
+            )}
+            <span>{Math.round(volume * 100)}%</span>
+          </div>
+        ),
       });
       show();
       previousVolume.current = volume;
     }
   }, [volume, show]);
+
+  useEffect(() => {
+    if (seekNotification) {
+      setCurrentStatus({
+        type: "seek",
+        value: (
+          <div className="flex items-center justify-center gap-2">
+            {seekNotification.direction === "backward" && <Rewind size={24} />}
+            <span>{seekNotification.seconds}秒</span>
+            {seekNotification.direction === "forward" && (
+              <FastForward size={24} />
+            )}
+          </div>
+        ),
+      });
+      show();
+    }
+  }, [seekNotification, show]);
+
+  useEffect(() => {
+    if (playPauseNotification) {
+      setCurrentStatus({
+        type: "playPause",
+        value: (
+          <div className="flex items-center justify-center gap-2">
+            {playPauseNotification.action === "play" ? (
+              <Play size={32} />
+            ) : (
+              <Pause size={32} />
+            )}
+          </div>
+        ),
+      });
+      show();
+    }
+  }, [playPauseNotification, show]);
 
   if (!currentStatus) {
     return null;
@@ -60,7 +129,7 @@ const PlayerStatusDisplay = () => {
         visible ? "opacity-100" : "opacity-0"
       }`}
     >
-      <div className="bg-black/50 text-white px-5 py-3 rounded-lg text-lg font-bold text-center">
+      <div className="bg-black/50 text-white px-5 py-3 rounded-lg text-lg font-bold text-center w-32 mx-auto">
         {currentStatus.value}
       </div>
     </div>

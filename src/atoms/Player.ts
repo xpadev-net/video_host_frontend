@@ -44,13 +44,24 @@ const NiconicommentsConfigAtom = atomWithStorage<Options>(
 
 const PlayerSettingAtom = atom<SettingKey[]>(["main"]);
 
+const PlayerSeekNotificationAtom = atom<{
+  direction: "forward" | "backward";
+  seconds: number;
+} | null>(null);
+
+const PlayerPlayPauseNotificationAtom = atom<{
+  action: "play" | "pause";
+} | null>(null);
+
 export {
   NiconicommentsConfigAtom,
   PlayerConfigAtom,
   PlayerPlaybackRateAtom,
+  PlayerPlayPauseNotificationAtom,
   PlayerVolumeAtom,
   PlayerSettingAtom,
   PlayerStateAtom,
+  PlayerSeekNotificationAtom,
   VideoMetadataAtom,
   VideoRefAtom,
   WrapperRefAtom,

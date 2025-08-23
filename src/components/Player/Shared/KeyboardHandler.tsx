@@ -6,6 +6,8 @@ import type { FilteredMovie } from "@/@types/v4Api";
 import {
   PlayerConfigAtom,
   PlayerPlaybackRateAtom,
+  PlayerPlayPauseNotificationAtom,
+  PlayerSeekNotificationAtom,
   PlayerStateAtom,
   VideoRefAtom,
 } from "@/atoms/Player";
@@ -22,6 +24,8 @@ const KeyboardHandler: FC<Props> = ({ data }) => {
   const [_playerConfig, setPlayerConfig] = useAtom(PlayerConfigAtom);
   const setPlaybackRate = useSetAtom(PlayerPlaybackRateAtom);
   const setVideoMetadata = useSetAtom(PlayerStateAtom);
+  const setSeekNotification = useSetAtom(PlayerSeekNotificationAtom);
+  const setPlayPauseNotification = useSetAtom(PlayerPlayPauseNotificationAtom);
   const router = useRouter();
 
   useEffect(() => {
@@ -29,7 +33,12 @@ const KeyboardHandler: FC<Props> = ({ data }) => {
       if (!videoRef || !data) return false;
       if (e.code === "ArrowRight" || e.code === "ArrowLeft") {
         e.preventDefault();
-        videoRef.currentTime += 5 * (e.code === "ArrowRight" ? 1 : -1);
+        const seekSeconds = 5;
+        const direction = e.code === "ArrowRight" ? "forward" : "backward";
+        videoRef.currentTime +=
+          seekSeconds * (direction === "forward" ? 1 : -1);
+        setSeekNotification({ direction, seconds: seekSeconds });
+        setTimeout(() => setSeekNotification(null), 100);
         return true;
       }
       if (e.code === "ArrowUp" || e.code === "ArrowDown") {
@@ -50,7 +59,10 @@ const KeyboardHandler: FC<Props> = ({ data }) => {
       }
       if (e.code === "Space" || e.code === "KeyK") {
         e.preventDefault();
+        const action = videoRef.paused ? "play" : "pause";
         void (videoRef.paused ? videoRef.play() : videoRef.pause());
+        setPlayPauseNotification({ action });
+        setTimeout(() => setPlayPauseNotification(null), 100);
         return true;
       }
       if ((e.code === "KeyN" || e.code === "KeyP") && e.shiftKey) {
@@ -91,6 +103,8 @@ const KeyboardHandler: FC<Props> = ({ data }) => {
     setPlaybackRate,
     setPlayerConfig,
     setVideoMetadata,
+    setSeekNotification,
+    setPlayPauseNotification,
     router.push,
   ]);
 
