@@ -14,7 +14,7 @@ import Styles from "@/components/Player/MobilePlayer/MobilePlayer.module.scss";
 import { CommentCanvas } from "@/components/Player/Shared/CommentCanvas";
 import { KeyboardHandler } from "@/components/Player/Shared/KeyboardHandler";
 import { MediaSessionHandler } from "@/components/Player/Shared/MediaSessionHandler";
-import { PlaybackRateDisplay } from "@/components/Player/Shared/PlaybackRateDisplay";
+import { PlayerStatusDisplay } from "@/components/Player/Shared/PlayerStatusDisplay";
 import { Video } from "@/components/Player/Shared/Video";
 import { EnableComments } from "@/contexts/env";
 
@@ -89,7 +89,7 @@ const MobilePlayer = ({ className, data }: props) => {
           />
         )}
         <Video className={Styles.video} videoRef={videoRef} movie={data} />
-        <PlaybackRateDisplay />
+        <PlayerStatusDisplay />
       </div>
       <Controller className={Styles.controller} data={data} />
       <KeyboardHandler data={data} />
