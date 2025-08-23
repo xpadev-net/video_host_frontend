@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 import { PlayerConfigAtom, WrapperRefAtom } from "@/atoms/Player";
 import { MovieInfo } from "@/components/MovieInfo";
+import { MoviePageSkeleton } from "@/components/MoviePageSkeleton";
 import { Player } from "@/components/Player";
 import { PlayList } from "@/components/PlayList";
 import { SiteName } from "@/contexts/env";
@@ -37,7 +38,7 @@ const MoviePage = () => {
       resizeObserver.disconnect();
     };
   }, [wrapperRef]);
-  if (!data.data) return null;
+  if (!data.data) return <MoviePageSkeleton />;
   if (data.data.status !== "ok") {
     return (
       <div>

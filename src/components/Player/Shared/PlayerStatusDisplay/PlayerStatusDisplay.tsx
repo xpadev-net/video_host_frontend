@@ -31,7 +31,7 @@ const PlayerStatusDisplay = () => {
   const volume = useAtomValue(PlayerVolumeAtom);
   const seekNotification = useAtomValue(PlayerSeekNotificationAtom);
   const playPauseNotification = useAtomValue(PlayerPlayPauseNotificationAtom);
-  const { visible, show } = useTemporaryVisible(1500);
+  const { visible, show } = useTemporaryVisible(1000);
   const [currentStatus, setCurrentStatus] = useState<StatusInfo | null>(null);
 
   const previousPlaybackRate = useRef<number | undefined>(undefined);
@@ -125,11 +125,11 @@ const PlayerStatusDisplay = () => {
 
   return (
     <div
-      className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1000] pointer-events-none transition-opacity duration-300 ease-in-out ${
+      className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1000] pointer-events-none transition-opacity duration-100 ease-in-out ${
         visible ? "opacity-100" : "opacity-0"
       }`}
     >
-      <div className="bg-black/50 text-white px-5 py-3 rounded-lg text-lg font-bold text-center w-32 mx-auto">
+      <div className="bg-black/50 text-white px-5 py-3 rounded-lg text-lg font-bold text-center">
         {currentStatus.value}
       </div>
     </div>
