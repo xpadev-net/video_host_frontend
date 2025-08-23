@@ -12,7 +12,7 @@ const PlayListSkeleton = ({ className, maxHeight }: Props) => {
   return (
     <div className={`${className} ${Styles.wrapper}`}>
       <div className={`${Styles.header} ${Styles.open} ${Styles.hasNext}`}>
-        <Skeleton height="20px" width="80px" />
+        <Skeleton height="20px" width="80%" />
       </div>
       <div
         className={`${Styles.playListWrapper} ${Styles.open}`}
