@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 
 import { MovieList } from "@/components/MovieList";
+import { SeriesPageSkeleton } from "@/components/SeriesPageSkeleton";
 import { User } from "@/components/User/User";
 import { SiteName } from "@/contexts/env";
 import { useSeries } from "@/hooks/useSeries";
@@ -13,7 +14,7 @@ const SeriesPage = () => {
   const query = router.query.series;
   const { data } = useSeries(query2str(query));
   if (!data) {
-    return null;
+    return <SeriesPageSkeleton />;
   }
   if (data.code === 401) {
     void router.push(`/login?callback=${encodeURIComponent(router.asPath)}`);
