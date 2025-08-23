@@ -41,6 +41,10 @@ export const useSelf = () => {
       setToken(null);
       location.reload();
     }
+    if (swr.data?.code === 200 && swr.data.data === null && token) {
+      setToken(null);
+      location.reload();
+    }
   }, [swr.data, setToken, token]);
 
   return swr;
