@@ -18,7 +18,7 @@
     "@radix-ui/react-switch": "^1.2.5",
     "@radix-ui/themes": "^3.2.1",
     "@tailwindcss/postcss": "^4.1.11",
-    "@types/node": "^20.19.10",
+    "@types/node": "^22",
     "@types/react": "^18.3.23",
     "@types/react-dom": "^18.3.7",
     "@xpadev-net/niconicomments": "^0.2.76",
