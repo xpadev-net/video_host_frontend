@@ -21,8 +21,8 @@ const CommentCanvas = ({ url, videoRef, pipVideoRef, className }: props) => {
   const playerConfig = useAtomValue(PlayerConfigAtom);
   const playbackRate = useAtomValue(PlayerPlaybackRateAtom);
   const niconicommentsConfig = useAtomValue(NiconicommentsConfigAtom);
-  const niconicommentsRef = useRef<NiconiComments | undefined>(undefined);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const niconicommentsRef = useRef<NiconiComments | null>(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const commentSmoothingRef = useRef({ offset: 0, timestamp: 0 });
 
   useEffect(() => {
@@ -43,7 +43,7 @@ const CommentCanvas = ({ url, videoRef, pipVideoRef, className }: props) => {
   useEffect(() => {
     void (async () => {
       if (!canvasRef.current || !url) return;
-      niconicommentsRef.current = undefined;
+      niconicommentsRef.current = null;
       const res = await request<CommentResponse>(`/comments/${url}/`);
       if (res.status !== "success") return;
       const video = (playerConfig.isPipEnable && videoRef) || undefined;
@@ -61,7 +61,7 @@ const CommentCanvas = ({ url, videoRef, pipVideoRef, className }: props) => {
       );
     })();
     return () => {
-      niconicommentsRef.current = undefined;
+      niconicommentsRef.current = null;
     };
   }, [url, niconicommentsConfig, playerConfig.isPipEnable, videoRef]);
 

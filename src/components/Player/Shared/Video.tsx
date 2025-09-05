@@ -37,7 +37,7 @@ const Video = ({ className, videoRef, movie }: props) => {
   const setWatchedHistory = useSetAtom(watchedHistoryAtom);
   const [url, setUrl] = useState<string>("");
 
-  const hlsRef = useRef<Hls>(null);
+  const hlsRef = useRef<Hls | null>(null);
 
   const router = useRouter();
 

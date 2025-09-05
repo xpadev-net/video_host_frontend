@@ -1,9 +1,9 @@
 import { useRef } from "react";
 import useSWR, { type SWRConfiguration } from "swr";
 
-const useStickyResult = <T>(value: T | undefined): T | undefined => {
-  const val = useRef<T | undefined>(undefined);
-  if (value !== undefined) val.current = value;
+const useStickyResult = <T>(value: T | null): T | null => {
+  const val = useRef<T | null>(null);
+  if (value !== null) val.current = value;
   return val.current;
 };
 

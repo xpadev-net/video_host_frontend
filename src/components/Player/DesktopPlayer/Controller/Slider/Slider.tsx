@@ -16,7 +16,7 @@ type RangeItemProps = {
 
 const Slider = ({ className }: props) => {
   const videoRef = useAtomValue(VideoRefAtom);
-  const wrapperRef = useRef<HTMLButtonElement>(null);
+  const wrapperRef = useRef<HTMLButtonElement | null>(null);
   const metadata = useAtomValue(VideoMetadataAtom);
   const [buffered, setBuffered] = useState<RangeItemProps[]>([]);
   const [isDrugging, setIsDrugging] = useState(false);
