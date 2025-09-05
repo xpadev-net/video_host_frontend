@@ -28,7 +28,7 @@ export const SeriesSearchList: FC<Props> = ({ query, author }) => {
     query,
     author,
   });
-  const loadMoreRef = useRef<HTMLDivElement>(null);
+  const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (!loadMoreRef.current || !hasNext) return;

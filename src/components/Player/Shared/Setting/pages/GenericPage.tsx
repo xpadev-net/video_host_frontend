@@ -26,7 +26,7 @@ const GenericPage: FC<GenericPageProps> = ({
   config,
 }) => {
   const setPlayerSetting = useSetAtom(PlayerSettingAtom);
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (!ref.current) return;

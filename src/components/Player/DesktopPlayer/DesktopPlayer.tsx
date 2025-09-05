@@ -28,11 +28,11 @@ const DesktopPlayer = ({ className, data }: props) => {
   const setWrapperAtom = useSetAtom(WrapperRefAtom);
   const { isPipEnable, isTheatre, isNiconicommentsEnable } =
     useAtomValue(PlayerConfigAtom);
-  const wrapperRef = useRef<HTMLButtonElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const pipVideoRef = useRef<HTMLVideoElement>(null);
+  const wrapperRef = useRef<HTMLButtonElement | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const pipVideoRef = useRef<HTMLVideoElement | null>(null);
   const [isAfk, setIsAfk] = useState(false);
-  const afkTimeout = useRef(-1);
+  const afkTimeout = useRef<number>(-1);
   const state = useAtomValue(PlayerStateAtom);
 
   const onPipPause = () => {
