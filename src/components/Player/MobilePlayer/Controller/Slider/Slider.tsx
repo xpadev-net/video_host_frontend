@@ -15,11 +15,11 @@ type RangeItemProps = {
 
 const Slider = ({ className }: props) => {
   const videoRef = useAtomValue(VideoRefAtom);
-  const wrapperRef = useRef<HTMLButtonElement>(null);
+  const wrapperRef = useRef<HTMLButtonElement | null>(null);
   const [buffered, setBuffered] = useState<RangeItemProps[]>([]);
   const [isDrugging, setIsDrugging] = useState(false);
   const [progress, setProgress] = useState(0);
-  const lastTouchEventRef = useRef<globalThis.TouchEvent>();
+  const lastTouchEventRef = useRef<globalThis.TouchEvent | null>(null);
 
   useEffect(() => {
     if (!videoRef) return;

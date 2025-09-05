@@ -1,5 +1,3 @@
-@use "../../styles/colors";
-
 .root {
   width: 30px;
   height: 10px;
@@ -21,7 +19,7 @@
     background-color: #bdbdbd;
   }
   &[data-state="checked"] {
-    background-color: colors.$accentColor;
+    background-color: var(--color-accent);
     .thumb {
       left: 22px;
       background-color: white;
