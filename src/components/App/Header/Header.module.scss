@@ -1,3 +1,5 @@
+@use "../../../styles/colors.scss";
+
 .container {
   padding: 0 16px;
   display: flex;
@@ -25,7 +27,7 @@
     height: 100%;
     width: 100%;
     display: flex;
-    background-color: var(--color-background);
+    background-color: colors.$backgroundColor;
     padding: 0 8px;
     opacity: 0;
     pointer-events: none;

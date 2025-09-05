@@ -1,3 +1,5 @@
+@import "../../styles/colors";
+
 .wrapper {
   aspect-ratio: 16/9;
   width: 100%;
@@ -16,7 +18,7 @@
     left: 0;
     height: 3px;
     display: block;
-    background-color: var(--color-accent);
+    background-color: $accentColor;
   }
   .duration {
     position: absolute;

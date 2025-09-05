@@ -1,3 +1,5 @@
+@import "../../styles/colors";
+
 .wrapper {
   &.row {
     display: block;
@@ -62,7 +64,7 @@
         gap: 8px;
         .seriesTitle {
           .link {
-            color: var(--color-text);
+            color: $textColor;
             text-overflow: ellipsis;
             display: -webkit-box;
             -webkit-box-orient: vertical;
@@ -113,7 +115,7 @@
       }
     }
   }
-  color: var(--color-text);
+  color: $textColor;
   .thumbnail {
     &.skeleton {
       background: #fff1;
@@ -137,7 +139,7 @@
     }
   }
   .title {
-    color: var(--color-text);
+    color: $textColor;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal;
@@ -148,7 +150,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     letter-spacing: 0;
-    color: var(--color-sub-text);
+    color: $subTextColor;
     display: flex;
     flex-direction: row;
     &.skeleton {
@@ -160,7 +162,7 @@
       overflow: hidden;
     }
     .link {
-      color: var(--color-sub-text);
+      color: $subTextColor;
       text-decoration: none;
       &:hover {
         text-decoration: underline;
@@ -168,7 +170,7 @@
     }
   }
   &:hover {
-    background-color: var(--color-hover);
+    background-color: $hoverColor;
   }
 }
 

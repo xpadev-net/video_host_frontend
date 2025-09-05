@@ -1,7 +1,9 @@
+@use "../../styles/colors.scss";
+
 .header {
   height: 56px;
   width: 100vw;
-  background-color: var(--color-secondary-background);
+  background-color: colors.$secondaryBackgroundColor;
   position: fixed;
   top: 0;
   left: 0;

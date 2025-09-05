@@ -1,17 +1,19 @@
+@use "../../styles/colors";
+
 .wrapper {
   display: flex;
   flex-direction: column;
   user-select: none;
   max-height: min(700px, 50vh);
   border-radius: 12px;
-  border: solid 1px var(--color-quaternary-background);
+  border: solid 1px colors.$quaternaryBackgroundColor;
   overflow: hidden;
   .header {
     display: flex;
     height: 60px;
     padding: 4px 16px;
     flex-shrink: 0;
-    background-color: var(--color-thirdly-background);
+    background-color: colors.$thirdlyBackgroundColor;
     flex-direction: row;
     align-items: center;
     .icon {
@@ -39,7 +41,7 @@
         }
         .title {
           font-size: 12px;
-          color: var(--color-sub-text);
+          color: colors.$subTextColor;
           line-height: 24px;
           text-overflow: ellipsis;
           display: -webkit-box;
@@ -52,14 +54,14 @@
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
-        color: var(--color-sub-text);
+        color: colors.$subTextColor;
       }
     }
     &.open, &:not(.hasNext) {
       .textWrapper {
         .title {
           font-size: unset;
-          color: var(--color-text);
+          color: colors.$textColor;
           vertical-align: middle;
           line-height: 25px;
           text-overflow: ellipsis;
@@ -72,7 +74,7 @@
   .visibility,
   .author {
     font-size: 12px;
-    color: var(--color-sub-text);
+    color: colors.$subTextColor;
     line-height: 24px;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -81,7 +83,7 @@
     overflow: hidden;
   }
   .list {
-    border-top: solid 1px var(--color-quaternary-background);
+    border-top: solid 1px colors.$quaternaryBackgroundColor;
     overflow-y: scroll;
   }
 }

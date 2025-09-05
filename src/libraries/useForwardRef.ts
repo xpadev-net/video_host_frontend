@@ -1,10 +1,10 @@
 import { type ForwardedRef, useEffect, useRef } from "react";
 
 const useForwardRef = <T>(
-  ref: ForwardedRef<T | null>,
+  ref: ForwardedRef<T>,
   initialValue: T | null = null,
 ) => {
-  const targetRef = useRef<T | null>(initialValue);
+  const targetRef = useRef<T>(initialValue);
 
   useEffect(() => {
     if (!ref) return;

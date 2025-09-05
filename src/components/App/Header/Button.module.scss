@@ -1,3 +1,5 @@
+@use "../../../styles/colors";
+
 .button {
   background: none;
   cursor: pointer;
@@ -19,6 +21,6 @@
   }
 
   .icon {
-    fill: var(--color-text);
+    fill: colors.$textColor;
   }
 }

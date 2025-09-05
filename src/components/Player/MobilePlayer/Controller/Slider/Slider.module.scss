@@ -1,3 +1,5 @@
+@use "../../../../../styles/colors";
+
 .wrapper {
   position: relative;
   width: 100%;
@@ -19,7 +21,7 @@
   .watched {
     position: absolute;
     height: 4px;
-    background-color: var(--color-accent);
+    background-color: colors.$accentColor;
     top: 18px;
   }
   .grubber {
@@ -27,7 +29,7 @@
     width: 0;
     height: 0;
     border-radius: 50%;
-    background-color: var(--color-accent);
+    background-color: colors.$accentColor;
     bottom: 20px;
     transform: translate(-50%, 50%);
     transition:

@@ -34,11 +34,11 @@ const PlayerStatusDisplay = () => {
   const { visible, show } = useTemporaryVisible(1000);
   const [currentStatus, setCurrentStatus] = useState<StatusInfo | null>(null);
 
-  const previousPlaybackRate = useRef<number | null>(null);
-  const previousVolume = useRef<number | null>(null);
+  const previousPlaybackRate = useRef<number | undefined>(undefined);
+  const previousVolume = useRef<number | undefined>(undefined);
 
   useEffect(() => {
-    if (previousPlaybackRate.current === null) {
+    if (previousPlaybackRate.current === undefined) {
       previousPlaybackRate.current = playbackRate;
       return;
     }

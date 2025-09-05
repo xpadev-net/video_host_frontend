@@ -14,7 +14,7 @@ type props = {
 
 const MobileHeader = ({ className }: props) => {
   const [isInputActive, setIsInputActive] = useState(false);
-  const inputRef = useRef<HTMLInputElement | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const _router = useRouter();
   useEffect(() => {
     setIsInputActive(false);

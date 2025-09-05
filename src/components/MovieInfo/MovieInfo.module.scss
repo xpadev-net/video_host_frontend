@@ -1,19 +1,21 @@
+@use "../../styles/colors";
+
 .wrapper {
   .titleWrapper {
-    border-bottom: solid 1px var(--color-quaternary-background);
+    border-bottom: solid 1px colors.$quaternaryBackgroundColor;
     margin-bottom: 10px;
     .title {
       font-size: 18px;
     }
     .postDate {
       font-size: 14px;
-      color: var(--color-sub-text);
+      color: colors.$subTextColor;
       margin-bottom: 10px;
     }
   }
   .author {
     padding-bottom: 10px;
-    border-bottom: solid 1px var(--color-quaternary-background);
+    border-bottom: solid 1px colors.$quaternaryBackgroundColor;
     margin-bottom: 10px;
     display: flex;
     flex-direction: row;
@@ -25,7 +27,7 @@
     padding-bottom: 10px;
     line-height: 20px;
     .link {
-      color: var(--color-sub-text);
+      color: colors.$subTextColor;
     }
   }
 }

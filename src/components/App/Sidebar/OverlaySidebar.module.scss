@@ -1,3 +1,5 @@
+@use "../../../styles/colors";
+
 .disable {
   .background {
     opacity: 0;
@@ -18,7 +20,7 @@
   transition: opacity 250ms ease;
 }
 .overlay {
-  background-color: var(--color-secondary-background);
+  background-color: colors.$secondaryBackgroundColor;
   position: fixed;
   top: 0;
   left: 0;
@@ -37,7 +39,7 @@
     margin: 8px 0;
     display: flex;
     gap: 8px;
-    color: var(--color-text);
+    color: colors.$textColor;
     .text {
       line-height: 24px;
       height: 24px;
@@ -45,7 +47,7 @@
     svg {
       width: 24px;
       height: 24px;
-      fill: var(--color-text);
+      fill: colors.$textColor;
     }
   }
 }

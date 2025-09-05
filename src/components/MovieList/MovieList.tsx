@@ -14,8 +14,8 @@ export type props = {
 };
 
 const MovieList = ({ movies, type, active, className, showSeries }: props) => {
-  const wrapperRef = useRef<HTMLDivElement | null>(null);
-  const activeRef = useRef<HTMLAnchorElement | null>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const activeRef = useRef<HTMLAnchorElement>(null);
   useEffect(() => {
     if (
       type !== "minColumn" ||
