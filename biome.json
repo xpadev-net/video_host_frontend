@@ -19,6 +19,9 @@
       "recommended": true,
       "a11y": {
         "useMediaCaption": "off"
+      },
+      "suspicious": {
+        "noUnknownAtRules": "off"
       }
     }
   },

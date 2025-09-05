@@ -27,11 +27,7 @@ const AutoPlayButton = ({ className }: props) => {
       onClick={toggleAutoPlay}
       type="button"
     >
-      <Switch.Root
-        className={Styles.root}
-        id="airplane-mode"
-        checked={playerConfig.autoPlay}
-      >
+      <Switch.Root className={Styles.root} checked={playerConfig.autoPlay}>
         <Switch.Thumb className={Styles.thumb}>
           {playerConfig.autoPlay ? (
             <MdPlayArrow className={Styles.icon} />
