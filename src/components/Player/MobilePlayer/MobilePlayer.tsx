@@ -26,12 +26,12 @@ type props = {
 const MobilePlayer = ({ className, data }: props) => {
   const { isLoading, isFullscreen } = useAtomValue(PlayerStateAtom);
   const { isNiconicommentsEnable } = useAtomValue(PlayerConfigAtom);
-  const wrapperRef = useRef<HTMLButtonElement | null>(null);
-  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const wrapperRef = useRef<HTMLButtonElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const setVideoAtom = useSetAtom(VideoRefAtom);
   const setWrapperAtom = useSetAtom(WrapperRefAtom);
   const [isAfk, setIsAfk] = useState(false);
-  const afkTimeout = useRef<number>(-1);
+  const afkTimeout = useRef(-1);
 
   useEffect(() => {
     setIsAfk(false);

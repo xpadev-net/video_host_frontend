@@ -24,7 +24,7 @@ import { findNext } from "@/components/Player/utils/findPrevNext";
 type props = {
   className?: string;
   movie?: FilteredMovie;
-  videoRef: RefObject<HTMLVideoElement | null>;
+  videoRef: RefObject<HTMLVideoElement>;
 };
 
 const Video = ({ className, videoRef, movie }: props) => {
@@ -37,7 +37,7 @@ const Video = ({ className, videoRef, movie }: props) => {
   const setWatchedHistory = useSetAtom(watchedHistoryAtom);
   const [url, setUrl] = useState<string>("");
 
-  const hlsRef = useRef<Hls | null>(null);
+  const hlsRef = useRef<Hls>();
 
   const router = useRouter();
 

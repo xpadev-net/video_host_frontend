@@ -1,14 +1,16 @@
+@use "../../../../styles/colors.scss";
+
 .wrapper {
   padding: 0 4px;
   display: flex;
   height: 32px;
   .inputWrapper {
     position: relative;
-    background-color: var(--color-thirdly-background);
-    border: solid 1px var(--color-quaternary-background);
+    background-color: colors.$thirdlyBackgroundColor;
+    border: solid 1px colors.$quaternaryBackgroundColor;
     border-right: none;
     flex: 1;
-    box-shadow: inset 0 1px 2px var(--color-quaternary-background);
+    box-shadow: inset 0 1px 2px colors.$quaternaryBackgroundColor;
     padding: 2px 6px;
     .input {
       outline: none;
@@ -21,7 +23,7 @@
       width: 100%;
       text-align: inherit;
       &::placeholder {
-        color: var(--color-sub-text);
+        color: colors.$subTextColor;
       }
     }
     .suggest {
@@ -31,16 +33,16 @@
       left: -1px;
       top: 100%;
       width: calc(100% + 2px);
-      background-color: var(--color-background);
-      border: solid 1px var(--color-secondary-background);
+      background-color: colors.$backgroundColor;
+      border: solid 1px colors.$secondaryBackgroundColor;
       padding-top: 12px;
       .suggestItem {
-        color: var(--color-text);
+        color: colors.$textColor;
         padding: 3px 10px;
         margin: 5px 0;
         display: block;
         &:hover {
-          background-color: var(--color-hover);
+          background-color: colors.$hoverColor;
         }
       }
     }
@@ -52,8 +54,8 @@
   .button {
     cursor: pointer;
     width: 65px;
-    border: 1px solid var(--color-quaternary-background);
-    background-color: var(--color-quaternary-background);
+    border: 1px solid colors.$quaternaryBackgroundColor;
+    background-color: colors.$quaternaryBackgroundColor;
     border-radius: 0 2px 2px 0;
     margin: 0;
     display: inline-flex;

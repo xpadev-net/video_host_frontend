@@ -1,3 +1,5 @@
+@use "../../../styles/colors";
+
 .wrapper {
   position: relative;
   z-index: 10001;
@@ -12,7 +14,7 @@
   .container {
     transition: left ease 0.5s;
     width: 76px;
-    background-color: var(--color-secondary-background);
+    background-color: colors.$secondaryBackgroundColor;
     padding: 12px 0;
     position: fixed;
     left: 0;
@@ -24,11 +26,11 @@
       flex-direction: column;
       align-items: center;
       padding: 15px 0;
-      color: var(--color-text);
+      color: colors.$textColor;
       .icon {
         width: 24px;
         height: 24px;
-        fill: var(--color-text);
+        fill: colors.$textColor;
       }
       .text {
         font-size: 10px;

@@ -31,7 +31,7 @@ const Setting = ({ className }: Props) => {
   });
   const playerSetting = useAtomValue(PlayerSettingAtom);
   const wrapperRef = useAtomValue(WrapperRefAtom);
-  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
   const settingDefinitions = useSettingDefinitions();
   useEffect(() => {

@@ -33,7 +33,7 @@ export const MoviesSearchList: FC<MovieResultProps> = ({
     query,
     author,
   });
-  const loadMoreRef = useRef<HTMLDivElement | null>(null);
+  const loadMoreRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!loadMoreRef.current || !hasNext) return;

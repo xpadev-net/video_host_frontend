@@ -23,7 +23,7 @@ const elementIsVisibleInViewport = (
 const Index = () => {
   const { movies, setSize, hasNext, isValidating } = useMovies();
 
-  const wrapper = useRef<HTMLDivElement | null>(null);
+  const wrapper = useRef<HTMLDivElement>(null);
   const containerWidth = useWindowWidth(wrapper);
 
   const width = useMemo(() => {
@@ -32,7 +32,7 @@ const Index = () => {
   }, [containerWidth]);
 
   // 無限スクロール用Intersection Observer
-  const loadMoreRef = useRef<HTMLDivElement | null>(null);
+  const loadMoreRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (!loadMoreRef.current || !hasNext) return;
     const io = new window.IntersectionObserver((entries) => {
