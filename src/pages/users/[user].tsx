@@ -7,7 +7,6 @@ import { type TabItem, TabSwitcher } from "@/components/TabSwitcher";
 import { User } from "@/components/User/User";
 import { SiteName } from "@/contexts/env";
 import { useUser } from "@/hooks/useUser";
-import Styles from "@/styles/search.module.scss";
 
 const UserPage = () => {
   const router = useRouter();
@@ -20,7 +19,7 @@ const UserPage = () => {
 
   if (user.status !== "ok") {
     return (
-      <div className={Styles.wrapper}>
+      <div className={"p-6 pt-3 max-w-[1070px] mx-auto"}>
         <h1>読み込みに失敗しました</h1>
         <span>
           {user.code} - {user.message}
@@ -43,7 +42,7 @@ const UserPage = () => {
   ];
 
   return (
-    <div className={Styles.wrapper}>
+    <div className={"p-6 pt-3 max-w-[1070px] mx-auto"}>
       <Head>
         <title>{`${user.data.name} - ${SiteName}`}</title>
       </Head>

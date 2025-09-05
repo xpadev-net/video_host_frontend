@@ -6,7 +6,6 @@ import { SeriesPageSkeleton } from "@/components/SeriesPageSkeleton";
 import { User } from "@/components/User/User";
 import { SiteName } from "@/contexts/env";
 import { useSeries } from "@/hooks/useSeries";
-import Styles from "@/styles/search.module.scss";
 import { query2str } from "@/utils/query2str";
 
 const SeriesPage = () => {
@@ -28,7 +27,7 @@ const SeriesPage = () => {
     );
   }
   return (
-    <div className={Styles.wrapper}>
+    <div className={"p-6 pt-3 max-w-[1070px] mx-auto flex flex-col gap-2"}>
       <Head>
         <title>{`${data.data.title} - ${SiteName}`}</title>
       </Head>
@@ -36,7 +35,7 @@ const SeriesPage = () => {
         <h1 className="text-2xl">{data.data.title}</h1>
         <User user={data.data.author} size="1" />
       </div>
-      <div className={Styles.moviesContainer}>
+      <div>
         <MovieList movies={data.data.movies ?? []} type={"column"} />
       </div>
     </div>
