@@ -99,6 +99,7 @@ body,
   --color-text: var(--gray-12);
   --color-sub-text: var(--gray-10);
   --color-accent: var(--accent-track);
+  --color-hover: var(--accent-3);
   --color-background: var(--gray-1);
   --color-secondary-background: var(--gray-2);
   --color-thirdly-background: var(--gray-3);
@@ -142,6 +143,7 @@ body,
   --color-text: var(--gray-12);
   --color-sub-text: var(--gray-10);
   --color-accent: var(--accent-track);
+  --color-hover: var(--accent-3);
   --color-background: var(--gray-1);
   --color-secondary-background: var(--gray-2);
   --color-thirdly-background: var(--gray-3);
