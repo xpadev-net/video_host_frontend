@@ -2,9 +2,11 @@ import { useRef, useState } from "react";
 
 import { useIsomorphicEffect } from "@/libraries/IsomorphicEffect";
 
-export const useWindowWidth = (containerRef: React.RefObject<HTMLElement>) => {
+export const useWindowWidth = (
+  containerRef: React.RefObject<HTMLElement | null>,
+) => {
   const [containerWidth, setContainerWidth] = useState(1920);
-  const observer = useRef<ResizeObserver>();
+  const observer = useRef<ResizeObserver | null>(null);
   const isomorphicEffect = useIsomorphicEffect();
 
   const handleResize = () => {

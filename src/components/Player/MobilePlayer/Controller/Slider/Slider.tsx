@@ -19,7 +19,7 @@ const Slider = ({ className }: props) => {
   const [buffered, setBuffered] = useState<RangeItemProps[]>([]);
   const [isDrugging, setIsDrugging] = useState(false);
   const [progress, setProgress] = useState(0);
-  const lastTouchEventRef = useRef<globalThis.TouchEvent>();
+  const lastTouchEventRef = useRef<globalThis.TouchEvent>(null);
 
   useEffect(() => {
     if (!videoRef) return;

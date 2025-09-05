@@ -1,5 +1,3 @@
-@use "../../styles/colors";
-
 .card {
   display: flex;
   flex-direction: row;
@@ -17,11 +15,11 @@
     gap: 12px;
     .title {
       font-size: min(1.7vw, 24px);
-      color: colors.$textColor;
+      color: var(--color-text);
     }
   }
   &:hover {
-    background-color: colors.$hoverColor;
+    background-color: var(--color-hover);
   }
   
   &.skeletonCard {

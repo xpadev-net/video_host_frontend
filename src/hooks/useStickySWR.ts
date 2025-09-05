@@ -2,7 +2,7 @@ import { useRef } from "react";
 import useSWR, { type SWRConfiguration } from "swr";
 
 const useStickyResult = <T>(value: T | undefined): T | undefined => {
-  const val = useRef<T>();
+  const val = useRef<T | undefined>(undefined);
   if (value !== undefined) val.current = value;
   return val.current;
 };
