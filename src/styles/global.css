@@ -20,6 +20,9 @@ body,
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
   --color-background: var(--gray-1);
+  --color-secondary-background: var(--gray-2);
+  --color-thirdly-background: var(--gray-3);
+  --color-quaternary-background: var(--gray-4);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
@@ -52,6 +55,10 @@ body,
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-skeleton: var(--skeleton);
+  --color-hover: var(--accent-3);
+  --color-accent: var(--accent-track);
+  --color-text: var(--gray-12);
+  --color-sub-text: var(--gray-10);
 }
 
 :root {

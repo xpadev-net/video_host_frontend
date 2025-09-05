@@ -1,5 +1,3 @@
-@use "../styles/colors.scss";
-
 .wrapper {
   padding: 12px 24px 24px 24px;
   max-width: 1070px;
@@ -18,7 +16,7 @@
     position: sticky;
     top: 0;
     z-index: 1;
-    background-color: colors.$backgroundColor;
+    background-color: var(--color-background);
     padding-bottom: 12px;
   }
   .tab {
@@ -26,7 +24,7 @@
       position: sticky;
       top: 0;
       z-index: 1;
-      background-color: colors.$backgroundColor;
+      background-color: var(--color-background);
     }
   }
 }

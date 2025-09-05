@@ -12,7 +12,7 @@ import Styles from "@/components/Player/DesktopPlayer/Controller/VolumeSlider/Vo
 
 const VolumeSlider = () => {
   const videoRef = useAtomValue(VideoRefAtom);
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
   const configVolume = useAtomValue(PlayerVolumeAtom);
   const [isDrugging, setIsDrugging] = useState(false);
 
