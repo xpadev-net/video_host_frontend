@@ -2,21 +2,9 @@ import { type FC, useEffect, useRef } from "react";
 
 import { MovieCard, MovieCardSkeleton } from "@/components/Movie";
 import { useMovies } from "@/hooks/useMovies";
+import { elementIsVisibleInViewport } from "@/libraries/elementIsVisibleInViewport";
 
 import styles from "./SearchList.module.scss";
-
-const elementIsVisibleInViewport = (
-  el: HTMLElement,
-  partiallyVisible = false,
-) => {
-  const { top, left, bottom, right } = el.getBoundingClientRect();
-  const { innerHeight, innerWidth } = window;
-  return partiallyVisible
-    ? ((top > 0 && top < innerHeight) ||
-        (bottom > 0 && bottom < innerHeight)) &&
-        ((left > 0 && left < innerWidth) || (right > 0 && right < innerWidth))
-    : top >= 0 && left >= 0 && bottom <= innerHeight && right <= innerWidth;
-};
 
 type MovieResultProps = {
   query?: string;
