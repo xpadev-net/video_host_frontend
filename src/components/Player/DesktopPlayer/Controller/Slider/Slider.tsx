@@ -2,7 +2,6 @@ import { useAtomValue } from "jotai";
 import { type MouseEvent, useEffect, useRef, useState } from "react";
 
 import { VideoMetadataAtom, VideoRefAtom } from "@/atoms/Player";
-import Styles from "@/components/Player/DesktopPlayer/Controller/Slider/Slider.module.scss";
 import { time2str } from "@/libraries/time";
 
 type props = {
@@ -84,17 +83,17 @@ const Slider = ({ className }: props) => {
 
   return (
     <button
-      className={`${Styles.wrapper} ${className}`}
+      className={`relative w-full h-4 cursor-pointer group ${className || ""}`}
       ref={wrapperRef}
       onMouseDown={onMouseDown}
       onMouseMove={onMouseMove}
       type="button"
     >
-      <div className={Styles.background} />
+      <div className="absolute w-full h-0.5 bg-white/20 bottom-0" />
       {buffered.map((item) => {
         return (
           <div
-            className={Styles.buffered}
+            className="absolute h-0.5 bg-white/80 bottom-0 transition-all duration-250 ease-in-out"
             key={item.left}
             {...item}
             style={{
@@ -105,20 +104,20 @@ const Slider = ({ className }: props) => {
         );
       })}
       <div
-        className={Styles.watched}
+        className="absolute h-0.5 bg-accent bottom-0"
         style={{
           left: `0`,
           width: `${progress}%`,
         }}
       />
       <div
-        className={Styles.grubber}
+        className="absolute w-0 h-0 rounded-full bg-accent -translate-x-1/2 translate-y-1/2 bottom-[1px] transition-[width,height] duration-50 ease-in-out group-hover:w-3 group-hover:h-3"
         style={{
           left: `${progress}%`,
         }}
       />
       <div
-        className={Styles.timeDisplay}
+        className="absolute bottom-4 text-xs text-white -translate-x-1/2 hidden group-hover:block"
         style={{
           left: `max(min(${timeDisplayPos}%, 100% - 15px), 15px)`,
         }}
