@@ -7,7 +7,6 @@ import {
   type KeyboardEvent,
   useState,
 } from "react";
-import Styles from "@/components/App/Header/Search/Search.module.scss";
 import { useSeriesSuggest } from "@/hooks/useSeriesSuggest";
 import { useIsMobile } from "@/libraries/isMobile";
 import { useForwardRef } from "@/libraries/useForwardRef";
@@ -18,6 +17,7 @@ type props = {
 
 const Search_ = ({ className }: props, ref: ForwardedRef<HTMLInputElement>) => {
   const [input, setInput] = useState("");
+  const [showSuggest, setShowSuggest] = useState(false);
   const suggest = useSeriesSuggest({ query: input });
   const inputRef = useForwardRef<HTMLInputElement>(ref);
   const isMobile = useIsMobile();
@@ -25,52 +25,69 @@ const Search_ = ({ className }: props, ref: ForwardedRef<HTMLInputElement>) => {
   const router = useRouter();
   const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     e.stopPropagation();
-    const key = e.keyCode || e.charCode || 0;
-    if (!e.nativeEvent.isComposing && key === 13) {
+    if (!e.nativeEvent.isComposing && e.key === "Enter") {
       void router.push(`/search/${encodeURIComponent(input)}`);
       inputRef.current?.blur();
+      setShowSuggest(false);
     }
   };
   const onSearchClick = () => {
     if (input && input.length > 1) {
       void router.push(`/search/${encodeURIComponent(input)}`);
+      setShowSuggest(false);
     }
   };
 
+  const onSuggestItemClick = () => {
+    setShowSuggest(false);
+  };
+
   return (
-    <div
-      className={`${isMobile && Styles.mobile} ${Styles.wrapper} ${className}`}
-    >
-      <div className={Styles.inputWrapper}>
+    <div className={`px-1 flex h-8 ${className || ""}`}>
+      <div className="relative bg-thirdly-background border border-quaternary-background border-r-0 flex-1 p-0.5 px-1.5 group rounded-l-sm">
         <input
           type="text"
           ref={inputRef}
-          className={Styles.input}
+          className="outline-none border-none bg-transparent text-base font-normal leading-6 ml-1 w-full placeholder:text-[var(--color-sub-text)]"
           placeholder={"検索"}
           onKeyDown={onKeyDown}
           value={input}
           id={"headerSearchInput"}
           onChange={(e) => setInput(e.target.value)}
+          onFocus={() => setShowSuggest(true)}
+          onBlur={() => setTimeout(() => setShowSuggest(false), 200)}
         />
 
         {suggest.data?.status === "ok" &&
           suggest.data.data.items.length > 0 && (
-            <label htmlFor={"headerSearchInput"} className={Styles.suggest}>
-              {suggest.data.data.items.map((item) => {
-                return (
-                  <Link
-                    href={`/search/${encodeURIComponent(item.title)}`}
-                    key={item.id}
-                    className={Styles.suggestItem}
-                  >
-                    <div>{item.title}</div>
-                  </Link>
-                );
-              })}
+            <label
+              htmlFor={"headerSearchInput"}
+              className={`${isMobile ? "block" : "hidden"} ${
+                showSuggest ? "group-hover:block focus-within:block" : "hidden"
+              } z-10 absolute -left-[1px] top-full w-[calc(100%+2px)] pt-1`}
+            >
+              <div className="bg-background border border-secondary-background rounded-sm overflow-hidden">
+                {suggest.data.data.items.map((item) => {
+                  return (
+                    <Link
+                      href={`/search/${encodeURIComponent(item.title)}`}
+                      key={item.id}
+                      className="text-text px-2.5 py-1.5 block hover:bg-hover"
+                      onClick={onSuggestItemClick}
+                    >
+                      <div>{item.title}</div>
+                    </Link>
+                  );
+                })}
+              </div>
             </label>
           )}
       </div>
-      <button type="button" className={Styles.button} onClick={onSearchClick}>
+      <button
+        type="button"
+        className="cursor-pointer w-16 border border-quaternary-background bg-quaternary-background rounded-r-sm m-0 inline-flex text-center items-center justify-center hover:bg-accent"
+        onClick={onSearchClick}
+      >
         <SearchIcon size={16} />
       </button>
     </div>
