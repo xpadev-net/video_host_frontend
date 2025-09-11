@@ -6,7 +6,7 @@ import { time2str } from "@/libraries/time";
 const TimeDisplay = () => {
   const metadata = useAtomValue(VideoMetadataAtom);
   return (
-    <div>
+    <div className="w-24 text-center">
       <span className="text-xs leading-10 px-0.5">
         {time2str(metadata.currentTime)}
       </span>
