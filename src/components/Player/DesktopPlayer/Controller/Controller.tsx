@@ -11,7 +11,6 @@ import { PrevNextButton } from "@/components/Player/Shared/Controller/PrevNextBu
 import { SettingButton } from "@/components/Player/Shared/Controller/SettingButton";
 import { Setting } from "@/components/Player/Shared/Setting/Setting";
 
-import Styles from "./Controller.module.scss";
 import { Slider } from "./Slider";
 import { TheatreButton } from "./TheatreButton";
 import { VolumeIcon } from "./VolumeIcon";
@@ -62,49 +61,63 @@ const Controller = ({ className, data }: props) => {
 
   return (
     <button
-      className={`${className} ${Styles.wrapper} text-white`}
+      className={`${className} relative px-3 flex flex-col-reverse select-none text-white`}
       onClick={stopPropagation}
       aria-label="Video player controls"
       type="button"
     >
-      <div className={Styles.background}></div>
+      <div
+        className="absolute left-0 h-[100px] w-full -z-10 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 40%, rgba(0, 0, 0, 0.2) 60%, rgba(0, 0, 0, 0) 100%)",
+        }}
+      ></div>
       <button
-        className={Styles.buttons}
+        className="flex flex-row h-10 justify-between"
         onMouseLeave={onMouseLeave}
         aria-label="Video controls"
         type="button"
       >
-        <div className={Styles.leftSideWrapper}>
-          <PrevNextButton className={Styles.button} type={"prev"} data={data} />
-          <PlayPauseButton className={Styles.button} />
-          <PrevNextButton className={Styles.button} type={"next"} data={data} />
+        <div className="flex flex-row items-center">
+          <PrevNextButton
+            className="w-10 h-10 border-none bg-none cursor-pointer flex justify-center items-center [&>svg]:w-6 [&>svg]:h-6"
+            type={"prev"}
+            data={data}
+          />
+          <PlayPauseButton className="w-10 h-10 border-none bg-none cursor-pointer flex justify-center items-center [&>svg]:w-6 [&>svg]:h-6" />
+          <PrevNextButton
+            className="w-10 h-10 border-none bg-none cursor-pointer flex justify-center items-center [&>svg]:w-6 [&>svg]:h-6"
+            type={"next"}
+            data={data}
+          />
           <button
             type="button"
             onClick={onVolumeClick}
             onMouseOver={onVolumeMouseOver}
             onFocus={onVolumeMouseOver}
-            className={Styles.button}
+            className="w-10 h-10 border-none bg-none cursor-pointer flex justify-center items-center [&>svg]:w-6 [&>svg]:h-6"
           >
             <VolumeIcon />
           </button>
           <div
-            className={`${Styles.volumeSlider} ${
-              isVolumeExtend && Styles.extend
+            className={`overflow-hidden transition-[width] duration-[250ms] ease mr-2.5 ${
+              isVolumeExtend ? "w-[52px]" : "w-0"
             }`}
           >
             <VolumeSlider />
           </div>
           <TimeDisplay />
         </div>
-        <div className={Styles.rightSideWrapper}>
-          <AutoPlayButton className={Styles.button} />
-          <SettingButton className={Styles.button} />
-          <TheatreButton className={Styles.button} />
-          <FullscreenButton className={Styles.button} />
+        <div className="flex flex-row items-center">
+          <AutoPlayButton className="w-10 h-10 border-none bg-none cursor-pointer flex justify-center items-center [&>svg]:w-6 [&>svg]:h-6" />
+          <SettingButton className="w-10 h-10 border-none bg-none cursor-pointer flex justify-center items-center [&>svg]:w-6 [&>svg]:h-6" />
+          <TheatreButton className="w-10 h-10 border-none bg-none cursor-pointer flex justify-center items-center [&>svg]:w-6 [&>svg]:h-6" />
+          <FullscreenButton className="w-10 h-10 border-none bg-none cursor-pointer flex justify-center items-center [&>svg]:w-6 [&>svg]:h-6" />
         </div>
       </button>
-      <Slider className={Styles.Slider} />
-      <Setting className={Styles.setting} />
+      <Slider />
+      <Setting className="absolute right-3 bottom-[60px]" />
     </button>
   );
 };
