@@ -79,6 +79,10 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     overflow: hidden;
+    text-decoration: none;
+    &:hover{
+      text-decoration: underline;
+    }
   }
   .list {
     border-top: solid 1px var(--color-quaternary-background);

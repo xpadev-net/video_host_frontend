@@ -26,6 +26,10 @@
     line-height: 20px;
     .link {
       color: var(--color-sub-text);
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 }
