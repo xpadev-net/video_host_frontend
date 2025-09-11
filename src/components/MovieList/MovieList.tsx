@@ -3,8 +3,6 @@ import { useEffect, useMemo, useRef } from "react";
 import type { FilteredMovie } from "@/@types/v4Api";
 import { MovieCard } from "@/components/Movie";
 
-import Styles from "./MovieList.module.scss";
-
 export type props = {
   movies: FilteredMovie[];
   type: "row" | "column" | "minColumn";
@@ -27,12 +25,19 @@ const MovieList = ({ movies, type, active, className, showSeries }: props) => {
     wrapperRef.current.scrollTop =
       activeRef.current.offsetTop - activeRef.current.clientHeight;
   }, [type, active]);
+  const wrapperClasses = useMemo(() => {
+    const baseClasses = "flex relative";
+    const typeClasses = {
+      row: "flex-row overflow-x-scroll max-w-screen",
+      column: "flex-col",
+      minColumn: "flex-col",
+    };
+    return `${className || ""} ${baseClasses} ${typeClasses[type]}`;
+  }, [className, type]);
+
   return useMemo(() => {
     return (
-      <div
-        className={`${className} ${Styles.wrapper} ${Styles[type]}`}
-        ref={wrapperRef}
-      >
+      <div className={wrapperClasses} ref={wrapperRef}>
         {movies.map((movie, index) => {
           const indexLabel = (() => {
             if (active === undefined) return undefined;
@@ -56,7 +61,7 @@ const MovieList = ({ movies, type, active, className, showSeries }: props) => {
         })}
       </div>
     );
-  }, [movies, type, active, className, showSeries]);
+  }, [movies, type, active, wrapperClasses, showSeries]);
 };
 
 export { MovieList };
