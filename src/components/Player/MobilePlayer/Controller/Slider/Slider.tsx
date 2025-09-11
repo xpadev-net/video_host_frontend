@@ -129,7 +129,7 @@ const Slider = ({ className }: props) => {
         }}
       />
       <div
-        className="absolute w-0 h-0 rounded-full bg-accent bottom-5 -translate-x-1/2 translate-y-1/2 transition-[width,height] duration-[50ms] ease-in-out group-hover:w-[11px] group-hover:h-[11px]"
+        className="absolute w-3 h-3 rounded-full bg-accent bottom-5 -translate-x-1/2 translate-y-1/2 transition-[width,height] duration-[50ms] ease-in-out"
         style={{
           left: `${progress}%`,
         }}
