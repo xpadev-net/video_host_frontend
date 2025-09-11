@@ -3,10 +3,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-a {
-  text-decoration: none;
-}
-
 html,
 body,
 #__next,
