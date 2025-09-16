@@ -8,9 +8,8 @@ import {
 } from "@/atoms/Player";
 import { GenericPage } from "@/components/Player/Shared/Setting/pages/GenericPage";
 import { useSettingDefinitions } from "@/components/Player/Shared/Setting/settingDefinitions";
+import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/libraries/isMobile";
-
-import Styles from "./Setting.module.scss";
 
 type Props = {
   className?: string;
@@ -87,16 +86,18 @@ const Setting = ({ className }: Props) => {
   return (
     <div
       ref={scrollContainerRef}
-      className={`${Styles.scrollContainer} ${className} ${
-        !state.isSetting && Styles.inactive
-      }`}
+      className={cn(
+        "overflow-y-scroll bg-black/80 rounded-[5px]",
+        !state.isSetting && "opacity-0 select-none pointer-events-none",
+        className,
+      )}
       style={{
         maxHeight: isMobile ? "unset" : `${size.maxHeight}px`,
       }}
     >
       <button
         onClick={onClick}
-        className={Styles.wrapper}
+        className="overflow-hidden transition-[width,height] duration-200 ease-in-out relative block"
         style={{
           width: `${size.width}px`,
           height: `${size.height}px`,
@@ -104,7 +105,7 @@ const Setting = ({ className }: Props) => {
         type="button"
       >
         <div
-          className={Styles.container}
+          className="w-[1920px] h-[1080px] flex items-start absolute top-0 transition-[left] duration-200"
           style={{
             left: `-${size.left}px`,
           }}
