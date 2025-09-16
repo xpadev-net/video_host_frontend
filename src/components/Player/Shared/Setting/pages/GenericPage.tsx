@@ -14,7 +14,7 @@ import {
 import type { MenuProps } from "@/components/Player/Shared/Setting";
 import { Switch } from "@/components/Switch/Switch";
 
-import Styles from "./pages.module.scss";
+// Tailwind移行: CSS Modulesを廃止
 
 type GenericPageProps = MenuProps & {
   config: SettingPageConfig;
@@ -54,7 +54,9 @@ const GenericPage: FC<GenericPageProps> = ({
   const renderItem = (item: SettingItem, index: number) => {
     const baseProps = {
       className:
-        item.type === "back" ? `${Styles.item} ${Styles.header}` : Styles.item,
+        item.type === "back"
+          ? "flex flex-row h-10 leading-10 cursor-pointer justify-between border-b border-white/20 -mt-[5px] pb-[5px] box-content hover:bg-white/10"
+          : "flex flex-row h-10 leading-10 cursor-pointer justify-between hover:bg-white/10",
       type: "button" as const,
       tabIndex: 0,
     };
@@ -72,17 +74,17 @@ const GenericPage: FC<GenericPageProps> = ({
             }
             aria-label={item.ariaLabel || `${item.label}設定を開く`}
           >
-            <div className={Styles.left}>
+            <div className="flex">
               {item.icon && (
-                <div className={Styles.iconWrapper}>
+                <div className="w-10 h-10 p-2">
                   <item.icon />
                 </div>
               )}
-              <span className={Styles.text}>{item.label}</span>
+              <span className="">{item.label}</span>
             </div>
-            <div className={Styles.right}>
+            <div className="flex justify-end">
               <span>{currentValue}</span>
-              <div className={Styles.iconWrapper}>
+              <div className="w-10 h-10 p-2">
                 <KeyboardArrowRight />
               </div>
             </div>
@@ -103,16 +105,16 @@ const GenericPage: FC<GenericPageProps> = ({
               `${item.label}を${isChecked ? "無効" : "有効"}にする`
             }
           >
-            <div className={Styles.left}>
+            <div className="flex">
               {item.icon && (
-                <div className={Styles.iconWrapper}>
+                <div className="w-10 h-10 p-2">
                   <item.icon />
                 </div>
               )}
-              <span className={Styles.text}>{item.label}</span>
+              <span className="">{item.label}</span>
             </div>
-            <div className={Styles.right}>
-              <div className={Styles.switch}>
+            <div className="flex justify-end">
+              <div className="w-10 h-10 mr-2.5 border-0 bg-transparent cursor-pointer flex justify-center items-center">
                 <Switch checked={isChecked} />
               </div>
             </div>
@@ -125,7 +127,7 @@ const GenericPage: FC<GenericPageProps> = ({
         return item.options.map((option) => (
           <button
             key={`${item.id}-${option.value}`}
-            className={Styles.item}
+            className="flex flex-row h-10 leading-10 cursor-pointer justify-between hover:bg-white/10"
             onClick={() => item.onChange(option.value)}
             onKeyDown={(e) =>
               handleKeyDown(e, () => item.onChange(option.value))
@@ -136,11 +138,11 @@ const GenericPage: FC<GenericPageProps> = ({
               item.ariaLabel || `${item.label}を${option.label}に設定`
             }
           >
-            <div className={Styles.left}>
-              <div className={Styles.iconWrapper}>
+            <div className="flex">
+              <div className="w-10 h-10 p-2">
                 {currentValue === option.value && <Check />}
               </div>
-              <span className={Styles.text}>{option.label}</span>
+              <span className="">{option.label}</span>
             </div>
           </button>
         ));
@@ -157,11 +159,11 @@ const GenericPage: FC<GenericPageProps> = ({
             }
             aria-label="戻る"
           >
-            <div className={Styles.left}>
-              <div className={Styles.iconWrapper}>
+            <div className="flex">
+              <div className="w-10 h-10 p-2">
                 <KeyboardArrowLeft />
               </div>
-              <span className={Styles.text}>{item.label}</span>
+              <span className="">{item.label}</span>
             </div>
           </button>
         );
@@ -173,7 +175,10 @@ const GenericPage: FC<GenericPageProps> = ({
   };
 
   return (
-    <div className={`${Styles.wrapper} ${className}`} ref={ref}>
+    <div
+      className={`flex flex-col py-2.5 w-fit min-w-[250px] ${className ?? ""}`}
+      ref={ref}
+    >
       {config.map((item, index) => renderItem(item, index))}
     </div>
   );
