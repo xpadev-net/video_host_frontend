@@ -10,13 +10,13 @@ import {
   WrapperRefAtom,
 } from "@/atoms/Player";
 import { Controller } from "@/components/Player/MobilePlayer/Controller";
-import Styles from "@/components/Player/MobilePlayer/MobilePlayer.module.scss";
 import { CommentCanvas } from "@/components/Player/Shared/CommentCanvas";
 import { KeyboardHandler } from "@/components/Player/Shared/KeyboardHandler";
 import { MediaSessionHandler } from "@/components/Player/Shared/MediaSessionHandler";
 import { PlayerStatusDisplay } from "@/components/Player/Shared/PlayerStatusDisplay";
 import { Video } from "@/components/Player/Shared/Video";
 import { EnableComments } from "@/contexts/env";
+import { cn } from "@/lib/utils";
 
 type props = {
   className?: string;
@@ -55,18 +55,25 @@ const MobilePlayer = ({ className, data }: props) => {
 
   return (
     <button
-      className={`${className} ${Styles.wrapper} ${isAfk && Styles.inactive} ${
-        isFullscreen && Styles.fullscreen
-      }`}
+      className={cn(
+        className,
+        "relative h-auto w-full overflow-hidden bg-black",
+        isFullscreen && "fixed left-0 top-0 w-screen h-dvh z-[20000]",
+      )}
       onClick={toggleAfk}
       ref={wrapperRef}
       type="button"
     >
-      <div className={Styles.videoWrapper}>
+      <div
+        className={cn(
+          "aspect-video h-full mx-auto relative max-h-[calc(100dvh-104px)]",
+          isFullscreen && "max-w-screen max-h-dvh",
+        )}
+      >
         {isLoading && data && (
           <>
-            <div className={Styles.loadingWrapper}>
-              <LoadingIcon className={Styles.icon} />
+            <div className="absolute inset-0 w-full h-full bg-black/50 z-10">
+              <LoadingIcon className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
             </div>
             {data.thumbnailUrl && (
               <Image
@@ -74,7 +81,7 @@ const MobilePlayer = ({ className, data }: props) => {
                 width={360}
                 height={240}
                 alt={""}
-                className={Styles.thumbnail}
+                className="absolute inset-0 w-full h-full z-0"
               />
             )}
           </>
@@ -83,15 +90,33 @@ const MobilePlayer = ({ className, data }: props) => {
           <CommentCanvas
             key={data?.id}
             url={data?.id}
-            className={Styles.canvas}
+            className={cn(
+              "absolute inset-0 w-full h-full z-[2] pointer-events-none object-contain",
+              isFullscreen && "max-w-screen max-h-dvh",
+            )}
             videoRef={videoRef.current}
             pipVideoRef={null}
           />
         )}
-        <Video className={Styles.video} videoRef={videoRef} movie={data} />
+        <Video
+          className={cn(
+            "absolute inset-0 w-full h-full z-[1]",
+            isFullscreen && "max-w-screen max-h-dvh",
+          )}
+          videoRef={videoRef}
+          movie={data}
+        />
         <PlayerStatusDisplay />
       </div>
-      <Controller className={Styles.controller} data={data} />
+      <Controller
+        className={cn(
+          "z-10 transition-opacity duration-300",
+          isAfk
+            ? "opacity-0 pointer-events-none"
+            : "opacity-100 pointer-events-auto",
+        )}
+        data={data}
+      />
       <KeyboardHandler data={data} />
       <MediaSessionHandler data={data} />
     </button>
