@@ -1,4 +1,5 @@
 import { useSetAtom } from "jotai";
+import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import { type FC, type KeyboardEvent, useEffect, useRef } from "react";
 import type {
   SettingItem,
@@ -6,11 +7,6 @@ import type {
   SettingPageConfig,
 } from "@/@types/Player";
 import { PlayerSettingAtom } from "@/atoms/Player";
-import {
-  Check,
-  KeyboardArrowLeft,
-  KeyboardArrowRight,
-} from "@/components/icons";
 import type { MenuProps } from "@/components/Player/Shared/Setting";
 import { Switch } from "@/components/Switch/Switch";
 
@@ -85,7 +81,7 @@ const GenericPage: FC<GenericPageProps> = ({
             <div className="flex justify-end">
               <span>{currentValue}</span>
               <div className="w-10 h-10 p-2">
-                <KeyboardArrowRight />
+                <ArrowRight />
               </div>
             </div>
           </button>
@@ -161,7 +157,7 @@ const GenericPage: FC<GenericPageProps> = ({
           >
             <div className="flex">
               <div className="w-10 h-10 p-2">
-                <KeyboardArrowLeft />
+                <ArrowLeft />
               </div>
               <span className="">{item.label}</span>
             </div>
