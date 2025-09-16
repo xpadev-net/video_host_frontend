@@ -16,7 +16,6 @@ import { PlayerStatusDisplay } from "@/components/Player/Shared/PlayerStatusDisp
 import { Video } from "@/components/Player/Shared/Video";
 import { EnableComments } from "@/contexts/env";
 import { Controller } from "./Controller";
-import Styles from "./DesktopPlayer.module.scss";
 
 type props = {
   className?: string;
@@ -34,6 +33,7 @@ const DesktopPlayer = ({ className, data }: props) => {
   const [isAfk, setIsAfk] = useState(false);
   const afkTimeout = useRef<number>(-1);
   const state = useAtomValue(PlayerStateAtom);
+  const isInactive = isAfk && !state.paused && !state.isSetting;
 
   const onPipPause = () => {
     void (async () => {
@@ -80,11 +80,13 @@ const DesktopPlayer = ({ className, data }: props) => {
 
   return (
     <button
-      className={`${className} ${Styles.wrapper} ${
-        isTheatre && !state.isFullscreen && Styles.theatre
-      } ${state.isFullscreen && Styles.fullscreen} ${
-        isAfk && !state.paused && !state.isSetting && Styles.inactive
-      }`}
+      className={`${className} relative h-auto w-full overflow-hidden bg-black ${
+        isTheatre && !state.isFullscreen ? "max-h-[calc(100vh-170px)]" : ""
+      } ${
+        state.isFullscreen
+          ? "fixed left-0 top-0 w-screen h-screen z-[20000]"
+          : ""
+      } ${isInactive ? "cursor-none" : ""}`}
       onMouseMove={onMouseMove}
       onClick={togglePlayerState}
       type="button"
@@ -96,10 +98,10 @@ const DesktopPlayer = ({ className, data }: props) => {
         <>
           <div
             className={
-              "absolute z-20 left-0 top-0 w-full h-full bg-black opacity-50 grid place-items-center pointer-events-none"
+              "absolute z-20 left-0 top-0 w-full h-full bg-black/50 grid place-items-center pointer-events-none"
             }
           >
-            <LoadingIcon className={Styles.icon} />
+            <LoadingIcon className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
           </div>
           {data.thumbnailUrl && (
             <Image
@@ -112,20 +114,28 @@ const DesktopPlayer = ({ className, data }: props) => {
           )}
         </>
       )}
-      <div className={Styles.videoWrapper}>
+      <div
+        className={`relative aspect-video h-full mx-auto ${
+          isTheatre && !state.isFullscreen ? "max-h-[calc(100vh-170px)]" : ""
+        } ${state.isFullscreen ? "max-w-[100vw] max-h-[100vh]" : ""}`}
+      >
         {isNiconicommentsEnable && EnableComments && (
           <CommentCanvas
             key={data?.id}
             url={data?.id}
-            className={Styles.canvas}
+            className="absolute w-full h-full z-[2] pointer-events-none object-contain"
             videoRef={videoRef.current}
             pipVideoRef={pipVideoRef.current}
           />
         )}
-        <Video className={Styles.video} videoRef={videoRef} movie={data} />
+        <Video
+          className="absolute w-full h-full z-[1]"
+          videoRef={videoRef}
+          movie={data}
+        />
         <video
-          className={`${Styles.pipVideo} ${
-            isPipEnable && EnableComments && Styles.active
+          className={`absolute w-full h-full ${
+            isPipEnable && EnableComments ? "z-[3]" : "z-[-1]"
           }`}
           ref={pipVideoRef}
           autoPlay={true}
@@ -134,7 +144,12 @@ const DesktopPlayer = ({ className, data }: props) => {
         />
         <PlayerStatusDisplay />
       </div>
-      <Controller className={Styles.controller} data={data} />
+      <Controller
+        className={`absolute z-[4] left-0 w-full transition-[bottom] duration-[250ms] ease-in-out ${
+          isInactive ? "-bottom-[100px]" : "bottom-0"
+        }`}
+        data={data}
+      />
       <KeyboardHandler data={data} />
       <MediaSessionHandler data={data} />
     </button>
