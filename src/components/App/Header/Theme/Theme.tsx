@@ -1,7 +1,6 @@
 import { MoonStar, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/hooks/useTheme";
-import styles from "../Button.module.scss";
 
 export const ToggleTheme = () => {
   const { theme, setTheme } = useTheme();
@@ -15,11 +14,7 @@ export const ToggleTheme = () => {
       variant={"ghost"}
       className="cursor-pointer"
     >
-      {theme === "dark" ? (
-        <MoonStar className={styles.icon} />
-      ) : (
-        <Sun className={styles.icon} />
-      )}
+      {theme === "dark" ? <MoonStar /> : <Sun />}
     </Button>
   );
 };
