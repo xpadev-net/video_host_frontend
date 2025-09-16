@@ -1,6 +1,4 @@
 import { AuthButton } from "src/components/App/Header/Auth";
-
-import Styles from "@/components/App/Header/Header.module.scss";
 import { Search } from "@/components/App/Header/Search";
 import { ToggleTheme } from "@/components/App/Header/Theme";
 import { HeaderMenu } from "@/components/App/Menu";
@@ -11,14 +9,16 @@ type props = {
 
 const DesktopHeader = ({ className }: props) => {
   return (
-    <header className={`${className} ${Styles.container}`}>
-      <div className={Styles.leftSideWrapper}>
+    <header
+      className={`${className} px-4 flex flex-row items-center justify-between`}
+    >
+      <div className="w-[169px]">
         <HeaderMenu />
       </div>
-      <div className={Styles.centerWrapper}>
+      <div className="flex-[0_1_728px] min-w-0 px-10">
         <Search />
       </div>
-      <div className={Styles.rightSideWrapper}>
+      <div className="w-[225px] flex justify-end gap-1">
         <ToggleTheme />
         <AuthButton />
       </div>

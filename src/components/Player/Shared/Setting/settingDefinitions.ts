@@ -1,6 +1,14 @@
 import type { Options } from "@xpadev-net/niconicomments";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { AppWindow, Gauge, MessageSquareText } from "lucide-react";
+import {
+  Activity,
+  AppWindow,
+  Gauge,
+  MessageSquareText,
+  PictureInPicture2,
+  Sigma,
+  VectorSquare,
+} from "lucide-react";
 import type {
   SelectionItem,
   SettingKey,
@@ -15,13 +23,6 @@ import {
   VideoRefAtom,
   WrapperRefAtom,
 } from "@/atoms/Player";
-import {
-  ChatBubble,
-  Filter9,
-  PictureInPictureAlt,
-  SelectAll,
-  SixtyFpsSelect,
-} from "@/components/icons";
 import { EnableComments } from "@/contexts/env";
 
 const suggestedRate = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 3, 4];
@@ -158,7 +159,7 @@ export const useSettingDefinitions = (): Record<
       type: "toggle",
       id: "isNiconicommentsEnable",
       label: "コメント",
-      icon: ChatBubble,
+      icon: MessageSquareText,
       getValue: () => playerConfig.isNiconicommentsEnable,
       onChange: toggleCommentActive,
     },
@@ -166,7 +167,7 @@ export const useSettingDefinitions = (): Record<
       type: "toggle",
       id: "showFPS",
       label: "FPS表示",
-      icon: SixtyFpsSelect,
+      icon: Activity,
       getValue: () => !!niconicommentsConfig.showFPS,
       onChange: () => toggleNiconicommentsConfig("showFPS"),
     },
@@ -174,7 +175,7 @@ export const useSettingDefinitions = (): Record<
       type: "toggle",
       id: "showCollision",
       label: "当たり判定表示",
-      icon: SelectAll,
+      icon: VectorSquare,
       getValue: () => !!niconicommentsConfig.showCollision,
       onChange: () => toggleNiconicommentsConfig("showCollision"),
     },
@@ -182,7 +183,7 @@ export const useSettingDefinitions = (): Record<
       type: "toggle",
       id: "showCommentCount",
       label: "コメント数表示",
-      icon: Filter9,
+      icon: Sigma,
       getValue: () => !!niconicommentsConfig.showCommentCount,
       onChange: () => toggleNiconicommentsConfig("showCommentCount"),
     },
@@ -190,7 +191,7 @@ export const useSettingDefinitions = (): Record<
       type: "toggle",
       id: "isPipEnable",
       label: "PiP",
-      icon: PictureInPictureAlt,
+      icon: PictureInPicture2,
       getValue: () => playerConfig.isPipEnable,
       onChange: togglePipEnable,
     },

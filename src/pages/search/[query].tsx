@@ -4,7 +4,6 @@ import { MoviesSearchList } from "@/components/SearchList/MoviesSearchList";
 import { SeriesSearchList } from "@/components/SearchList/SeriesSearchList";
 import { type TabItem, TabSwitcher } from "@/components/TabSwitcher";
 import { SiteName } from "@/contexts/env";
-import Styles from "@/styles/search.module.scss";
 
 const SearchPage = () => {
   const router = useRouter();
@@ -24,7 +23,7 @@ const SearchPage = () => {
   ];
 
   return (
-    <div className={Styles.wrapper}>
+    <div className={"p-6 pt-3 max-w-[1070px] mx-auto"}>
       <Head>
         <title>{`検索: ${query} - ${SiteName}`}</title>
       </Head>

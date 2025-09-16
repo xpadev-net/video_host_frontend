@@ -8,7 +8,6 @@ import {
 } from "react";
 
 import { PlayerVolumeAtom, VideoRefAtom } from "@/atoms/Player";
-import Styles from "@/components/Player/DesktopPlayer/Controller/VolumeSlider/VolumeSlider.module.scss";
 
 const VolumeSlider = () => {
   const videoRef = useAtomValue(VideoRefAtom);
@@ -64,7 +63,7 @@ const VolumeSlider = () => {
 
   return (
     <div
-      className={Styles.wrapper}
+      className="relative w-10 h-10 mx-1.5 cursor-pointer"
       onMouseDown={onMouseDown}
       onKeyDown={handleKeyDown}
       ref={wrapperRef}
@@ -75,8 +74,16 @@ const VolumeSlider = () => {
       aria-valuemax={100}
       aria-valuenow={Math.round(configVolume * 100)}
     >
+      <div className="absolute top-5 -translate-y-1/2 w-full h-1 bg-white/20 rounded-full overflow-hidden">
+        <div
+          className="absolute top-0 left-0 h-1 rounded-full bg-white"
+          style={{
+            width: `${configVolume * 100}%`,
+          }}
+        />
+      </div>
       <div
-        className={Styles.grubber}
+        className="absolute top-5 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-white"
         style={{
           left: `${configVolume * 100}%`,
         }}

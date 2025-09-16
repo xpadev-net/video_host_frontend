@@ -4,7 +4,6 @@ import Head from "next/head";
 import { watchedHistoryAtom } from "@/atoms/WatchedHistory";
 import { MovieList } from "@/components/MovieList";
 import { SiteName } from "@/contexts/env";
-import Styles from "@/styles/history.module.scss";
 
 const History = () => {
   const history = useAtomValue(watchedHistoryAtom);
@@ -16,7 +15,7 @@ const History = () => {
     .toReversed();
 
   return (
-    <div className={Styles.wrapper}>
+    <div className={"p-4 max-w-[1070px] mx-auto"}>
       <Head>
         <title>{`履歴 - ${SiteName}`}</title>
       </Head>

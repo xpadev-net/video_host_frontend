@@ -1,8 +1,6 @@
 import { Flex, Skeleton } from "@radix-ui/themes";
 import type { FC } from "react";
 
-import styles from "./User.module.scss";
-
 type Props = {
   size?: "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8";
 };
@@ -26,7 +24,7 @@ export const UserSkeleton: FC<Props> = ({ size = "3" }) => {
         height={avatarSize}
         style={{ borderRadius: "max(var(--radius-2), var(--radius-full))" }}
       />
-      <Skeleton height="20px" className={`${styles.span} w-3/4`} />
+      <Skeleton height="20px" className={`text-text text-nowrap w-3/4`} />
     </Flex>
   );
 };

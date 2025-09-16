@@ -1,5 +1,4 @@
 import { Skeleton } from "@radix-ui/themes";
-import Styles from "@/components/MovieInfo/MovieInfo.module.scss";
 import { UserSkeleton } from "@/components/User/UserSkeleton";
 
 type Props = {
@@ -8,17 +7,21 @@ type Props = {
 
 const MovieInfoSkeleton = ({ className }: Props) => {
   return (
-    <div className={`${className} ${Styles.wrapper}`}>
-      <div className={Styles.titleWrapper}>
-        <Skeleton height="32px" width="300px" className={Styles.title} />
-        <Skeleton height="20px" width="100px" className={Styles.postDate} />
+    <div className={className}>
+      <div className="border-b border-[var(--color-quaternary-background)] mb-2.5">
+        <Skeleton height="32px" width="300px" />
+        <Skeleton
+          height="20px"
+          width="100px"
+          className="text-[14px] text-[var(--color-sub-text)] mb-2.5"
+        />
       </div>
-      <div className={Styles.author}>
+      <div className="pb-2.5 border-b border-[var(--color-quaternary-background)] mb-2.5 flex flex-row gap-2 items-center">
         <UserSkeleton />
       </div>
-      <div className={Styles.series}>
+      <div className="text-[14px] pb-2.5 leading-5">
         <Skeleton height="16px" width="200px" />
-        <Skeleton height="24px" width="250px" className={Styles.link} />
+        <Skeleton height="24px" width="250px" />
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import { useAtomValue } from "jotai";
 import { type MouseEvent, useEffect, useRef, useState } from "react";
 
 import { VideoRefAtom } from "@/atoms/Player";
-import Styles from "@/components/Player/MobilePlayer/Controller/Slider/Slider.module.scss";
+import { cn } from "@/lib/utils";
 
 type props = {
   className?: string;
@@ -100,18 +100,18 @@ const Slider = ({ className }: props) => {
 
   return (
     <button
-      className={`${Styles.wrapper} ${className}`}
+      className={cn(`relative w-full cursor-pointer group`, className)}
       ref={wrapperRef}
       onMouseDown={onMouseDown}
       onTouchStart={onMouseDown}
       onClick={onClick}
       type="button"
     >
-      <div className={Styles.background} />
+      <div className="absolute w-full h-1 bg-white/20 top-[18px] rounded-full" />
       {buffered.map((item) => {
         return (
           <div
-            className={Styles.buffered}
+            className="absolute h-1 bg-white/80 top-[18px] transition-all duration-[250ms] ease-in-out rounded-full"
             key={item.left}
             {...item}
             style={{
@@ -122,14 +122,14 @@ const Slider = ({ className }: props) => {
         );
       })}
       <div
-        className={Styles.watched}
+        className="absolute h-1 bg-accent top-[18px] rounded-full"
         style={{
           left: `0`,
           width: `${progress}%`,
         }}
       />
       <div
-        className={Styles.grubber}
+        className="absolute w-3 h-3 rounded-full bg-accent bottom-5 -translate-x-1/2 translate-y-1/2 transition-[width,height] duration-[50ms] ease-in-out"
         style={{
           left: `${progress}%`,
         }}
