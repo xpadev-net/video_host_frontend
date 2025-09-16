@@ -1,6 +1,5 @@
 import { Skeleton } from "@radix-ui/themes";
 import { UserSkeleton } from "@/components/User/UserSkeleton";
-import { cn } from "@/lib/utils";
 
 type Props = {
   className?: string;
@@ -8,7 +7,7 @@ type Props = {
 
 const MovieInfoSkeleton = ({ className }: Props) => {
   return (
-    <div className={cn(className)}>
+    <div className={className}>
       <div className="border-b border-[var(--color-quaternary-background)] mb-2.5">
         <Skeleton height="32px" width="300px" />
         <Skeleton

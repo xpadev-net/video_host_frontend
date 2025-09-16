@@ -2,7 +2,6 @@ import Link from "next/link";
 
 import type { FilteredMovie } from "@/@types/v4Api";
 import { User } from "@/components/User/User";
-import { cn } from "@/lib/utils";
 
 type props = {
   data: FilteredMovie;
@@ -11,7 +10,7 @@ type props = {
 
 const MovieInfo = ({ data, className }: props) => {
   return (
-    <div className={cn(className)}>
+    <div className={className}>
       <div className="border-b border-[var(--color-quaternary-background)] mb-2.5">
         <div className="text-[18px]">{data.title}</div>
         <div className="text-[14px] text-[var(--color-sub-text)] mb-2.5">
